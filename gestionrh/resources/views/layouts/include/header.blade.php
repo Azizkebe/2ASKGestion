@@ -302,7 +302,7 @@ class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bo
       >
         <div class="avatar-sm">
           <img
-            src="assets/img/profile.jpg"
+            src="{{asset('admin/img/profile.jpg')}}"
             alt="..."
             class="avatar-img rounded-circle"
           />

@@ -9,4 +9,5 @@ Route::get('/', function () {
 
 Route::prefix('user')->group(function(){
     Route::get('/register',[UserAdminController::class,'register'])->name('register');
+    Route::post('/handleregister',[UserAdminController::class,'handleregister'])->name('handleregister');
 });
