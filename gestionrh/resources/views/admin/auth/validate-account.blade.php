@@ -6,7 +6,7 @@
       <div class="col-12 h-50 ">
         <div class="card shadow">
           <div class="card-body mx-100">
-            <h4 class="card-title mt-3 text-center">Creation Utilisateur</h4>
+            <h4 class="card-title mt-3 text-center">Validation du Compte</h4>
             <div>
                 @if (session('success'))
                     <div class="alert alert-success">
@@ -16,27 +16,12 @@
                     </div>
                 @endif
             </div>
-            <form action="{{route('handleregister')}}" method="POST">
+            <form action="{{route('submitaccessdefine', $email)}}" method="POST">
                 @csrf
                 @method('POST')
+
               <div class="form-group input-group">
-                <input name="surname" class="form-control" placeholder="Prenom" type="text" value="{{old('surname')}}">
-                <div class="input-group">
-                    @error('surname')
-                     <span class="error">{{$message}}</span>
-                    @enderror
-                </div>
-            </div>
-              <div class="form-group input-group">
-                <input name="name" class="form-control" placeholder="Nom" type="text" value="{{old('name')}}">
-                <div class="input-group">
-                    @error('name')
-                     <span class="error">{{$message}}</span>
-                    @enderror
-                </div>
-                </div>
-              <div class="form-group input-group">
-                <input name="email" class="form-control" placeholder="Email address" type="email" value="{{old('email')}}">
+                <input name="email" class="form-control" placeholder="Email address" type="email" value="{{$email}}" readonly>
                 <div class="input-group">
                     @error('email')
                      <span class="error">{{$message}}</span>
@@ -44,20 +29,24 @@
                 </div>
             </div>
               <div class="form-group input-group">
-                <input name="phone" class="form-control" placeholder="Telephone" type="number" value="{{old('phone')}}">
+                <input name="password" class="form-control" placeholder="Mot de Passe" type="password">
                 <div class="input-group">
-                    @error('phone')
+                    @error('password')
                      <span class="error">{{$message}}</span>
                     @enderror
                 </div>
-            </div>
-
+             </div>
+             <div class="form-group input-group">
+                <input name="confirm_password" class="form-control" placeholder="Confirmation du mot de passe" type="password">
+                <div class="input-group">
+                    @error('confirm_password')
+                     <span class="error">{{$message}}</span>
+                    @enderror
+                </div>
+             </div>
               <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-block"> Creer le Compte  </button>
+                <button type="submit" class="btn btn-primary btn-block"> Validation du Compte  </button>
               </div>
-              <p class="text-center">
-                <a href="">Voir la liste des comptes</a>
-              </p>
             </form>
           </div>
         </div>

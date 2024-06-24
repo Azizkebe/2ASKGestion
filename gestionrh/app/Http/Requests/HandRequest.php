@@ -24,18 +24,20 @@ class HandRequest extends FormRequest
         return [
             'name'=>'required',
             'surname'=>'required',
-            'email'=>'required',
-            'phone'=>'required|max:9|unique:phone,users'
+            'email'=>'required|unique:users,email',
+            'phone'=>'required|max:9|unique:users,phone',
         ];
     }
     public function messages(): array{
         return [
-            'name.required'=>'le nom de la personne est requis',
-            'surname.unique'=>'le prenom de la personne est requis',
-            'email.required'=>'L\adresse email est requise',
-            'email.unique'=>'L\'Email existe déjà',
-            'phone.required'=>'Le numero de telephone est requis',
-            'phone.max'=>'Le numero doit avoir au maximun 9 chiffres'
+            'surname.required'=>'Mettez votre prenom',
+            'name.required'=>'Mettez votre nom',
+            'email.required'=>'Email est requis',
+            'email.unique'=>'Email existe déjà',
+            'email.email'=>'Veuillez fournir une addresse valide',
+            'phone.required'=>'Le Telephone est requis',
+            'phone.unique'=>'Le Telephone existe déjà',
+            'phone.max'=>'Telephone doit etre au maximum 9 quatre chiffres',
 
         ];
     }
