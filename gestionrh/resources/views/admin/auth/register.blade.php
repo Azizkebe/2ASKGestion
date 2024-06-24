@@ -28,6 +28,12 @@
                     <div class="error">{{$message}}</div>
                 @enderror
             </div>
+            <div class="form-group input-group">
+                <input name="password" class="form-control" placeholder="Mot de Passe" type="password">
+                @error('password')
+                    <div class="error">{{$message}}</div>
+                @enderror
+            </div>
               <div class="form-group input-group">
                 <input name="phone" class="form-control" placeholder="Telephone" type="number">
                 @error('phone')

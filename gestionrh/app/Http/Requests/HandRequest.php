@@ -24,7 +24,7 @@ class HandRequest extends FormRequest
         return [
             'name'=>'required',
             'surname'=>'required',
-            'email'=>'required|unique:email,users',
+            'email'=>'required',
             'phone'=>'required|max:9|unique:phone,users'
         ];
     }
