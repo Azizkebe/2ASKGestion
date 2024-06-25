@@ -21,7 +21,7 @@
                     aria-hidden="true"></button>
                     {{session('success')}}
                 </div>
-            @endif
+                @endif
             </div>
             <form action="{{route('update', $user->id)}}" method="POST">
                 @csrf

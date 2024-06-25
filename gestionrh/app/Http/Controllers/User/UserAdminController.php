@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 use App\Http\Requests\HandRequest;
+use App\Http\Requests\HandloginRequest;
 use App\Models\User;
 use App\Models\ResetCodePassword;
 use App\Notifications\SendEmailToAdminAfterRegistration;
@@ -17,6 +18,10 @@ use Carbon\Carbon;
 
 class UserAdminController extends Controller
 {
+    public function dashboard()
+    {
+        return view('admin.dashboard');
+    }
     public function register()
     {
         return view('admin.auth.register');
@@ -152,5 +157,24 @@ class UserAdminController extends Controller
 
         }
 
+    }
+    public function login()
+    {
+        return view('frontend.auth.login');
+    }
+    public function handlogin(HandloginRequest $request)
+    {
+        if(auth()->attempt($request->only('email','password')))
+        {
+            return redirect('/dashboard');
+        }
+        else{
+            return redirect()->route('login')->with('error','Les parametres saisis sont incorrectes');
+        }
+    }
+    public function deconnexion()
+    {
+        Auth::logout();
+        return redirect()->route('login');
     }
 }

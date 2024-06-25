@@ -342,7 +342,9 @@ class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bo
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#">Account Setting</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Logout</a>
+            @auth
+            <a class="dropdown-item" href="{{route('deconnexion')}}">Deconnexion</a>
+            @endauth
           </li>
         </div>
       </ul>
