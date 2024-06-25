@@ -42,8 +42,8 @@
                                         title=""
                                         class="btn btn-link btn-primary btn-lg"
                                         data-original-title="Edit Task"
-                                        >
-                                        <i class="fa fa-edit"></i>
+                                        ><a href="{{route('editer',$user->id)}}"><i class="fa fa-edit"></i></a>
+
                                         </button>
                                         <button
                                         type="button"
@@ -51,8 +51,7 @@
                                         title=""
                                         class="btn btn-link btn-danger"
                                         data-original-title="Remove"
-                                        >
-                                        <i class="fa fa-times"></i>
+                                        ><a onclick="return confirm('Etes vous sure de vouloir supprimer le compte')" href="{{route('delete',$user->id)}}" class="btn btn-link btn-danger"><i class="fa fa-times"></i></a>
                                         </button>
                                     </div>
                                     </td>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 use App\Http\Requests\HandRequest;
 use App\Models\User;
@@ -106,5 +107,50 @@ class UserAdminController extends Controller
         $user = User::all();
 
         return view('admin.auth.list', compact('user'));
+    }
+    public function edit($user)
+    {
+        $user = User::findOrFail($user);
+
+        return view('admin.auth.edit', compact('user'));
+    }
+    public function update($user, Request $request)
+    {
+        try {
+            $user = User::findOrFail($user);
+
+            $user->name = $request->name;
+            $user->username = $request->username;
+            $user->email = $request->email;
+            $user->phone = $request->phone;
+
+            $user->update();
+
+            return redirect()->route('listregister')->with('success','Les infos de l\'utilisateurs sont mises à jour');
+
+        } catch (Exception $e) {
+            throw new Exception("Erreur survie lors de la mise à jour", 1);
+
+        }
+
+    }
+    public function delete($user)
+    {
+        try {
+            $userconnecter = Auth::User()->id;
+            if($userconnecter != $user->id)
+            {
+                $user->delete();
+                return redirect()->back()->with('success','Le compte de l\'utilisateur est supprimé avec succes');
+            }
+            else{
+
+                return redirect()->back()->with('error', 'Vous ne pouvez supprimer votre propre compte');
+            }
+        } catch (Exception $e) {
+            throw new Exception("Erreur survenue lors de la suppression", 1);
+
+        }
+
     }
 }
