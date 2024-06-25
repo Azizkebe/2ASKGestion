@@ -20,13 +20,13 @@ class UserAdminController extends Controller
     {
         return view('admin.auth.register');
     }
-    public function handleregister(Request $request)
+    public function handleregister(HandRequest $request)
     {
         try {
             $user = new User();
 
             $user->name = $request->name;
-            $user->username = $request->surname;
+            $user->username = $request->username;
             $user->email = $request->email;
             $user->password = Hash::make('default');
             $user->phone = $request->phone;
@@ -50,7 +50,7 @@ class UserAdminController extends Controller
                    SendEmailToAdminAfterRegistration($user->email));
 
                    //Redirigez l'utilisateur vers une l'url
-                   return redirect()->route('register')->with('success', 'L\'utilisateur est enregistré avec succes');
+                   return redirect()->back()->with('success', 'L\'utilisateur est enregistré avec succes');
 
                 }
                    catch (Exception $e) {
@@ -100,5 +100,11 @@ class UserAdminController extends Controller
          {
             dd($e);
          }
+    }
+    public function list_register()
+    {
+        $user = User::all();
+
+        return view('admin.auth.list', compact('user'));
     }
 }

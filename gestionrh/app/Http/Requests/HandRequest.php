@@ -23,14 +23,14 @@ class HandRequest extends FormRequest
     {
         return [
             'name'=>'required',
-            'surname'=>'required',
+            'username'=>'required',
             'email'=>'required|unique:users,email',
             'phone'=>'required|max:9|unique:users,phone',
         ];
     }
     public function messages(): array{
         return [
-            'surname.required'=>'Mettez votre prenom',
+            'username.required'=>'Mettez votre prenom',
             'name.required'=>'Mettez votre nom',
             'email.required'=>'Email est requis',
             'email.unique'=>'Email existe déjà',

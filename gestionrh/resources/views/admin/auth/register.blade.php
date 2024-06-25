@@ -20,9 +20,9 @@
                 @csrf
                 @method('POST')
               <div class="form-group input-group">
-                <input name="surname" class="form-control" placeholder="Prenom" type="text" value="{{old('surname')}}">
+                <input name="username" class="form-control" placeholder="Prenom" type="text" value="{{old('username')}}">
                 <div class="input-group">
-                    @error('surname')
+                    @error('username')
                      <span class="error">{{$message}}</span>
                     @enderror
                 </div>
@@ -56,7 +56,7 @@
                 <button type="submit" class="btn btn-primary btn-block"> Creer le Compte  </button>
               </div>
               <p class="text-center">
-                <a href="">Voir la liste des comptes</a>
+                <a href="{{route('listregister')}}">Voir la liste</a>
               </p>
             </form>
           </div>
