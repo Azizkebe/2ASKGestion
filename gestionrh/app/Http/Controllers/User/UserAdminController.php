@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 use App\Http\Requests\HandRequest;
 use App\Http\Requests\HandloginRequest;
+use App\Http\Requests\HandProfilRequest;
 use App\Models\User;
 use App\Models\ResetCodePassword;
 use App\Notifications\SendEmailToAdminAfterRegistration;
@@ -178,5 +179,43 @@ class UserAdminController extends Controller
     {
         Auth::logout();
         return redirect()->route('welcome');
+    }
+
+    public function user_profil($user)
+    {
+        $user = User::findOrFail($user);
+
+        return view('admin.auth.profil', compact('user'));
+    }
+
+    public function profil_user($user, Request $request)
+    {
+        $user = User::findOrFail($user);
+
+        try {
+
+            $userconnecter = Auth::user()->id;
+
+            if($userconnecter == $user->id)
+            {
+                $user->name = $request->name;
+                $user->username = $request->username;
+                $user->email = $request->email;
+                $user->phone = $request->phone;
+
+                $user->update();
+
+                return redirect()->back()->with('success','Les donnees ont été modifiées');
+
+            }
+            else
+            {
+                return redirect()->back()->with('error','Impossible de modifier le profil');
+            }
+
+        } catch (Exception $e) {
+            throw new Exception("Erreur survenue lors de l'edition du profil", 1);
+
+        }
     }
 }

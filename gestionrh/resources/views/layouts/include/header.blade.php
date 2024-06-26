@@ -327,7 +327,7 @@ class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bo
                 <h4>{{Auth::user()->username}} {{Auth::user()->name}} </h4>
                 <p class="text-muted">{{Auth::user()->email}}</p>
                 <a
-                  href="profile.html"
+                  href="{{route('profil_user',Auth::user()->id)}}"
                   class="btn btn-xs btn-secondary btn-sm"
                   >Voir Profil</a
                 >

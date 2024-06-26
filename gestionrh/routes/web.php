@@ -35,6 +35,8 @@ Route::middleware('auth')->group(function(){
         Route::get('/register',[UserAdminController::class,'register'])->name('register');
         Route::post('/handleregister',[UserAdminController::class,'handleregister'])->name('handleregister');
 
+        Route::get('/profil_user/{user}', [UserAdminController::class,'user_profil'])->name('profil_user');
+        Route::put('/profil/{user}',[UserAdminController::class, 'profil_user'])->name('user.profil');
 
     });
 });
