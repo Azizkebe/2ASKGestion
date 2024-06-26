@@ -40,10 +40,16 @@
                 <li class="nav-item ms-lg-auto">
                     <a class="nav-link" href="">  </a>
                 </li>
-
+                @guest
                 <li class="nav-item">
-                    <a class="nav-link custom-btn btn" href="#">Se connecter</a>
+                    <a class="nav-link custom-btn btn-primary btn" href="{{route('login')}}">Se connecter</a>
                 </li>
+                @endguest
+                @auth
+                <li class="nav-item">
+                    <a class="nav-link custom-btn btn" href="{{route('deconnexion')}}">Se deconnecter</a>
+                </li>
+                @endauth
             </ul>
         </div>
     </div>
