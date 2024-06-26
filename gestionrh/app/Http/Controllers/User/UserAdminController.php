@@ -141,7 +141,9 @@ class UserAdminController extends Controller
     }
     public function delete($user)
     {
+           $user = User::findOrFail($user);
         try {
+
             $userconnecter = Auth::User()->id;
             if($userconnecter != $user->id)
             {
