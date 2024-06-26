@@ -168,7 +168,7 @@ class UserAdminController extends Controller
     {
         if(auth()->attempt($request->only('email','password')))
         {
-            return redirect('/dashboard');
+            return redirect()->route('dashboard');
         }
         else{
             return redirect()->route('login')->with('error','Les parametres saisis sont incorrectes');

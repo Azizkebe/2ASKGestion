@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg">
     <div class="container">
-        <a class="navbar-brand d-flex align-items-center" href="index.html">
-            <img src="{{asset('hello/images/logo.png')}}" class="img-fluid logo-image">
+        <a class="navbar-brand d-flex align-items-center" href="{{route('welcome')}}">
+            <img style="border-radius: 50%;" src="{{asset('hello/images/logo_anpej.png')}}" class="img-fluid logo-image">
 
             <div class="d-flex flex-column">
                 <strong class="logo-text">Gestion</strong>
@@ -42,12 +42,12 @@
                 </li>
                 @guest
                 <li class="nav-item">
-                    <a class="nav-link custom-btn btn-primary btn" href="{{route('login')}}">Se connecter</a>
+                    <a class="nav-link custom-btn btn-lg" href="{{route('login')}}">Se connecter</a>
                 </li>
                 @endguest
                 @auth
                 <li class="nav-item">
-                    <a class="nav-link custom-btn btn" href="{{route('deconnexion')}}">Se deconnecter</a>
+                    <a class="nav-link secondary-btn btn-sm" href="{{route('deconnexion')}}">Se deconnecter</a>
                 </li>
                 @endauth
             </ul>
