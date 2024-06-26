@@ -17,7 +17,7 @@
         <div class="alert alert-danger">
             <button type="button" class="close" data-dismiss="alert"
             aria-hidden="true"></button>
-            {{session('error')}}
+           <span style="text-align: center; color:red;padding-left:35px;">{{session('error')}}</span>
         </div>
         @endif
 

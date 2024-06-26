@@ -302,14 +302,14 @@ class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bo
       >
         <div class="avatar-sm">
           <img
-            src="{{asset('admin/img/profile.jpg')}}"
+            src="https://ui-avatars.com/api/?name={{Auth::user()->name ?? 'None'}}"
             alt="..."
             class="avatar-img rounded-circle"
           />
         </div>
         <span class="profile-username">
-          <span class="op-7">Hi,</span>
-          <span class="fw-bold">Hizrian</span>
+          <span class="op-7">Bonjour,</span>
+          <span class="fw-bold">{{Auth::user()->name}}</span>
         </span>
       </a>
       <ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -318,33 +318,27 @@ class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bo
             <div class="user-box">
               <div class="avatar-lg">
                 <img
-                  src="assets/img/profile.jpg"
+                  src="https://ui-avatars.com/api/?name={{Auth::user()->name ?? 'None'}}"
                   alt="image profile"
                   class="avatar-img rounded"
                 />
               </div>
               <div class="u-text">
-                <h4>Hizrian</h4>
-                <p class="text-muted">hello@example.com</p>
+                <h4>{{Auth::user()->username}} {{Auth::user()->name}} </h4>
+                <p class="text-muted">{{Auth::user()->email}}</p>
                 <a
                   href="profile.html"
                   class="btn btn-xs btn-secondary btn-sm"
-                  >View Profile</a
+                  >Voir Profil</a
                 >
               </div>
             </div>
           </li>
           <li>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">My Profile</a>
-            <a class="dropdown-item" href="#">My Balance</a>
-            <a class="dropdown-item" href="#">Inbox</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Account Setting</a>
-            <div class="dropdown-divider"></div>
-            {{-- @auth --}}
+
             <a class="dropdown-item" href="{{route('deconnexion')}}">Deconnexion</a>
-            {{-- @endauth --}}
+
           </li>
         </div>
       </ul>
