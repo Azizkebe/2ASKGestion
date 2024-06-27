@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\UserAdminController;
 use App\Http\Controllers\WebsiteController;
+use App\Http\Controllers\Employe\EmployeController;
 
 // Route::get('/dashboard',[UserAdminController::class,'dashboard'])->name('dashboard');
 // Route::get('/',[UserAdminController::class, 'login'])->name('login');
@@ -38,6 +39,9 @@ Route::middleware('auth')->group(function(){
         Route::get('/profil_user/{user}', [UserAdminController::class,'user_profil'])->name('profil_user');
         Route::put('/profil/{user}',[UserAdminController::class, 'profil_user'])->name('user.profil');
 
+    });
+    Route::prefix('employe')->group(function(){
+        Route::get('/create',[EmployeController::class, 'create'])->name('employe.create');
     });
 });
 
