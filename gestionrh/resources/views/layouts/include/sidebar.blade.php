@@ -79,19 +79,19 @@
           <li class="nav-item">
             <a data-bs-toggle="collapse" href="#sidebarLayouts">
               <i class="fas fa-th-list"></i>
-              <p>Sidebar Layouts</p>
+              <p>Employe</p>
               <span class="caret"></span>
             </a>
             <div class="collapse" id="sidebarLayouts">
               <ul class="nav nav-collapse">
                 <li>
-                  <a href="sidebar-style-2.html">
-                    <span class="sub-item">Sidebar Style 2</span>
-                  </a>
-                </li>
+                    <a href="{{route('employe.create')}}">
+                      <span class="sub-item">Ajouter un Employe</span>
+                    </a>
+                  </li>
                 <li>
                   <a href="icon-menu.html">
-                    <span class="sub-item">Icon Menu</span>
+                    <span class="sub-item">Liste des Employes</span>
                   </a>
                 </li>
               </ul>
@@ -135,77 +135,23 @@
             </div>
           </li>
           <li class="nav-item">
-            <a data-bs-toggle="collapse" href="#maps">
-              <i class="fas fa-map-marker-alt"></i>
-              <p>Maps</p>
-              <span class="caret"></span>
-            </a>
-            <div class="collapse" id="maps">
-              <ul class="nav nav-collapse">
-                <li>
-                  <a href="maps/googlemaps.html">
-                    <span class="sub-item">Google Maps</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="maps/jsvectormap.html">
-                    <span class="sub-item">Jsvectormap</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a data-bs-toggle="collapse" href="#charts">
-              <i class="far fa-chart-bar"></i>
-              <p>Charts</p>
-              <span class="caret"></span>
-            </a>
-            <div class="collapse" id="charts">
-              <ul class="nav nav-collapse">
-                <li>
-                  <a href="charts/charts.html">
-                    <span class="sub-item">Chart Js</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="charts/sparkline.html">
-                    <span class="sub-item">Sparkline</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a href="widgets.html">
-              <i class="fas fa-desktop"></i>
-              <p>Widgets</p>
-              <span class="badge badge-success">4</span>
-            </a>
-          </li>
-          <li class="nav-item">
             <a data-bs-toggle="collapse" href="#submenu">
               <i class="fas fa-bars"></i>
-              <p>Menu Levels</p>
+              <p>Configuration</p>
               <span class="caret"></span>
             </a>
             <div class="collapse" id="submenu">
               <ul class="nav nav-collapse">
                 <li>
                   <a data-bs-toggle="collapse" href="#subnav1">
-                    <span class="sub-item">Level 1</span>
+                    <span class="sub-item">Genre</span>
                     <span class="caret"></span>
                   </a>
                   <div class="collapse" id="subnav1">
                     <ul class="nav nav-collapse subnav">
                       <li>
-                        <a href="#">
-                          <span class="sub-item">Level 2</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <span class="sub-item">Level 2</span>
+                        <a href="{{route('genre.create')}}">
+                          <span class="sub-item">Ajouter un genre</span>
                         </a>
                       </li>
                     </ul>
@@ -213,23 +159,166 @@
                 </li>
                 <li>
                   <a data-bs-toggle="collapse" href="#subnav2">
-                    <span class="sub-item">Level 1</span>
+                    <span class="sub-item">Situation Matrimoniale</span>
                     <span class="caret"></span>
                   </a>
                   <div class="collapse" id="subnav2">
                     <ul class="nav nav-collapse subnav">
                       <li>
-                        <a href="#">
-                          <span class="sub-item">Level 2</span>
+                        <a href="{{route('matrimonial.create')}}">
+                          <span class="sub-item">Ajouter une matrimoniale</span>
                         </a>
                       </li>
                     </ul>
                   </div>
                 </li>
                 <li>
-                  <a href="#">
-                    <span class="sub-item">Level 1</span>
-                  </a>
+                    <a data-bs-toggle="collapse" href="#subnav3">
+                      <span class="sub-item">Domaine</span>
+                      <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="subnav3">
+                      <ul class="nav nav-collapse subnav">
+                        <li>
+                          <a href="{{route('domaine.create')}}">
+                            <span class="sub-item">Ajouter un domaine</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                <li>
+                    <li>
+                        <a data-bs-toggle="collapse" href="#subnav4">
+                          <span class="sub-item">Niveau</span>
+                          <span class="caret"></span>
+                        </a>
+                        <div class="collapse" id="subnav4">
+                          <ul class="nav nav-collapse subnav">
+                            <li>
+                              <a href="{{route('niveau.create')}}">
+                                <span class="sub-item">Ajouter un niveau</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                    <li>
+                        <li>
+                            <a data-bs-toggle="collapse" href="#subnav5">
+                              <span class="sub-item">Diplome</span>
+                              <span class="caret"></span>
+                            </a>
+                            <div class="collapse" id="subnav5">
+                              <ul class="nav nav-collapse subnav">
+                                <li>
+                                  <a href="{{route('diplome.create')}}">
+                                    <span class="sub-item">Ajouter un diplome</span>
+                                  </a>
+                                </li>
+                              </ul>
+                            </div>
+                          </li>
+                        <li>
+                            <li>
+                                <a data-bs-toggle="collapse" href="#subnav6">
+                                  <span class="sub-item">Contrat</span>
+                                  <span class="caret"></span>
+                                </a>
+                                <div class="collapse" id="subnav6">
+                                  <ul class="nav nav-collapse subnav">
+                                    <li>
+                                      <a href="{{route('contrat.create')}}">
+                                        <span class="sub-item">Ajouter un contrat</span>
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </li>
+                            <li>
+                                <li>
+                                    <a data-bs-toggle="collapse" href="#subnav7">
+                                      <span class="sub-item">Direction</span>
+                                      <span class="caret"></span>
+                                    </a>
+                                    <div class="collapse" id="subnav7">
+                                      <ul class="nav nav-collapse subnav">
+                                        <li>
+                                          <a href="{{route('direction.create')}}">
+                                            <span class="sub-item">Ajouter une direction</span>
+                                          </a>
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </li>
+                                <li>
+                                    <li>
+                                        <a data-bs-toggle="collapse" href="#subnav8">
+                                          <span class="sub-item">Service</span>
+                                          <span class="caret"></span>
+                                        </a>
+                                        <div class="collapse" id="subnav8">
+                                          <ul class="nav nav-collapse subnav">
+                                            <li>
+                                              <a href="{{route('service.create')}}">
+                                                <span class="sub-item">Ajouter un service</span>
+                                              </a>
+                                            </li>
+                                          </ul>
+                                        </div>
+                                      </li>
+                                    <li>
+                                        <li>
+                                            <a data-bs-toggle="collapse" href="#subnav9">
+                                              <span class="sub-item">Antenne</span>
+                                              <span class="caret"></span>
+                                            </a>
+                                            <div class="collapse" id="subnav9">
+                                              <ul class="nav nav-collapse subnav">
+                                                <li>
+                                                  <a href="{{route('antenne.create')}}">
+                                                    <span class="sub-item">Ajouter une antenne</span>
+                                                  </a>
+                                                </li>
+                                              </ul>
+                                            </div>
+                                          </li>
+                                        <li>
+                                            <li>
+                                                <a data-bs-toggle="collapse" href="#subnav10">
+                                                  <span class="sub-item">Bureau</span>
+                                                  <span class="caret"></span>
+                                                </a>
+                                                <div class="collapse" id="subnav10">
+                                                  <ul class="nav nav-collapse subnav">
+                                                    <li>
+                                                      <a href="{{route('bureau.create')}}">
+                                                        <span class="sub-item">Ajouter un bureau</span>
+                                                      </a>
+                                                    </li>
+                                                  </ul>
+                                                </div>
+                                              </li>
+                                            <li>
+                                                <li>
+                                                    <a data-bs-toggle="collapse" href="#subnav11">
+                                                      <span class="sub-item">Poste</span>
+                                                      <span class="caret"></span>
+                                                    </a>
+                                                    <div class="collapse" id="subnav11">
+                                                      <ul class="nav nav-collapse subnav">
+                                                        <li>
+                                                          <a href="{{route('poste.create')}}">
+                                                            <span class="sub-item">Ajouter un poste</span>
+                                                          </a>
+                                                        </li>
+                                                      </ul>
+                                                    </div>
+                                                  </li>
+                                                <li>
+                        {{-- <a href="#">
+                            <span class="sub-item">Level 1</span>
+                        </a> --}}
                 </li>
               </ul>
             </div>

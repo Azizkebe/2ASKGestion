@@ -3,25 +3,25 @@
       <nav class="pull-left">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="http://www.themekita.com">
-              ThemeKita
+            <a class="nav-link" href="">
+              GES-RH
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#"> Help </a>
+            <a class="nav-link" href="#"> Aide </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#"> Licenses </a>
+            <a class="nav-link" href="#"> ANPEJ </a>
           </li>
         </ul>
       </nav>
       <div class="copyright">
-        2024, made with <i class="fa fa-heart heart text-danger"></i> by
-        <a href="http://www.themekita.com">ThemeKita</a>
+        2024, Developer <i class="fa fa-heart heart text-danger"></i> by
+        <a href="#">Abdoul Aziz Sy KEBE</a>
       </div>
       <div>
-        Distributed by
-        <a target="_blank" href="https://themewagon.com/">ThemeWagon</a>.
+        Tous droits
+        <a target="_blank" href="#">reseves</a>.
       </div>
     </div>
   </footer>
