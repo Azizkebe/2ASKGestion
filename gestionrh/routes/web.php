@@ -56,6 +56,12 @@ Route::middleware('auth')->group(function(){
     });
     Route::prefix('genre')->group(function(){
         Route::get('/create',[GenreController::class, 'create'])->name('genre.create');
+        Route::post('/create',[GenreController::class, 'store'])->name('genre.store');
+        Route::get('/liste',[GenreController::class, 'liste'])->name('genre.liste');
+        Route::get('/edit/{genre}',[GenreController::class, 'editer'])->name('genre.editer');
+        Route::put('/update/{genre}',[GenreController::class, 'update'])->name('genre.update');
+        Route::get('/delete/{genre}',[GenreController::class, 'delete'])->name('genre.delete');
+
         // Route::get('/edit/{genre}',[GenreController::class, 'create'])->name('genre.create');
     });
     Route::prefix('matrimonial')->group(function(){

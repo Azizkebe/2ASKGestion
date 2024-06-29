@@ -6,7 +6,7 @@
       <div class="col-12 h-50 ">
         <div class="card shadow">
           <div class="card-body mx-100">
-            <h4 class="card-title mt-3 text-center">Ajout de Genre</h4>
+            <h4 class="card-title mt-3 text-center">Editer le Genre</h4>
             <div>
                 @if (session('success'))
                     <div class="alert alert-success">
@@ -16,19 +16,14 @@
                     </div>
                 @endif
             </div>
-            <form action="{{route('genre.store')}}" method="POST">
+            <form action="{{route('genre.update',$genre->id)}}" method="POST">
                 @csrf
                 @method('POST')
                <div class="form-group input-group">
-                <input name="sexe" class="form-control" placeholder="Masculin" type="text" value="{{old('sexe')}}">
-                <div class="input-group">
-                    @error('sexe')
-                     <span class="error">{{$message}}</span>
-                    @enderror
-                </div>
+                <input name="sexe" class="form-control" placeholder="Masculin" type="text" value="{{$genre->name}}">
                 </div>
               <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-block"> Creer le sexe  </button>
+                <button type="submit" class="btn btn-primary btn-block"> Mettre à jour le genre  </button>
               </div>
             </form>
           </div>
