@@ -6,7 +6,10 @@
       <div class="col-12 h-50 ">
         <div class="card shadow">
           <div class="card-body mx-100">
-            <h4 class="card-title mt-3 text-center">Domaine d'etude </h4>
+            <h4 class="card-title mt-3 text-center">Editer le domaine d'etude </h4>
+            <div style="display: flex; justify-content:end;">
+                <a href="{{route('domaine.liste')}}" class="btn btn-success btn-sm">Liste des domaine</a>
+            </div>
             <div>
                 @if (session('success'))
                     <div class="alert alert-success">
@@ -16,11 +19,11 @@
                     </div>
                 @endif
             </div>
-            <form action="{{route('domaine.store')}}" method="POST">
+            <form action="{{route('domaine.update', $domaine->id)}}" method="POST">
                 @csrf
-                @method('POST')
+                @method('PUT')
                <div class="form-group input-group">
-                <input name="domaine_etude" class="form-control" placeholder="domaine_etude" type="text" value="{{old('domaine_etude')}}">
+                <input name="domaine_etude" class="form-control" placeholder="domaine_etude" type="text" value="{{$domaine->domaine_etude}}">
                 <div class="input-group">
                     @error('domaine_etude')
                      <span class="error">{{$message}}</span>
@@ -28,7 +31,7 @@
                 </div>
                 </div>
               <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-block"> Ajouter le domaine  </button>
+                <button type="submit" class="btn btn-primary btn-block"> Enregister les modification du domaine  </button>
               </div>
             </form>
           </div>

@@ -74,6 +74,11 @@ Route::middleware('auth')->group(function(){
     });
     Route::prefix('domaine')->group(function(){
         Route::get('create',[DomineController::class, 'create'])->name('domaine.create');
+        Route::post('/create',[DomineController::class, 'store'])->name('domaine.store');
+        Route::get('/liste',[DomineController::class, 'liste'])->name('domaine.liste');
+        Route::get('/edit/{domaine}',[DomineController::class, 'editer'])->name('domaine.editer');
+        Route::put('/update/{domaine}',[DomineController::class, 'update'])->name('domaine.update');
+        Route::get('/delete/{domaine}',[DomineController::class, 'delete'])->name('domaine.delete');
     });
     Route::prefix('niveau')->group(function(){
         Route::get('create',[NiveauController::class,'create'])->name('niveau.create');

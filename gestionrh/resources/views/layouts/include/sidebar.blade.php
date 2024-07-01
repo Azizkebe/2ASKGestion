@@ -174,6 +174,11 @@
                           <span class="sub-item">Ajouter une matrimoniale</span>
                         </a>
                       </li>
+                      <li>
+                        <a href="{{route('matrimonial.liste')}}">
+                          <span class="sub-item">Liste des situations matrimoniales</span>
+                        </a>
+                      </li>
                     </ul>
                   </div>
                 </li>
@@ -189,6 +194,11 @@
                             <span class="sub-item">Ajouter un domaine</span>
                           </a>
                         </li>
+                        <li>
+                            <a href="{{route('domaine.liste')}}">
+                              <span class="sub-item">Liste un ou des domaines</span>
+                            </a>
+                          </li>
                       </ul>
                     </div>
                   </li>
