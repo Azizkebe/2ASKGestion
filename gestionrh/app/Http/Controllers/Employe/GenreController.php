@@ -39,10 +39,11 @@ class GenreController extends Controller
     public function update(Request $request, $genre)
     {
         $genre = Genre::findOrFail($genre);
+
         $genre->name = $request->sexe;
 
-        // $genre->update();
+        $genre->update();
 
-        // return redirect()->back()->with('success','La modification est effectuée avec succes');
+        return redirect()->back()->with('success','La modification est effectuée avec succes');
     }
 }

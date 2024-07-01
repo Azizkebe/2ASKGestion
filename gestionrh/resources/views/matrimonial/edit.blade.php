@@ -19,11 +19,11 @@
                     </div>
                 @endif
             </div>
-            <form action="{{route('matrimonial.store')}}" method="POST">
+            <form action="{{route('matrimonial.update',$mat->id)}}" method="POST">
                 @csrf
-                @method('POST')
+                @method('PUT')
                <div class="form-group input-group">
-                <input name="matrimonial" class="form-control" placeholder="Situation Matrimoniale" type="text" value="{{old('matrimonial')}}">
+                <input name="matrimonial" class="form-control" placeholder="Situation Matrimoniale" type="text" value="{{($mat->situation_matrimoniale)}}">
                 <div class="input-group">
                     @error('matrimonial')
                      <span class="error">{{$message}}</span>
@@ -31,7 +31,7 @@
                 </div>
                 </div>
               <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-block"> Ajouter la situation matrimoniale  </button>
+                <button type="submit" class="btn btn-primary btn-block"> Enregistrer la modification du matrimoniale  </button>
               </div>
             </form>
           </div>

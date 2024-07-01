@@ -154,6 +154,11 @@
                           <span class="sub-item">Ajouter un genre</span>
                         </a>
                       </li>
+                      <li>
+                        <a href="{{route('genre.liste')}}">
+                          <span class="sub-item">Liste des genres</span>
+                        </a>
+                      </li>
                     </ul>
                   </div>
                 </li>

@@ -66,7 +66,11 @@ Route::middleware('auth')->group(function(){
     });
     Route::prefix('matrimonial')->group(function(){
         Route::get('/create',[MatrimonialController::class, 'create'])->name('matrimonial.create');
-        // Route::get('/edit/{matrimonial}',[MatrimonialController::class, 'create'])->name('matrimonial.create');
+        Route::post('/create',[MatrimonialController::class, 'store'])->name('matrimonial.store');
+        Route::get('/liste',[MatrimonialController::class, 'liste'])->name('matrimonial.liste');
+        Route::get('/edit/{matrimonial}',[MatrimonialController::class, 'editer'])->name('matrimonial.editer');
+        Route::put('/update/{matrimonial}',[MatrimonialController::class, 'update'])->name('matrimonial.update');
+        Route::get('/delete/{matrimonial}',[MatrimonialController::class, 'delete'])->name('matrimonial.delete');
     });
     Route::prefix('domaine')->group(function(){
         Route::get('create',[DomineController::class, 'create'])->name('domaine.create');

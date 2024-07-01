@@ -7,6 +7,9 @@
         <div class="card shadow">
           <div class="card-body mx-100">
             <h4 class="card-title mt-3 text-center">Editer le Genre</h4>
+            <div style="display: flex; justify-content:end;">
+                <p><a href="{{route('genre.liste')}}" class="btn btn-success btn-sm">Liste du Genre</a></p>
+            </div>
             <div>
                 @if (session('success'))
                     <div class="alert alert-success">
@@ -18,7 +21,7 @@
             </div>
             <form action="{{route('genre.update',$genre->id)}}" method="POST">
                 @csrf
-                @method('POST')
+                @method('PUT')
                <div class="form-group input-group">
                 <input name="sexe" class="form-control" placeholder="Masculin" type="text" value="{{$genre->name}}">
                 </div>
