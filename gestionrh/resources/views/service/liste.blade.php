@@ -6,9 +6,9 @@
         <div class="card">
                 <div class="card-header">
                     <div class="d-flex align-items-center">
-                    <h4 class="card-title">Liste des diplomes</h4>
+                    <h4 class="card-title">Liste des Service</h4>
                     <button class="btn btn-primary btn-round ms-auto">
-                        <a href="{{route('diplome.create')}}" class="text-white"><i class="fa fa-plus"></i> Ajouter un diplome</a>
+                        <a href="{{route('service.create')}}" class="text-white"><i class="fa fa-plus"></i> Ajouter un service</a>
                     </button>
                     </div>
                 </div>
@@ -20,15 +20,17 @@
                   >
                     <thead>
                       <tr>
-                        <th>Diplome</th>
+                        <th>Direction</th>
+                        <th>Service</th>
 
                         <th style="width: 10%">Action</th>
                       </tr>
                         </thead>
                             <tbody>
-                             @forelse ($diplome as $diplome)
+                             @forelse ($service as $service)
                             <tr>
-                                <td>{{$diplome->diplome_etude}}</td>
+                                <td>{{$service->id_direction}}</td>
+                                <td>{{$service->service}}</td>
                                 <td>
                                     <div class="form-button-action">
                                         <button
@@ -37,7 +39,7 @@
                                         title=""
                                         class="btn btn-link btn-primary btn-lg"
                                         data-original-title="Edit Task"
-                                        ><a href="{{route('diplome.editer',$diplome->id)}}"><i class="fa fa-edit"></i></a>
+                                        ><a href="{{route('service.editer',$service->id)}}"><i class="fa fa-edit"></i></a>
 
                                         </button>
                                         <button
@@ -46,8 +48,8 @@
                                         title=""
                                         class="btn btn-link btn-danger"
                                         data-original-title="Remove"
-                                        ><a onclick="return confirm('Etes vous sure de vouloir supprimer le compte')"
-                                        href="{{route('diplome.delete',$diplome->id)}}" class="btn btn-link btn-danger"><i class="fa fa-times"></i></a>
+                                        ><a onclick="return confirm('Etes vous sure de vouloir supprimer le service')"
+                                        href="{{route('service.delete',$service->id)}}" class="btn btn-link btn-danger"><i class="fa fa-times"></i></a>
                                         </button>
                                     </div>
                                 </td>

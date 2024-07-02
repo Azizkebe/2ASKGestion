@@ -257,6 +257,11 @@
                                         <span class="sub-item">Ajouter un contrat</span>
                                       </a>
                                     </li>
+                                    <li>
+                                        <a href="{{route('contrat.liste')}}">
+                                          <span class="sub-item">Liste des contrat</span>
+                                        </a>
+                                      </li>
                                   </ul>
                                 </div>
                               </li>
@@ -273,6 +278,11 @@
                                             <span class="sub-item">Ajouter une direction</span>
                                           </a>
                                         </li>
+                                        <li>
+                                            <a href="{{route('direction.liste')}}">
+                                              <span class="sub-item">Liste des directions</span>
+                                            </a>
+                                          </li>
                                       </ul>
                                     </div>
                                   </li>
@@ -289,6 +299,11 @@
                                                 <span class="sub-item">Ajouter un service</span>
                                               </a>
                                             </li>
+                                            <li>
+                                                <a href="{{route('service.liste')}}">
+                                                  <span class="sub-item">Liste des services</span>
+                                                </a>
+                                              </li>
                                           </ul>
                                         </div>
                                       </li>

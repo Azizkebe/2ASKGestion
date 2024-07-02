@@ -6,10 +6,7 @@
       <div class="col-12 h-50 ">
         <div class="card shadow">
           <div class="card-body mx-100">
-            <h4 class="card-title mt-3 text-center">Direction </h4>
-            <div style="display: flex; justify-content:end;">
-                <a href="{{route('direction.liste')}}" class="btn btn-success btn-sm">Liste des directions</a>
-            </div>
+            <h4 class="card-title mt-3 text-center">Editer une direction </h4>
             <div>
                 @if (session('success'))
                     <div class="alert alert-success">
@@ -19,11 +16,11 @@
                     </div>
                 @endif
             </div>
-            <form action="{{route('direction.store')}}" method="POST">
+            <form action="{{route('direction.update', $direction->id)}}" method="POST">
                 @csrf
-                @method('POST')
+                @method('PUT')
                <div class="form-group input-group">
-                <input name="direction" class="form-control" placeholder="direction" type="text" value="{{old('direction')}}">
+                <input name="direction" class="form-control" placeholder="direction" type="text" value="{{$direction->direction}}">
                 <div class="input-group">
                     @error('direction')
                      <span class="error">{{$message}}</span>
@@ -31,7 +28,7 @@
                 </div>
                 </div>
               <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-block"> Ajouter la direction  </button>
+                <button type="submit" class="btn btn-primary btn-block"> Enregister les modifications la direction  </button>
               </div>
             </form>
           </div>

@@ -98,12 +98,27 @@ Route::middleware('auth')->group(function(){
     });
     Route::prefix('contrat')->group(function(){
         Route::get('create',[TypeContratController::class,'create'])->name('contrat.create');
+        Route::post('/create',[TypeContratController::class, 'store'])->name('contrat.store');
+        Route::get('/liste',[TypeContratController::class, 'liste'])->name('contrat.liste');
+        Route::get('/edit/{contrat}',[TypeContratController::class, 'editer'])->name('contrat.editer');
+        Route::put('/update/{contrat}',[TypeContratController::class, 'update'])->name('contrat.update');
+        Route::get('/delete/{contrat}',[TypeContratController::class, 'delete'])->name('contrat.delete');
     });
     Route::prefix('direction')->group(function(){
         Route::get('create',[DirectionController::class,'create'])->name('direction.create');
+        Route::post('/create',[DirectionController::class, 'store'])->name('direction.store');
+        Route::get('/liste',[DirectionController::class, 'liste'])->name('direction.liste');
+        Route::get('/edit/{direction}',[DirectionController::class, 'editer'])->name('direction.editer');
+        Route::put('/update/{direction}',[DirectionController::class, 'update'])->name('direction.update');
+        Route::get('/delete/{direction}',[DirectionController::class, 'delete'])->name('direction.delete');
     });
     Route::prefix('service')->group(function(){
         Route::get('create',[ServiceController::class, 'create'])->name('service.create');
+        Route::post('/create',[ServiceController::class, 'store'])->name('service.store');
+        Route::get('/liste',[ServiceController::class, 'liste'])->name('service.liste');
+        Route::get('/edit/{service}',[ServiceController::class, 'editer'])->name('service.editer');
+        Route::put('/update/{service}',[ServiceController::class, 'update'])->name('service.update');
+        Route::get('/delete/{service}',[ServiceController::class, 'delete'])->name('service.delete');
     });
     Route::prefix('antenne')->group(function(){
         Route::get('create',[AntenneController::class,'create'])->name('antenne.create');

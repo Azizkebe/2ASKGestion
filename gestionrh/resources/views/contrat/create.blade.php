@@ -8,6 +8,9 @@
           <div class="card-body mx-100">
             <h4 class="card-title mt-3 text-center">Contrat de Travail</h4>
             <div>
+                <a href="{{route('contrat.liste')}}" class="btn btn-success">Liste des contrats</a>
+            </div>
+            <div>
                 @if (session('success'))
                     <div class="alert alert-success">
                         <button type="button" class="close" data-dismiss="alert"
@@ -16,7 +19,7 @@
                     </div>
                 @endif
             </div>
-            <form action="{{route('handleregister')}}" method="POST">
+            <form action="{{route('contrat.store')}}" method="POST">
                 @csrf
                 @method('POST')
                <div class="form-group input-group">

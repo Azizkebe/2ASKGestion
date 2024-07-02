@@ -6,9 +6,9 @@
       <div class="col-12 h-50 ">
         <div class="card shadow">
           <div class="card-body mx-100">
-            <h4 class="card-title mt-3 text-center">Direction </h4>
-            <div style="display: flex; justify-content:end;">
-                <a href="{{route('direction.liste')}}" class="btn btn-success btn-sm">Liste des directions</a>
+            <h4 class="card-title mt-3 text-center">Editer un Type de Travail</h4>
+            <div style="display: flex;justify-content:end;">
+                <a href="{{route('contrat.liste')}}" class="btn btn-success">Liste des contrats</a>
             </div>
             <div>
                 @if (session('success'))
@@ -19,19 +19,19 @@
                     </div>
                 @endif
             </div>
-            <form action="{{route('direction.store')}}" method="POST">
+            <form action="{{route('contrat.update', $contrat->id)}}" method="POST">
                 @csrf
-                @method('POST')
+                @method('PUT')
                <div class="form-group input-group">
-                <input name="direction" class="form-control" placeholder="direction" type="text" value="{{old('direction')}}">
+                <input name="contrat" class="form-control" placeholder="contrat" type="text" value="{{$contrat->contrat}}">
                 <div class="input-group">
-                    @error('direction')
+                    @error('contrat')
                      <span class="error">{{$message}}</span>
                     @enderror
                 </div>
                 </div>
               <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-block"> Ajouter la direction  </button>
+                <button type="submit" class="btn btn-primary btn-block"> Enregistrer la modification du contrat  </button>
               </div>
             </form>
           </div>
