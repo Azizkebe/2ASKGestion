@@ -16,13 +16,21 @@
                     </div>
                 @endif
             </div>
-            <form action="{{route('handleregister')}}" method="POST">
+            <form action="{{route('antenne.store')}}" method="POST">
                 @csrf
                 @method('POST')
                 <div class="form-group input-group">
                     <select name="id_direction" id="id_direction" class="form-select">
-                        <option value="">direction</option>
+                        <option value="">--choisissez l'antenne--</option>
+                        @foreach ($direction as $direction)
+                            <option value="{{$direction->id}}">{{$direction->direction}}</option>
+                        @endforeach
                     </select>
+                </div>
+                <div>
+                    @error('id_direction')
+                        <span class="error">{{$message}}</span>
+                    @enderror
                 </div>
                <div class="form-group input-group">
                 <input name="antenne" class="form-control" placeholder="antenne" type="text" value="{{old('antenne')}}">

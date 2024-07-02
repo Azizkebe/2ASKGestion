@@ -33,7 +33,7 @@ class ServiceController extends Controller
     }
     public function liste()
     {
-        $service = Service::all();
+        $service = Service::latest()->with('direction')->get();
 
         return view('service.liste', compact('service'));
 

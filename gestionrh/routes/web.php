@@ -122,6 +122,11 @@ Route::middleware('auth')->group(function(){
     });
     Route::prefix('antenne')->group(function(){
         Route::get('create',[AntenneController::class,'create'])->name('antenne.create');
+        Route::post('/create',[AntenneController::class, 'store'])->name('antenne.store');
+        Route::get('/liste',[AntenneController::class, 'liste'])->name('antenne.liste');
+        Route::get('/edit/{antenne}',[AntenneController::class, 'editer'])->name('antenne.editer');
+        Route::put('/update/{antenne}',[AntenneController::class, 'update'])->name('antenne.update');
+        Route::get('/delete/{antenne}',[AntenneController::class, 'delete'])->name('antenne.delete');
     });
     Route::prefix('bureau')->group(function(){
         Route::get('create',[BureauController::class, 'create'])->name('bureau.create');
