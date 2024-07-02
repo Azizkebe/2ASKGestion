@@ -82,9 +82,19 @@ Route::middleware('auth')->group(function(){
     });
     Route::prefix('niveau')->group(function(){
         Route::get('create',[NiveauController::class,'create'])->name('niveau.create');
+        Route::post('/create',[NiveauController::class, 'store'])->name('niveau.store');
+        Route::get('/liste',[NiveauController::class, 'liste'])->name('niveau.liste');
+        Route::get('/edit/{niveau}',[NiveauController::class, 'editer'])->name('niveau.editer');
+        Route::put('/update/{niveau}',[NiveauController::class, 'update'])->name('niveau.update');
+        Route::get('/delete/{niveau}',[NiveauController::class, 'delete'])->name('niveau.delete');
     });
     Route::prefix('diplome')->group(function(){
         Route::get('create',[DiplomeController::class, 'create'])->name('diplome.create');
+        Route::post('/create',[DiplomeController::class, 'store'])->name('diplome.store');
+        Route::get('/liste',[DiplomeController::class, 'liste'])->name('diplome.liste');
+        Route::get('/edit/{diplome}',[DiplomeController::class, 'editer'])->name('diplome.editer');
+        Route::put('/update/{diplome}',[DiplomeController::class, 'update'])->name('diplome.update');
+        Route::get('/delete/{diplome}',[DiplomeController::class, 'delete'])->name('diplome.delete');
     });
     Route::prefix('contrat')->group(function(){
         Route::get('create',[TypeContratController::class,'create'])->name('contrat.create');

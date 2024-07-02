@@ -7,6 +7,9 @@
         <div class="card shadow">
           <div class="card-body mx-100">
             <h4 class="card-title mt-3 text-center">Ajout un niveau d'etude</h4>
+            <div style="display: flex;justify-content:end;">
+                <a href="{{route('niveau.liste')}}" class="btn btn-success btn-sm"> Liste des niveaux</a>
+            </div>
             <div>
                 @if (session('success'))
                     <div class="alert alert-success">
@@ -16,7 +19,7 @@
                     </div>
                 @endif
             </div>
-            <form action="{{route('handleregister')}}" method="POST">
+            <form action="{{route('niveau.store')}}" method="POST">
                 @csrf
                 @method('POST')
                <div class="form-group input-group">

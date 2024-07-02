@@ -196,7 +196,7 @@
                         </li>
                         <li>
                             <a href="{{route('domaine.liste')}}">
-                              <span class="sub-item">Liste un ou des domaines</span>
+                              <span class="sub-item">Liste des domaines</span>
                             </a>
                           </li>
                       </ul>
@@ -215,6 +215,11 @@
                                 <span class="sub-item">Ajouter un niveau</span>
                               </a>
                             </li>
+                            <li>
+                                <a href="{{route('niveau.liste')}}">
+                                  <span class="sub-item">Liste des niveaux d'etude</span>
+                                </a>
+                              </li>
                           </ul>
                         </div>
                       </li>
@@ -231,6 +236,11 @@
                                     <span class="sub-item">Ajouter un diplome</span>
                                   </a>
                                 </li>
+                                <li>
+                                    <a href="{{route('diplome.liste')}}">
+                                      <span class="sub-item">Liste des diplomes</span>
+                                    </a>
+                                  </li>
                               </ul>
                             </div>
                           </li>
