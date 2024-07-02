@@ -320,6 +320,11 @@
                                                     <span class="sub-item">Ajouter une antenne</span>
                                                   </a>
                                                 </li>
+                                                <li>
+                                                    <a href="{{route('antenne.liste')}}">
+                                                      <span class="sub-item">Liste des antenne</span>
+                                                    </a>
+                                                  </li>
                                               </ul>
                                             </div>
                                           </li>

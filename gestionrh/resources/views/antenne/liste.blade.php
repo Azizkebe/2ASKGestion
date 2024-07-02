@@ -29,7 +29,7 @@
                             <tbody>
                              @forelse ($antenne as $antenne)
                             <tr>
-                                <td>{{$antenne->direction->direction}}</td>
+                                <td>{{$antenne->id_direction}}</td>
                                 <td>{{$antenne->antenne}}</td>
                                 <td>
                                     <div class="form-button-action">
