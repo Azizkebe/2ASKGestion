@@ -6,9 +6,9 @@
       <div class="col-12 h-50 ">
         <div class="card shadow">
           <div class="card-body mx-100">
-            <h4 class="card-title mt-3 text-center">Ajout un service</h4>
+            <h4 class="card-title mt-3 text-center">Editer un service</h4>
             <div style="display: flex; justify-content:end;">
-                <a href="{{route('service.liste')}}" class="btn btn-success btn-sm">Liste des services</a>
+                <a href="{{route('service.create')}}" class="btn btn-success btn-sm">Liste des service</a>
             </div>
             <div>
                 @if (session('success'))
@@ -19,15 +19,14 @@
                     </div>
                 @endif
             </div>
-            <form action="{{route('service.store')}}" method="POST">
+            <form action="{{route('service.update', $service->id)}}" method="POST">
                 @csrf
-                @method('POST')
+                @method('PUT')
                 <div class="form-group input-group">
                     <select name="id_direction" id="id_direction" class="form-select">
                        <option value="">--Choisissez une direction--</option>
                         @foreach ($direction as $direction)
-                       <option value="{{$direction->id}}">{{$direction->direction}}</option>
-
+                       <option value="{{$direction->id}}" {{$direction->id === $service->id_direction ? 'selected' : ''}}>{{$direction->direction}}</option>
                        @endforeach
                     </select>
                 </div>
@@ -37,7 +36,7 @@
                     @enderror
                 </div>
                <div class="form-group input-group">
-                <input name="service" class="form-control" placeholder="service" type="text" value="{{old('service')}}">
+                <input name="service" class="form-control" placeholder="service" type="text" value="{{$service->service}}">
                 <div class="input-group">
                     @error('service')
                      <span class="error">{{$message}}</span>

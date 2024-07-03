@@ -41,10 +41,14 @@ class ServiceController extends Controller
     public function editer($service)
     {
         $service = Service::findOrFail($service);
+        $direction = Direction::all();
 
-        return view('service.edit', compact('service'));
+        return view('service.edit',[
+            'service'=>$service,
+            'direction'=>$direction,
+        ]);
     }
-    public function update(ServiceRequest $request, $service)
+    public function update(Request $request, $service)
     {
         try {
             $service = Service::findOrFail($service);
@@ -52,6 +56,7 @@ class ServiceController extends Controller
             $service->id_direction = $request->id_direction;
             $service->service = $request->service;
 
+            // dd($service);
             $service->update();
 
             return redirect()->route('service.liste')->with('success', 'Le service est mise à jour');

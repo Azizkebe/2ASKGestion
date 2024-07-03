@@ -7,6 +7,9 @@
         <div class="card shadow">
           <div class="card-body mx-100">
             <h4 class="card-title mt-3 text-center">Ajout une antenne</h4>
+            <div style="display: flex; justify-content:end;">
+                <a href="{{route('antenne.liste')}}" class="btn btn-success btn-sm">Liste des antennes</a>
+            </div>
             <div>
                 @if (session('success'))
                     <div class="alert alert-success">

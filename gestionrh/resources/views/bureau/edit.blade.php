@@ -25,7 +25,7 @@
                     <select name="id_antenne" id="id_antenne" class="form-select">
                         <option value="">--Choisissez un bureau--</option>
                         @foreach ($antenne as $antenne)
-                            <option value="{{$antenne->id}}">{{$antenne->antenne}}</option>
+                            <option value="{{$antenne->id}}" {{$antenne->id === $bureau->id_antenne ? 'selected' : ''}}>{{$antenne->antenne}}</option>
                         @endforeach
                     </select>
                 </div>

@@ -40,10 +40,14 @@ class BureauController extends Controller
     public function editer($bureau)
     {
         $bureau = Bureau::findOrFail($bureau);
+        $antenne = Antenne::all();
 
-        return view('bureau.edit', compact('bureau'));
+        return view('bureau.edit',[
+            'antenne'=> $antenne,
+            'bureau'=> $bureau,
+        ]);
     }
-    public function update(BureauRequest $request, $bureau)
+    public function update(Request $request, $bureau)
     {
         try {
             $bureau = Bureau::findOrFail($bureau);

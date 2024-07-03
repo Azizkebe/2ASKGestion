@@ -6,9 +6,9 @@
       <div class="col-12 h-50 ">
         <div class="card shadow">
           <div class="card-body mx-100">
-            <h4 class="card-title mt-3 text-center">Ajout un service</h4>
+            <h4 class="card-title mt-3 text-center">Editer une antenne</h4>
             <div style="display: flex; justify-content:end;">
-                <a href="{{route('service.liste')}}" class="btn btn-success btn-sm">Liste des services</a>
+                <a href="{{route('antenne.liste')}}" class="btn btn-success btn-sm">Liste des antennes</a>
             </div>
             <div>
                 @if (session('success'))
@@ -19,16 +19,15 @@
                     </div>
                 @endif
             </div>
-            <form action="{{route('service.store')}}" method="POST">
+            <form action="{{route('antenne.update', $antenne->id)}}" method="POST">
                 @csrf
-                @method('POST')
+                @method('PUT')
                 <div class="form-group input-group">
                     <select name="id_direction" id="id_direction" class="form-select">
-                       <option value="">--Choisissez une direction--</option>
+                        <option value="">--choisissez l'antenne--</option>
                         @foreach ($direction as $direction)
-                       <option value="{{$direction->id}}">{{$direction->direction}}</option>
-
-                       @endforeach
+                            <option value="{{$direction->id}}" {{$direction->id === $antenne->id_direction ? 'selected' : ''}}>{{$direction->direction}}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div>
@@ -37,15 +36,15 @@
                     @enderror
                 </div>
                <div class="form-group input-group">
-                <input name="service" class="form-control" placeholder="service" type="text" value="{{old('service')}}">
+                <input name="antenne" class="form-control" placeholder="antenne" type="text" value="{{$antenne->antenne}}">
                 <div class="input-group">
-                    @error('service')
+                    @error('antenne')
                      <span class="error">{{$message}}</span>
                     @enderror
                 </div>
                 </div>
               <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-block"> Ajouter le service  </button>
+                <button type="submit" class="btn btn-primary btn-block"> Enregistrer les modifictaions </button>
               </div>
             </form>
           </div>

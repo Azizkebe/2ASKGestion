@@ -341,6 +341,11 @@
                                                         <span class="sub-item">Ajouter un bureau</span>
                                                       </a>
                                                     </li>
+                                                    <li>
+                                                        <a href="{{route('bureau.liste')}}">
+                                                          <span class="sub-item">Liste des bureaux</span>
+                                                        </a>
+                                                      </li>
                                                   </ul>
                                                 </div>
                                               </li>

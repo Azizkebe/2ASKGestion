@@ -32,7 +32,7 @@ class AntenneController extends Controller
     }
     public function liste()
     {
-        $antenne = Antenne::all();
+        $antenne = Antenne::latest()->with('direction')->get();
 
         return view('antenne.liste', compact('antenne'));
 
@@ -40,10 +40,14 @@ class AntenneController extends Controller
     public function editer($antenne)
     {
         $antenne = Antenne::findOrFail($antenne);
+        $direction = Direction::all();
 
-        return view('antenne.edit', compact('antenne'));
+        return view('antenne.edit', [
+            'antenne'=>$antenne,
+            'direction'=>$direction,
+        ]);
     }
-    public function update(AntenneRequest $request, $antenne)
+    public function update(Request $request, $antenne)
     {
         try {
             $antenne = Antenne::findOrFail($antenne);
