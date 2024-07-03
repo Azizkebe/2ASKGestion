@@ -129,10 +129,20 @@ Route::middleware('auth')->group(function(){
         Route::get('/delete/{antenne}',[AntenneController::class, 'delete'])->name('antenne.delete');
     });
     Route::prefix('bureau')->group(function(){
-        Route::get('create',[BureauController::class, 'create'])->name('bureau.create');
+        Route::get('/create',[BureauController::class, 'create'])->name('bureau.create');
+        Route::post('/create',[BureauController::class, 'store'])->name('bureau.store');
+        Route::get('/liste',[BureauController::class, 'liste'])->name('bureau.liste');
+        Route::get('/edit/{bureau}',[BureauController::class, 'editer'])->name('bureau.editer');
+        Route::put('/update/{bureau}',[BureauController::class, 'update'])->name('bureau.update');
+        Route::get('/delete/{bureau}',[BureauController::class, 'delete'])->name('bureau.delete');
     });
     Route::prefix('poste')->group(function(){
         Route::get('create',[PosteController::class, 'create'])->name('poste.create');
+        Route::post('/create',[PosteController::class, 'store'])->name('poste.store');
+        Route::get('/liste',[PosteController::class, 'liste'])->name('poste.liste');
+        Route::get('/edit/{poste}',[PosteController::class, 'editer'])->name('poste.editer');
+        Route::put('/update/{poste}',[PosteController::class, 'update'])->name('poste.update');
+        Route::get('/delete/{poste}',[PosteController::class, 'delete'])->name('poste.delete');
     });
 
 });

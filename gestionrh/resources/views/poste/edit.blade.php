@@ -6,9 +6,9 @@
       <div class="col-12 h-50 ">
         <div class="card shadow">
           <div class="card-body mx-100">
-            <h4 class="card-title mt-3 text-center">Ajout un Poste à Occuper</h4>
+            <h4 class="card-title mt-3 text-center">Editer un poste</h4>
             <div style="display: flex; justify-content:end;">
-                <a href="{{route('poste.liste')}}" class="btn btn-success btn-sm">Liste des Postes</a>
+                <a href="{{route('poste.liste')}}" class="btn btn-success btn-sm">Liste des postes</a>
             </div>
             <div>
                 @if (session('success'))
@@ -19,11 +19,11 @@
                     </div>
                 @endif
             </div>
-            <form action="{{route('poste.store')}}" method="POST">
+            <form action="{{route('poste.update', $poste->id)}}" method="POST">
                 @csrf
-                @method('POST')
+                @method('PUT')
                <div class="form-group input-group">
-                <input name="poste" class="form-control" placeholder="Poste à Occuper" type="text" value="{{old('poste')}}">
+                <input name="poste" class="form-control" placeholder="poste" type="text" value="{{$poste->poste}}">
                 <div class="input-group">
                     @error('poste')
                      <span class="error">{{$message}}</span>
@@ -31,7 +31,7 @@
                 </div>
                 </div>
               <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-block"> Ajouter le poste  </button>
+                <button type="submit" class="btn btn-primary btn-block"> Enregister les modificationsn du poste  </button>
               </div>
             </form>
           </div>

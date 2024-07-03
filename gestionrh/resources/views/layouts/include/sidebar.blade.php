@@ -357,6 +357,11 @@
                                                             <span class="sub-item">Ajouter un poste</span>
                                                           </a>
                                                         </li>
+                                                        <li>
+                                                            <a href="{{route('poste.liste')}}">
+                                                              <span class="sub-item">Liste des postes</span>
+                                                            </a>
+                                                          </li>
                                                       </ul>
                                                     </div>
                                                   </li>

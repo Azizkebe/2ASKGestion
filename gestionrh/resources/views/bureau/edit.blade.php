@@ -5,7 +5,7 @@
       <div class="col-12 h-50 ">
         <div class="card shadow">
           <div class="card-body mx-100">
-            <h4 class="card-title mt-3 text-center">Ajouter un bureau</h4>
+            <h4 class="card-title mt-3 text-center">Editer un bureau</h4>
             <div style="display: flex;justify-content:end;">
                 <a href="{{route('bureau.liste')}}" class="btn btn-success btn-sm"> Liste des bureaux</a>
             </div>
@@ -18,9 +18,9 @@
                     </div>
                 @endif
             </div>
-            <form action="{{route('bureau.store')}}" method="POST">
+            <form action="{{route('bureau.update', $bureau->id)}}" method="POST">
                 @csrf
-                @method('POST')
+                @method('PUT')
                 <div class="form-group input-group">
                     <select name="id_antenne" id="id_antenne" class="form-select">
                         <option value="">--Choisissez un bureau--</option>
@@ -30,7 +30,7 @@
                     </select>
                 </div>
                <div class="form-group input-group">
-                <input name="bureau" class="form-control" placeholder="bureau" type="text" value="{{old('bureau')}}">
+                <input name="bureau" class="form-control" placeholder="bureau" type="text" value="{{$bureau->bureau}}">
                 <div class="input-group">
                     @error('bureau')
                      <span class="error">{{$message}}</span>
@@ -38,7 +38,7 @@
                 </div>
                 </div>
               <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-block"> Ajouter un bureau  </button>
+                <button type="submit" class="btn btn-primary btn-block"> Enregistrer les modifications du bureau  </button>
               </div>
             </form>
           </div>
