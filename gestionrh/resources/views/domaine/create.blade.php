@@ -7,6 +7,9 @@
         <div class="card shadow">
           <div class="card-body mx-100">
             <h4 class="card-title mt-3 text-center">Domaine d'etude </h4>
+            <div style="display: flex; justify-content:end;">
+                <a href="{{route('domaine.liste')}}" class="btn btn-success btn-sm">Liste des domaines</a>
+            </div>
             <div>
                 @if (session('success'))
                     <div class="alert alert-success">

@@ -96,14 +96,19 @@
                       <div class="form-group">
                         <label for="sexe">Genre</label>
                         <select name="sexe" id="sexe" class="form-select">
-                            <option value="">Masculin</option>
-                            <option value="">Feminin</option>
+                            <option value="">--Choisissez le genre --</option>
+                            @foreach ($genre as $genre)
+                                <option value="{{$genre->id}}">{{$genre->name}}</option>
+                            @endforeach
                         </select>
                     </div>
                       <div class="form-group">
                         <label for="matrimonial">Stuation Matrimoniale</label>
                         <select name="matrimonial" id="matrimonial" class="form-select">
-                            <option value="">Marie</option>
+                            <option value="">--Choisissez la situation matrimonial --</option>
+                            @foreach ($matrimonial as $mat)
+                                <option value="{{$mat->id}}">{{$mat->situation_matrimoniale}}</option>
+                            @endforeach
                         </select>
                       </div>
                       <div class="form-group">
@@ -121,55 +126,82 @@
                         <div class="form-group">
                             <label for="domaine_etude">Domaine d'etude</label>
                             <select name="domaine_etude" id="domaine_etude" class="form-select">
-                                <option value="">Informatique</option>
+                                <option value="">--Choisissez le domaine d'etude --</option>
+                                @foreach ($domaine as $domaine)
+                                    <option value="{{$domaine->id}}">{{$domaine->domaine_etude}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="niveau_etude">Niveau d'etude</label>
-                            <select name="niveau_etude" id="niveau_etude" class="form-select">
-                                <option value="">Doctorat</option>
+                            <select name="niveau_etude" id="niveau_etude" class="form-select" autocomplete="on">
+                                <option value="">--Choisissez le niveau d'etude --</option>
+                                @foreach ($niveau as $niveau)
+                                    <option value="{{$niveau->id}}">{{$niveau->niveau_etude}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="dernier_diplome">Dernier diplome Obtenu</label>
                             <select name="dernier_diplome" id="dernier_diplome" class="form-select">
-                                <option value="">BAC</option>
+                                <option value="">--Choisissez le dernier diplome obtenu --</option>
+                                @foreach ($diplome as $diplome)
+                                    <option value="{{$diplome->id}}">{{$diplome->diplome_etude}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="dernier_contrat">Type de Contrat Obtenu</label>
                             <select name="dernier_contrat" id="dernier_contrat" class="form-select">
-                                <option value="">Prestation</option>
+                                <option value="">--Choisissez le dernier type de contrat --</option>
+                                @foreach ($contrat as $contrat)
+                                    <option value="{{$contrat->id}}">{{$contrat->contrat}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="direction">Direction Orientee</label>
                             <select name="direction" id="direction" class="form-select">
-                                <option value="">DOFI</option>
+                                <option value="">--Choisissez la direction ---</option>
+                                @foreach ($direction as $direction)
+                                    <option value="{{$direction->id}}">{{$direction->direction}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="service">Service Oriente</label>
                             <select name="service" id="service" class="form-select">
-                                <option value="">Pole Auto Emploi</option>
+                                <option value="">--Choisissez le service --</option>
+                                @foreach ($service as $service)
+                                    <option value="{{$service->id}}">{{$service->service}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="antenne">Antenne Orientee</label>
                             <select name="antenne" id="antenne" class="form-select">
-                                <option value="">Pole Auto Emploi</option>
+                                <option value="">--Choisissez l'antenne --</option>
+                                @foreach ($antenne as $antenne)
+                                    <option value="{{$antenne->id}}">{{$antenne->antenne}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="bureau">Bureau Oriente</label>
                             <select name="bureau" id="bureau" class="form-select">
-                                <option value="">CDEPS DE DAKAR</option>
+                                <option value="">--Choisissez le bureau --</option>
+                                @foreach ($bureau as $bureau)
+                                    <option value="{{$bureau->id}}">{{$bureau->bureau}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="bureau">Poste Occupe</label>
                             <select name="bureau" id="bureau" class="form-select">
-                                <option value="">Conseiller</option>
+                                <option value="">--Choisissez le poste occupé --</option>
+                                @foreach ($poste as $poste)
+                                    <option value="{{$poste->id}}">{{$poste->poste}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -179,8 +211,8 @@
                             <input
                             type="file"
                             class="form-control"
-                            id="image_profil"
-                            name="image_profil"
+                            id="imagephoto"
+                            name="imagephoto"
                             accept="png, jpg, jpeg"
                           />
                         </div>
@@ -189,9 +221,9 @@
                             <input
                             type="file"
                             class="form-control"
-                            id="image_cv"
+                            id="imagecv"
                             name="image_cv"
-                            accept="png, jpg, jpeg"
+                            accept="png, jpg, jpeg, png"
                           />
                         </div>
                         <div class="form-group">
@@ -199,9 +231,9 @@
                             <input
                             type="file"
                             class="form-control"
-                            id="image_diplome"
-                            name="image_diplome"
-                            accept="png, jpg, jpeg"
+                            id="imagediplome"
+                            name="imagediplome"
+                            accept="pdf, jpg, jpeg, png"
                           />
                         </div>
                         <div class="form-group">
@@ -209,9 +241,9 @@
                             <input
                             type="file"
                             class="form-control"
-                            id="image_contrat"
-                            name="image_contrat"
-                            accept="png, jpg, jpeg"
+                            id="imagecontrat"
+                            name="imagecontrat"
+                            accept="pdf, jpg, jpeg, png"
                           />
                         </div>
                         <div class="form-group">
@@ -219,9 +251,9 @@
                             <input
                             type="file"
                             class="form-control"
-                            id="image_extrait"
-                            name="image_extrait"
-                            accept="png, jpg, jpeg"
+                            id="imageextrait"
+                            name="imageextrait"
+                            accept="pdf, png, jpg, jpeg"
                           />
                         </div>
                     </div>
