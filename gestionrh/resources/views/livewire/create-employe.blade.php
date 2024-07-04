@@ -27,7 +27,9 @@
               <div class="card-title">Ajouter un Employe</div>
             </div>
             <div class="card-body">
-                <form action="">
+                <form wire:submit.prevent="store" method="POST">
+                    @csrf
+                    @method('POST')
                 <div class="row">
                    <div class="col-md-6 col-lg-4">
                     <div class="form-group">
@@ -41,6 +43,11 @@
                           wire:model.live="name"
                         />
                       </div>
+                      <div>
+                        @error('name')
+                            <span class="error">Veuillez saisir le nom de l'employe</span>
+                        @enderror
+                      </div>
                       <div class="form-group">
                         <label for="name">Prenom</label>
                         <input
@@ -51,6 +58,11 @@
                           wire:model.live="surname"
                           placeholder="Prenom"
                         />
+                      </div>
+                      <div>
+                        @error('surname')
+                            <span class="error">Veuillez saisir le prenom de l'employe</span>
+                        @enderror
                       </div>
                       <div class="form-group">
                         <label for="email2">Email</label>
@@ -63,6 +75,11 @@
                           placeholder="Enter Email"
                         />
                       </div>
+                      <div>
+                        @error('email')
+                            <span class="error">Veuillez saisir l\'adresse Email</span>
+                        @enderror
+                      </div>
                       <div class="form-group">
                         <label for="naissance">Date de Naissance</label>
                         <input
@@ -73,6 +90,11 @@
                           wire:model.live="naissance"
                           placeholder="Date de Naissance"
                         />
+                      </div>
+                      <div>
+                        @error('naissance')
+                            <span class="error">Veuillez saisir le nom de l'employe</span>
+                        @enderror
                       </div>
                       <div class="form-group">
                         <label for="age">AGE</label>
@@ -97,6 +119,11 @@
                           placeholder="Lieu de naissance"
                         />
                       </div>
+                      <div>
+                        @error('naissance')
+                            <span class="error">Veuillez choisir la date de naissance</span>
+                        @enderror
+                      </div>
                       <div class="form-group">
                         <label for="sexe">Genre</label>
                         <select name="sexe" id="sexe" class="form-select" wire:model.live="sexe">
@@ -106,6 +133,11 @@
                             @endforeach
                         </select>
                     </div>
+                    <div>
+                        @error('sexe')
+                            <span class="error">Veuillez choisir le sexe</span>
+                        @enderror
+                      </div>
                       <div class="form-group">
                         <label for="matrimonial">Stuation Matrimoniale</label>
                         <select name="matrimonial" id="matrimonial" class="form-select" wire:model.live="matrimonial">
@@ -114,6 +146,11 @@
                                 <option value="{{$mat->id}}">{{$mat->situation_matrimoniale}}</option>
                             @endforeach
                         </select>
+                      </div>
+                      <div>
+                        @error('matrimonial')
+                            <span class="error">Veuillez saisir la situation matrimoniale</span>
+                        @enderror
                       </div>
                       <div class="form-group">
                         <label for="nbr_enfant">Nombre d'enfant</label>

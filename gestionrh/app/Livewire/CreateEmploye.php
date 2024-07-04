@@ -3,6 +3,8 @@
 namespace App\Livewire;
 
 use Livewire\Component;
+use Illuminate\Support\Facades\DB;
+
 use App\Models\Genre;
 use App\Models\Matrimonial;
 use App\Models\Domaine;
@@ -57,18 +59,20 @@ public $imagediplome, $imagecontrat, $imageextrait;
 
               $this->validate([
                 'name'=>'string|required',
-                'prenom'=>'string|required',
+                'username'=>'string|required',
                 'email'=>'required|email',
-                'date_naissance'=>'required',
-                'id_matrimonial'=>'required',
+                'naissance'=>'required',
+                'lieu_naissance'=>'string|required',
+                'sexe'=>'required',
+                'matrimonial'=>'required',
                 'nbr_enfant'=>'integer|required',
-                'id_domonaine'=>'required',
-                'id_contrat'=>'required',
+                'id_domaine_etude'=>'required',
+                'id_dernier_contrat'=>'required',
                 'id_niveau_etude'=>'required',
                 'id_direction'=>'required',
                 'id_poste'=>'required',
-                'id_cloud_file_cv'=>'required',
-                'id_cloud_file_diplome'=>'required',
+                // 'id_cloud_file_cv'=>'required',
+                // 'id_cloud_file_diplome'=>'required',
               ]);
               try{
 
@@ -82,16 +86,25 @@ public $imagediplome, $imagecontrat, $imageextrait;
                     'lieu_naissance'=> $this->lieu_naissance,
                     'id_genre'=> $this->sexe,
                     'id_matrimonial'=> $this->matrimonial,
-
-
+                    'nbr_enfant'=> $this->nbr_enfant,
+                    'id_domaine_etude'=> $this->id_domaine_etude,
+                    'id_niveau_etude'=> $this->id_niveau_etude,
+                    'id_dernier_diplome'=> $this->id_dernier_diplome,
+                    'id_dernier_contrat'=> $this->id_dernier_contrat,
+                    'id_direction'=> $this->id_direction,
+                    'id_service'=> $this->id_service,
+                    'id_bureau'=> $this->id_bureau,
+                    'id_antenne'=> $this->id_antenne,
+                    'id_poste'=> $this->id_poste,
                 ];
-                // dd($request);
-                $products = Product::create($productData);
-                $this->handleImageUpload($products,$request,'image','CloudFile/Products','cloudfile_id');
+
+                dd($productData);
+                // $products = Product::create($productData);
+                // $this->handleImageUpload($products,$request,'image','CloudFile/Products','cloudfile_id');
 
 
-                return redirect()->route('article.liste')->with('success','Le produit à été ajouté avec succes');
-                DB::commit();
+                // return redirect()->route('article.liste')->with('success','Le produit à été ajouté avec succes');
+                // DB::commit();
 
 
         } catch (Exception $th) {
