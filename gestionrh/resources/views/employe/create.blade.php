@@ -125,7 +125,7 @@
                     <div class="col-md-6 col-lg-4">
                         <div class="form-group">
                             <label for="domaine_etude">Domaine d'etude</label>
-                            <select name="domaine_etude" id="domaine_etude" class="form-select">
+                            <select name="domaine_etude" id="domaine_etude" class="form-select" autocomplete="on">
                                 <option value="">--Choisissez le domaine d'etude --</option>
                                 @foreach ($domaine as $domaine)
                                     <option value="{{$domaine->id}}">{{$domaine->domaine_etude}}</option>
@@ -143,7 +143,7 @@
                         </div>
                         <div class="form-group">
                             <label for="dernier_diplome">Dernier diplome Obtenu</label>
-                            <select name="dernier_diplome" id="dernier_diplome" class="form-select">
+                            <select name="dernier_diplome" id="dernier_diplome" class="form-select" autocomplete="on">
                                 <option value="">--Choisissez le dernier diplome obtenu --</option>
                                 @foreach ($diplome as $diplome)
                                     <option value="{{$diplome->id}}">{{$diplome->diplome_etude}}</option>
@@ -152,7 +152,7 @@
                         </div>
                         <div class="form-group">
                             <label for="dernier_contrat">Type de Contrat Obtenu</label>
-                            <select name="dernier_contrat" id="dernier_contrat" class="form-select">
+                            <select name="dernier_contrat" id="dernier_contrat" class="form-select" autocomplete="on">
                                 <option value="">--Choisissez le dernier type de contrat --</option>
                                 @foreach ($contrat as $contrat)
                                     <option value="{{$contrat->id}}">{{$contrat->contrat}}</option>
@@ -161,7 +161,7 @@
                         </div>
                         <div class="form-group">
                             <label for="direction">Direction Orientee</label>
-                            <select name="direction" id="direction" class="form-select">
+                            <select name="direction" id="direction" class="form-select" autocomplete="on">
                                 <option value="">--Choisissez la direction ---</option>
                                 @foreach ($direction as $direction)
                                     <option value="{{$direction->id}}">{{$direction->direction}}</option>
@@ -170,7 +170,7 @@
                         </div>
                         <div class="form-group">
                             <label for="service">Service Oriente</label>
-                            <select name="service" id="service" class="form-select">
+                            <select name="service" id="service" class="form-select" autocomplete="on">
                                 <option value="">--Choisissez le service --</option>
                                 @foreach ($service as $service)
                                     <option value="{{$service->id}}">{{$service->service}}</option>
@@ -179,7 +179,7 @@
                         </div>
                         <div class="form-group">
                             <label for="antenne">Antenne Orientee</label>
-                            <select name="antenne" id="antenne" class="form-select">
+                            <select name="antenne" id="antenne" class="form-select" autocomplete="on">
                                 <option value="">--Choisissez l'antenne --</option>
                                 @foreach ($antenne as $antenne)
                                     <option value="{{$antenne->id}}">{{$antenne->antenne}}</option>
@@ -188,7 +188,7 @@
                         </div>
                         <div class="form-group">
                             <label for="bureau">Bureau Oriente</label>
-                            <select name="bureau" id="bureau" class="form-select">
+                            <select name="bureau" id="bureau" class="form-select" autocomplete="on">
                                 <option value="">--Choisissez le bureau --</option>
                                 @foreach ($bureau as $bureau)
                                     <option value="{{$bureau->id}}">{{$bureau->bureau}}</option>
@@ -197,7 +197,7 @@
                         </div>
                         <div class="form-group">
                             <label for="bureau">Poste Occupe</label>
-                            <select name="bureau" id="bureau" class="form-select">
+                            <select name="bureau" id="bureau" class="form-select" autocomplete="on">
                                 <option value="">--Choisissez le poste occupé --</option>
                                 @foreach ($poste as $poste)
                                     <option value="{{$poste->id}}">{{$poste->poste}}</option>
