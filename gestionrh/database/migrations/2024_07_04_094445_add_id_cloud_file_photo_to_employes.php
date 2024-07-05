@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('employes', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_cloud_file_photo')->after('id_poste');
+            $table->unsignedBigInteger('id_cloud_file_photo')->after('id_poste')->nullable();
             $table->foreign('id_cloud_file_photo')->references('id')->on('cloud_file_photos');
         });
     }

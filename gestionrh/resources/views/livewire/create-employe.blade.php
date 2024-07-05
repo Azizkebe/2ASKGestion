@@ -27,7 +27,7 @@
               <div class="card-title">Ajouter un Employe</div>
             </div>
             <div class="card-body">
-                <form wire:submit.prevent="store" method="POST">
+                <form wire:submit.prevent="store" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('POST')
                 <div class="row">
@@ -53,14 +53,14 @@
                         <input
                           type="type"
                           class="form-control"
-                          id="surname"
-                          name="surname"
-                          wire:model.live="surname"
+                          id="username"
+                          name="username"
+                          wire:model.live="username"
                           placeholder="Prenom"
                         />
                       </div>
                       <div>
-                        @error('surname')
+                        @error('username')
                             <span class="error">Veuillez saisir le prenom de l'employe</span>
                         @enderror
                       </div>
@@ -133,7 +133,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div>
+                      <div>
                         @error('sexe')
                             <span class="error">Veuillez choisir le sexe</span>
                         @enderror
@@ -163,6 +163,11 @@
                         value="0"
                       />
                     </div>
+                    <div>
+                        @error('nbr_enfant')
+                            <span class="error">Veuillez choisir le domaine d'etude</span>
+                        @enderror
+                      </div>
                     </div>
                     <div class="col-md-6 col-lg-4">
                         <div class="form-group">
@@ -174,6 +179,11 @@
                                 @endforeach
                             </select>
                         </div>
+                          <div>
+                            @error('id_domaine_etude')
+                                <span class="error">Veuillez choisir le domaine d'etude</span>
+                            @enderror
+                          </div>
                         <div class="form-group">
                             <label for="niveau_etude">Niveau d'etude</label>
                             <select name="id_niveau_etude" id="id_niveau_etude" class="form-select" wire:model.live="id_niveau_etude" autocomplete="on">
@@ -183,6 +193,11 @@
                                 @endforeach
                             </select>
                         </div>
+                          <div>
+                            @error('id_niveau_etude')
+                                <span class="error">Veuillez choisir le niveau d'etude</span>
+                            @enderror
+                          </div>
                         <div class="form-group">
                             <label for="dernier_diplome">Dernier diplome Obtenu</label>
                             <select name="id_dernier_diplome" id="id_dernier_diplome" class="form-select" wire:model.live="id_dernier_diplome" autocomplete="on">
@@ -192,6 +207,11 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div>
+                            @error('id_dernier_diplome')
+                                <span class="error">Veuillez choisir le dernier diplome obtenu </span>
+                            @enderror
+                          </div>
                         <div class="form-group">
                             <label for="dernier_contrat">Type de Contrat Obtenu</label>
                             <select name="id_dernier_contrat" id="id_dernier_contrat" class="form-select" wire:model.live="id_dernier_contrat" autocomplete="on">
@@ -201,6 +221,11 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div>
+                            @error('id_dernier_contrat')
+                                <span class="error">Veuillez choisir le contrat obtenu</span>
+                            @enderror
+                          </div>
                         <div class="form-group">
                             <label for="direction">Direction Orientee</label>
                             <select name="id_direction" id="id_direction" class="form-select" wire:model.live="id_direction" autocomplete="on">
@@ -210,6 +235,11 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div>
+                            @error('id_direction')
+                                <span class="error">Veuillez choisir la direction</span>
+                            @enderror
+                          </div>
                         <div class="form-group">
                             <label for="service">Service Oriente</label>
                             <select name="id_service" id="id_service" class="form-select" wire:model.live="id_service" autocomplete="on">
@@ -219,6 +249,11 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div>
+                            @error('id_service')
+                                <span class="error">Veuillez choisir le service</span>
+                            @enderror
+                          </div>
                         <div class="form-group">
                             <label for="antenne">Antenne Orientee</label>
                             <select name="id_antenne" id="id_antenne" class="form-select" wire:model.live="id_antenne" autocomplete="on">
@@ -246,18 +281,16 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div>
+                            @error('id_poste')
+                                <span class="error">Veuillez choisir le poste occcupé par l'employé</span>
+                            @enderror
+                          </div>
                     </div>
                     <div class="col-md-6 col-lg-4">
                         <div class="form-group">
                             <label for="image_profil">Joindre la photo de l'employe</label>
-                            <input
-                            type="file"
-                            class="form-control"
-                            id="imagephoto"
-                            name="imagephoto"
-                            wire:model.live="imagephoto"
-                            accept="png, jpg, jpeg"
-                          />
+                            <input type="file" name="imagephoto" wire:model.live="imagephoto" id="imagephoto" placeholder="Photo de l'employe" class="form-control" autocomplete="on">
                         </div>
                         <div class="form-group">
                             <label for="image_cv">Joindre le CV de l'employe</label>
