@@ -53,6 +53,7 @@ Route::middleware('auth')->group(function(){
     });
     Route::prefix('employe')->group(function(){
         Route::get('/create',[EmployeController::class, 'create'])->name('employe.create');
+        Route::get('/liste',[EmployeController::class, 'liste'])->name('employe.liste');
     });
     Route::prefix('genre')->group(function(){
         Route::get('/create',[GenreController::class, 'create'])->name('genre.create');

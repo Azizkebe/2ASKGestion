@@ -27,6 +27,17 @@
               <div class="card-title">Ajouter un Employe</div>
             </div>
             <div class="card-body">
+                <div>
+                    <div>
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                <button type="button" class="close" data-dismiss="alert"
+                                aria-hidden="true"></button>
+                                {{session('success')}}
+                            </div>
+                        @endif
+                    </div
+                </div>
                 <form wire:submit.prevent="store" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('POST')
@@ -311,7 +322,7 @@
                             id="imagediplome"
                             name="imagediplome"
                             wire:model.live="imagediplome"
-                            accept="pdf, jpg, jpeg, png"
+                            accept="image/pdf, image/jpg, image/jpeg, image/png"
                           />
                         </div>
                         <div class="form-group">
@@ -322,7 +333,7 @@
                             id="imagecontrat"
                             name="imagecontrat"
                             wire:model.live="imagecontrat"
-                            accept="pdf, jpg, jpeg, png"
+                            accept="image/pdf, image/jpg, image/jpeg, image/png"
                           />
                         </div>
                         <div class="form-group">
@@ -333,7 +344,8 @@
                             id="imageextrait"
                             name="imageextrait"
                             wire:model.live="imageextrait"
-                            accept="pdf, png, jpg, jpeg"
+                            accept="image/pdf, image/png, image/jpg, image/jpeg"
+                            multiple
                           />
                         </div>
                     </div>
