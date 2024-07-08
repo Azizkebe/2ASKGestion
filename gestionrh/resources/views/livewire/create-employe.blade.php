@@ -25,18 +25,20 @@
           <div class="card">
             <div class="card-header">
               <div class="card-title">Ajouter un Employe</div>
+              <div style="display: flex; justify-content:end;">
+                <a href="{{route('employe.liste')}}" class="btn btn-success btn-sm">Liste des Employes</a>
+            </div>
             </div>
             <div class="card-body">
+
                 <div>
-                    <div>
-                        @if (session('success'))
-                            <div class="alert alert-success">
-                                <button type="button" class="close" data-dismiss="alert"
-                                aria-hidden="true"></button>
-                                {{session('success')}}
-                            </div>
-                        @endif
-                    </div
+                         @if (session('success'))
+                        <div class="alert alert-success">
+                            <button type="button" class="close" data-dismiss="alert"
+                            aria-hidden="true">x</button>
+                            {{session('success')}}
+                        </div>
+                          @endif
                 </div>
                 <form wire:submit.prevent="store" method="POST" enctype="multipart/form-data">
                     @csrf
