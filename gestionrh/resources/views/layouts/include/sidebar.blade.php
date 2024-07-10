@@ -90,7 +90,7 @@
                     </a>
                   </li>
                 <li>
-                  <a href="icon-menu.html">
+                  <a href="{{route('employe.liste')}}">
                     <span class="sub-item">Liste des Employes</span>
                   </a>
                 </li>

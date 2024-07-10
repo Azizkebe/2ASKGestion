@@ -90,7 +90,7 @@
                       </div>
                       <div>
                         @error('email')
-                            <span class="error">Veuillez saisir l\'adresse Email</span>
+                            <span class="error">Veuillez saisir l'adresse Email</span>
                         @enderror
                       </div>
                       <div class="form-group">
@@ -106,7 +106,7 @@
                       </div>
                       <div>
                         @error('naissance')
-                            <span class="error">Veuillez saisir le nom de l'employe</span>
+                            <span class="error">Veuillez choisir la date de naissance</span>
                         @enderror
                       </div>
                       <div class="form-group">
@@ -133,8 +133,8 @@
                         />
                       </div>
                       <div>
-                        @error('naissance')
-                            <span class="error">Veuillez choisir la date de naissance</span>
+                        @error('lieu_naissance')
+                            <span class="error">Veuillez le lieu de naissance</span>
                         @enderror
                       </div>
                       <div class="form-group">
@@ -178,7 +178,7 @@
                     </div>
                     <div>
                         @error('nbr_enfant')
-                            <span class="error">Veuillez choisir le domaine d'etude</span>
+                            <span class="error">Veuillez preciser le nombre d'enfant</span>
                         @enderror
                       </div>
                     </div>
