@@ -5,85 +5,57 @@
 <link rel="stylesheet" href="{{asset('admin/css/resumecv.css')}}">
 
 <div class="container-fluid">
-    <div class="wraper">
-		<div class="container">
-		<div class="left-content p-30">
-			<div class="logo">
-				<a href="index.html">
-					<span>My</span>
-					<span>Resume</span>
-				</a>
-			</div>
-			<div class="nav">
-				<ul>
-					<li><a href="#Home">Home</a></li>
-					<li><a href="#About">About</a></li>
-					<li><a href="">Work Profile</a></li>
-					<li><a href="">Portfolio</a></li>
-					<li><a href="">Education</a></li>
-					<li><a href="">Contact</a></li>
-				</ul>
-			</div>
-			<div class="left-footer">
-				<div class="social-icons">
-					<ul>
-						<li><a href=""><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></li>
-						<li><a href=""><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-						<li><a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-						<li><a href=""><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-					</ul>
-				</div>
-				<div class="foot-contact">
-					<ul>
-						<li>xxxxxxxxxxx@gmail.com</li>
-						<li>+91 90000XXXXX / 90XXXXXXXX</li>
-					</ul>
-				</div>
-
-<div class="copy-rights">Copyright &copy;2019 All rights reserved</div>
-			</div>
-
-		</div>
-		<div class="main-content">
-			<div class="section1 p-30" id="Home">
-			<div class="sec-title">
-	<div class="pg-sub-title">Home</div>
-	<div class="pg-title">My Profile</div>
-			</div>
-				<div class="d-flex-align-center">
-				<div class="user-img flex-1"><img src="https://colorlib.com/preview/theme/meetme/img/personal.jpg"></div>
-				<div class="user-profile flex-1">
-					<div class="pro-details">
-						<div class="sm-text">HELLO EVERYBODY, I AM</div>
-						<div class="name">Pavan Ramshetty</div>
-						<div class="role">UI Developer</div>
-
-					</div>
-					<div class="text">You will begin to realise why this exercise is called the Dickens Pattern (with reference to the ghost showing Scrooge some different futures)</div>
-					<div class="pr-list">
-						<ul>
-							<li><i class="fa fa-calendar" aria-hidden="true"></i> 14th May, 1992</li>
-							<li><i class="fa fa-phone" aria-hidden="true"></i> 90000XXXXX / 90XXXXXXXX</li>
-							<li><i class="fa fa-envelope" aria-hidden="true"></i> xxxxxxxxxxxxxx@gmail.com</li>
-							<li><i class="fa fa-map-marker" aria-hidden="true"></i> Hyderabad, Telangana</li>
-						</ul>
-					</div>
-			<div class="social-icons-head">
-					<ul>
-						<li><a href=""><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></li>
-						<li><a href=""><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-						<li><a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-						<li><a href=""><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-					</ul>
-				</div>
-
-				</div>
-			</div>
-			</div>
-
-		</div>
-	</div>
-</div>
+    <div class="content-wrapper">
+        <aside>
+            <div class="profile-img-wrapper">
+                <img src="assets/images/Profile.png" alt="profile">
+            </div>
+            <h1 class="profile-name">Daisy Murphy</h1>
+            <div class="text-center">
+                <span class="badge badge-white badge-pill profile-designation">UI / UX Designer</span>
+            </div>
+            <nav class="social-links">
+                <a href="#!" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                <a href="#!" class="social-link"><i class="fab fa-twitter"></i></a>
+                <a href="#!" class="social-link"><i class="fab fa-behance"></i></a>
+                <a href="#!" class="social-link"><i class="fab fa-dribbble"></i></a>
+                <a href="#!" class="social-link"><i class="fab fa-github"></i></a>
+            </nav>
+            <div class="widget">
+                <h5 class="widget-title">personal information</h5>
+                <div class="widget-content">
+                    <p>BIRTHDAY : 15 April 1990</p>
+                    <p>WEBSITE : www.example.com</p>
+                    <p>PHONE : +1 123 000 4444</p>
+                    <p>MAIL : your@example.com</p>
+                    <p>Location : California, USA</p>
+                    <button class="btn btn-download-cv btn-primary rounded-pill"> <img src="assets/images/download.svg" alt="download"
+                        class="btn-img">DOWNLOAD CV </button>
+                </div>
+            </div>
+            <div class="widget card">
+                <div class="card-body">
+                    <div class="widget-content">
+                        <h5 class="widget-title card-title">LANGUAGES</h5>
+                        <p>English : native</p>
+                        <p>Spanish : fluent</p>
+                        <p>Italian : fluent</p>
+                    </div>
+                </div>
+            </div>
+            <div class="widget card">
+                <div class="card-body">
+                    <div class="widget-content">
+                        <h5 class="widget-title card-title">INTERESTS</h5>
+                        <p>Video games</p>
+                        <p>Finance</p>
+                        <p>Basketball</p>
+                        <p>Theatre</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
 </div>
 
 @endsection
