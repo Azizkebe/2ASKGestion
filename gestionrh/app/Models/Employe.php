@@ -24,7 +24,7 @@ public function domaine()
 }
 public function niveauetude()
 {
-    return $this->belongsTo(Employe::class, 'id_niveau_etude');
+    return $this->belongsTo(NiveauEtude::class, 'id_niveau_etude');
 }
 public function diplome()
 {
@@ -72,7 +72,7 @@ public function photoextrait()
 }
 public function photocv()
 {
-    return $this->belongsTo(CloudFilePhoto::class, 'id_cloud_file_cv');
+    return $this->belongsTo(CloudFileCv::class, 'id_cloud_file_cv');
 }
 }
 
