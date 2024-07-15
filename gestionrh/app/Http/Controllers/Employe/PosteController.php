@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Employe;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
+
 use App\Models\Poste;
 
 class PosteController extends Controller
@@ -22,7 +23,10 @@ class PosteController extends Controller
 
             $poste->save();
 
-            return redirect()->back()->with('success','Le poste a été enregistré');
+            toastr()->success('Le poste a été enregistré');
+
+            return redirect()->back();
+            // return redirect()->back()->with('success','Le poste a été enregistré');
 
         } catch (Exception $th) {
             throw new Exception("Erreur survenue lors de l\'enregistrement", 1);
@@ -51,7 +55,9 @@ class PosteController extends Controller
 
             $poste->update();
 
-            return redirect()->route('poste.liste')->with('success', 'Le poste est mise à jour');
+            toastr()->success('Le poste est mise à jour');
+
+            return redirect()->route('poste.liste');
         } catch (Exception $th) {
             throw new Exception("Erreur survenue lors de la mise à jour", 1);
 
@@ -63,6 +69,8 @@ class PosteController extends Controller
 
         $poste->delete();
 
-        return redirect()->back()->with('success','Le poste a été enlevé avec succes');
+        toastr()->success('Le poste a été enlevé avec succes');
+
+        return redirect()->back()->with('success');
     }
 }

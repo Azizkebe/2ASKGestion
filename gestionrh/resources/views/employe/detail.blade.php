@@ -74,16 +74,16 @@
                         <ul class="time-line">
                             <li class="time-line-item">
                                 <span class="time-line-item-title">Dernier type de contrat</span><br>
-                                <h6 style="margin-top: 5px; font-size:16px;" class="badge badge-success section-title">{{$employe->contrat->contrat}}</h6>
+                                <h6 style="margin-top: 5px; font-size:16px;" class="section-title">{{$employe->contrat->contrat}}</h6>
                             </li>
                             <li class="time-line-item">
                                 <span class="time-line-item-title">Niveau d'etude</span><br>
-                                <h6 style="margin-top: 5px; font-size:16px;" class="badge badge-success section-title">{{$employe->niveauetude->niveau_etude ?? ''}}</h6>
+                                <h6 style="margin-top: 5px; font-size:16px;" class="section-title">{{$employe->niveauetude->niveau_etude ?? ''}}</h6>
 
                             </li>
                             <li class="time-line-item">
                                 <span class=" time-line-item-title">Dernier Diplome Obtenu</span><br>
-                                <h6 style="margin-top: 5px; font-size:16px;" class="badge badge-success section-title">{{$employe->diplome->diplome_etude}}</h6>
+                                <h6 style="margin-top: 5px; font-size:16px;" class="section-title">{{$employe->diplome->diplome_etude}}</h6>
 
                             </li>
                             {{-- <li class="time-line-item">
@@ -98,17 +98,17 @@
                         <ul class="time-line">
                             <li class="time-line-item">
                                 <span class=" time-line-item-title">Direction</span><br>
-                                <h6 style="margin-top: 5px; font-size:16px;" class="badge badge-success section-title">{{$employe->direction->direction}}</h6>
+                                <h6 style="margin-top: 5px; font-size:16px;" class="section-title">{{$employe->direction->direction}}</h6>
 
                             </li>
                             <li class="time-line-item">
                                 <span class=" time-line-item-title">Service</span><br>
-                                <h6 style="margin-top: 5px; font-size:16px;" class="badge badge-success section-title">{{$employe->service->service}}</h6>
+                                <h6 style="margin-top: 5px; font-size:16px;" class="section-title">{{$employe->service->service}}</h6>
 
                             </li>
                             <li class="time-line-item">
                                 <span class=" time-line-item-title">Antenne</span><br>
-                                <h6 style="margin-top: 5px; font-size:16px;" class="badge badge-success section-title">{{$employe->antenne->antenne}}</h6>
+                                <h6 style="margin-top: 5px; font-size:16px;" class="badge badge-success section-title">{{$employe->antenne->antenne ?? ''}}</h6>
 
                             </li>
 
@@ -121,7 +121,7 @@
                         <div style="height: 80;" class="client-logo"><a href="{{asset('storage/'.$employe->photocontrat->image_contrat)}}"><img src="{{asset('icon/contrat.png')}}" title="CONTRAT" alt="contrat" class="w-100"></a></div>
                         <div style="height: 80;" class="client-logo"><a href="{{asset('storage/'.$employe->photocv->image_cv)}}"><img  style="height: 180px;" src="{{asset('icon/cv.png')}}"title="CV" alt="cv" class="w-100"></a></div>
                         <div style="height: 80;" class="client-logo"><a href="{{asset('storage/'.$employe->photodiplome->image_diplome)}}"><img src="{{asset('icon/diplome.png')}}" alt="diplome" title="DIPLOME" class="w-100"></a></div>
-                        <div style="height: 80;" class="client-logo"><a href="{{asset('storage/'.$employe->photoextrait->image_extrait)}}" download=""><img src="{{asset('icon/extrait.png')}}" title="EXTRAIT" alt="extrait" class="w-100"></a></div>
+                        <div style="height: 80;" class="client-logo"><a href="{{asset('storage/'.$employe->photoextrait->image_extrait)}}"><img src="{{asset('icon/extrait.png')}}" title="EXTRAIT" alt="extrait" class="w-100"></a></div>
                     </div>
                 </section>
             </section>

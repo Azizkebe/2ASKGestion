@@ -117,7 +117,7 @@
                           id="age"
                           name="age"
                           wire:model.live="age"
-                          placeholder="20"
+                          {{-- placeholder="20" --}}
                           disabled
                         />
                       </div>
@@ -174,6 +174,7 @@
                         name="nbr_enfant"
                         wire:model.live="nbr_enfant"
                         value="0"
+                        min="0"
                       />
                     </div>
                     <div>
@@ -324,7 +325,7 @@
                             id="imagediplome"
                             name="imagediplome"
                             wire:model.live="imagediplome"
-                            accept="image/pdf, image/jpg, image/jpeg, image/png"
+
                           />
                         </div>
                         <div class="form-group">
@@ -335,7 +336,7 @@
                             id="imagecontrat"
                             name="imagecontrat"
                             wire:model.live="imagecontrat"
-                            accept="image/pdf, image/jpg, image/jpeg, image/png"
+
                           />
                         </div>
                         <div class="form-group">
@@ -346,7 +347,6 @@
                             id="imageextrait"
                             name="imageextrait"
                             wire:model.live="imageextrait"
-                            accept="image/pdf, image/png, image/jpg, image/jpeg"
                             multiple
                           />
                         </div>

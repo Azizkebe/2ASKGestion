@@ -25,6 +25,7 @@ use App\Models\CloudFileDiplome;
 use App\Models\CloudFileContrat;
 use App\Models\CloudFileExtrait;
 use Livewire\WithFileUploads;
+use Carbon\Carbon;
 
 
 class CreateEmploye extends Component
@@ -50,7 +51,13 @@ public $imageextrait = [];
         $antenne = Antenne::where('id_direction', $this->id_direction)->get();
         $bureau = Bureau::where('id_antenne', $this->id_antenne)->get();
         $poste = Poste::all();
+        $currentday =(int) Carbon::now()->format('Y');
+        $dateanniv = (int) Carbon::parse($this->naissance)->format('Y');
 
+        if(isset($this->naissance))
+        {
+            $this->age = $currentday - $dateanniv;
+        }
         return view('livewire.create-employe',[
             'genre'=>$genre,
             'matri'=>$matri,
@@ -90,12 +97,14 @@ public $imageextrait = [];
               try{
 
                 DB::beginTransaction();
+                $currentday =(int) Carbon::now()->format('Y');
+                $dateanniv = (int) Carbon::parse($this->naissance)->format('Y');
                 $docData = [
                     'nom'=> $this->name,
                     'prenom'=> $this->username,
                     'email'=> $this->email,
                     'date_naissance' => $this->naissance,
-                    'age'=> 20,
+                    'age'=> $currentday - $dateanniv,
                     'lieu_naissance'=> $this->lieu_naissance,
                     'id_genre'=> $this->sexe,
                     'id_matrimonial'=> $this->matrimonial,
@@ -111,6 +120,7 @@ public $imageextrait = [];
                     'id_poste'=> $this->id_poste,
                 ];
 
+                // dd($docData);
                 $employe = Employe::create($docData);
                 $this->handleImagePhotoUpload($employe,$this->imagephoto,'CloudImage/Employe','id_cloud_file_photo');
                 $this->handleImageCVUpload($employe,$this->imagecv,'CloudImageCV/Employe','id_cloud_file_cv');
@@ -118,8 +128,8 @@ public $imageextrait = [];
                 $this->handleImageContratUpload($employe,$this->imagecontrat,'CloudImageContrat/Employe','id_cloud_file_contrat');
                 $this->handleImageExtraitUpload($employe,$this->imageextrait,'CloudImageExtrait/Employe','id_cloud_file_extrait');
 
-
-                return redirect()->route('employe.liste')->with('success','Le dossier de l\'employé a été enregistré avec succes');
+                toastr()->success('Le dossier de l\'employé a été enregistré avec succes');
+                return redirect()->route('employe.liste');
                 DB::commit();
 
 
