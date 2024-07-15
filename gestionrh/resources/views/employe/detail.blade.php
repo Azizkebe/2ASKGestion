@@ -118,10 +118,10 @@
                 <section class="clients-section">
                     <h4 class="section-title">DOCUMENTS A TELECHARGER</h4>
                     <div class="client-logos-wrapper">
-                        <div style="height: 80;" class="client-logo"><a href="{{asset('storage/'.$employe->photocontrat->image_contrat)}}"><img src="{{asset('icon/contrat.png')}}" alt="contrat" class="w-100"></a></div>
-                        <div style="height: 80;" class="client-logo"><a href="{{asset('storage/'.$employe->photocv->image_cv)}}"><img  style="height: 180px;" src="{{asset('icon/cv.png')}}" alt="cv" class="w-100"></a></div>
-                        <div style="height: 80;" class="client-logo"><a href="{{asset('storage/'.$employe->photodiplome->image_diplome)}}"><img src="{{asset('icon/diplome.png')}}" alt="diplome" class="w-100"></a></div>
-                        <div style="height: 80;" class="client-logo"><a href="{{asset('storage/'.$employe->photoextrait->image_extrait)}}" download=""><img src="{{asset('icon/extrait.png')}}" alt="extrait" class="w-100"></a></div>
+                        <div style="height: 80;" class="client-logo"><a href="{{asset('storage/'.$employe->photocontrat->image_contrat)}}"><img src="{{asset('icon/contrat.png')}}" title="CONTRAT" alt="contrat" class="w-100"></a></div>
+                        <div style="height: 80;" class="client-logo"><a href="{{asset('storage/'.$employe->photocv->image_cv)}}"><img  style="height: 180px;" src="{{asset('icon/cv.png')}}"title="CV" alt="cv" class="w-100"></a></div>
+                        <div style="height: 80;" class="client-logo"><a href="{{asset('storage/'.$employe->photodiplome->image_diplome)}}"><img src="{{asset('icon/diplome.png')}}" alt="diplome" title="DIPLOME" class="w-100"></a></div>
+                        <div style="height: 80;" class="client-logo"><a href="{{asset('storage/'.$employe->photoextrait->image_extrait)}}" download=""><img src="{{asset('icon/extrait.png')}}" title="EXTRAIT" alt="extrait" class="w-100"></a></div>
                     </div>
                 </section>
             </section>

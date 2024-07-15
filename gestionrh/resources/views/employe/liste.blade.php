@@ -20,6 +20,7 @@
                   >
                     <thead>
                       <tr>
+                        <th></th>
                         <th>Nom</th>
                         <th>Prenom</th>
                         <th>Email</th>
@@ -35,6 +36,18 @@
                             <tbody>
                              @forelse ($employe as $employe)
                             <tr>
+                                <td>
+                                    @if ($employe->photo)
+                                        <div style="background-image: url('{{asset('storage/'.
+                                        $employe->photo->photo_employe)}}');
+                                        width:50px;
+                                        height:50px;
+                                        background-position:center;
+                                        background-size:cover;
+                                        ">
+                                        </div>
+                                    @endif
+                                 </td>
                                 <td>{{$employe->nom}}</td>
                                 <td>{{$employe->prenom}}</td>
                                 <td>{{$employe->email}}</td>
