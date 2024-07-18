@@ -32,14 +32,73 @@ class CreateEmploye extends Component
 {
     use WithFileUploads;
 
-public $name, $username, $email, $naissance, $age, $lieu_naissance;
-public $sexe, $matrimonial, $nbr_enfant, $id_domaine_etude, $id_niveau_etude, $id_dernier_diplome;
-public $id_dernier_contrat, $id_direction, $id_service, $id_bureau, $id_poste, $id_antenne, $imagephoto, $imagecv;
-public $imagediplome, $imagecontrat ;
+public $name, $username, $email, $naissance, $age, $lieu_naissance = '';
+public $sexe, $matrimonial, $nbr_enfant, $id_domaine_etude, $id_niveau_etude, $id_dernier_diplome = '';
+public $id_dernier_contrat, $id_direction, $id_service, $id_bureau, $id_poste, $id_antenne, $imagephoto, $imagecv = '';
+public $imagediplome, $imagecontrat = '';
 public $imageextrait = [];
+public $totalStep = 4;
+public $currentStep = 1;
+
+
+    public function mount()
+    {
+        $this->currentStep = 1;
+    }
+    public function increaseStep()
+    {
+        // dd('inc');
+        $this->resetErrorBag();
+        $this->validateData();
+        $this->currentStep++;
+        if($this->currentStep > $this->totalStep){
+            $this->currentStep = $this->totalStep;
+        }
+    }
+    public function decreaseStep()
+    {
+        $this->resetErrorBag();
+        $this->currentStep--;
+        if($this->currentStep < 1){
+            $this->currentStep = 1;
+        }
+    }
+    public function validateData()
+    {
+        if($this->currentStep == 1)
+        {
+            $this->validate([
+
+                'name'=>'string|required',
+                'username'=>'string|required',
+                // 'email'=>'required|email|unique:employes',
+                'naissance'=>'required',
+                'lieu_naissance'=>'string|required',
+                'sexe'=>'required',
+                'matrimonial'=>'required',
+                'nbr_enfant'=>'integer|required',
+            ]);
+        }
+        elseif ($this->currentStep == 2) {
+            $this->validate([
+                'id_domaine_etude'=>'required',
+                'id_dernier_diplome'=>'required',
+                'id_dernier_contrat'=>'required',
+                'id_niveau_etude'=>'required',
+            ]);
+        }
+        elseif ($this->currentStep == 3) {
+            $this->validate([
+                'id_direction'=>'required',
+                'id_service'=>'required',
+
+            ]);
+        }
+    }
 
     public function render()
     {
+
         $genre = Genre::all();
         $matri = Matrimonial::all();
         $domaine = Domaine::all();
@@ -77,20 +136,20 @@ public $imageextrait = [];
     {
               $this->validate([
 
-                'name'=>'string|required',
-                'username'=>'string|required',
-                'email'=>'required|email',
-                'naissance'=>'required',
-                'lieu_naissance'=>'string|required',
-                'sexe'=>'required',
-                'matrimonial'=>'required',
-                'nbr_enfant'=>'integer|required',
+                // 'name'=>'string|required',
+                // 'username'=>'string|required',
+                'email'=>'required|email|unique:employes',
+                // 'naissance'=>'required',
+                // 'lieu_naissance'=>'string|required',
+                // 'sexe'=>'required',
+                // 'matrimonial'=>'required',
+                // 'nbr_enfant'=>'integer|required',
                 'id_service'=>'required',
-                'id_domaine_etude'=>'required',
-                'id_dernier_diplome'=>'required',
-                'id_dernier_contrat'=>'required',
-                'id_niveau_etude'=>'required',
-                'id_direction'=>'required',
+                // 'id_domaine_etude'=>'required',
+                // 'id_dernier_diplome'=>'required',
+                // 'id_dernier_contrat'=>'required',
+                // 'id_niveau_etude'=>'required',
+                // 'id_direction'=>'required',
                 'id_poste'=>'required',
 
               ]);
