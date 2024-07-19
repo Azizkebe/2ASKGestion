@@ -102,7 +102,10 @@
                     <div class="mt-3">
                             <label for="image_profil">Joindre la photo de l'employe</label>
                             <input type="file" class="form-control" name="imagephoto" wire:model.live="imagephoto" id="imagephoto" placeholder="Photo de l'employe" class="form-control" accept="image/png, image/jpg, image/jpeg" autocomplete="on">
-                    </div>
+                            @error('imagephoto')
+                            <span class="error">Veuillez choisir le domaine d'etude</span>
+                            @enderror
+                        </div>
                     </div>
                 </div>
             </div>

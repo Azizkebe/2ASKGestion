@@ -53,7 +53,7 @@
                                 <td>{{$employe->email}}</td>
                                 <td>{{$employe->domaine->domaine_etude}}</td>
                                 <td>{{$employe->direction->direction}}</td>
-                                <td>{{$employe->service->service}}</td>
+                                <td>{{$employe->service->service ?? ''}}</td>
                                 <td>
                                     <div class="form-button-action">
                                         <button

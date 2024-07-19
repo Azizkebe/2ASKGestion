@@ -234,12 +234,14 @@ public $currentStep = 1;
 
        if($this->imagecv)
         {
-            $image = $this->username;
+            $image = $this->imagecv;
 
-            $imagename = 'CV_'.$this->username->getClientOriginalExtension();
+            // $imagename = 'CV_'.$this->username->getClientOriginalExtension();
 
             // //Chemin vers le fichier
-            $filePath = $image->storeAs($destination2,$imagename);
+
+            $filePath = $image->store($destination2,'public');
+
             // $filePath = $image->store($destination2,'public');
 
             $cloudfile = CloudFileCv::create([
