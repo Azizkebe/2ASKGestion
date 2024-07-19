@@ -71,29 +71,34 @@ public $currentStep = 1;
 
                 'name'=>'string|required',
                 'username'=>'string|required',
-                // 'email'=>'required|email|unique:employes',
+                'email'=>'required|email|unique:employes',
                 'naissance'=>'required',
                 'lieu_naissance'=>'string|required',
                 'sexe'=>'required',
                 'matrimonial'=>'required',
                 'nbr_enfant'=>'integer|required',
+                'imagephoto'=>'required|mimes:png,jpeg,jpg|max:1024',
             ]);
         }
         elseif ($this->currentStep == 2) {
             $this->validate([
                 'id_domaine_etude'=>'required',
                 'id_dernier_diplome'=>'required',
-                'id_dernier_contrat'=>'required',
                 'id_niveau_etude'=>'required',
+                'imagecv'=>'required',
+                'imagediplome'=>'required',
             ]);
         }
         elseif ($this->currentStep == 3) {
             $this->validate([
                 'id_direction'=>'required',
-                'id_service'=>'required',
+                'id_poste'=>'required',
+                // 'id_dernier_contrat'=>'required',
 
             ]);
         }
+
+
     }
 
     public function render()
@@ -138,19 +143,21 @@ public $currentStep = 1;
 
                 // 'name'=>'string|required',
                 // 'username'=>'string|required',
-                'email'=>'required|email|unique:employes',
+                // 'email'=>'required|email|unique:employes',
                 // 'naissance'=>'required',
                 // 'lieu_naissance'=>'string|required',
                 // 'sexe'=>'required',
                 // 'matrimonial'=>'required',
                 // 'nbr_enfant'=>'integer|required',
-                'id_service'=>'required',
+                // 'id_service'=>'required',
                 // 'id_domaine_etude'=>'required',
                 // 'id_dernier_diplome'=>'required',
                 // 'id_dernier_contrat'=>'required',
                 // 'id_niveau_etude'=>'required',
                 // 'id_direction'=>'required',
-                'id_poste'=>'required',
+                // 'id_poste'=>'required',
+                'id_dernier_contrat'=>'required',
+                'imagecontrat'=>'required',
 
               ]);
               try{
@@ -227,12 +234,13 @@ public $currentStep = 1;
 
        if($this->imagecv)
         {
-            $image = $this->imagecv;
+            $image = $this->username;
 
-            // $imagename = time().' '.$image->getClientOriginalExtension();
+            $imagename = 'CV_'.$this->username->getClientOriginalExtension();
 
             // //Chemin vers le fichier
-            $filePath = $image->store($destination2,'public');
+            $filePath = $image->storeAs($destination2,$imagename);
+            // $filePath = $image->store($destination2,'public');
 
             $cloudfile = CloudFileCv::create([
                 'image_cv'=> $filePath,

@@ -86,7 +86,7 @@
                                         title=""
                                         class="btn btn-link btn-danger"
                                         data-original-title="Remove"
-                                        ><a onclick="return confirm('Etes vous sure de vouloir supprimer l\'antenne')"
+                                        ><a onclick="return confirm('Etes vous sure de vouloir supprimer l\'employe')"
                                         href="{{route('employe.delete',$employe->id)}}" class="btn btn-link btn-danger"><i class="fa fa-times"></i></a>
                                         </button>
                                     </div>

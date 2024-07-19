@@ -1,27 +1,5 @@
-<div class="container">
-    {{-- <div class="page-inner"> --}}
-      {{-- <div class="page-header">
-        <h3 class="fw-bold mb-3">Employe</h3>
-        <ul class="breadcrumbs mb-3">
-          <li class="nav-home">
-            <a href="#">
-              <i class="icon-home"></i>
-            </a>
-          </li>
-          <li class="separator">
-            <i class="icon-arrow-right"></i>
-          </li>
-          <li class="nav-item">
-            <a href="#">Ajout</a>
-          </li>
-          <li class="separator">
-            <i class="icon-arrow-right"></i>
-          </li>
-          <li class="nav-item">
-            <a href="#">Employe</a>
-          </li>
-        </ul>
-      </div> --}}
+<div style="margin:auto; width:80%;" class="container">
+
       @if (session('success'))
       <div class="alert alert-success">
           <button type="button" class="close" data-dismiss="alert"
@@ -36,10 +14,10 @@
             @if ( $currentStep == 1)
             <div class="step-one">
                 <div class="card">
-                    <div class="card-header bg-secondary text-white">
-                        <div class="card-title">Identification</div>
+                    <div class="card-header bg-primary">
+                        <div class="card-title text-white">Etape 1/4: Identification</div>
                         <div style="display: flex; justify-content:end;">
-                            <a href="" class="btn btn-success btn-sm"> Liste des Employe</a>
+                            <a href="" class="btn btn-success btn-md"> Liste des Employe</a>
                         </div>
                     </div>
                     <div class="card-body">
@@ -59,7 +37,7 @@
                     </div>
                     <div class="mt-3">
                             <label for="email">Email</label>
-                            <input type="text" class="form-control" name="email" id="email" wire:model.live="Email">
+                            <input type="text" class="form-control" name="email" id="email" wire:model.live="email">
                             @error('email')
                                 <span class="error">Veuillez saisir l'adresse Email</span>
                             @enderror
@@ -123,7 +101,7 @@
                     </div>
                     <div class="mt-3">
                             <label for="image_profil">Joindre la photo de l'employe</label>
-                            <input type="file" class="form-control" name="imagephoto" wire:model.live="imagephoto" id="imagephoto" placeholder="Photo de l'employe" class="form-control" autocomplete="on">
+                            <input type="file" class="form-control" name="imagephoto" wire:model.live="imagephoto" id="imagephoto" placeholder="Photo de l'employe" class="form-control" accept="image/png, image/jpg, image/jpeg" autocomplete="on">
                     </div>
                     </div>
                 </div>
@@ -134,9 +112,9 @@
             <div class="step-two">
                 <div class="card">
                     <div class="card-header bg-secondary text-white">
-                        <div class="card-title">Diplome et Contrat</div>
+                        <div class="card-title text-white">Etape 2/4: Cursus et Diplome</div>
                         <div style="display: flex; justify-content:end;">
-                            <a href="" class="btn btn-success btn-sm"> Liste des Employe</a>
+                            <a href="" class="btn btn-success btn-md"> Liste des Employe</a>
                         </div>
                     </div>
                     <div class="card-body">
@@ -179,10 +157,16 @@
                         <div class="mt-3">
                             <label for="image_diplome">Joindre le dernier diplome obtenu</label>
                             <input type="file" class="form-control" name="imagediplome" id="imagediplome" wire:model.live="imagediplome">
+                            @error('imagediplome')
+                            <span class="error">Vous devez joindre votre diplome</span>
+                            @enderror
                         </div>
                         <div class="mt-3">
                             <label for="image_cv">Joindre le CV de l'employe</label>
-                            <input type="file" class="form-control" name="imagecv" id="imagecv" accept="image/png, image/jpg, image/jpeg" wire:model.live="imagecv">
+                            <input type="file" class="form-control" name="imagecv" id="imagecv" wire:model.live="imagecv">
+                            @error('imagecv')
+                            <span class="error">Vous devez joindre votre CV</span>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -192,9 +176,9 @@
            <div class="step-three">
             <div class="card">
                 <div class="card-header bg-secondary text-white">
-                    <div class="card-title">Service et Direction</div>
+                    <div class="card-title text-white">Etape 3/4: Service et Direction</div>
                     <div style="display: flex; justify-content:end;">
-                        <a href="" class="btn btn-success btn-sm"> Liste des Employe</a>
+                        <a href="" class="btn btn-success btn-md"> Liste des Employe</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -260,9 +244,9 @@
         <div class="step-four">
             <div class="card">
                 <div class="card-header bg-secondary text-white">
-                    <div class="card-title">Contrat</div>
+                    <div class="card-title text-white">Etape 4/4: Contrat</div>
                     <div style="display: flex; justify-content:end;">
-                        <a href="" class="btn btn-success btn-sm"> Liste des Employe</a>
+                        <a href="" class="btn btn-success btn-md"> Liste des Employe</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -281,6 +265,9 @@
                     <div class="mt-3">
                         <label for="image_contrat">Joindre une copie du contrat de travail</label>
                         <input type="file" class="form-control" name="imagecontrat" id="imagecontrat" wire:model.live="imagecontrat">
+                        @error('imagecontrat')
+                        <span class="error">Vous devez joindre une copie du contrat</span>
+                         @enderror
                     </div>
                 </div>
                 </div>
@@ -292,10 +279,10 @@
                     <div></div>
                     @endif
                     @if ($currentStep == 2 || $currentStep == 3 || $currentStep == 4)
-                    <a href="" class="btn btn-secondary btn-sm text-white" wire:click.prevent="decreaseStep()">Precedent</a>
+                    <a href="" class="btn btn-secondary btn-md text-white" wire:click.prevent="decreaseStep()">Precedent</a>
                     @endif
                     @if ($currentStep == 1 || $currentStep == 2 || $currentStep == 3)
-                    <a href="" class="btn btn-success btn-sm text-white" wire:click.prevent="increaseStep()">Suivant</a>
+                    <a href="" class="btn btn-success btn-md text-white" wire:click.prevent="increaseStep()">Suivant</a>
                     @endif
                     @if ($currentStep == 4)
                     <button type="submit" class="btn btn-primary">Ajouter un Employe</button>
