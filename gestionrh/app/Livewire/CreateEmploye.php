@@ -320,5 +320,21 @@ public $currentStep = 1;
             // dd($data);
         }
     }
+    public function delete_photo_employe(int $employe)
+    {
+        $photo_employe = CloudFilePhoto::findOrFail($employe);
+
+        $photo_employe->delete();
+
+        toastr()->success('La photo a été supprimée avec succes');
+
+        return redirect()->back();
+    }
+
+    public function editer(Employe $employe)
+    {
+
+        return view('employe.edit', compact('employe'));
+    }
 
 }
