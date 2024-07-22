@@ -1,12 +1,12 @@
 <div style="margin:auto; width:80%;" class="container">
 
-      @if (session('success'))
+      {{-- @if (session('success'))
       <div class="alert alert-success">
           <button type="button" class="close" data-dismiss="alert"
           aria-hidden="true">x</button>
           {{session('success')}}
       </div>
-        @endif
+        @endif --}}
       <form wire:submit.prevent="store" method="POST" enctype="multipart/form-data">
         @csrf
         @method('POST')

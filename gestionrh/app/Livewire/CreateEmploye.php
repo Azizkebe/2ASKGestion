@@ -47,7 +47,7 @@ public $currentStep = 1;
     }
     public function increaseStep()
     {
-        // dd('inc');
+
         $this->resetErrorBag();
         $this->validateData();
         $this->currentStep++;
@@ -320,16 +320,16 @@ public $currentStep = 1;
             // dd($data);
         }
     }
-    public function delete_photo_employe(int $employe)
-    {
-        $photo_employe = CloudFilePhoto::findOrFail($employe);
+    // public function delete_photo_employe(int $employe)
+    // {
+    //     $photo_employe = CloudFilePhoto::findOrFail($employe);
 
-        $photo_employe->delete();
+    //     $photo_employe->delete();
 
-        toastr()->success('La photo a été supprimée avec succes');
+    //     toastr()->success('La photo a été supprimée avec succes');
 
-        return redirect()->back();
-    }
+    //     return redirect()->back();
+    // }
 
     public function editer(Employe $employe)
     {
