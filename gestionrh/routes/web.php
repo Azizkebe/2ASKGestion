@@ -56,6 +56,8 @@ Route::middleware('auth')->group(function(){
         Route::get('/liste',[EmployeController::class, 'liste'])->name('employe.liste');
         Route::get('/edit/{employe}',[EmployeController::class, 'editer'])->name('employe.editer');
         Route::get('/delete_photo/{employe}',[EmployeController::class, 'delete_photo_employe'])->name('employe.delete_photo');
+        Route::get('/delete_cv/{employe}',[EmployeController::class, 'delete_cv_employe'])->name('employe.cv_photo');
+        Route::get('/delete_diplome/{employe}',[EmployeController::class, 'delete_diplome_employe'])->name('employe.diplome_photo');
         Route::get('/detail/{employe}',[EmployeController::class,'detail'])->name('employe.detail');
         Route::get('delete/{employe}',[EmployeController::class,'delete'])->name('employe.delete');
 

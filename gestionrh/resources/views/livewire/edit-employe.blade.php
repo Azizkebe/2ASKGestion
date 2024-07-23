@@ -105,12 +105,11 @@
                           <div class="col-md-2">
 
                             @if ($imagephoto)
-                                {{-- <span>{{$info_employe->id_cloud_file_photo}}</span> --}}
-                            <img style="width: 50px;" src="{{asset('storage/'.$info_employe->photo->photo_employe)}} " alt=""><br>
-                            <a href="{{url('employe/delete_photo/'.$info_employe->id)}}"
+                                <img style="width: 50px;" src="{{asset('storage/'.$info_employe->photo->photo_employe)}} " alt=""><br>
+                                <a href="{{url('employe/delete_photo/'.$info_employe->id) ?? ''}}"
                                 onclick="return confirm('Etes vous sure de supprimer la photo')">Supprimer</a>
-
                             @endif
+
                           </div>
                           @error('imagephoto')
                           <span class="error">Veuillez choisir le domaine d'etude</span>
@@ -173,6 +172,14 @@
                           @error('imagediplome')
                           <span class="error">Vous devez joindre votre diplome</span>
                           @enderror
+                          <div class="col-md-2 mt-1">
+                            @if ($info_employe->id_cloud_file_diplome != NULL)
+                                <img style="width: 50px;" src="{{asset('storage/'.$info_employe->photodiplome->image_diplome)}} " alt=""><br>
+                                <a href="{{url('employe/delete_diplome/'.$info_employe->id) ?? ''}}"
+                                onclick="return confirm('Etes vous sure de supprimer le CV')">Supprimer</a>
+                            @endif
+
+                          </div>
                       </div>
                       <div class="mt-3">
                           <label for="image_cv">Joindre le CV de l'employe</label>
@@ -180,6 +187,15 @@
                           @error('imagecv')
                           <span class="error">Vous devez joindre votre CV</span>
                           @enderror
+                          <div class="col-md-2 mt-1">
+
+                            @if ($info_employe->id_cloud_file_cv != NULL)
+                                <img style="width: 50px;" src="{{asset('storage/'.$info_employe->photocv->image_cv)}} " alt=""><br>
+                                <a href="{{url('employe/delete_cv/'.$info_employe->id) ?? ''}}"
+                                onclick="return confirm('Etes vous sure de supprimer le CV')">Supprimer</a>
+                            @endif
+
+                          </div>
                       </div>
                   </div>
               </div>

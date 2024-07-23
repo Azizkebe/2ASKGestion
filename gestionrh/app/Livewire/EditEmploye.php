@@ -101,7 +101,7 @@ public $employe, $info_employe;
                 'sexe'=>'required',
                 'matrimonial'=>'required',
                 'nbr_enfant'=>'integer|required',
-                'imagephoto'=>'required|mimes:png,jpeg,jpg|max:1024',
+                // 'imagephoto'=>'required|mimes:png,jpeg,jpg|max:1024',
             ]);
         }
         elseif ($this->currentStep == 2) {
