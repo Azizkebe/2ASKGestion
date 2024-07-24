@@ -140,25 +140,8 @@ public $currentStep = 1;
     public function store()
     {
               $this->validate([
-
-                // 'name'=>'string|required',
-                // 'username'=>'string|required',
-                // 'email'=>'required|email|unique:employes',
-                // 'naissance'=>'required',
-                // 'lieu_naissance'=>'string|required',
-                // 'sexe'=>'required',
-                // 'matrimonial'=>'required',
-                // 'nbr_enfant'=>'integer|required',
-                // 'id_service'=>'required',
-                // 'id_domaine_etude'=>'required',
-                // 'id_dernier_diplome'=>'required',
-                // 'id_dernier_contrat'=>'required',
-                // 'id_niveau_etude'=>'required',
-                // 'id_direction'=>'required',
-                // 'id_poste'=>'required',
                 'id_dernier_contrat'=>'required',
                 'imagecontrat'=>'required',
-
               ]);
               try{
 

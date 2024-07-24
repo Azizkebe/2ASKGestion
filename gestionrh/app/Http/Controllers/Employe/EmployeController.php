@@ -8,6 +8,7 @@ use App\Models\Employe;
 use App\Models\CloudFilePhoto;
 use App\Models\CloudFileCv;
 use App\Models\CloudFileDiplome;
+use App\Models\CloudFileContrat;
 
 
 
@@ -45,18 +46,17 @@ class EmployeController extends Controller
 
     public function delete_cv_employe(int $employe)
     {
-        $deleteImage = CloudFileCv::findOrFail($employe);
-
         $Employedata = Employe::findOrFail($employe);
 
-        if($deleteImage->image_cv) {
+        $deleteImage = CloudFileCv::findOrFail($Employedata->id_cloud_file_cv);
+
+
+        if($deleteImage) {
 
             $deleteImage->delete();
 
-            if(!$deleteImage->image_cv)
-            {
-                $Employedata->update(['id_cloud_file_cv'=>NULL]);
-            }
+            $Employedata->update(['id_cloud_file_cv'=>NULL]);
+
 
             toastr()->success('Le CV a été supprimé avec succes');
             return redirect()->back();
@@ -66,48 +66,55 @@ class EmployeController extends Controller
     }
     public function delete_diplome_employe(int $employe)
     {
-        $deleteImage = CloudFileDiplome::findOrFail($employe);
-
         $Employedata = Employe::findOrFail($employe);
 
-        if($deleteImage->image_diplome) {
+        $deleteImage = CloudFileDiplome::findOrFail($Employedata->id_cloud_file_diplome);
 
+        if($deleteImage)
+        {
             $deleteImage->delete();
 
-            if(!$deleteImage->image_diplome)
-            {
-                $Employedata->update(['id_cloud_file_diplome'=>NULL]);
-            }
+            $Employedata->update(['id_cloud_file_diplome'=>NULL]);
 
-            // dd($Employedata);
-
-            toastr()->success('Le diplome a été supprimé avec succes');
-            return redirect()->back();
+             toastr()->success('Le diplome a été supprimé avec succes');
+             return redirect()->back();
 
         }
 
     }
     public function delete_photo_employe(int $employe)
     {
-        $deleteImage = CloudFilePhoto::findOrFail($employe);
 
         $Employedata = Employe::findOrFail($employe);
 
-        if($deleteImage->photo_employe) {
+        $deleteImage = CloudFilePhoto::findOrFail($Employedata->id_cloud_file_photo);
 
+        if($deleteImage)
+        {
             $deleteImage->delete();
 
-            if(!$deleteImage->photo_employe)
-            {
-                $Employedata->update(['id_cloud_file_photo'=>NULL]);
-            }
+            $Employedata->update(['id_cloud_file_photo'=>NULL]);
 
-            // dd($Employedata);
-
-            toastr()->success('La photo a été supprimée avec succes');
-            return redirect()->back();
+             toastr()->success('La photo a été supprimée avec succes');
+             return redirect()->back();
 
         }
+    }
+    public function delete_contrat_employe(int $employe)
+    {
+        $Employedata = Employe::findOrFail($employe);
 
+        $deleteImage = CloudFileContrat::findOrFail($Employedata->id_cloud_file_contrat);
+
+        if($deleteImage)
+        {
+            $deleteImage->delete();
+
+            $Employedata->update(['id_cloud_file_contrat'=>NULL]);
+
+             toastr()->success('La copie du contrat a été supprimée avec succes');
+             return redirect()->back();
+
+        }
     }
 }

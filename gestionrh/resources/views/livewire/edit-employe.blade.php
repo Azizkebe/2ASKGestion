@@ -1,15 +1,8 @@
 <div style="margin:auto; width:80%;" class="container">
 
-    {{-- @if (session('success'))
-    <div class="alert alert-success">
-        <button type="button" class="close" data-dismiss="alert"
-        aria-hidden="true">x</button>
-        {{session('success')}}
-    </div>
-      @endif --}}
-    <form wire:submit.prevent="store" method="POST" enctype="multipart/form-data">
+    <form wire:submit.prevent="update" method="POST" enctype="multipart/form-data">
       @csrf
-      @method('POST')
+      @method('PUT')
       <div>
           @if ( $currentStep == 1)
           <div class="step-one">
@@ -103,18 +96,17 @@
                           <label for="image_profil">Joindre la photo de l'employe</label>
                           <input type="file" class="form-control" name="imagephoto" wire:model.live="imagephoto" id="imagephoto" placeholder="Photo de l'employe" class="form-control" accept="image/png, image/jpg, image/jpeg" autocomplete="on">
                           <div class="col-md-2">
-
-                            @if ($imagephoto)
-                                <img style="width: 50px;" src="{{asset('storage/'.$info_employe->photo->photo_employe)}} " alt=""><br>
-                                <a href="{{url('employe/delete_photo/'.$info_employe->id) ?? ''}}"
-                                onclick="return confirm('Etes vous sure de supprimer la photo')">Supprimer</a>
-                            @endif
-
-                          </div>
                           @error('imagephoto')
                           <span class="error">Veuillez choisir le domaine d'etude</span>
                           @enderror
-                      </div>
+                        </div>
+                        <div class="col-md-2 mt-1">
+                            @if ($info_employe->id_cloud_file_photo)
+                                <img style="width: 50px;" src="{{asset('storage/'.$info_employe->photo->photo_employe)}} " alt=""><br>
+                                <a href="{{route('employe.delete_photo',$info_employe->id)}}"
+                                onclick="return confirm('Etes vous sure de supprimer la photo de profil')">Supprimer</a>
+                            @endif
+                        </div>
                   </div>
               </div>
           </div>
@@ -173,10 +165,15 @@
                           <span class="error">Vous devez joindre votre diplome</span>
                           @enderror
                           <div class="col-md-2 mt-1">
-                            @if ($info_employe->id_cloud_file_diplome != NULL)
-                                <img style="width: 50px;" src="{{asset('storage/'.$info_employe->photodiplome->image_diplome)}} " alt=""><br>
-                                <a href="{{url('employe/delete_diplome/'.$info_employe->id) ?? ''}}"
-                                onclick="return confirm('Etes vous sure de supprimer le CV')">Supprimer</a>
+                            @if ($info_employe->id_cloud_file_diplome)
+
+                                <div style="height: 50;" class="client-logo">
+                                    <a href="{{asset('storage/'.$info_employe->photodiplome->image_diplome)}}"><img src="{{asset('icon/diplome.png')}}" alt="diplome" title="DIPLOME" class="w-100"></a>
+                                    <p><a href="{{route('employe.diplome_employe',$info_employe->id)}}"
+                                        onclick="return confirm('Etes vous sure de supprimer le diplome')">Supprimer</a></p>
+
+                                </div>
+
                             @endif
 
                           </div>
@@ -189,10 +186,14 @@
                           @enderror
                           <div class="col-md-2 mt-1">
 
-                            @if ($info_employe->id_cloud_file_cv != NULL)
-                                <img style="width: 50px;" src="{{asset('storage/'.$info_employe->photocv->image_cv)}} " alt=""><br>
-                                <a href="{{url('employe/delete_cv/'.$info_employe->id) ?? ''}}"
-                                onclick="return confirm('Etes vous sure de supprimer le CV')">Supprimer</a>
+                            @if ($info_employe->id_cloud_file_cv)
+                            <div style="height: 50;" class="client-logo">
+                                <a href="{{asset('storage/'.$info_employe->photocv->image_cv)}}">
+                                    <img src="{{asset('icon/cv.png')}}" alt="CV" title="CV" class="w-100"></a>
+                               <p><a href="{{route('employe.cv_employe',$info_employe->id )}}"
+                                onclick="return confirm('Etes vous sure de supprimer le CV')">Supprimer</a></p>
+                            </div>
+
                             @endif
 
                           </div>
@@ -299,6 +300,16 @@
                       @error('imagecontrat')
                       <span class="error">Vous devez joindre une copie du contrat</span>
                        @enderror
+                  </div>
+                  <div class="col-md-2 mt-1">
+                    @if ($info_employe->id_cloud_file_contrat != NULL)
+                        {{-- <img style="width: 50px;" src="{{asset('storage/'.$info_employe->photocontrat->image_contrat)}} " alt=""> --}}
+                        <div>
+                            <a  style="height: 50;" class="client-logo" href="{{asset('storage/'.$info_employe->photocontrat->image_contrat)}}"><img src="{{asset('icon/contrat.png')}}" title="CONTRAT" alt="contrat" class="w-100"></a>
+                            <p> <a href="{{route('employe.contrat_employe',$info_employe->id)}}"
+                                onclick="return confirm('Etes vous sure de supprimer le contrat')">Supprimer</a></p>
+                        </div>
+                    @endif
                   </div>
               </div>
               </div>

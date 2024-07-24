@@ -49,8 +49,8 @@
                     <div class="widget-content">
                         <h5 style="color:black;" class="widget-title card-title">Autres Documents</h5>
                         <p><a style="color:blue" href="{{asset('storage/'.$employe->photocontrat->image_contrat)}}">Voir le contrat </a></p>
-                        <p><a style="color:blue" href="{{asset('storage/'.$employe->photodiplome->image_diplome)}}">Voir le diplome</a></p>
-                        <p><a style="color:blue" href="{{asset('storage/'.$employe->photoextrait->image_extrait)}}">Voir les extraits</a></p>
+                        {{-- <p><a style="color:blue" href="{{asset('storage/'.$employe->photodiplome->image_diplome) ?? ''}}">Voir le diplome</a></p>
+                        <p><a style="color:blue" href="{{asset('storage/'.$employe->photoextrait->image_extrait)}}">Voir les extraits</a></p> --}}
 
                     </div>
                 </div>
@@ -120,12 +120,16 @@
                     <div class="client-logos-wrapper">
                         <div style="height: 80;" class="client-logo"><a href="{{asset('storage/'.$employe->photocontrat->image_contrat)}}"><img src="{{asset('icon/contrat.png')}}" title="CONTRAT" alt="contrat" class="w-100"></a></div>
                         <div style="height: 80;" class="client-logo"><a href="{{asset('storage/'.$employe->photocv->image_cv)}}"><img  style="height: 180px;" src="{{asset('icon/cv.png')}}"title="CV" alt="cv" class="w-100"></a></div>
-                        <div style="height: 80;" class="client-logo"><a href="{{asset('storage/'.$employe->photodiplome->image_diplome)}}"><img src="{{asset('icon/diplome.png')}}" alt="diplome" title="DIPLOME" class="w-100"></a></div>
+                        @if ($employe->photodiplome)
+                            <div style="height: 80;" class="client-logo"><a href="{{asset('storage/'.$employe->photodiplome->image_diplome)}}"><img src="{{asset('icon/diplome.png')}}" alt="diplome" title="DIPLOME" class="w-100"></a></div>
+                        @endif
+                        @if ($employe->photoextrait)
                         <div style="height: 80;" class="client-logo"><a href="{{asset('storage/'.$employe->photoextrait->image_extrait)}}"><img src="{{asset('icon/extrait.png')}}" title="EXTRAIT" alt="extrait" class="w-100"></a></div>
+                        @endif
                     </div>
                 </section>
             </section>
-            <footer>Resume du Profi de <a href="" target="_blank" rel="noopener noreferrer">{{$employe->prenom}} {{$employe->nom}}</a>. ANPEJ - 2024</footer>
+            <footer>Resume du Profil de <a href="" target="_blank" rel="noopener noreferrer">{{$employe->prenom}} {{$employe->nom}}</a>. ANPEJ - 2024</footer>
         </main>
     </div>
 </div>
