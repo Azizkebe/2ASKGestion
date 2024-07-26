@@ -42,6 +42,7 @@
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="{{asset('admin/css/demo.css')}}" />
+    @livewireStyles
   </head>
   <body>
     <div class="wrapper">
@@ -215,5 +216,11 @@
           });
         });
       </script>
+<script>
+    window.addEventListener('show-form', event =>{
+        $('#form').modal('show')
+    })
+</script>
+@livewireScripts
   </body>
 </html>

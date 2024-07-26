@@ -8,8 +8,14 @@
     <div class="content-wrapper">
         <aside>
             <div class="profile-img-wrapper">
+                @if($employe->photo)
                 <img src="{{asset('storage/'.$employe->photo->photo_employe)}}" alt="profile">
+                @endif
             </div>
+           <div style="margin-left: 70px;">
+            <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#exampleModal" wire:click.prevent="editer_photo({{$employe->id}})">Modif</button>
+            {{-- <a href="{{route('employe.delete_photo',$employe->id)}}" data-bs-toggle="modal" data-bs-target="#exampleModal">Modifier</a> --}}
+           </div>
             <h1 class="profile-name">{{$employe->prenom}} {{$employe->nom}}</h1>
             <div class="text-center">
                 <span class="badge badge-white badge-pill profile-designation">{{$employe->poste->poste}}</span>
@@ -57,6 +63,20 @@
             </div>
         </aside>
         <main>
+            <section>
+                <div class="widget card">
+                    <div class="card-body">
+                        <div style="display: flex; justify-content-between;">
+                            <h5 style="color:black;" class="widget-title card-title">Modification Supplementaire</h5>
+                           <div>Photo de profil</div>
+                           <div>Dernier diplome</div>
+                           <div>Dernier contrat</div>
+                           <div>Extrait des enfants</div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
             <section class="intro-section">
                 <h2 class="badge badge-primary section-title">{{$employe->poste->poste}}</h2>
                 {{-- <p>I'm Creative Director and UI/UX Designer from Sydney, Australia, working in web development and print
@@ -118,8 +138,11 @@
                 <section class="clients-section">
                     <h4 class="section-title">DOCUMENTS A TELECHARGER</h4>
                     <div class="client-logos-wrapper">
-                        <div style="height: 80;" class="client-logo"><a href="{{asset('storage/'.$employe->photocontrat->image_contrat)}}"><img src="{{asset('icon/contrat.png')}}" title="CONTRAT" alt="contrat" class="w-100"></a></div>
+                        <div style="height: 80;" class="client-logo"><a href="{{asset('storage/'.$employe->photocontrat->image_contrat)}}"><img src="{{asset('icon/contrat.png')}}" title="CONTRAT" alt="contrat" class="w-100"></a>
+                        </div>
+
                         <div style="height: 80;" class="client-logo"><a href="{{asset('storage/'.$employe->photocv->image_cv)}}"><img  style="height: 180px;" src="{{asset('icon/cv.png')}}"title="CV" alt="cv" class="w-100"></a></div>
+                        <p><a href="">Modifier</a></p>
                         @if ($employe->photodiplome)
                             <div style="height: 80;" class="client-logo"><a href="{{asset('storage/'.$employe->photodiplome->image_diplome)}}"><img src="{{asset('icon/diplome.png')}}" alt="diplome" title="DIPLOME" class="w-100"></a></div>
                         @endif

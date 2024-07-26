@@ -44,6 +44,10 @@ class EmployeController extends Controller
         return view('employe.edit', compact('employe'));
     }
 
+    public function editer_photo($employe)
+    {
+        return view('employe.editer_photo', compact('employe'));
+    }
     public function delete_cv_employe(int $employe)
     {
         $Employedata = Employe::findOrFail($employe);
