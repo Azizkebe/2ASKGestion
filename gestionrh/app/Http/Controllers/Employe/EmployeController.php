@@ -31,13 +31,14 @@ class EmployeController extends Controller
             'employe'=>$employe
         ]);
     }
-    public function detail($employe)
+    public function detail(int $employe)
     {
-        $employe = Employe::with(['genre','matrimonial','domaine','niveauetude',
-        'diplome','contrat','direction','service','antenne','bureau','poste',
-        'photo','photocontrat','photodiplome','photoextrait','photocv'])->findOrFail($employe);
-
-        return view('employe.detail', compact('employe'));
+        // $employe = Employe::with(['genre','matrimonial','domaine','niveauetude',
+        // 'diplome','contrat','direction','service','antenne','bureau','poste',
+        // 'photo','photocontrat','photodiplome','photoextrait','photocv'])->findOrFail($employe);
+        // $employe = Employe::findOrFail($employe);
+        return view('employe.details', compact('employe'));
+        // return view('employe.detail', compact('employe'));
     }
     public function editer($employe)
     {
