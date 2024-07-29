@@ -39,6 +39,8 @@
     <link rel="stylesheet" href="{{asset('admin/css/plugins.min.css')}}" />
     <link rel="stylesheet" href="{{asset('admin/css/kaiadmin.min.css')}}" />
     <link rel="stylesheet" href="{{asset('admin/css/style.css')}}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="{{asset('admin/css/demo.css')}}" />
@@ -218,9 +220,13 @@
       </script>
 <script>
     window.addEventListener('show-form', event =>{
-        $('#form').modal('show')
+        $('#exampleModal').modal('show')
     })
 </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+{{-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> --}}
 @livewireScripts
+
+@yield('script')
   </body>
 </html>

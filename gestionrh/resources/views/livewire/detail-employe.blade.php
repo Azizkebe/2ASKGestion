@@ -1,5 +1,6 @@
 <div>
     {{-- Care about people's approval and you will be their prisoner. --}}
+    @include('livewire.editModalPhoto')
     <div class="container-fluid">
         <div class="content-wrapper">
             <aside>
@@ -7,11 +8,15 @@
                     @if($employes->photo)
                     <img src="{{asset('storage/'.$employes->photo->photo_employe)}}" alt="profile">
                     @endif
-                </div>
-               <div style="margin-left: 70px;">
+                </div class="text-center">
+                {{-- <button type="button" class="badge badge-white btn btn-primary" wire:click.prevent="" data-bs-toggle="modal" data-bs-target="#editModalPhoto">
+                    Modifier
+                </button> --}}
+                <a href="{{route('employe.editer_dossier', $employes->id)}}" class="badge badge-white btn btn-primary">Modifier</a>
+               {{-- <div style="margin-left: 70px;">
                 <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#exampleModal" wire:click.prevent="editer_photo({{$employes->id}})">Modif</button>
-                {{-- <a href="{{route('employe.delete_photo',$employe->id)}}" data-bs-toggle="modal" data-bs-target="#exampleModal">Modifier</a> --}}
-               </div>
+                <a href="{{route('employe.delete_photo',$employe->id)}}" data-bs-toggle="modal" data-bs-target="#exampleModal">Modifier</a>
+               </div> --}}
                 <h1 class="profile-name">{{$employes->prenom}} {{$employes->nom}}</h1>
                 <div class="text-center">
                     <span class="badge badge-white badge-pill profile-designation">{{$employes->poste->poste}}</span>
@@ -62,14 +67,14 @@
                 <section>
                     <div class="widget card">
                         <div class="card-body">
-                            <div style="display: flex; justify-content-between;">
+                            {{-- <div style="display: flex; justify-content-between;">
                                 <h5 style="color:black;" class="widget-title card-title">Modification Supplementaire</h5>
                                <div>Photo de profil</div>
                                <div>Dernier diplome</div>
                                <div>Dernier contrat</div>
                                <div>Extrait des enfants</div>
 
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </section>

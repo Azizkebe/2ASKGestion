@@ -2,6 +2,6 @@
 
 @section('content')
 
-@livewire('edit-photo-employe',['employe'=>$employe])
+@livewire('dossier-employe',['employe'=>$employe])
 
 @endsection
