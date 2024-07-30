@@ -7,12 +7,14 @@
             <div class="card-header">
                 <h4>Modifier la photo de profil</h4>
                 <div style="display:flex; justify-content:end;">
-                    <a href="" class="btn btn-primary flex-end">Retour</a><br>
+                    <a href="{{route('employe.detail',$employes->id)}}" class="btn btn-primary flex-end">Retour</a><br>
 
                 </div>
             </div>
             <div class="card-body">
-                <form action="">
+                <form wire:submit.prevent="updatephotoprofil" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
                     <div class="form-group">
                         @if ($employes->photo)
 
@@ -21,7 +23,7 @@
                             src="{{asset('storage/'.$employes->photo->photo_employe)}}"/>
                             <br>
                         </div>
-                        <a href="{{route('employe.delete_photo', $employes->id)}}">Supprimer</a>
+                        <a onclick="return confirm('Etes-vous sur de vouloir supprimer la photo')" href="{{route('employe.delete_photo', $employes->id)}}">Supprimer</a>
 
                         @endif
                         <div class="mt-2">
@@ -40,20 +42,22 @@
             <div class="card-header">
                 <h4>Modifier le diplome</h4>
                 <div style="display:flex; justify-content:end;">
-                    <a href="" class="btn btn-primary flex-end">Retour</a>
+                    <a href="{{route('employe.detail',$employes->id)}}" class="btn btn-primary flex-end">Retour</a>
                 </div>
 
             </div>
             <div class="card-body">
-                <form action="">
+                <form wire:submit.prevent="update_diplome" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
                     <div class="form-group">
                         @if ($employes->photodiplome)
                         <div style="height: 150px; width:150px; border:1px solid black;">
                             <a href="{{asset('storage/'.$employes->photodiplome->image_diplome)}}">
-                                <img src="{{asset('icon/diplome.png')}}" alt="">
+                                <img style="height: 150px; width:150px;" src="{{asset('icon/diplome.png')}}" alt="">
                             </a>
                         </div>
-                        <a href="{{route('employe.diplome_employe', $employes->id)}}">Supprimer</a>
+                        <a onclick="return confirm('Etes-vous sur de vouloir supprimer le diplome')" href="{{route('employe.diplome_employe', $employes->id)}}">Supprimer</a>
                         @endif
                     </div>
                     <div class="mt-2">
@@ -70,11 +74,14 @@
             <div class="card-header">
                 <h4>Modifier le Curriculum Vitae</h4>
                 <div style="display:flex; justify-content:end;">
-                    <a href="" class="btn btn-primary flex-end">Retour</a>
+                    <a href="{{route('employe.detail',$employes->id)}}" class="btn btn-primary flex-end">Retour</a>
                 </div>
             </div>
             <div class="card-body">
-                <form action="">
+                <form wire:submit.prevent="update_cv" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+
                     <div class="form-group">
                         @if ($employes->photocv)
                         <div style="height: 150px; width:150px; border:1px solid black;">
@@ -82,7 +89,7 @@
                                 <img style="height: 150px; width:150px;" src="{{asset('icon/cv.png')}}" alt="">
                             </a>
                         </div>
-                        <a href="{{route('employe.cv_delete',$employes->id)}}">Supprimer</a>
+                        <a onclick="return confirm('Etes-vous sur de vouloir supprimer le cv')" href="{{route('employe.cv_delete',$employes->id)}}">Supprimer</a>
                         @endif
                     </div>
                     <div class="mt-2">
@@ -99,11 +106,13 @@
             <div class="card-header">
                 <h4>Modifier le Contrat</h4>
                 <div style="display:flex; justify-content:end;">
-                    <a href="" class="btn btn-primary flex-end">Retour</a>
+                    <a href="{{route('employe.detail',$employes->id)}}" class="btn btn-primary flex-end">Retour</a>
                 </div>
             </div>
             <div class="card-body">
-                <form action="">
+                <form wire:submit.prevent="update_contrat" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
                     <div class="form-group">
                         @if ($employes->photocontrat)
                         <div style="height: 150px; width:150px; border:1px solid black;">
@@ -111,7 +120,7 @@
                                 <img style="height: 150px; width:150px;" src="{{asset('icon/contrat.png')}}" alt="">
                             </a>
                         </div>
-                        <a href="{{route('employe.contrat_employe', $employes->id)}}">Supprimer</a>
+                        <a onclick="return confirm('Etes-vous sur de vouloir supprimer le contrat')" href="{{route('employe.contrat_employe', $employes->id)}}">Supprimer</a>
                         @endif
                     </div>
                     <div class="mt-2">
@@ -127,11 +136,13 @@
             <div class="card-header">
                 <h4>Modifier les Extraits de naissance Vitae</h4>
                 <div style="display:flex; justify-content:end;">
-                    <a href="" class="btn btn-primary flex-end">Retour</a>
+                    <a onclick="return confirm('Etes-vous sur de vouloir supprimer l\'extrait')" href="" class="btn btn-primary flex-end">Retour</a>
                 </div>
             </div>
             <div class="card-body">
-                <form action="">
+                <form wire:submit.prevent="update_extrait" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
                     <div class="form-group">
                         @if ($employes->photoextrait)
                         <div style="height: 150px; width:150px; border:1px solid black;">

@@ -20,8 +20,8 @@
         <a href="#">Abdoul Aziz Sy KEBE</a>
       </div>
       <div>
-        Tous droits
-        <a target="_blank" href="#">reseves</a>.
+
+        <a class="dropdown-item" href="{{route('deconnexion')}}">Deconnexion</a>.
       </div>
     </div>
   </footer>

@@ -88,7 +88,7 @@
                                   <span class="error">Veuillez preciser le nombre d'enfant</span>
                               @enderror
                   </div>
-                  <div class="mt-3">
+                  {{-- <div class="mt-3">
                           <label for="image_extrait">Joindre les extraits de naissance des enfants</label>
                           <input type="file" class="form-control" name="imageextrait" id="imageextrait" wire:model.live="imageextrait" multiple>
                   </div>
@@ -107,7 +107,7 @@
                                 onclick="return confirm('Etes vous sure de supprimer la photo de profil')">Supprimer</a>
                             @endif
                         </div>
-                  </div>
+                  </div> --}}
               </div>
           </div>
           @endif
@@ -158,7 +158,7 @@
                               <span class="error">Veuillez choisir le dernier diplome obtenu </span>
                           @enderror
                       </div>
-                      <div class="mt-3">
+                      {{-- <div class="mt-3">
                           <label for="image_diplome">Joindre le dernier diplome obtenu</label>
                           <input type="file" class="form-control" name="imagediplome" id="imagediplome" wire:model.live="imagediplome">
                           @error('imagediplome')
@@ -197,7 +197,7 @@
                             @endif
 
                           </div>
-                      </div>
+                      </div> --}}
                   </div>
               </div>
           </div>
@@ -294,23 +294,22 @@
                       @enderror
 
                   </div>
-                  <div class="mt-3">
+                  {{-- <div class="mt-3">
                       <label for="image_contrat">Joindre une copie du contrat de travail</label>
                       <input type="file" class="form-control" name="imagecontrat" id="imagecontrat" wire:model.live="imagecontrat">
                       @error('imagecontrat')
                       <span class="error">Vous devez joindre une copie du contrat</span>
                        @enderror
-                  </div>
-                  <div class="col-md-2 mt-1">
+                  </div> --}}
+                  {{-- <div class="col-md-2 mt-1">
                     @if ($info_employe->id_cloud_file_contrat != NULL)
-                        {{-- <img style="width: 50px;" src="{{asset('storage/'.$info_employe->photocontrat->image_contrat)}} " alt=""> --}}
                         <div>
                             <a  style="height: 50;" class="client-logo" href="{{asset('storage/'.$info_employe->photocontrat->image_contrat)}}"><img src="{{asset('icon/contrat.png')}}" title="CONTRAT" alt="contrat" class="w-100"></a>
                             <p> <a href="{{route('employe.contrat_employe',$info_employe->id)}}"
                                 onclick="return confirm('Etes vous sure de supprimer le contrat')">Supprimer</a></p>
                         </div>
                     @endif
-                  </div>
+                  </div> --}}
               </div>
               </div>
           </div>
@@ -328,7 +327,6 @@
                   @endif
                   @if ($currentStep == 4)
                   <button type="submit" class="btn btn-primary">Enregistrer la modification</button>
-                  {{-- <a href="" class="btn btn-success btn-sm text-white">Enregistrer</a> --}}
                   @endif
               </div>
       </div>

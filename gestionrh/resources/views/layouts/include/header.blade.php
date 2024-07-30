@@ -5,7 +5,7 @@ class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bo
   <nav
     class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex"
   >
-    <div class="input-group">
+    {{-- <div class="input-group">
       <div class="input-group-prepend">
         <button type="submit" class="btn btn-search pe-1">
           <i class="fa fa-search search-icon"></i>
@@ -16,7 +16,7 @@ class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bo
         placeholder="Search ..."
         class="form-control"
       />
-    </div>
+    </div> --}}
   </nav>
 
   <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
@@ -45,7 +45,7 @@ class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bo
         </form>
       </ul>
     </li>
-    <li class="nav-item topbar-icon dropdown hidden-caret">
+    {{-- <li class="nav-item topbar-icon dropdown hidden-caret">
       <a
         class="nav-link dropdown-toggle"
         href="#"
@@ -135,7 +135,7 @@ class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bo
           </a>
         </li>
       </ul>
-    </li>
+    </li> --}}
     <li class="nav-item topbar-icon dropdown hidden-caret">
       <a
         class="nav-link dropdown-toggle"
@@ -214,7 +214,7 @@ class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bo
         </li>
       </ul>
     </li>
-    <li class="nav-item topbar-icon dropdown hidden-caret">
+    {{-- <li class="nav-item topbar-icon dropdown hidden-caret">
       <a
         class="nav-link"
         data-bs-toggle="dropdown"
@@ -291,7 +291,7 @@ class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bo
           </div>
         </div>
       </div>
-    </li>
+    </li> --}}
 
     <li class="nav-item topbar-user dropdown hidden-caret">
       <a
@@ -307,7 +307,7 @@ class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bo
             class="avatar-img rounded-circle"
           />
         </div>
-        <span class="profile-username">
+        <span style="margin-right: 15px;" class="profile-username">
           <span class="op-7">Bonjour,</span>
           <span class="fw-bold">{{Auth::user()->name}}</span>
         </span>
@@ -320,17 +320,13 @@ class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bo
                 <img
                   src="https://ui-avatars.com/api/?name={{Auth::user()->name ?? 'None'}}"
                   alt="image profile"
-                  class="avatar-img rounded"
-                />
+                  class="avatar-img rounded"/>
               </div>
               <div class="u-text">
                 <h4>{{Auth::user()->username}} {{Auth::user()->name}} </h4>
                 <p class="text-muted">{{Auth::user()->email}}</p>
-                <a
-                  href="{{route('profil_user',Auth::user()->id)}}"
-                  class="btn btn-xs btn-secondary btn-sm"
-                  >Voir Profil</a
-                >
+                <a href="{{route('profil_user',Auth::user()->id)}}"
+                  class="btn btn-xs btn-secondary btn-sm">Voir Profil</a>
               </div>
             </div>
           </li>
