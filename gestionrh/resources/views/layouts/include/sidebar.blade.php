@@ -73,6 +73,11 @@
                     <span class="sub-item">Liste des utilisateurs</span>
                   </a>
                 </li>
+                <li>
+                    <a href="{{route('permission.create')}}">
+                      <span class="sub-item">Assigner une permission</span>
+                    </a>
+                </li>
               </ul>
             </div>
           </li>

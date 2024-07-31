@@ -34,7 +34,8 @@
                         <p>Né(e) le : <strong>{{$employes->date_naissance}}</strong></p>
                         <p>Né(e) à : <strong>{{$employes->lieu_naissance}}</strong></p>
                         <p>Sexe : <strong>{{$employes->genre->name}}</strong></p>
-                        <p>Telephone : <strong>+1 123 000 4444</strong></p>
+                        <p>Telephone : <strong>{{$employes->telephone}}</strong></p>
+                        <p>Adresse : <strong>{{$employes->adresse}}</strong></p>
                         <p>Email: <strong>{{$employes->email}}</strong></p>
                         @if ($employes->photocv)
                         <button class="btn btn-download-cv btn-success rounded-pill">
@@ -150,7 +151,7 @@
                             @if ($employes->photocv)
                             <div style="height: 80;" class="client-logo"><a href="{{asset('storage/'.$employes->photocv->image_cv)}}"><img  style="height: 180px;" src="{{asset('icon/cv.png')}}"title="CV" alt="cv" class="w-100"></a></div>
                             @endif
-                            <p><a href="">Modifier</a></p>
+
                             @if ($employes->photodiplome)
                                 <div style="height: 80;" class="client-logo"><a href="{{asset('storage/'.$employes->photodiplome->image_diplome)}}"><img src="{{asset('icon/diplome.png')}}" alt="diplome" title="DIPLOME" class="w-100"></a></div>
                             @endif

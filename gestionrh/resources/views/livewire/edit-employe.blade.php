@@ -29,6 +29,20 @@
                           @enderror
                   </div>
                   <div class="mt-3">
+                    <label for="name">Telephone</label>
+                    <input type="number" class="form-control" name="telephone" id="telephone" placeholder="telephone" wire:model.live="telephone" maxlength="9">
+                    @error('telephone')
+                        <span class="error">Veuillez saisir le numero de telephone et doit avoir au maximum 9 chiffres</span>
+                    @enderror
+                </div>
+                <div class="mt-3">
+                    <label for="name">Adresse</label>
+                    <input type="text" class="form-control" name="adresse" id="adresse" placeholder="localite" wire:model.live="adresse">
+                    @error('adresse')
+                        <span class="error">Veuillez saisir votre adresse </span>
+                    @enderror
+                </div>
+                  <div class="mt-3">
                           <label for="email">Email</label>
                           <input type="text" class="form-control" name="email" id="email" wire:model.live="email">
                           @error('email')

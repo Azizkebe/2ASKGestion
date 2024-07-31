@@ -37,7 +37,7 @@ public $imagediplome, $imagecontrat = '';
 public $imageextrait = [];
 public $totalStep = 4;
 public $currentStep = 1;
-public $employe, $info_employe;
+public $employe, $info_employe, $telephone, $adresse;
 
 
     public function mount(Employe $employe)
@@ -49,6 +49,8 @@ public $employe, $info_employe;
         // dd($info_employe);
         $this->name =  $this->info_employe->nom;
         $this->username =  $this->info_employe->prenom;
+        $this->telephone =  $this->info_employe->telephone;
+        $this->adresse =  $this->info_employe->adresse;
         $this->email =  $this->info_employe->email;
         $this->naissance =  $this->info_employe->date_naissance;
         $this->age =  $this->info_employe->age;
@@ -95,6 +97,8 @@ public $employe, $info_employe;
 
                 'name'=>'string|required',
                 'username'=>'string|required',
+                'telephone'=>'required|numeric|min:9',
+                'adresse'=>'string|required',
                 'email'=>'required|email',
                 // 'email'=>'required|email|unique:employes',
                 'naissance'=>'required',
@@ -177,6 +181,8 @@ public $employe, $info_employe;
 
                 $inf_employe->nom = $this->name;
                 $inf_employe->prenom = $this->username;
+                $inf_employe->telephone = $this->telephone;
+                $inf_employe->adresse = $this->adresse;
                 $inf_employe->email = $this->email;
                 $inf_employe->date_naissance = $this->naissance;
                 $inf_employe->age = $currentday - $dateanniv;

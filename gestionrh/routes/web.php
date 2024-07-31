@@ -15,6 +15,7 @@ use App\Http\Controllers\Employe\ServiceController;
 use App\Http\Controllers\Employe\AntenneController;
 use App\Http\Controllers\Employe\BureauController;
 use App\Http\Controllers\Employe\PosteController;
+use App\Http\Controllers\Permission\PermissionController;
 use App\Livewire\EditPhotoEmploye;
 
 // Route::get('/dashboard',[UserAdminController::class,'dashboard'])->name('dashboard');
@@ -156,6 +157,10 @@ Route::middleware('auth')->group(function(){
         Route::get('/edit/{poste}',[PosteController::class, 'editer'])->name('poste.editer');
         Route::put('/update/{poste}',[PosteController::class, 'update'])->name('poste.update');
         Route::get('/delete/{poste}',[PosteController::class, 'delete'])->name('poste.delete');
+    });
+
+    Route::prefix('permission')->group(function(){
+        Route::get('create',[PermissionController::class, 'create'])->name('permission.create');
     });
 
 });

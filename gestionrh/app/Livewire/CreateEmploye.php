@@ -39,6 +39,7 @@ public $imagediplome, $imagecontrat = '';
 public $imageextrait = [];
 public $totalStep = 4;
 public $currentStep = 1;
+public $telephone, $adresse;
 
 
     public function mount()
@@ -71,6 +72,8 @@ public $currentStep = 1;
 
                 'name'=>'string|required',
                 'username'=>'string|required',
+                'telephone'=>'required|numeric|min:9',
+                'adresse'=>'string|required',
                 'email'=>'required|email|unique:employes',
                 'naissance'=>'required',
                 'lieu_naissance'=>'string|required',
@@ -151,6 +154,8 @@ public $currentStep = 1;
                 $docData = [
                     'nom'=> $this->name,
                     'prenom'=> $this->username,
+                    'telephone'=> $this->telephone,
+                    'adresse'=> $this->adresse,
                     'email'=> $this->email,
                     'date_naissance' => $this->naissance,
                     'age'=> $currentday - $dateanniv,
