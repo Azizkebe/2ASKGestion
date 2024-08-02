@@ -39,11 +39,17 @@
     <link rel="stylesheet" href="{{asset('admin/css/plugins.min.css')}}" />
     <link rel="stylesheet" href="{{asset('admin/css/kaiadmin.min.css')}}" />
     <link rel="stylesheet" href="{{asset('admin/css/style.css')}}" />
+    <link rel="stylesheet" href="{{asset('admin/css/style2.css')}}" />
+
+    <link rel="stylesheet" type="text/css" href="/jquery.datetimepicker.css"/ >
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="{{asset('admin/css/demo.css')}}" />
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
     @livewireStyles
   </head>
   <body>
@@ -133,6 +139,8 @@
     <!-- Kaiadmin DEMO methods, don't include it in your project! -->
     <script src="{{asset('admin//js/setting-demo.js')}}"></script>
     {{-- <script src="{{asset('admin//js/demo.js')}}"></script> --}}
+
+
     <script>
       $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
         type: "line",

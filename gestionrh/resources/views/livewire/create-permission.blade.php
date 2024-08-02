@@ -29,24 +29,26 @@
                 </div>
                 <div class="mt-3">
                     <label for="date_depart">Date de Depart</label>
-                    <input type="text" class="form-control" id="date_d" name="date_depart" wire:model.live="date_depart" autocomplete="off"
-                    data-provide="datepicker" data-date-autoclose="true"
-                    data-date-format="d/m/yyyy" data-date-today-highlight="true"
-                    onchange="this.dispatchEvent(new InputEvent('input'))">
+                    <input type="text" class="form-control" id="date_d" name="date_depart" wire:model.live="date_depart" autocomplete="off">
 
                     <script>
-                        $(document).ready(function(){
-                            $('#date_d').datepicker({
-                                beforeShowDay: function(date)
-                                {
-                                    var day = date.getDay();
-                                    return [(day != 0), ''];
-                                },
-                                dateFormat: 'dd-mm-yy',
-                                changeYear: true,
-                                maxDate: null,
-                            });
-
+                        jQuery.datetimepicker.setLocale('fr');
+                        jQuery('#date_d').datetimepicker({
+                        i18n:{
+                        fr:{
+                        months:[
+                            'Janvier','Fevrier','Mars','Avril',
+                            'Mai','Juin','Jullet','Aout',
+                            'Septembre','Octobre','Novembre','Decembre',
+                        ],
+                        dayOfWeek:[
+                             "Lun", "Mar", "Mer",
+                            "Jeu", "Ven", "Sam.",
+                        ]
+                        }
+                        },
+                        timepicker:true,
+                        format:'d\m\Y'
                         });
                     </script>
                     @error('date_depart')
@@ -99,6 +101,7 @@
                 <div style="display: flex; justify-content:center" class="mb-3 mt-3">
                     <button type="submit" class="btn btn-primary"> Autoriser la permission</button>
                 </div>
+
             </form>
     </div>
 </div>
