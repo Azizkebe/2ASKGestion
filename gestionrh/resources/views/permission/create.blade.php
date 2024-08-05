@@ -2,6 +2,9 @@
 
 @section('content')
 
+
 @livewire('create-permission')
 
 @endsection
+
+

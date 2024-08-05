@@ -6,13 +6,14 @@
     <title>Gestion des Ressources Humaines</title>
     <meta
       content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
-      name="viewport"
-    />
-    <link
-      rel="icon"
-      href="{{asset('admin/img/kaiadmin/favicon.ico')}}"
-      type="image/x-icon"
-    />
+      name="viewport" />
+    <link rel="icon" href="{{asset('admin/img/kaiadmin/favicon.ico')}}" type="image/x-icon"/>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
+    <script src="https://jqueryui.com/resources/demos/datepicker/i18n/datepicker-fr.js"></script>
+
 
     <!-- Fonts and icons -->
     <script src="{{asset('admin/js/plugin/webfont/webfont.min.js')}}"></script>
@@ -41,15 +42,15 @@
     <link rel="stylesheet" href="{{asset('admin/css/style.css')}}" />
     <link rel="stylesheet" href="{{asset('admin/css/style2.css')}}" />
 
-    <link rel="stylesheet" type="text/css" href="/jquery.datetimepicker.css"/ >
+    {{-- <link rel="stylesheet" type="text/css" href="/jquery.datetimepicker.css"/ > --}}
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="{{asset('admin/css/demo.css')}}" />
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script> --}}
     @livewireStyles
   </head>
   <body>
@@ -104,7 +105,7 @@
       <!-- End Custom template -->
     </div>
     <!--   Core JS Files   -->
-    <script src="{{asset('admin/js/core/jquery-3.7.1.min.js')}}"></script>
+    {{-- <script src="{{asset('admin/js/core/jquery-3.7.1.min.js')}}"></script> --}}
     <script src="{{asset('admin/js/core/popper.min.js')}}"></script>
     <script src="{{asset('admin/js/core/bootstrap.min.js')}}"></script>
 
@@ -226,12 +227,12 @@
           });
         });
       </script>
-<script>
+     <script>
     window.addEventListener('show-form', event =>{
         $('#exampleModal').modal('show')
     })
 </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> --}}
 {{-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> --}}
 @livewireScripts
 

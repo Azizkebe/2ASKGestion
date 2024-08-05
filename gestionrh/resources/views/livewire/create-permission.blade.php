@@ -7,7 +7,14 @@
             </div>
         </div>
         <div class="card-body">
-            <form action="">
+            <div class="mb-1">
+                @if ($error)
+                    <div class="alert alert-danger">{{$error}}</div>
+                @endif
+            </div>
+            <form action="" method="POST" wire:submit.prevent="store">
+                @csrf
+                @method('POST')
                 <div class="mt-3">
                     <label for="id_employe">Nom de l'employe</label>
                     <select name="id_employe" id="id_employe" class="form-select" wire:model.live="id_employe">
@@ -17,70 +24,68 @@
                         @endforeach
                     </select>
                     @error('id_employe')
-                        <span class="error">Veuillez saisir la situation matrimoniale</span>
+                        <span class="error">Veuillez choisir l'employe matrimoniale</span>
                     @enderror
                 </div>
                 <div class="mt-3">
-                    <label for="nombre_de_jour">Nombre de Jour</label>
-                    <input type="number" class="form-control" name="nombre_de_jour" id="nombre_de_jour" wire:model.live="nombre_de_jour" readonly>
-                    @error('nombre_de_jour')
-                        <span class="error"> Le nombre de jour est requise</span>
-                    @enderror
-                </div>
-                <div class="mt-3">
-                    <label for="date_depart">Date de Depart</label>
-                    <input type="text" class="form-control" id="date_d" name="date_depart" wire:model.live="date_depart" autocomplete="off">
-
+                    <label for="">Date de depart</label>
+                    <input type="text" class="form-control" id="date_d" name="date_depart" wire:model.live="date_depart" autocomplete="off"
+                    data-provide="datepicker" data-date-autoclose="true"
+                    data-date-format="d/m/yyyy" data-date-today-highlight="true"
+                    onchange="this.dispatchEvent(new InputEvent('input'))" placeholder="05-08-24">
                     <script>
-                        jQuery.datetimepicker.setLocale('fr');
-                        jQuery('#date_d').datetimepicker({
-                        i18n:{
-                        fr:{
-                        months:[
-                            'Janvier','Fevrier','Mars','Avril',
-                            'Mai','Juin','Jullet','Aout',
-                            'Septembre','Octobre','Novembre','Decembre',
-                        ],
-                        dayOfWeek:[
-                             "Lun", "Mar", "Mer",
-                            "Jeu", "Ven", "Sam.",
-                        ]
-                        }
-                        },
-                        timepicker:true,
-                        format:'d\m\Y'
+                        $(document).ready(function(){
+                           $('#date_d').datepicker({
+                               beforeShowDay: diseablesunday,
+                               dateFormat: 'dd-mm-yy',
+                               changeYear: true,
+                               maxDate: null,
+                           });
+                           function diseablesunday(sunday)
+                            {
+                                var calendary = sunday.getDay();
+                                return [(calendary > 0)];
+                            };
                         });
-                    </script>
-                    @error('date_depart')
-                        <div class="error">Veuillez preciser la date de depart</div>
+                   </script>
+                    @error('date-depart')
+                    <span class="error">la date de depart est obligatoire</span>
                     @enderror
                 </div>
-                <div class="mb-3">
+                <div class="mt-3">
                     <label for="date_retour">Date de Retour</label>
                     <input type="text" class="form-control" id="date_r" name="date_retour" wire:model.live="date_retour" autocomplete="off"
                     data-provide="datepicker" data-date-autoclose="true"
                     data-date-format="d/m/yyyy" data-date-today-highlight="true"
-                    onchange="this.dispatchEvent(new InputEvent('input'))">
+                    onchange="this.dispatchEvent(new InputEvent('input'))" placeholder="08-08-2024">
 
                     <script>
                          $(document).ready(function(){
                             $('#date_r').datepicker({
-                                beforeShowDay: function(date)
-                                {
-                                    var day = date.getDay();
-                                    return [(day != 0), ''];
-                                },
+                                beforeShowDay: diseablesunday,
                                 dateFormat: 'dd-mm-yy',
                                 changeYear: true,
                                 maxDate: null,
                             });
-
+                            function diseablesunday(sunday)
+                            {
+                                var calendary = sunday.getDay();
+                                return [(calendary > 0)];
+                            };
                          });
                     </script>
                     @error('date_retour')
                         <div class="error">Veuillez preciser la date de retour</div>
                     @enderror
 
+                </div>
+
+                <div class="mt-3">
+                    <label for="nombre_de_jour">Nombre de Jour</label>
+                    <input type="number" class="form-control" name="nombre_de_jour" id="nombre_de_jour" wire:model.live="nombre_de_jour" readonly>
+                    @error('nombre_de_jour')
+                        <span class="error"> Le nombre de jour est requise</span>
+                    @enderror
                 </div>
                 <div class="mt-3">
                     <label for="st_permission">La permission est-elle deductible</label>
@@ -96,7 +101,12 @@
                        <div class="error">Precisez bien la deduction</div>
                         @enderror
                    </div>
-
+                   <div class="mt-3">
+                    <textarea name="commentaire" class="form-control" id="commentaire" placeholder="Motif de la demande" cols="30" rows="5" wire:model.live="commentaire"></textarea>
+                   </div>
+                   @error('date-depart')
+                   <span class="error">Pourquoi voulez-vous la permission</span>
+                   @enderror
                 </div>
                 <div style="display: flex; justify-content:center" class="mb-3 mt-3">
                     <button type="submit" class="btn btn-primary"> Autoriser la permission</button>
