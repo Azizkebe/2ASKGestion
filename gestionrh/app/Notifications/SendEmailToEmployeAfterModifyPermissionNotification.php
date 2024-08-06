@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class SendEmailToEmployeAfterAcceptedPermissionNotification extends Notification
+class SendEmailToEmployeAfterModifyPermissionNotification extends Notification
 {
     use Queueable;
     public $messages;
@@ -18,6 +18,7 @@ class SendEmailToEmployeAfterAcceptedPermissionNotification extends Notification
     public function __construct($message)
     {
         $this->messages = $message;
+        //
     }
 
     /**
@@ -37,11 +38,11 @@ class SendEmailToEmployeAfterAcceptedPermissionNotification extends Notification
     {
         return (new MailMessage)
 
-        ->subject('Acceptation de Permission')
+        ->subject('Modification de Permission')
         ->line('Bonjour '.$this->messages['prenom'].' '. $this->messages['nom'])
         ->line('Suite à votre demande de Permission, le Service des Ressources Humaines de l\'Anpej')
-        ->line('Vous informe que votre permission demarre à la date du '.$this->messages['todate'].' à 17h')
-        ->line('Et prendra fin le soir de la date du '. $this->messages['fordate'].' à 17h')
+        ->line('Vous informe que votre permission a été modifiée. Elle demarre à la date du '.$this->messages['todate'].' à 17h')
+        ->line('Et prendra fin le soir de la date du '. $this->messages['fordate']. ' à 17h')
         ->line('Pour une duree de '. $this->messages['nbr_jour'].' jours')
         ->line('La permission est-elle deductible au congé : '. $this->messages['permission']);
     }

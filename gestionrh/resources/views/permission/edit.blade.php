@@ -2,8 +2,6 @@
 
 @section('content')
 
-@livewire('create-permission')
+@livewire('edit-permission',['permission' =>$permission ])
 
 @endsection
-
-

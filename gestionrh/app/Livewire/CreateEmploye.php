@@ -172,6 +172,7 @@ public $telephone, $adresse;
                     'id_bureau'=> $this->id_bureau,
                     'id_antenne'=> $this->id_antenne,
                     'id_poste'=> $this->id_poste,
+                    'nombre_jour_permission' => 3,
                 ];
 
                 // dd($docData);

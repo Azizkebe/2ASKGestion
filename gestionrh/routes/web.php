@@ -161,6 +161,10 @@ Route::middleware('auth')->group(function(){
 
     Route::prefix('permission')->group(function(){
         Route::get('create',[PermissionController::class, 'create'])->name('permission.create');
+        Route::get('liste',[PermissionController::class, 'liste'])->name('permission.liste');
+        Route::get('/edit/{permission}',[PermissionController::class, 'edit'])->name('permission.editer');
+        Route::get('/delete/{permission}',[PermissionController::class, 'delelte'])->name('permission.delete');
+
     });
 
 });

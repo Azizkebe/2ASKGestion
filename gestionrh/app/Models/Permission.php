@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Permission extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
+
+    public function employe()
+{
+    return $this->belongsTo(Employe::class, 'id_employe');
+}
+    public function statutpermission()
+    {
+        return $this->belongsTo(StatutPermission::class,'id_statut_permission','id');
+    }
 }

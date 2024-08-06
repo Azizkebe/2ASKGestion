@@ -1,7 +1,7 @@
 <div>
     <div style="margin: auto;" class="card">
         <div class="card-header bg-primary">
-            <div class="card-title text-white">Permission</div>
+            <div class="card-title text-white">Modifier la Permission</div>
             <div style="display: flex; justify-content:end;">
                 <a href="{{route('permission.liste')}}" class="btn btn-success btn-md"> Liste des Permissions</a>
             </div>
@@ -12,9 +12,9 @@
                     <div class="alert alert-danger">{{$error}}</div>
                 @endif
             </div>
-            <form action="" method="POST" wire:submit.prevent="store">
+            <form action="" method="POST" wire:submit.prevent="update">
                 @csrf
-                @method('POST')
+                @method('PUT')
 
                 <div class="mt-3">
                     <label for="nombre_de_jour">Nombre de Jour de Permission Annuel Réservé</label>
@@ -58,9 +58,7 @@
                             };
                         });
                    </script>
-                    @error('date-depart')
-                    <span class="error">la date de depart est obligatoire</span>
-                    @enderror
+
                 </div>
                 <div class="mt-3">
                     <label for="date_retour">Date de Retour</label>
@@ -85,9 +83,7 @@
                             };
                          });
                     </script>
-                    @error('date_retour')
-                        <div class="error">Veuillez preciser la date de retour</div>
-                    @enderror
+
 
                 </div>
 
@@ -95,9 +91,7 @@
                     <p>Nombre de jour de permission souhaité:
                         <input type="number" class="btn btn-sm btn-success" name="jours_pris" id="jours_pris" wire:model.live="jours_pris" readonly>
                     </p>
-                    @error('jours_pris')
-                        <div class="error">Le champs est requis</div>
-                    @enderror
+
                 </div>
                 <div class="mt-3">
                     <label for="st_permission">La permission est-elle deductible</label>
@@ -109,19 +103,15 @@
 
                         @endforeach
                     </select>
-                       @error('st_permission')
-                       <div class="error">Precisez bien la deduction</div>
-                        @enderror
+
                    </div>
                    <div class="mt-3">
                     <textarea name="commentaire" class="form-control" id="commentaire" placeholder="Motif de la demande" cols="30" rows="5" wire:model.live="commentaire"></textarea>
                    </div>
-                   @error('commentaire')
-                   <span class="error">Pourquoi voulez-vous la permission</span>
-                   @enderror
+
                 </div>
                 <div style="display: flex; justify-content:center" class="mb-3 mt-3">
-                    <button type="submit" class="btn btn-primary"> Autoriser la permission</button>
+                    <button type="submit" class="btn btn-primary"> Mettre à jour la permission</button>
                 </div>
 
             </form>
