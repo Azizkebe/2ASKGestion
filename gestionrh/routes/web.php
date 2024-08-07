@@ -16,6 +16,7 @@ use App\Http\Controllers\Employe\AntenneController;
 use App\Http\Controllers\Employe\BureauController;
 use App\Http\Controllers\Employe\PosteController;
 use App\Http\Controllers\Permission\PermissionController;
+use App\Http\Controllers\Conge\CongeController;
 use App\Livewire\EditPhotoEmploye;
 
 // Route::get('/dashboard',[UserAdminController::class,'dashboard'])->name('dashboard');
@@ -165,6 +166,10 @@ Route::middleware('auth')->group(function(){
         Route::get('/edit/{permission}',[PermissionController::class, 'edit'])->name('permission.editer');
         Route::get('/delete/{permission}',[PermissionController::class, 'delelte'])->name('permission.delete');
 
+    });
+
+    Route::prefix('conge')->group(function(){
+        Route::get('create',[CongeController::class, 'create'])->name('conge.create');
     });
 
 });
