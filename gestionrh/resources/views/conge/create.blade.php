@@ -33,7 +33,7 @@
                     </div>
                     <div class="mt-3 form-group">
                         <label for="">Nombre de jour attribué</label>
-                        <input type="number" id="nbre_jour_estime" name="nbre_jour_estime" class="form-control">
+                        <input type="number" id="nbre_jour_estime" name="nbre_jour_estime" value="0" min="0" class="form-control">
                     </div>
                 </div>
 

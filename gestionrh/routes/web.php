@@ -16,6 +16,7 @@ use App\Http\Controllers\Employe\AntenneController;
 use App\Http\Controllers\Employe\BureauController;
 use App\Http\Controllers\Employe\PosteController;
 use App\Http\Controllers\Permission\PermissionController;
+use App\Http\Controllers\Permission\PermissionCongeController;
 use App\Http\Controllers\Conge\CongeController;
 use App\Livewire\EditPhotoEmploye;
 
@@ -171,7 +172,9 @@ Route::middleware('auth')->group(function(){
     Route::prefix('conge')->group(function(){
         Route::get('create',[CongeController::class, 'create'])->name('conge.create');
     });
-
+    Route::prefix('permissionconge')->group(function(){
+        Route::get('create',[PermissionCongeController::class, 'create'])->name('permissionconge.create');
+    });
 });
 
 
