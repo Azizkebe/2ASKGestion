@@ -6,11 +6,13 @@ use Livewire\Component;
 use App\Models\Conge;
 use App\Models\Employe;
 use App\Models\PermissionConge;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\SendEmailToEmployeAfterAcceptedCongeNotification;
 use Carbon\Carbon;
 
 class CreatePermissionConge extends Component
 {
-    public $id_employe, $id_conge, $nombre_de_jour, $date_depart, $date_retour, $jours_pris;
+    public $id_employe, $id_conge, $nombre_de_jour, $date_depart, $date_retour, $jours_pris, $nombre_de_jour_demande, $permission_conge, $nombre_restant_jour;
     public function render()
     {
         $toDate = Carbon::parse($this->date_depart);
@@ -19,12 +21,19 @@ class CreatePermissionConge extends Component
     if(isset($this->id_conge)){
 
         $this->donnees_employe = Conge::where('id', $this->id_conge)->first();
+        $this->permission_conge = PermissionConge::where('id_employe', $this->id_employe)->count();
+
+        // dd($this->permission_conge);
+
         $this->nombre_de_jour = $this->donnees_employe->nombre_jour_conge ?? 0;
+        // $this->nombre_restant_jour = $this->permission_conge->nombre_jour_restant;
+
 
     }
     if(isset($this->date_depart)&&(isset($this->date_retour)))
     {
         $this->jours_pris =  $toDate->diffInDays($fromDate);
+
 
         if($this->jours_pris > $this->nombre_de_jour)
         {
@@ -51,7 +60,11 @@ class CreatePermissionConge extends Component
     }
     public function store(PermissionConge $permission)
     {
-        $this->donnees_employe = PermissionConge::where('id', $this->id_conge)->first();
+        $this->donnees_employe = Conge::where('id', $this->id_conge)->first();
+        $this->permission_conge = PermissionConge::where('id', $this->id_conge)->first();
+
+        $this->permission_conge->nombre_jour_restant = $this->donnees_employe->nombre_jour_conge - $this->nombre_de_jour_demande;
+
         $this->nombre_de_jour = $this->donnees_employe->nombre_jour_conge ?? 0;
 
         $this->validate([
@@ -60,24 +73,20 @@ class CreatePermissionConge extends Component
             'nombre_de_jour'=>'integer|required',
             'date_depart'=>'string|required',
             'date_retour'=>'string|required',
-            'id_conge'=>'required',
-
-
-
-        ]);
+            'id_conge'=>'required',]);
 
         try {
-
+            $permission->id_employe = $this->id_employe;
+            $permission->id_conge =  $this->id_conge;
             $permission->date_depart = $this->date_depart;
             $permission->date_retour = $this->date_retour;
 
             $toDate = Carbon::parse($this->date_depart);
             $fromDate = Carbon::parse($this->date_retour);
 
-            $permission->nombre_de_jour = $toDate->diffInDays($fromDate);
+            $this->nombre_de_jour_demande = $toDate->diffInDays($fromDate);
 
-            dd($this->nombre_de_jour);
-            if($permission->nombre_de_jour > $this->nombre_de_jour )
+            if($this->nombre_de_jour_demande > $this->nombre_de_jour )
             {
                 toastr()->error('Attention, Le nombre de jour demandé est superieur au nombre de jour restant');
                 // return redirect()->back()->with('error','Verifiez les informations de saisie');
@@ -87,51 +96,37 @@ class CreatePermissionConge extends Component
             {
                 $this->nombre_de_jour = 0;
                 $this->id_employe = 0;
-                toastr()->error('Desolé, Vous avez pris toutes vos permissions');
+                toastr()->error('Desolé, Vous avez pris tous vos congés');
             }
             else
             {
+                // $permission->nombre_jours_pris = $this->nombre_de_jour_demande;
 
-                $permission->id_conge =  $this->id_conge;
+                $this->nbr_jour_restant_conge = $this->nombre_de_jour - $this->nombre_de_jour_demande;
+                // $this->nbr_jour_restant_conge = $this->nombre_de_jour - $this->nombre_de_jour_demande;
 
-                dd($permission);
+                // dd($permission);
+                $reussi = $permission->save();
 
-                // $reussi = $permission->save();
+                if($reussi){
 
-                // if($reussi){
+                    $this->permission_conge->update(['nombre_jours_pris'=> $this->nombre_de_jour_demande,
+                    'nombre_jour_restant'=> $this->nbr_jour_restant_conge]);
 
-                //     $this->nbr_jour_restant_conge = $this->nombre_de_jour - $permission->nombre_de_jour;
+                    $messages['prenom'] = $permission->employe->prenom;
+                    $messages['nom'] = $permission->employe->nom;
+                    $messages['todate'] =  $permission->date_depart;
+                    $messages['fordate'] = $permission->date_retour;
+                    $messages['nbr_jour'] = $this->nombre_de_jour_demande;
+                    $messages['permission'] = $permission->conge->nombre_jour_conge ?? '';
 
-                //     // $this->donnees_employe->update(['nombre_jour_permission'=> $this->nbr_jour_restant]);
+                    Notification::route('mail', $permission->employe->email)->notify(new
+                    SendEmailToEmployeAfterAcceptedCongeNotification($messages));
 
+                }
+                 toastr()->success('Bravo, le congé est autorisé avec succes');
 
-                //     // if($permission->id_statut_permission === '2')
-                //     // {
-
-                //     //     $this->donnees_employe->update(['nombre_jour_permission'=> $this->nbr_jour_restant]);
-
-                //     // }
-                //     // else
-                //     // {
-
-                //     //     $this->donnees_employe->update(['nombre_jour_permission'=> $this->nombre_de_jour]);
-
-                //     // }
-
-                //     $messages['prenom'] = $permission->employe->prenom;
-                //     $messages['nom'] = $permission->employe->nom;
-                //     $messages['todate'] =  $permission->date_depart;
-                //     $messages['fordate'] = $permission->date_retour;
-                //     $messages['nbr_jour'] = $permission->nombre_de_jour;
-                //     $messages['permission'] = $permission->id_statut_permission === 1 ? 'Non' : 'Oui';
-
-                //     Notification::route('mail', $permission->employe->email)->notify(new
-                //     SendEmailToEmployeAfterAcceptedPermissionNotification($messages));
-
-                // }
-                 toastr()->success('Bravo, la permission est autorisée avec succes');
-
-                return redirect()->route('permission.liste');
+                return redirect()->route('conge.liste');
 
             }
 

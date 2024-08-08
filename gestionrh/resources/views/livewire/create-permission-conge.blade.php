@@ -42,6 +42,14 @@
                     <label for="nombre_de_jour">Nombre de Jour Total pour ce congé réservé</label>
                     <input type="number" class="form-control" name="nombre_de_jour" id="nombre_de_jour" wire:model.live="nombre_de_jour" readonly>
                 </div>
+                <div class="mt-1 mb-1">
+                    <p>Nombre de jour de congé restant:
+                        <input type="number" class="btn btn-sm btn-warning" name="nombre_restant_jour" id="nombre_restant_jour" wire:model.live="nombre_restant_jour" readonly> jour(s)
+                    </p>
+                    @error('nombre_restant_jour')
+                        <div class="error">Le champs est requis</div>
+                    @enderror
+                </div>
                 <div class="mt-3">
                     <label for="">Date de depart</label>
                     <input type="text" class="form-control" id="date_d" name="date_depart" wire:model.live="date_depart" autocomplete="off"
@@ -97,7 +105,6 @@
                     @enderror
 
                 </div>
-
 
                 <div class="mt-1 mb-1">
                     <p>Nombre de jour de congé souhaité:

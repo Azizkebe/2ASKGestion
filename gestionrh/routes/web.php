@@ -174,6 +174,7 @@ Route::middleware('auth')->group(function(){
     });
     Route::prefix('permissionconge')->group(function(){
         Route::get('create',[PermissionCongeController::class, 'create'])->name('permissionconge.create');
+        Route::get('liste',[PermissionCongeController::class, 'liste'])->name('permissionconge.liste');
     });
 });
 
