@@ -78,6 +78,11 @@
                       <span class="sub-item">Assigner une permission</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{route('permissionconge.create')}}">
+                      <span class="sub-item">Assigner un congé</span>
+                    </a>
+                </li>
               </ul>
             </div>
           </li>
@@ -376,14 +381,34 @@
                                                     </div>
                                                   </li>
                                                 <li>
-                        {{-- <a href="#">
-                            <span class="sub-item">Level 1</span>
-                        </a> --}}
-                </li>
-              </ul>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
+                                            </li>
+                                            <li>
+                                                <li>
+                                                    <a data-bs-toggle="collapse" href="#subnav12">
+                                                      <span class="sub-item">Conge</span>
+                                                      <span class="caret"></span>
+                                                    </a>
+                                                    <div class="collapse" id="subnav12">
+                                                      <ul class="nav nav-collapse subnav">
+                                                        <li>
+                                                          <a href="{{route('conge.create')}}">
+                                                            <span class="sub-item">Ajouter un type de conge</span>
+                                                          </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="{{route('conge.liste')}}">
+                                                              <span class="sub-item">Liste des types de conge</span>
+                                                            </a>
+                                                          </li>
+                                                      </ul>
+                                                    </div>
+                                                  </li>
+                                                <li>
+                                            </li>
+                                        </ul>
+                                        </div>
+                                    </li>
+                                    </ul>
+                                </div>
+                                </div>
   </div>

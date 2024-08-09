@@ -170,7 +170,13 @@ Route::middleware('auth')->group(function(){
     });
 
     Route::prefix('conge')->group(function(){
-        Route::get('create',[CongeController::class, 'create'])->name('conge.create');
+        Route::get('/create',[CongeController::class, 'create'])->name('conge.create');
+        Route::post('/store',[CongeController::class, 'store'])->name('conge.store');
+        Route::get('/liste',[CongeController::class, 'liste'])->name('conge.liste');
+        Route::get('/edit/{conge}',[CongeController::class, 'editer'])->name('conge.editer');
+        Route::put('/update/{conge}',[CongeController::class, 'update'])->name('conge.update');
+        Route::get('/delete/{conge}',[CongeController::class, 'delete'])->name('conge.delete');
+
     });
     Route::prefix('permissionconge')->group(function(){
         Route::get('create',[PermissionCongeController::class, 'create'])->name('permissionconge.create');

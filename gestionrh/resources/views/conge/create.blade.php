@@ -7,33 +7,30 @@
         <div class="card-header bg-primary">
             <div class="card-title text-white">Parametre des conges</div>
             <div style="display: flex; justify-content:end;">
-                {{-- <a href="{{route('conge.liste')}}" class="btn btn-success btn-md"> Liste des Parametres define</a> --}}
+                <a href="{{route('conge.liste')}}" class="btn btn-success btn-md"> Liste des types define</a>
             </div>
         </div>
         <div class="card-body">
-            <form action="" method="POST">
+            <form action="{{route('conge.store')}}" method="POST">
                 @csrf
                 @method('POST')
 
-
-                <div class="mt-3">
-                    <label for="type_conge">Le type de conge</label>
-                    <select name="type_conge"  id="type_conge" name="type_conge" class="form-select">
-                        <option value="">---choississez le type de statut ---</option>
-                        @foreach ($typeconge as $type_conge)
-
-                        <option value="{{$type_conge->id}}">{{$type_conge->type_conge}}</option>
-
-                        @endforeach
-                    </select>
-
-                        @error('type_conge')
+                <div class="mt-3 form-group">
+                    <label for="type_de_conge">Type de Congé</label>
+                    <input type="text" class="form-control" name="type_de_conge" id="type_de_conge" wire:model.live="type_de_conge">
+                    <div>
+                        @error('type_de_conge')
                         <div class="error">Precisez le type de conge</div>
-                            @enderror
+                        @enderror
                     </div>
-                    <div class="mt-3 form-group">
-                        <label for="">Nombre de jour attribué</label>
-                        <input type="number" id="nbre_jour_estime" name="nbre_jour_estime" value="0" min="0" class="form-control">
+                </div>
+                <div class="mt-3 form-group">
+                    <label for="">Nombre de jour attribué</label>
+                    <input type="number" id="nombre_de_jour_reserve" name="nombre_de_jour_reserve" value="0" min="0" class="form-control">
+                    <div>
+                        @error('nombre_de_jour_reserve')
+                            <span class="error">{{$message}}</span>
+                        @enderror
                     </div>
                 </div>
 

@@ -11,16 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('conges', function (Blueprint $table) {
-
+        Schema::create('param_type_conges', function (Blueprint $table) {
             $table->id();
-
-            $table->enum('type_conge',['Congé Annuel','Congé Obligatoire',
-            'Congé Supplementaire hier','Congé Special','Congé de paternite ou parental',
-            'Congé à Salaire différé','Congé Medical'])->default('Congé Annuel');
-
-            $table->integer('nombre_jour_conge');
-
+            $table->string('type_de_conge');
+            $table->integer('nombre_de_jour_reserve');
             $table->timestamps();
         });
     }
@@ -30,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('conges');
+        Schema::dropIfExists('param_type_conges');
     }
 };

@@ -21,9 +21,10 @@ class CreatePermissionConge extends Component
     if(isset($this->id_conge)){
 
         $this->donnees_employe = Conge::where('id', $this->id_conge)->first();
-        $this->permission_conge = PermissionConge::where('id_employe', $this->id_employe)->count();
+        $this->permission_conge = PermissionConge::where('id_employe', $this->id_employe)->get();
 
-        // dd($this->permission_conge);
+
+        dd($this->permission_conge);
 
         $this->nombre_de_jour = $this->donnees_employe->nombre_jour_conge ?? 0;
         // $this->nombre_restant_jour = $this->permission_conge->nombre_jour_restant;

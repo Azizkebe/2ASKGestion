@@ -14,8 +14,8 @@ class PermissionConge extends Model
     {
         return $this->belongsTo(Employe::class,'id_employe','id');
     }
-    public function conge()
+    public function paramtypeconge()
     {
-        return $this->belongsTo(Employe::class,'id_conge','id');
+        return $this->belongsTo(ParamTypeConge::class,'id_param_type_conge','id');
     }
 }
