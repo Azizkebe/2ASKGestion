@@ -40,7 +40,7 @@
                     <input type="text" class="form-control" id="date_d" name="date_depart" wire:model.live="date_depart" autocomplete="off"
                     data-provide="datepicker" data-date-autoclose="true"
                     data-date-format="d/m/yyyy" data-date-today-highlight="true"
-                    onchange="this.dispatchEvent(new InputEvent('input'))" placeholder="00-00-0000">
+                    onchange="this.dispatchEvent(new InputEvent('input'))">
                     <script>
                         $(document).ready(function(){
                            $('#date_d').datepicker({
@@ -67,7 +67,7 @@
                     <input type="text" class="form-control" id="date_r" name="date_retour" wire:model.live="date_retour" autocomplete="off"
                     data-provide="datepicker" data-date-autoclose="true"
                     data-date-format="d/m/yyyy" data-date-today-highlight="true"
-                    onchange="this.dispatchEvent(new InputEvent('input'))" placeholder="00-00-0000">
+                    onchange="this.dispatchEvent(new InputEvent('input'))">
 
                     <script>
                          $(document).ready(function(){
