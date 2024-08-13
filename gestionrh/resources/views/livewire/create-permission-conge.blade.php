@@ -31,7 +31,7 @@
                     <select name="id_conge" id="id_conge" class="form-select" wire:model.live="id_conge">
                         <option value="">--Choisissez un employé --</option>
                         @foreach ($conge as $conge)
-                            <option value="{{$conge->id}}">{{$conge->type_conge}}</</option>
+                            <option value="{{$conge->id}}">{{$conge->type_de_conge}}</option>
                         @endforeach
                     </select>
                     @error('id_employe')

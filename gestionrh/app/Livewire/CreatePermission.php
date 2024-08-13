@@ -7,6 +7,7 @@ use App\Models\Employe;
 use App\Models\StatutPermission;
 use Carbon\Carbon;
 use App\Models\Permission;
+use App\Models\Conge;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\SendEmailToEmployeAfterAcceptedPermissionNotification;
 

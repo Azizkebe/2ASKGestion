@@ -3,7 +3,7 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use App\Models\Conge;
+use App\Models\ParamTypeConge;
 use App\Models\Employe;
 use App\Models\PermissionConge;
 use Illuminate\Support\Facades\Notification;
@@ -20,13 +20,13 @@ class CreatePermissionConge extends Component
 
     if(isset($this->id_conge)){
 
-        $this->donnees_employe = Conge::where('id', $this->id_conge)->first();
+        $this->donnees_employe = ParamTypeConge::where('id', $this->id_conge)->first();
         $this->permission_conge = PermissionConge::where('id_employe', $this->id_employe)->get();
 
 
-        dd($this->permission_conge);
+        // dd($this->permission_conge);
 
-        $this->nombre_de_jour = $this->donnees_employe->nombre_jour_conge ?? 0;
+        $this->nombre_de_jour = $this->donnees_employe->nombre_de_jour_reserve ?? 0;
         // $this->nombre_restant_jour = $this->permission_conge->nombre_jour_restant;
 
 
@@ -51,7 +51,7 @@ class CreatePermissionConge extends Component
         }
     }
 
-        $conge = Conge::all();
+        $conge = ParamTypeConge::all();
         $employe = Employe::all();
 
         return view('livewire.create-permission-conge',[
