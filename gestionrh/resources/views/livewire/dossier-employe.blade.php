@@ -118,7 +118,11 @@
                         <div class="row">
                             <div class="col col-md-10">
                                 <input type="file" wire:model.live="files_contrat" class="form-control" multiple>
-
+                                @if ($files_contrat)
+                                    @foreach ($files_contrat as $image)
+                                        <img style="width:50px; border:1px solid black;" src="{{$image->temporaryUrl()}}" alt="" >
+                                    @endforeach
+                                @endif
                             </div>
                                 {{-- <button class="btn btn-success" wire:click="add({{$i}})">Ajouter</button> --}}
                         </div>

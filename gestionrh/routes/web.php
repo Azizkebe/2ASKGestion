@@ -18,6 +18,8 @@ use App\Http\Controllers\Employe\PosteController;
 use App\Http\Controllers\Permission\PermissionController;
 use App\Http\Controllers\Permission\PermissionCongeController;
 use App\Http\Controllers\Conge\CongeController;
+use App\Http\Controllers\Contrat\FicheContratController;
+
 use App\Livewire\EditPhotoEmploye;
 
 // Route::get('/dashboard',[UserAdminController::class,'dashboard'])->name('dashboard');
@@ -181,6 +183,12 @@ Route::middleware('auth')->group(function(){
     Route::prefix('permissionconge')->group(function(){
         Route::get('create',[PermissionCongeController::class, 'create'])->name('permissionconge.create');
         Route::get('liste',[PermissionCongeController::class, 'liste'])->name('permissionconge.liste');
+    });
+    Route::prefix('fichecontrat')->group(function(){
+        Route::get('create',[FicheContratController::class, 'create'])->name('fiche_contrat.create');
+        Route::post('/create',[FicheContratController::class, 'store'])->name('fiche_contrat.store');
+        Route::get('/liste',[FicheContratController::class, 'liste'])->name('fiche_contrat.liste');
+
     });
 });
 
