@@ -144,7 +144,7 @@ public $telephone, $adresse;
     {
               $this->validate([
                 'id_dernier_contrat'=>'required',
-                'imagecontrat'=>'required',
+                // 'imagecontrat'=>'required',
               ]);
               try{
 

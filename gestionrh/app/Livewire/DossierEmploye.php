@@ -16,6 +16,25 @@ class DossierEmploye extends Component
     use WithFileUploads;
     public $employe, $imagefile, $filediplome, $filecv, $filecontrat, $fileextrait;
 
+    public $inputs, $i, $files_contrat = [];
+
+    public function mount()
+    {
+        $this->inputs = [];
+
+        $this->i = 1;
+
+    }
+    public function add($i)
+    {
+        $this->i = $i + 1;
+        array_push($this->inputs, $i);
+
+    }
+    public function remove($key)
+    {
+        unset($this->inputs[$key]);
+    }
     public function render()
     {
 
@@ -123,39 +142,71 @@ class DossierEmploye extends Component
 
         }
     }
-    public function update_contrat(Employe $employe)
+    public function update_contrat()
     {
-        $info_employe = Employe::findOrFail($this->employe);
 
-        if($info_employe->id_cloud_file_contrat != NULL)
-        {
-            toastr()->error('Pour mettre à jour le contrat, vous devez d\'abord supprimer le contrat existant et joindre un autre');
-            return redirect()->back();
-        }
-        else{
-              if(isset($this->filecontrat))
-              {
-                $filePath = $this->filecontrat->storePublicly('CloudImageContrat/Employe','public');
-                $cloudfile = CloudFileContrat::create([
-                    'image_contrat'=> $filePath,
-                ]);
-
-                $info_employe->update(['id_cloud_file_contrat'=>$cloudfile->id]);
-
-                toastr()->success('Le contrat de l\'employe a été bien modifié');
-
-                return redirect()->back();
-              }
+        $response = [];
+        foreach ($this->files_contrat as $file) {
 
 
-              else
-              {
-                toastr()->error('Erreur: Veuillez charger une copie du contrat');
+            $fileName = time(). '.' .$file->extension();
 
-                return redirect()->back();
-              }
+            $filePath = $file->storeAs('CloudImageContrat/Employe', $fileName, 'public' );
+
+            $response[] = [
+                'image_contrat'=> $filePath,
+            ];
 
         }
+        dd($response);
+        // CloudFileContrat::insert($response);
+
+        // $info_employe->update(['id_cloud_file_contrat'=>$cloudfile->id]);
+
+        // toastr()->success('Le contrat de l\'employe a été bien modifié');
+
+        // return redirect()->back();
+        // dd( $response );
+        // for($x = 0; $x < count($response); $x++)
+        // {
+        //     dd(count($response));
+        //     $cloudfile = CloudFileContrat::create([
+        //         'image_contrat'=> $response[$x],
+        //         ]);
+        //     dd($cloudfile);
+        // }
+
+        // $info_employe = Employe::findOrFail($this->employe);
+
+        // if($info_employe->id_cloud_file_contrat != NULL)
+        // {
+        //     toastr()->error('Pour mettre à jour le contrat, vous devez d\'abord supprimer le contrat existant et joindre un autre');
+        //     return redirect()->back();
+        // }
+        // else{
+        //       if(isset($this->filecontrat))
+        //       {
+        //         $filePath = $this->filecontrat->storePublicly('CloudImageContrat/Employe','public');
+        //         $cloudfile = CloudFileContrat::create([
+        //             'image_contrat'=> $filePath,
+        //         ]);
+
+        //         $info_employe->update(['id_cloud_file_contrat'=>$cloudfile->id]);
+
+        //         toastr()->success('Le contrat de l\'employe a été bien modifié');
+
+        //         return redirect()->back();
+        //       }
+
+
+        //       else
+        //       {
+        //         toastr()->error('Erreur: Veuillez charger une copie du contrat');
+
+        //         return redirect()->back();
+        //       }
+
+        // }
     }
     public function update_extrait(Employe $employe)
     {

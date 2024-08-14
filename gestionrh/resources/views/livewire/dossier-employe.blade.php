@@ -113,7 +113,21 @@
                 <form wire:submit.prevent="update_contrat" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-                    <div class="form-group">
+
+                    <div class="form-group my-3">
+                        <div class="row">
+                            <div class="col col-md-10">
+                                <input type="file" wire:model.live="files_contrat" class="form-control" multiple>
+
+                            </div>
+                                {{-- <button class="btn btn-success" wire:click="add({{$i}})">Ajouter</button> --}}
+                        </div>
+                        <div style="display: flex; justify-content:center;" class="mt-2">
+                            <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+                        </div>
+                    </div>
+
+                    {{-- <div class="form-group">
                         @if ($employes->photocontrat)
                         <div style="height: 150px; width:150px; border:1px solid black;">
                             <a style="height: 150px; width:150px;" href="{{asset('storage/'.$employes->photocontrat->image_contrat)}}">
@@ -128,7 +142,7 @@
                     </div>
                     <div style="display: flex; justify-content:center;" class="mt-2">
                         <button style=" width:200px;" type="submit" class="btn btn-primary">Enregistrer les modifications</button>
-                    </div>
+                    </div> --}}
                 </form>
             </div>
         </div>
