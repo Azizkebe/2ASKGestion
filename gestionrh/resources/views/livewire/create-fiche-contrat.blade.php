@@ -66,6 +66,9 @@
                 </div>
                 <div class="form-group">
                     <input type="file" accept="image/jpg, image/jpeg, image/png" name="fichier_contrat" id="fichier_contrat" wire:model.live="fichier_contrat">
+                    @if ($this->fichier_contrat)
+                        <img style="width: 50px; height:50px;" src="{{$this->fichier_contrat->temporaryUrl()}}" alt="">
+                    @endif
                 </div>
               <div class="form-group justify-content-center align-items-center text-center">
                 <button type="submit" class="btn btn-primary btn-block"> Ajouter le contrat </button>
