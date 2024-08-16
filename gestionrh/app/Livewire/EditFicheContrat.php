@@ -63,8 +63,6 @@ class EditFicheContrat extends Component
             $reponse = $this->fichier_contrat->storeAs('CloudImageContrat/Employe', $fileName, 'public');
             $detailfiche->fichier_contrat = $reponse;
 
-
-            // dd($detailfiche);
             $detailfiche->update();
 
             toastr()->success('le contrat a été modifié avec succes');
