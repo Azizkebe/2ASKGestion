@@ -3,14 +3,14 @@
       <div class="col-12 h-50 ">
         <div class="card shadow">
           <div class="card-body mx-100">
-            <h4 class="card-title mt-3 text-center">Ajout des contrats de l'employe</h4>
+            <h4 class="card-title mt-3 text-center">Editer le contrat de l'employe</h4>
             <div style="display: flex; justify-content:end;">
                 <a href="{{route('fiche_contrat.liste')}}" class="btn btn-success btn-sm">Liste de tous les contrats</a>
             </div>
 
-            <form action="" method="POST" wire:submit.prevent="store">
+            <form wire:submit.prevent="update" method="POST" enctype="multipart/form-data">
                 @csrf
-                @method('POST')
+                @method('PUT')
                 <div class="form-group input-group">
                     <select name="id_employe" id="id_employe" wire:model.live="id_employe" class="form-select">
                        <option value="">--Choisissez un employe--</option>
@@ -58,8 +58,12 @@
                         </div>
                     </div>
                     <div class="col col-md-3">
+                        @if ($fiche->date_always === 'En cours')
+                        <input type="checkbox" name="date_always" id="date_always" wire:model.live="date_always" checked>
+                        @else
                         <input type="checkbox" name="date_always" id="date_always" wire:model.live="date_always">
-                        <label for="">Depuis toujours</label>
+                        @endif
+                        <label for="">En cours</label>
                     </div>
 
                 </div>
@@ -74,13 +78,17 @@
                 <div class="form-group mt-2">
                     <input type="file" accept="image/jpg, image/jpeg, image/png" name="fichier_contrat" id="fichier_contrat" wire:model.live="fichier_contrat">
                    <div>
-                        @if ($fichier_contrat)
-                        <img style="width: 70px; height:70px;" src="{{$fichier_contrat->temporaryUrl()}}" alt="">
-                        @endif
+                    @if ($fiche->fichier_contrat)
+                    <span style="font-weight:bolder;">Image Anterieur: <img style="width:50px;" src="{{asset('storage/'.$fiche->fichier_contrat)}}" alt=""></span>
+
+                    @else
+                    <span style="font-weight:bolder;">Nouvelle Image: <img style="width: 70px; height:70px;" src="{{$fiche->temporary()}}" alt="image"></span>
+
+                    @endif
                    </div>
                 </div>
               <div class="form-group justify-content-center align-items-center text-center">
-                <button type="submit" class="btn btn-primary btn-block"> Ajouter le contrat </button>
+                <button type="submit" class="btn btn-primary btn-block"> Enregistrer les modifications </button>
               </div>
             </form>
           </div>

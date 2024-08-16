@@ -19,7 +19,7 @@ return new class extends Migration
 
             $table->string('date_obtention_contrat');
 
-            $table->string('date_fin_contrat');
+            $table->string('date_fin_contrat')->nullable();
 
             $table->string('commentaire');
 

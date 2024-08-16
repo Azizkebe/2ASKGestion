@@ -14,4 +14,17 @@ class FicheContratController extends Controller
     {
         return view('fichecontrat.create');
     }
+    public function liste()
+    {
+        $fichecontrat = FicheContrat::all();
+
+
+        return view('fichecontrat.liste',[
+            'fichecontrat'=>$fichecontrat,
+        ]);
+    }
+    public function edit($fichecontrat)
+    {
+        return view('fichecontrat.edit', compact('fichecontrat'));
+    }
 }

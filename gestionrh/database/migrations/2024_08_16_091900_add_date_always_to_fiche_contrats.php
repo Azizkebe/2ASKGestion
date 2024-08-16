@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('employes', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_fichecontrat')->after('id_cloud_file_photo')->nullable();
-            $table->foreign('id_fichecontrat')->references('id')->on('fiche_contrats');
+        Schema::table('fiche_contrats', function (Blueprint $table) {
+            $table->string('date_always')->after('fichier_contrat')->nullable();
         });
     }
 
@@ -22,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('employes', function (Blueprint $table) {
+        Schema::table('fiche_contrats', function (Blueprint $table) {
             //
         });
     }

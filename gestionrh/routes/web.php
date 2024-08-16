@@ -187,6 +187,7 @@ Route::middleware('auth')->group(function(){
     Route::prefix('fichecontrat')->group(function(){
         Route::get('create',[FicheContratController::class, 'create'])->name('fiche_contrat.create');
         Route::get('/liste',[FicheContratController::class, 'liste'])->name('fiche_contrat.liste');
+        Route::get('/edit/{fichecontrat}',[FicheContratController::class, 'edit'])->name('fiche_contrat.editer');
 
     });
 });
