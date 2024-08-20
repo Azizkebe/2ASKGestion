@@ -3,14 +3,14 @@
       <div class="col-12 h-50 ">
         <div class="card shadow">
           <div class="card-body mx-100">
-            <h4 class="card-title mt-3 text-center">Ajout d'un membre</h4>
+            <h4 class="card-title mt-3 text-center">Editer un membre</h4>
             <div style="display: flex; justify-content:end;">
                 <a href="{{route('membre.liste')}}" class="btn btn-success btn-sm">Liste de tous les membres</a>
             </div>
 
-            <form  wire:submit.prevent="store" method="POST" enctype="multipart/form-data">
+            <form  wire:submit.prevent="update" method="POST" enctype="multipart/form-data">
                 @csrf
-                @method('POST')
+                @method('PUT')
                 <div class="form-group">
                     <label for="Nom">Employe</label><br>
 
@@ -71,7 +71,7 @@
                    </div>
                 </div>
               <div class="form-group justify-content-center align-items-center text-center">
-                <button type="submit" class="btn btn-primary btn-block"> Ajouter le membre </button>
+                <button type="submit" class="btn btn-primary btn-block"> Enregistrer les modifications </button>
               </div>
             </form>
           </div>

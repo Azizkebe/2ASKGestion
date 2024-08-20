@@ -30,29 +30,35 @@
                       </tr>
                         </thead>
                             <tbody>
-                             @forelse ($fichecontrat as $contrat)
+                             @forelse ($membre as $membre)
                             <tr>
                                 <td>
-                                    @if ($contrat->fichier_contrat)
+
                                     <div>
-                                        <a href="{{asset('storage/'.$contrat->fichier_contrat)}}">
+
+                                     <a href="{{asset('storage/'.$membre->employe->photo->photo_employe)}}">
                                         <img style="width:50px; height:50px;" src="{{asset('storage/'.
-                                         $contrat->fichier_contrat)}}" alt="">
+                                         $membre->employe->photo->photo_employe)}}" alt="">
                                         </a>
                                     </div>
-
-                                    @endif
                                 </td>
-                                <td>{{$contrat->employe->prenom}}</td>
-                                <td>{{$contrat->employe->nom}}</td>
-                                <td>{{$contrat->contrat->contrat}}</td>
-                                <td>{{$contrat->date_obtention_contrat}}</td>
-                                @if ($contrat->date_fin_contrat)
-                                    <td> {{$contrat->date_fin_contrat}}</td>
-                                @else
-                                    <td>{{$contrat->date_always}}</td>
+                                <td>{{$membre->employe->prenom}}</td>
+                                <td>{{$membre->employe->nom}}</td>
+                                <td>{{$membre->typemembre->type_membre}}</td>
+
+                                @if ($membre->photo_justificative)
+                                <td>
+                                    <div>
+                                        <a href="{{asset('storage/'.$membre->photo_justificative)}}">
+                                        <img style="width:50px; height:50px;" src="{{asset('storage/'.
+                                         $membre->photo_justificative)}}" alt="">
+                                        </a>
+                                    </div>
+                                </td>
+
+
                                 @endif
-                                <td>{{$contrat->commentaire}}</td>
+
                                 <td>
                                     <div class="form-button-action">
                                         <button
@@ -61,7 +67,7 @@
                                         title=""
                                         class="btn btn-link btn-primary btn-lg"
                                         data-original-title="Edit Task"
-                                        ><a href="{{route('fiche_contrat.editer', $contrat->id)}}"><i class="fa fa-edit"></i></a>
+                                        ><a href="{{route('membre.editer', $membre->id)}}"><i class="fa fa-edit"></i></a>
 
                                         </button>
                                         <button
@@ -71,7 +77,7 @@
                                         class="btn btn-link btn-danger"
                                         data-original-title="Remove"
                                         ><a onclick="return confirm('Etes vous sure de vouloir supprimer la fiche du contrat')"
-                                        href="{{route('fiche_contrat.delete',$contrat->id)}}" class="btn btn-link btn-danger"><i class="fa fa-times"></i></a>
+                                        href="{{route('membre.delete',$membre->id)}}" class="btn btn-link btn-danger"><i class="fa fa-times"></i></a>
                                         </button>
                                     </div>
                                 </td>

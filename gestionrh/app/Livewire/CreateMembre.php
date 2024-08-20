@@ -51,6 +51,7 @@ class CreateMembre extends Component
             $reponse = $this->justificative->storeAs('CloudImageMembre/Employe', $fileName, 'public');
             $membre->photo_justificative = $reponse;
 
+            // dd($membre);
             $membre->save();
             toastr()->success('Le membre est enregisté avec succes');
 
