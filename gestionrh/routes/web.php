@@ -15,6 +15,8 @@ use App\Http\Controllers\Employe\ServiceController;
 use App\Http\Controllers\Employe\AntenneController;
 use App\Http\Controllers\Employe\BureauController;
 use App\Http\Controllers\Employe\PosteController;
+use App\Http\Controllers\Employe\TypeMembreController;
+use App\Http\Controllers\Employe\MembreController;
 use App\Http\Controllers\Permission\PermissionController;
 use App\Http\Controllers\Permission\PermissionCongeController;
 use App\Http\Controllers\Conge\CongeController;
@@ -188,6 +190,24 @@ Route::middleware('auth')->group(function(){
         Route::get('create',[FicheContratController::class, 'create'])->name('fiche_contrat.create');
         Route::get('/liste',[FicheContratController::class, 'liste'])->name('fiche_contrat.liste');
         Route::get('/edit/{fichecontrat}',[FicheContratController::class, 'edit'])->name('fiche_contrat.editer');
+        Route::get('/delete/{fichecontrat}',[FicheContratController::class,'delete'])->name('fiche_contrat.delete');
+
+    });
+
+    Route::prefix('typemembre')->group(function(){
+        Route::get('create',[TypeMembreController::class, 'create'])->name('typemembre.create');
+        Route::post('/create',[TypeMembreController::class, 'store'])->name('typemembre.store');
+        Route::get('/liste',[TypeMembreController::class, 'liste'])->name('typemembre.liste');
+        Route::get('/edit/{typemembre}',[TypeMembreController::class,'editer'])->name('typemembre.editer');
+        Route::put('/update/{typemembre}',[TypeMembreController::class,'update'])->name('typemembre.update');
+        Route::get('/delete/{typemembre}',[TypeMembreController::class,'delete'])->name('typemembre.delete');
+    });
+
+    Route::prefix('membre')->group(function(){
+        Route::get('create',[MembreController::class, 'create'])->name('membre.create');
+        Route::get('/liste',[MembreController::class, 'liste'])->name('membre.liste');
+        Route::get('/edit/{membre}',[MembreController::class, 'edit'])->name('membre.editer');
+        Route::get('/delete/{membre}',[MembreController::class,'delete'])->name('membre.delete');
 
     });
 });

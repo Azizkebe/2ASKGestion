@@ -73,16 +73,7 @@
                     <span class="sub-item">Liste des utilisateurs</span>
                   </a>
                 </li>
-                <li>
-                    <a href="{{route('permission.create')}}">
-                      <span class="sub-item">Assigner une permission</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{route('permissionconge.create')}}">
-                      <span class="sub-item">Assigner un congé</span>
-                    </a>
-                </li>
+
               </ul>
             </div>
           </li>
@@ -103,6 +94,26 @@
                   <a href="{{route('employe.liste')}}">
                     <span class="sub-item">Liste des Employes</span>
                   </a>
+                </li>
+                <li>
+                    <a href="{{route('permission.create')}}">
+                      <span class="sub-item">Assigner une permission</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('permissionconge.create')}}">
+                      <span class="sub-item">Assigner un congé</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('fiche_contrat.create')}}">
+                      <span class="sub-item">Ajouter un contrat</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('membre.create')}}">
+                      <span class="sub-item">Ajouter un membre</span>
+                    </a>
                 </li>
               </ul>
             </div>

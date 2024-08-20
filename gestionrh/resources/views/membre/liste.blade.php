@@ -6,9 +6,9 @@
         <div class="card">
                 <div class="card-header">
                     <div class="d-flex align-items-center">
-                    <h4 class="card-title">Liste des contrats</h4>
+                    <h4 class="card-title">Liste des membres</h4>
                     <button class="btn btn-primary btn-round ms-auto">
-                        <a href="{{route('fiche_contrat.create')}}" class="text-white"><i class="fa fa-plus"></i> Ajouter un contrat</a>
+                        <a href="{{route('membre.create')}}" class="text-white"><i class="fa fa-plus"></i> Ajouter un membre</a>
                     </button>
                     </div>
                 </div>
@@ -20,13 +20,11 @@
                   >
                     <thead>
                       <tr>
-                        <th>Contrat de l'employe</th>
+                        <th></th>
                         <th>Prenom</th>
                         <th>Nom</th>
-                        <th>Type de contrat</th>
-                        <th  style="width: 10%">Debut du contrat</th>
-                        <th  style="width: 10%">Fin du contrat</th>
-                        <th>Commentaire</th>
+                        <th>Membre</th>
+                        <th>Piece Justificative</th>
 
                         <th style="width: 10%">Action</th>
                       </tr>

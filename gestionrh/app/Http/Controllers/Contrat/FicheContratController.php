@@ -27,4 +27,16 @@ class FicheContratController extends Controller
     {
         return view('fichecontrat.edit', compact('fichecontrat'));
     }
+     public function delete($fichecontrat)
+    {
+
+        // dd($fichecontrat);
+        $fiche = FicheContrat::findOrFail($fichecontrat);
+
+        $fiche->delete();
+
+        toastr()->success('La fiche de contrat a été retirée avec succes');
+        return redirect()->back();
+    }
+
 }
