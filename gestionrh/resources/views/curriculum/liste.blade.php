@@ -6,9 +6,9 @@
         <div class="card">
                 <div class="card-header">
                     <div class="d-flex align-items-center">
-                    <h4 class="card-title">Liste des membres</h4>
+                    <h4 class="card-title">Liste des Curriculum Vitae</h4>
                     <button class="btn btn-primary btn-round ms-auto">
-                        <a href="{{route('membre.create')}}" class="text-white"><i class="fa fa-plus"></i> Ajouter un membre</a>
+                        <a href="{{route('curriculum.create')}}" class="text-white"><i class="fa fa-plus"></i> Ajouter un curriculum</a>
                     </button>
                     </div>
                 </div>
@@ -23,35 +23,37 @@
                         <th></th>
                         <th>Prenom</th>
                         <th>Nom</th>
-                        <th>Membre</th>
-                        <th>Piece Justificative</th>
+                        <th>Commentaire</th>
+                        <th>Date de la derniere mise à jour</th>
+                        <th>Curriculum Vitea</th>
 
                         <th style="width: 10%">Action</th>
                       </tr>
                         </thead>
                             <tbody>
-                             @forelse ($membre as $membre)
+                             @forelse ($cv as $cv)
                             <tr>
                                 <td>
 
                                     <div>
 
-                                     <a href="{{asset('storage/'.$membre->employe->photo->photo_employe)}}">
+                                     <a href="{{asset('storage/'.$cv->employe->photo->photo_employe)}}">
                                         <img style="width:50px; height:50px;" src="{{asset('storage/'.
-                                         $membre->employe->photo->photo_employe)}}" alt="">
+                                         $cv->employe->photo->photo_employe)}}" alt="">
                                         </a>
                                     </div>
                                 </td>
-                                <td>{{$membre->Prenom}}</td>
-                                <td>{{$membre->Nom}}</td>
-                                <td>{{$membre->typemembre->type_membre}}</td>
+                                <td>{{$cv->employe->prenom}}</td>
+                                <td>{{$cv->employe->nom}}</td>
+                                <td>{{$cv->commentaire}}</td>
+                                <td>{{$cv->date_mise_a_jour}}</td>
 
-                                @if ($membre->photo_justificative)
+                                @if ($cv->curriculum)
                                 <td>
                                     <div>
-                                        <a href="{{asset('storage/'.$membre->photo_justificative)}}">
+                                        <a href="{{asset('storage/'.$cv->curriculum)}}">
                                         <img style="width:50px; height:50px;" src="{{asset('storage/'.
-                                         $membre->photo_justificative)}}" alt="">
+                                         $cv->curriculum)}}" alt="">
                                         </a>
                                     </div>
                                 </td>
@@ -67,7 +69,7 @@
                                         title=""
                                         class="btn btn-link btn-primary btn-lg"
                                         data-original-title="Edit Task"
-                                        ><a href="{{route('membre.editer', $membre->id)}}"><i class="fa fa-edit"></i></a>
+                                        ><a href="{{route('curriculum.edit', $cv->id)}}"><i class="fa fa-edit"></i></a>
 
                                         </button>
                                         <button
@@ -76,8 +78,8 @@
                                         title=""
                                         class="btn btn-link btn-danger"
                                         data-original-title="Remove"
-                                        ><a onclick="return confirm('Etes vous sure de vouloir supprimer la fiche du contrat')"
-                                        href="{{route('membre.delete',$membre->id)}}" class="btn btn-link btn-danger"><i class="fa fa-times"></i></a>
+                                        ><a onclick="return confirm('Etes vous sure de vouloir supprimer le CV de l\'employe')"
+                                        href="{{route('curriculum.delete',$cv->id)}}" class="btn btn-link btn-danger"><i class="fa fa-times"></i></a>
                                         </button>
                                     </div>
                                 </td>

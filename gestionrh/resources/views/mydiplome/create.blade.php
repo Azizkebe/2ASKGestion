@@ -2,6 +2,6 @@
 
 @section('content')
 
-@livewire('edit-membre',['membres'=>$membres])
+@livewire('create-mydiplome')
 
 @endsection

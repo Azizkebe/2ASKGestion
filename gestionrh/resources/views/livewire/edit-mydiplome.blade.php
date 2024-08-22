@@ -3,9 +3,9 @@
       <div class="col-12 h-50 ">
         <div class="card shadow">
           <div class="card-body mx-100">
-            <h4 class="card-title mt-3 text-center">Editer un membre</h4>
+            <h4 class="card-title mt-3 text-center">Editer un diplome</h4>
             <div style="display: flex; justify-content:end;">
-                <a href="{{route('membre.liste')}}" class="btn btn-success btn-sm">Liste de tous les membres</a>
+                <a href="{{route('mydiplome.liste')}}" class="btn btn-success btn-sm">Liste des diplomes</a>
             </div>
 
             <form  wire:submit.prevent="update" method="POST" enctype="multipart/form-data">
@@ -28,48 +28,32 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="Nom">Membre</label><br>
-                    <select name="id_type_membre" id="id_type_membre" wire:model.live="id_type_membre" class="form-select">
-                       <option value="">--Choisissez un contrat--</option>
-                        @foreach ($type as $type)
-                       <option value="{{$type->id}}">{{$type->type_membre}}</option>
-
-                       @endforeach
-                    </select>
+                    <label for="Nom">Commentaire</label><br>
+                    <input type="text" class="form-control" name="commentaire" id="commentaire" wire:model.live="commentaire">
                 </div>
                 <div>
-                    @error('id_type_membre')
+                    @error('commentaire')
                         <span class="error">{{$message}}</span>
                     @enderror
                 </div>
                <div class="form-group">
-                <label for="Nom">Prenom du Membre</label><br>
-                    <input name="prenom" wire:model.live="prenom" class="form-control" type="text">
+                <label for="Nom">Date obtention du diplome</label><br>
+                    <input name="date_obtention_diplome" wire:model.live="date_obtention_diplome" class="form-control" type="date">
                     <div class="input-group">
-                        @error('prenom')
+                        @error('date_obtention_diplome')
                         <span class="error">{{$message}}</span>
                         @enderror
                     </div>
                 </div>
-                <div class="row form-group">
-                    <div class="col col-md-9">
-                        <label for="Nom">Nom du Membre</label><br>
-                        <input name="nom" wire:model.live="nom" class="form-control" type="text">
-                        <div class="input-group">
-                            @error('nom')
-                            <span class="error">{{$message}}</span>
-                            @enderror
-                        </div>
-                    </div>
-                </div>
                 <div class="form-group mt-2">
-                    <input type="file" accept="image/jpg, image/jpeg, image/png" name="justificative" id="justificative" wire:model.live="justificative">
+                    <label for="">Joindre le diplome</label>
+                    <input type="file" accept="image/jpg, image/jpeg, image/png" name="diplome" id="diplome" wire:model.live="diplome">
                    <div class="mt-2">
-                    @if ($photo->photo_justificative)
-                    <span style="font-weight:bolder;">Image Anterieur: <img style="width:50px;" src="{{asset('storage/'.$photo->photo_justificative)}}" alt=""></span>
+                    @if ($photodiplome->diplome)
+                    <span style="font-weight:bolder;">Image Anterieur: <img style="width:50px;" src="{{asset('storage/'.$photodiplome->diplome)}}" alt=""></span>
 
                     @else
-                    <span style="font-weight:bolder;">Nouvelle Image: <img style="width: 70px; height:70px;" src="{{$photo->temporary()}}" alt="image"></span>
+                    <span style="font-weight:bolder;">Nouvelle Image: <img style="width: 70px; height:70px;" src="{{$photodiplome->temporary()}}" alt="image"></span>
 
                     @endif
                    </div>

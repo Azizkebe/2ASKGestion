@@ -22,13 +22,9 @@ class MembreController extends Controller
             'membre'=>$membre,
         ]);
     }
-    public function edit($membre)
+    public function edit($membres)
     {
-        $membre = Membre::findorFail($membre);
-
-        return view('membre.edit',[
-            'membre'=> $membre,
-        ]);
+        return view('membre.edit', compact('membres'));
     }
     public function delete($membre)
     {

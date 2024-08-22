@@ -115,6 +115,16 @@
                       <span class="sub-item">Ajouter un membre</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{route('mydiplome.create')}}">
+                      <span class="sub-item">Ajouter un diplome</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('curriculum.create')}}">
+                      <span class="sub-item">Ajouter un curriculum vitae</span>
+                    </a>
+                </li>
               </ul>
             </div>
           </li>

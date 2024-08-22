@@ -6,9 +6,9 @@
         <div class="card">
                 <div class="card-header">
                     <div class="d-flex align-items-center">
-                    <h4 class="card-title">Liste des membres</h4>
+                    <h4 class="card-title">Liste des diplomes</h4>
                     <button class="btn btn-primary btn-round ms-auto">
-                        <a href="{{route('membre.create')}}" class="text-white"><i class="fa fa-plus"></i> Ajouter un membre</a>
+                        <a href="{{route('mydiplome.create')}}" class="text-white"><i class="fa fa-plus"></i> Ajouter un diplome</a>
                     </button>
                     </div>
                 </div>
@@ -23,35 +23,37 @@
                         <th></th>
                         <th>Prenom</th>
                         <th>Nom</th>
-                        <th>Membre</th>
-                        <th>Piece Justificative</th>
+                        <th>Commentaire</th>
+                        <th>Date Obtention du diplome</th>
+                        <th>Diplome</th>
 
                         <th style="width: 10%">Action</th>
                       </tr>
                         </thead>
                             <tbody>
-                             @forelse ($membre as $membre)
+                             @forelse ($mydiplome as $mydiplome)
                             <tr>
                                 <td>
 
                                     <div>
 
-                                     <a href="{{asset('storage/'.$membre->employe->photo->photo_employe)}}">
+                                     <a href="{{asset('storage/'.$mydiplome->employe->photo->photo_employe)}}">
                                         <img style="width:50px; height:50px;" src="{{asset('storage/'.
-                                         $membre->employe->photo->photo_employe)}}" alt="">
+                                         $mydiplome->employe->photo->photo_employe)}}" alt="">
                                         </a>
                                     </div>
                                 </td>
-                                <td>{{$membre->Prenom}}</td>
-                                <td>{{$membre->Nom}}</td>
-                                <td>{{$membre->typemembre->type_membre}}</td>
+                                <td>{{$mydiplome->employe->prenom}}</td>
+                                <td>{{$mydiplome->employe->nom}}</td>
+                                <td>{{$mydiplome->commentaire}}</td>
+                                <td>{{$mydiplome->date_obtention_diplome}}</td>
 
-                                @if ($membre->photo_justificative)
+                                @if ($mydiplome->diplome)
                                 <td>
                                     <div>
-                                        <a href="{{asset('storage/'.$membre->photo_justificative)}}">
+                                        <a href="{{asset('storage/'.$mydiplome->diplome)}}">
                                         <img style="width:50px; height:50px;" src="{{asset('storage/'.
-                                         $membre->photo_justificative)}}" alt="">
+                                         $mydiplome->diplome)}}" alt="">
                                         </a>
                                     </div>
                                 </td>
@@ -67,7 +69,7 @@
                                         title=""
                                         class="btn btn-link btn-primary btn-lg"
                                         data-original-title="Edit Task"
-                                        ><a href="{{route('membre.editer', $membre->id)}}"><i class="fa fa-edit"></i></a>
+                                        ><a href="{{route('mydiplome.edit', $mydiplome->id)}}"><i class="fa fa-edit"></i></a>
 
                                         </button>
                                         <button
@@ -76,8 +78,8 @@
                                         title=""
                                         class="btn btn-link btn-danger"
                                         data-original-title="Remove"
-                                        ><a onclick="return confirm('Etes vous sure de vouloir supprimer la fiche du contrat')"
-                                        href="{{route('membre.delete',$membre->id)}}" class="btn btn-link btn-danger"><i class="fa fa-times"></i></a>
+                                        ><a onclick="return confirm('Etes vous sure de vouloir supprimer le diplome de l\'employe')"
+                                        href="{{route('mydiplome.delete',$mydiplome->id)}}" class="btn btn-link btn-danger"><i class="fa fa-times"></i></a>
                                         </button>
                                     </div>
                                 </td>

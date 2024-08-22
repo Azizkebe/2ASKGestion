@@ -2,6 +2,7 @@
 
 @section('content')
 
-@livewire('edit-membre',['membres'=>$membres])
+@livewire('edit-curriculum',['curricula'=>$curricula])
 
 @endsection
+

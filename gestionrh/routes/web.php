@@ -17,6 +17,8 @@ use App\Http\Controllers\Employe\BureauController;
 use App\Http\Controllers\Employe\PosteController;
 use App\Http\Controllers\Employe\TypeMembreController;
 use App\Http\Controllers\Employe\MembreController;
+use App\Http\Controllers\Employe\CurriculumController;
+use App\Http\Controllers\Employe\MyDiplomeController;
 use App\Http\Controllers\Permission\PermissionController;
 use App\Http\Controllers\Permission\PermissionCongeController;
 use App\Http\Controllers\Conge\CongeController;
@@ -206,8 +208,23 @@ Route::middleware('auth')->group(function(){
     Route::prefix('membre')->group(function(){
         Route::get('create',[MembreController::class, 'create'])->name('membre.create');
         Route::get('/liste',[MembreController::class, 'liste'])->name('membre.liste');
-        Route::get('/edit/{membre}',[MembreController::class, 'edit'])->name('membre.editer');
+        Route::get('/edit/{membres}',[MembreController::class, 'edit'])->name('membre.editer');
         Route::get('/delete/{membre}',[MembreController::class,'delete'])->name('membre.delete');
+
+    });
+
+    Route::prefix('curriculum')->group(function(){
+        Route::get('create',[CurriculumController::class, 'create'])->name('curriculum.create');
+        Route::get('/liste',[CurriculumController::class, 'liste'])->name('curriculum.liste');
+        Route::get('/edit/{curriculum}',[CurriculumController::class, 'edit'])->name('curriculum.edit');
+        Route::get('/delete/{curricula}',[CurriculumController::class,'delete'])->name('curriculum.delete');
+
+    });
+    Route::prefix('mydiplome')->group(function(){
+        Route::get('create',[MyDiplomeController::class, 'create'])->name('mydiplome.create');
+        Route::get('/liste',[MyDiplomeController::class, 'liste'])->name('mydiplome.liste');
+        Route::get('/edit/{mydiplome}',[MyDiplomeController::class, 'edit'])->name('mydiplome.edit');
+        Route::get('/delete/{mydiplome}',[MyDiplomeController::class,'delete'])->name('mydiplome.delete');
 
     });
 });
