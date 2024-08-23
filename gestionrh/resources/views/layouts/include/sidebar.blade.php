@@ -96,16 +96,6 @@
                   </a>
                 </li>
                 <li>
-                    <a href="{{route('permission.create')}}">
-                      <span class="sub-item">Assigner une permission</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{route('permissionconge.create')}}">
-                      <span class="sub-item">Assigner un congé</span>
-                    </a>
-                </li>
-                <li>
                     <a href="{{route('fiche_contrat.create')}}">
                       <span class="sub-item">Ajouter un contrat</span>
                     </a>
@@ -128,6 +118,39 @@
               </ul>
             </div>
           </li>
+
+          <li class="nav-item">
+            <a data-bs-toggle="collapse" href="#permission">
+              <i class="fas fa-layer-group"></i>
+              <p>Permission & Congé</p>
+              <span class="caret"></span>
+            </a>
+            <div class="collapse" id="permission">
+              <ul class="nav nav-collapse">
+                <li>
+                  <a href="{{route('permission.create')}}">
+                    <span class="sub-item">Assigner une permission</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="{{route('permission.liste')}}">
+                    <span class="sub-item">Liste des permissions</span>
+                  </a>
+                </li>
+                <li>
+                    <a href="{{route('permissionconge.create')}}">
+                      <span class="sub-item">Assigner un congé</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('permissionconge.liste')}}">
+                      <span class="sub-item">Liste des conges</span>
+                    </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+
           <li class="nav-item">
             <a data-bs-toggle="collapse" href="#submenu">
               <i class="fas fa-bars"></i>
@@ -218,26 +241,6 @@
                         </div>
                       </li>
                     <li>
-                        <li>
-                            <a data-bs-toggle="collapse" href="#subnav5">
-                              <span class="sub-item">Diplome</span>
-                              <span class="caret"></span>
-                            </a>
-                            <div class="collapse" id="subnav5">
-                              <ul class="nav nav-collapse subnav">
-                                <li>
-                                  <a href="{{route('diplome.create')}}">
-                                    <span class="sub-item">Ajouter un diplome</span>
-                                  </a>
-                                </li>
-                                <li>
-                                    <a href="{{route('diplome.liste')}}">
-                                      <span class="sub-item">Liste des diplomes</span>
-                                    </a>
-                                  </li>
-                              </ul>
-                            </div>
-                          </li>
                         <li>
                             <li>
                                 <a data-bs-toggle="collapse" href="#subnav6">

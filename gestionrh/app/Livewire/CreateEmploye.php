@@ -88,8 +88,8 @@ public $telephone, $adresse;
                 'id_domaine_etude'=>'required',
                 'id_dernier_diplome'=>'required',
                 'id_niveau_etude'=>'required',
-                'imagecv'=>'required',
-                'imagediplome'=>'required',
+                // 'imagecv'=>'required',
+                // 'imagediplome'=>'required',
             ]);
         }
         elseif ($this->currentStep == 3) {
@@ -178,10 +178,10 @@ public $telephone, $adresse;
                 // dd($docData);
                 $employe = Employe::create($docData);
                 $this->handleImagePhotoUpload($employe,$this->imagephoto,'CloudImage/Employe','id_cloud_file_photo');
-                $this->handleImageCVUpload($employe,$this->imagecv,'CloudImageCV/Employe','id_cloud_file_cv');
-                $this->handleImageDiplomeUpload($employe,$this->imagediplome,'CloudImageDiplome/Employe','id_cloud_file_diplome');
-                $this->handleImageContratUpload($employe,$this->imagecontrat,'CloudImageContrat/Employe','id_cloud_file_contrat');
-                $this->handleImageExtraitUpload($employe,$this->imageextrait,'CloudImageExtrait/Employe','id_cloud_file_extrait');
+                // $this->handleImageCVUpload($employe,$this->imagecv,'CloudImageCV/Employe','id_cloud_file_cv');
+                // $this->handleImageDiplomeUpload($employe,$this->imagediplome,'CloudImageDiplome/Employe','id_cloud_file_diplome');
+                // $this->handleImageContratUpload($employe,$this->imagecontrat,'CloudImageContrat/Employe','id_cloud_file_contrat');
+                // $this->handleImageExtraitUpload($employe,$this->imageextrait,'CloudImageExtrait/Employe','id_cloud_file_extrait');
 
                 toastr()->success('Le dossier de l\'employé a été enregistré avec succes');
                 return redirect()->route('employe.liste');
@@ -218,97 +218,97 @@ public $telephone, $adresse;
 
         }
     }
-    public function handleImageCVUpload($data, $imagecv, $destination2, $attributeName2)
-    {
+    // public function handleImageCVUpload($data, $imagecv, $destination2, $attributeName2)
+    // {
 
-       if($this->imagecv)
-        {
-            $image = $this->imagecv;
+    //    if($this->imagecv)
+    //     {
+    //         $image = $this->imagecv;
 
-            // $imagename = 'CV_'.$this->username->getClientOriginalExtension();
+    //         // $imagename = 'CV_'.$this->username->getClientOriginalExtension();
 
-            // //Chemin vers le fichier
+    //         // //Chemin vers le fichier
 
-            $filePath = $image->store($destination2,'public');
+    //         $filePath = $image->store($destination2,'public');
 
-            // $filePath = $image->store($destination2,'public');
+    //         // $filePath = $image->store($destination2,'public');
 
-            $cloudfile = CloudFileCv::create([
-                'image_cv'=> $filePath,
-            ]);
+    //         $cloudfile = CloudFileCv::create([
+    //             'image_cv'=> $filePath,
+    //         ]);
 
-            $data->{$attributeName2} = $cloudfile->id;
+    //         $data->{$attributeName2} = $cloudfile->id;
 
-            $data->update();
-        }
-    }
-    public function handleImageDiplomeUpload($data, $imagediplome, $destination3, $attributeName3)
-    {
+    //         $data->update();
+    //     }
+    // }
+    // public function handleImageDiplomeUpload($data, $imagediplome, $destination3, $attributeName3)
+    // {
 
-       if($this->imagediplome)
-        {
-            $image = $this->imagediplome;
+    //    if($this->imagediplome)
+    //     {
+    //         $image = $this->imagediplome;
 
-            // $imagename = time().' '.$image->getClientOriginalExtension();
+    //         // $imagename = time().' '.$image->getClientOriginalExtension();
 
-            // //Chemin vers le fichier
-            $filePath = $image->store($destination3,'public');
+    //         // //Chemin vers le fichier
+    //         $filePath = $image->store($destination3,'public');
 
-            $cloudfile = CloudFileDiplome::create([
-                'image_diplome'=> $filePath,
-            ]);
+    //         $cloudfile = CloudFileDiplome::create([
+    //             'image_diplome'=> $filePath,
+    //         ]);
 
-            $data->{$attributeName3} = $cloudfile->id;
+    //         $data->{$attributeName3} = $cloudfile->id;
 
-            $data->update();
+    //         $data->update();
 
-        }
-    }
-    public function handleImageContratUpload($data, $imagecontrat, $destination4, $attributeName4)
-    {
+    //     }
+    // }
+    // public function handleImageContratUpload($data, $imagecontrat, $destination4, $attributeName4)
+    // {
 
-        if($this->imagecontrat)
-        {
-            $image = $this->imagecontrat;
+    //     if($this->imagecontrat)
+    //     {
+    //         $image = $this->imagecontrat;
 
-            // //Chemin vers le fichier
-            $filePath = $image->store($destination4,'public');
+    //         // //Chemin vers le fichier
+    //         $filePath = $image->store($destination4,'public');
 
-            $cloudfile = CloudFileContrat::create([
-                'image_contrat'=> $filePath,
-            ]);
+    //         $cloudfile = CloudFileContrat::create([
+    //             'image_contrat'=> $filePath,
+    //         ]);
 
-            $data->{$attributeName4} = $cloudfile->id;
+    //         $data->{$attributeName4} = $cloudfile->id;
 
-            $data->update();
+    //         $data->update();
 
-        }
-    }
-    public function handleImageExtraitUpload($data, $imageextrait, $destination5, $attributeName5)
-    {
+    //     }
+    // }
+    // public function handleImageExtraitUpload($data, $imageextrait, $destination5, $attributeName5)
+    // {
 
-       if($this->imageextrait)
-        {
-            $image = $this->imageextrait;
+    //    if($this->imageextrait)
+    //     {
+    //         $image = $this->imageextrait;
 
-            // $imagename = time().' '.$image->getClientOriginalExtension();
+    //         // $imagename = time().' '.$image->getClientOriginalExtension();
 
-            // //Chemin vers le fichier
-            foreach ($this->imageextrait as $image) {
+    //         // //Chemin vers le fichier
+    //         foreach ($this->imageextrait as $image) {
 
-                $filePath = $image->store($destination5,'public');
-            }
+    //             $filePath = $image->store($destination5,'public');
+    //         }
 
-            $cloudfile = CloudFileExtrait::create([
-                'image_extrait'=> $filePath,
-            ]);
+    //         $cloudfile = CloudFileExtrait::create([
+    //             'image_extrait'=> $filePath,
+    //         ]);
 
-            $data->{$attributeName5} = $cloudfile->id;
+    //         $data->{$attributeName5} = $cloudfile->id;
 
-            $data->update();
-            // dd($data);
-        }
-    }
+    //         $data->update();
+    //         // dd($data);
+    //     }
+    // }
     // public function delete_photo_employe(int $employe)
     // {
     //     $photo_employe = CloudFilePhoto::findOrFail($employe);

@@ -1,12 +1,5 @@
 <div style="margin:auto; width:80%;" class="container">
 
-      {{-- @if (session('success'))
-      <div class="alert alert-success">
-          <button type="button" class="close" data-dismiss="alert"
-          aria-hidden="true">x</button>
-          {{session('success')}}
-      </div>
-        @endif --}}
       <form wire:submit.prevent="store" method="POST" enctype="multipart/form-data">
         @csrf
         @method('POST')
@@ -109,15 +102,15 @@
                                     <span class="error">Veuillez preciser le nombre d'enfant</span>
                                 @enderror
                     </div>
-                    <div class="mt-3">
+                    {{-- <div class="mt-3">
                             <label for="image_extrait">Joindre les extraits de naissance des enfants</label>
                             <input type="file" class="form-control" name="imageextrait" id="imageextrait" wire:model.live="imageextrait" multiple>
-                    </div>
+                    </div> --}}
                     <div class="mt-3">
                             <label for="image_profil">Joindre la photo de l'employe</label>
                             <input type="file" class="form-control" name="imagephoto" wire:model.live="imagephoto" id="imagephoto" placeholder="Photo de l'employe" class="form-control" accept="image/png, image/jpg, image/jpeg" autocomplete="on">
                             @error('imagephoto')
-                            <span class="error">Veuillez choisir le domaine d'etude</span>
+                            <span class="error">Veuillez choisir la photo de profil</span>
                             @enderror
                         </div>
                     </div>
@@ -171,20 +164,20 @@
                                 <span class="error">Veuillez choisir le dernier diplome obtenu </span>
                             @enderror
                         </div>
-                        <div class="mt-3">
+                        {{-- <div class="mt-3">
                             <label for="image_diplome">Joindre le dernier diplome obtenu</label>
                             <input type="file" class="form-control" name="imagediplome" id="imagediplome" wire:model.live="imagediplome">
                             @error('imagediplome')
                             <span class="error">Vous devez joindre votre diplome</span>
                             @enderror
-                        </div>
-                        <div class="mt-3">
+                        </div> --}}
+                        {{-- <div class="mt-3">
                             <label for="image_cv">Joindre le CV de l'employe</label>
                             <input type="file" class="form-control" name="imagecv" id="imagecv" wire:model.live="imagecv">
                             @error('imagecv')
                             <span class="error">Vous devez joindre votre CV</span>
                             @enderror
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -279,13 +272,13 @@
                             <span class="error">Veuillez choisir le contrat obtenu</span>
                         @enderror
                     </div>
-                    <div class="mt-3">
+                    {{-- <div class="mt-3">
                         <label for="image_contrat">Joindre une copie du contrat de travail</label>
                         <input type="file" class="form-control" name="imagecontrat" id="imagecontrat" wire:model.live="imagecontrat">
                         @error('imagecontrat')
                         <span class="error">Vous devez joindre une copie du contrat</span>
                          @enderror
-                    </div>
+                    </div> --}}
                 </div>
                 </div>
             </div>
