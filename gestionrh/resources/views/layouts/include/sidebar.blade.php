@@ -240,6 +240,27 @@
                           </ul>
                         </div>
                       </li>
+                      <li>
+                        <a data-bs-toggle="collapse" href="#subnav13">
+                          <span class="sub-item">Diplome</span>
+                          <span class="caret"></span>
+                        </a>
+                        <div class="collapse" id="subnav13">
+                          <ul class="nav nav-collapse subnav">
+                            <li>
+                              <a href="{{route('mondiplome.create')}}">
+                                <span class="sub-item">Ajouter un diplome</span>
+                              </a>
+                            </li>
+                            <li>
+                                <a href="{{route('mondiplome.liste')}}">
+                                  <span class="sub-item">Liste des diplomes</span>
+                                </a>
+                              </li>
+                          </ul>
+                        </div>
+                      </li>
+                    <li>
                     <li>
                         <li>
                             <li>

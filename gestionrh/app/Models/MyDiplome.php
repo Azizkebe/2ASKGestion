@@ -14,4 +14,8 @@ class MyDiplome extends Model
     {
         return $this->belongsTo(Employe::class, 'id_employe');
     }
+    public function typediplome()
+    {
+        return $this->belongsTo(MonDiplome::class, 'id_diplome');
+    }
 }

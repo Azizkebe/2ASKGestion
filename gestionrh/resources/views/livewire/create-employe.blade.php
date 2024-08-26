@@ -8,19 +8,13 @@
             <div class="step-one">
                 <div class="card">
                     <div class="card-header bg-primary">
-                        <div class="card-title text-white">Etape 1/4: Identification</div>
+                        <div class="card-title text-white">Etape 1/3: Identification</div>
                         <div style="display: flex; justify-content:end;">
-                            <a href="" class="btn btn-success btn-md"> Liste des Employe</a>
+                            <a href="{{route('employe.liste')}}" class="btn btn-success btn-md"> Liste des Employe</a>
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="mt-3">
-                            <label for="name">Nom</label>
-                            <input type="text" class="form-control" name="name" id="name" placeholder="nom" wire:model.live="name">
-                                @error('name')
-                                    <span class="error">Veuillez saisir le nom de l'employe</span>
-                                @enderror
-                    </div>
+
                     <div class="mt-3">
                             <label for="name">Prenom</label>
                             <input type="text" class="form-control" name="username" id="username" placeholder="Prenom" wire:model.live="username">
@@ -29,24 +23,10 @@
                             @enderror
                     </div>
                     <div class="mt-3">
-                        <label for="name">Telephone</label>
-                        <input type="number" class="form-control" name="telephone" id="telephone" placeholder="telephone" wire:model.live="telephone" maxlength="9">
-                        @error('telephone')
-                            <span class="error">Veuillez saisir le numero de telephone </span>
-                        @enderror
-                    </div>
-                    <div class="mt-3">
-                        <label for="name">Adresse</label>
-                        <input type="text" class="form-control" name="adresse" id="adresse" placeholder="localite" wire:model.live="adresse">
-                        @error('adresse')
-                            <span class="error">Veuillez saisir votre adresse </span>
-                        @enderror
-                    </div>
-                    <div class="mt-3">
-                            <label for="email">Email</label>
-                            <input type="text" class="form-control" name="email" id="email" wire:model.live="email">
-                            @error('email')
-                                <span class="error">Veuillez saisir l'adresse Email</span>
+                        <label for="name">Nom</label>
+                        <input type="text" class="form-control" name="name" id="name" placeholder="nom" wire:model.live="name">
+                            @error('name')
+                                <span class="error">Veuillez saisir le nom de l'employe</span>
                             @enderror
                     </div>
                     <div class="mt-3">
@@ -69,6 +49,27 @@
                             @error('lieu_naissance')
                                 <span class="error">Veuillez le lieu de naissance</span>
                             @enderror
+                    </div>
+                    <div class="mt-3">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" name="email" id="email" wire:model.live="email">
+                        @error('email')
+                            <span class="error">Veuillez saisir l'adresse Email</span>
+                        @enderror
+                      </div>
+                    <div class="mt-3">
+                        <label for="name">Telephone</label>
+                        <input type="number" class="form-control" name="telephone" id="telephone" placeholder="telephone" wire:model.live="telephone" maxlength="9">
+                        @error('telephone')
+                            <span class="error">Veuillez saisir le numero de telephone </span>
+                        @enderror
+                    </div>
+                    <div class="mt-3">
+                        <label for="name">Adresse</label>
+                        <input type="text" class="form-control" name="adresse" id="adresse" placeholder="localite" wire:model.live="adresse">
+                        @error('adresse')
+                            <span class="error">Veuillez saisir votre adresse </span>
+                        @enderror
                     </div>
                     <div class="mt-3">
                             <label for="sexe">Genre</label>
@@ -122,7 +123,7 @@
             <div class="step-two">
                 <div class="card">
                     <div class="card-header bg-secondary text-white">
-                        <div class="card-title text-white">Etape 2/4: Cursus et Diplome</div>
+                        <div class="card-title text-white">Etape 2/3: Cursus et Diplome</div>
                         <div style="display: flex; justify-content:end;">
                             <a href="" class="btn btn-success btn-md"> Liste des Employe</a>
                         </div>
@@ -152,7 +153,7 @@
                                 <span class="error">Veuillez choisir le niveau d'etude</span>
                             @enderror
                         </div>
-                        <div class="mt-3">
+                        {{-- <div class="mt-3">
                             <label for="dernier_diplome">Dernier diplome Obtenu</label>
                             <select name="id_dernier_diplome" id="id_dernier_diplome" class="form-select form-control" wire:model.live="id_dernier_diplome" autocomplete="on">
                                 <option value="">--Choisissez le dernier diplome obtenu --</option>
@@ -163,7 +164,7 @@
                             @error('id_dernier_diplome')
                                 <span class="error">Veuillez choisir le dernier diplome obtenu </span>
                             @enderror
-                        </div>
+                        </div> --}}
                         {{-- <div class="mt-3">
                             <label for="image_diplome">Joindre le dernier diplome obtenu</label>
                             <input type="file" class="form-control" name="imagediplome" id="imagediplome" wire:model.live="imagediplome">
@@ -186,7 +187,7 @@
            <div class="step-three">
             <div class="card">
                 <div class="card-header bg-secondary text-white">
-                    <div class="card-title text-white">Etape 3/4: Service et Direction</div>
+                    <div class="card-title text-white">Etape 3/3: Service et Direction</div>
                     <div style="display: flex; justify-content:end;">
                         <a href="" class="btn btn-success btn-md"> Liste des Employe</a>
                     </div>
@@ -250,7 +251,7 @@
             </div>
         </div>
         @endif
-        @if ($currentStep == 4)
+        {{-- @if ($currentStep == 4)
         <div class="step-four">
             <div class="card">
                 <div class="card-header bg-secondary text-white">
@@ -272,31 +273,30 @@
                             <span class="error">Veuillez choisir le contrat obtenu</span>
                         @enderror
                     </div>
-                    {{-- <div class="mt-3">
+                    <div class="mt-3">
                         <label for="image_contrat">Joindre une copie du contrat de travail</label>
                         <input type="file" class="form-control" name="imagecontrat" id="imagecontrat" wire:model.live="imagecontrat">
                         @error('imagecontrat')
                         <span class="error">Vous devez joindre une copie du contrat</span>
                          @enderror
-                    </div> --}}
+                    </div>
                 </div>
                 </div>
             </div>
         </div>
-        @endif
+        @endif --}}
                <div class="action-buttoms d-flex justify-content-between bg-white pt-2 pb-2">
                     @if ($currentStep == 1)
                     <div></div>
                     @endif
-                    @if ($currentStep == 2 || $currentStep == 3 || $currentStep == 4)
+                    @if ($currentStep == 2 || $currentStep == 3)
                     <a href="" class="btn btn-secondary btn-md text-white" wire:click.prevent="decreaseStep()">Precedent</a>
                     @endif
-                    @if ($currentStep == 1 || $currentStep == 2 || $currentStep == 3)
+                    @if ($currentStep == 1 || $currentStep == 2)
                     <a href="" class="btn btn-success btn-md text-white" wire:click.prevent="increaseStep()">Suivant</a>
                     @endif
-                    @if ($currentStep == 4)
+                    @if ($currentStep == 3)
                     <button type="submit" class="btn btn-primary">Ajouter un Employe</button>
-                    {{-- <a href="" class="btn btn-success btn-sm text-white">Enregistrer</a> --}}
                     @endif
                 </div>
         </div>

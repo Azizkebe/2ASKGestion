@@ -11,7 +11,6 @@ use App\Models\Genre;
 use App\Models\Matrimonial;
 use App\Models\Domaine;
 use App\Models\NiveauEtude;
-use App\Models\Diplome;
 use App\Models\Contrat;
 use App\Models\Direction;
 use App\Models\Service;
@@ -37,7 +36,7 @@ public $sexe, $matrimonial, $nbr_enfant, $id_domaine_etude, $id_niveau_etude, $i
 public $id_dernier_contrat, $id_direction, $id_service, $id_bureau, $id_poste, $id_antenne, $imagephoto, $imagecv = '';
 public $imagediplome, $imagecontrat = '';
 public $imageextrait = [];
-public $totalStep = 4;
+public $totalStep = 3;
 public $currentStep = 1;
 public $telephone, $adresse;
 
@@ -77,6 +76,7 @@ public $telephone, $adresse;
                 'email'=>'required|email|unique:employes',
                 'naissance'=>'required',
                 'lieu_naissance'=>'string|required',
+                'age'=>'integer|required',
                 'sexe'=>'required',
                 'matrimonial'=>'required',
                 'nbr_enfant'=>'integer|required',
@@ -86,18 +86,14 @@ public $telephone, $adresse;
         elseif ($this->currentStep == 2) {
             $this->validate([
                 'id_domaine_etude'=>'required',
-                'id_dernier_diplome'=>'required',
                 'id_niveau_etude'=>'required',
-                // 'imagecv'=>'required',
-                // 'imagediplome'=>'required',
+
             ]);
         }
         elseif ($this->currentStep == 3) {
             $this->validate([
                 'id_direction'=>'required',
                 'id_poste'=>'required',
-                // 'id_dernier_contrat'=>'required',
-
             ]);
         }
 
@@ -111,7 +107,6 @@ public $telephone, $adresse;
         $matri = Matrimonial::all();
         $domaine = Domaine::all();
         $niveau = NiveauEtude::all();
-        $diplome = Diplome::all();
         $contrat = Contrat::all();
         $direction = Direction::all();
         $service = Service::where('id_direction', $this->id_direction)->get();
@@ -130,8 +125,8 @@ public $telephone, $adresse;
             'matri'=>$matri,
             'domaine'=>$domaine,
             'niveau'=>$niveau,
-            'diplome'=>$diplome,
-            'contrat'=>$contrat,
+            // 'diplome'=>$diplome,
+            // 'contrat'=>$contrat,
             'direction'=>$direction,
             'service'=>$service,
             'antenne'=>$antenne,
@@ -142,10 +137,10 @@ public $telephone, $adresse;
     }
     public function store()
     {
-              $this->validate([
-                'id_dernier_contrat'=>'required',
-                // 'imagecontrat'=>'required',
-              ]);
+            //   $this->validate([
+            //     'id_dernier_contrat'=>'required',
+            //     // 'imagecontrat'=>'required',
+            //   ]);
               try{
 
                 DB::beginTransaction();
@@ -165,8 +160,6 @@ public $telephone, $adresse;
                     'nbr_enfant'=> $this->nbr_enfant,
                     'id_domaine'=> $this->id_domaine_etude,
                     'id_niveau_etude'=> $this->id_niveau_etude,
-                    'id_diplome'=> $this->id_dernier_diplome,
-                    'id_contrat'=> $this->id_dernier_contrat,
                     'id_direction'=> $this->id_direction,
                     'id_service'=> $this->id_service,
                     'id_bureau'=> $this->id_bureau,
@@ -178,10 +171,6 @@ public $telephone, $adresse;
                 // dd($docData);
                 $employe = Employe::create($docData);
                 $this->handleImagePhotoUpload($employe,$this->imagephoto,'CloudImage/Employe','id_cloud_file_photo');
-                // $this->handleImageCVUpload($employe,$this->imagecv,'CloudImageCV/Employe','id_cloud_file_cv');
-                // $this->handleImageDiplomeUpload($employe,$this->imagediplome,'CloudImageDiplome/Employe','id_cloud_file_diplome');
-                // $this->handleImageContratUpload($employe,$this->imagecontrat,'CloudImageContrat/Employe','id_cloud_file_contrat');
-                // $this->handleImageExtraitUpload($employe,$this->imageextrait,'CloudImageExtrait/Employe','id_cloud_file_extrait');
 
                 toastr()->success('Le dossier de l\'employé a été enregistré avec succes');
                 return redirect()->route('employe.liste');
@@ -195,7 +184,6 @@ public $telephone, $adresse;
         }
     }
 
-    // public function handleImagePhotoUpload($data, $imagephoto, $destination, $attributeName)
     public function handleImagePhotoUpload($data, $imagephoto, $destination, $attributeName)
     {
 
@@ -218,107 +206,6 @@ public $telephone, $adresse;
 
         }
     }
-    // public function handleImageCVUpload($data, $imagecv, $destination2, $attributeName2)
-    // {
-
-    //    if($this->imagecv)
-    //     {
-    //         $image = $this->imagecv;
-
-    //         // $imagename = 'CV_'.$this->username->getClientOriginalExtension();
-
-    //         // //Chemin vers le fichier
-
-    //         $filePath = $image->store($destination2,'public');
-
-    //         // $filePath = $image->store($destination2,'public');
-
-    //         $cloudfile = CloudFileCv::create([
-    //             'image_cv'=> $filePath,
-    //         ]);
-
-    //         $data->{$attributeName2} = $cloudfile->id;
-
-    //         $data->update();
-    //     }
-    // }
-    // public function handleImageDiplomeUpload($data, $imagediplome, $destination3, $attributeName3)
-    // {
-
-    //    if($this->imagediplome)
-    //     {
-    //         $image = $this->imagediplome;
-
-    //         // $imagename = time().' '.$image->getClientOriginalExtension();
-
-    //         // //Chemin vers le fichier
-    //         $filePath = $image->store($destination3,'public');
-
-    //         $cloudfile = CloudFileDiplome::create([
-    //             'image_diplome'=> $filePath,
-    //         ]);
-
-    //         $data->{$attributeName3} = $cloudfile->id;
-
-    //         $data->update();
-
-    //     }
-    // }
-    // public function handleImageContratUpload($data, $imagecontrat, $destination4, $attributeName4)
-    // {
-
-    //     if($this->imagecontrat)
-    //     {
-    //         $image = $this->imagecontrat;
-
-    //         // //Chemin vers le fichier
-    //         $filePath = $image->store($destination4,'public');
-
-    //         $cloudfile = CloudFileContrat::create([
-    //             'image_contrat'=> $filePath,
-    //         ]);
-
-    //         $data->{$attributeName4} = $cloudfile->id;
-
-    //         $data->update();
-
-    //     }
-    // }
-    // public function handleImageExtraitUpload($data, $imageextrait, $destination5, $attributeName5)
-    // {
-
-    //    if($this->imageextrait)
-    //     {
-    //         $image = $this->imageextrait;
-
-    //         // $imagename = time().' '.$image->getClientOriginalExtension();
-
-    //         // //Chemin vers le fichier
-    //         foreach ($this->imageextrait as $image) {
-
-    //             $filePath = $image->store($destination5,'public');
-    //         }
-
-    //         $cloudfile = CloudFileExtrait::create([
-    //             'image_extrait'=> $filePath,
-    //         ]);
-
-    //         $data->{$attributeName5} = $cloudfile->id;
-
-    //         $data->update();
-    //         // dd($data);
-    //     }
-    // }
-    // public function delete_photo_employe(int $employe)
-    // {
-    //     $photo_employe = CloudFilePhoto::findOrFail($employe);
-
-    //     $photo_employe->delete();
-
-    //     toastr()->success('La photo a été supprimée avec succes');
-
-    //     return redirect()->back();
-    // }
 
     public function editer(Employe $employe)
     {

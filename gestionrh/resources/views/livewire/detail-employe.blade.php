@@ -61,8 +61,6 @@
                             @if ($employes->photocontrat)
                             <p><a style="color:blue" href="{{asset('storage/'.$employes->photocontrat->image_contrat)}}">Voir le contrat </a></p>
                             @endif
-                            {{-- <p><a style="color:blue" href="{{asset('storage/'.$employe->photodiplome->image_diplome) ?? ''}}">Voir le diplome</a></p>
-                            <p><a style="color:blue" href="{{asset('storage/'.$employe->photoextrait->image_extrait)}}">Voir les extraits</a></p> --}}
 
                         </div>
                     </div>
@@ -98,10 +96,10 @@
                         <div class="col-lg-6">
                             <h4 class="section-titlee">CONTRAT & DIPLOME</h4>
                             <ul class="time-line">
-                                <li class="time-line-item">
+                                {{-- <li class="time-line-item">
                                     <span class="time-line-item-title">Dernier type de contrat</span><br>
                                     <h6 style="margin-top: 5px; font-size:16px;" class="section-title">{{$employes->contrat->contrat}}</h6>
-                                </li>
+                                </li> --}}
                                 <li class="time-line-item">
                                     <span class="time-line-item-title">Niveau d'etude</span><br>
                                     <h6 style="margin-top: 5px; font-size:16px;" class="section-title">{{$employes->niveauetude->niveau_etude ?? ''}}</h6>
@@ -109,7 +107,7 @@
                                 </li>
                                 <li class="time-line-item">
                                     <span class=" time-line-item-title">Dernier Diplome Obtenu</span><br>
-                                    <h6 style="margin-top: 5px; font-size:16px;" class="section-title">{{$employes->diplome->diplome_etude}}</h6>
+                                    {{-- <h6 style="margin-top: 5px; font-size:16px;" class="section-title">{{$employes->diplome->diplome_etude}}</h6> --}}
 
                                 </li>
                                 {{-- <li class="time-line-item">

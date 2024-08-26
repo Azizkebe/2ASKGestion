@@ -19,6 +19,7 @@ use App\Http\Controllers\Employe\TypeMembreController;
 use App\Http\Controllers\Employe\MembreController;
 use App\Http\Controllers\Employe\CurriculumController;
 use App\Http\Controllers\Employe\MyDiplomeController;
+use App\Http\Controllers\Employe\MonDiplomeController;
 use App\Http\Controllers\Permission\PermissionController;
 use App\Http\Controllers\Permission\PermissionCongeController;
 use App\Http\Controllers\Conge\CongeController;
@@ -110,13 +111,15 @@ Route::middleware('auth')->group(function(){
         Route::put('/update/{niveau}',[NiveauController::class, 'update'])->name('niveau.update');
         Route::get('/delete/{niveau}',[NiveauController::class, 'delete'])->name('niveau.delete');
     });
-    Route::prefix('diplome')->group(function(){
-        Route::get('create',[DiplomeController::class, 'create'])->name('diplome.create');
-        Route::post('/create',[DiplomeController::class, 'store'])->name('diplome.store');
-        Route::get('/liste',[DiplomeController::class, 'liste'])->name('diplome.liste');
-        Route::get('/edit/{diplome}',[DiplomeController::class, 'editer'])->name('diplome.editer');
-        Route::put('/update/{diplome}',[DiplomeController::class, 'update'])->name('diplome.update');
-        Route::get('/delete/{diplome}',[DiplomeController::class, 'delete'])->name('diplome.delete');
+
+    Route::prefix('mondiplome')->group(function(){
+        Route::get('create',[MonDiplomeController::class, 'created'])->name('mondiplome.create');
+        Route::post('/create',[MonDiplomeController::class, 'store'])->name('mondiplome.store');
+        Route::get('/liste',[MonDiplomeController::class, 'liste'])->name('mondiplome.liste');
+        Route::get('/edit/{mondiplome}',[MonDiplomeController::class, 'editer'])->name('mondiplome.editer');
+        Route::put('/update/{mondiplome}',[MonDiplomeController::class, 'update'])->name('mondiplome.update');
+        Route::get('/delete/{mondiplome}',[MonDiplomeController::class, 'delete'])->name('mondiplome.delete');
+
     });
     Route::prefix('contrat')->group(function(){
         Route::get('create',[TypeContratController::class,'create'])->name('contrat.create');

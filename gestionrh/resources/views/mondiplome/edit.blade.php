@@ -6,7 +6,10 @@
       <div class="col-12 h-50 ">
         <div class="card shadow">
           <div class="card-body mx-100">
-            <h4 class="card-title mt-3 text-center">Diplome d'etude</h4>
+            <h4 class="card-title mt-3 text-center">Editer un diplome</h4>
+            <div style="display: flex; justify-content:end;">
+                <a href="{{route('mondiplome.liste')}}" class="btn btn-success btn-sm">Liste des diplome</a>
+            </div>
             <div>
                 @if (session('success'))
                     <div class="alert alert-success">
@@ -16,11 +19,11 @@
                     </div>
                 @endif
             </div>
-            <form action="{{route('diplome.store')}}" method="POST">
+            <form action="{{route('mondiplome.update', $diplome->id)}}" method="POST">
                 @csrf
-                @method('POST')
+                @method('PUT')
                <div class="form-group input-group">
-                <input name="diplome_etude" class="form-control" placeholder="diplome_etude" type="text" value="{{old('diplome_etude')}}">
+                <input name="diplome_etude" class="form-control" placeholder="diplome_etude" type="text" value="{{$diplome->diplome_etude}}">
                 <div class="input-group">
                     @error('diplome_etude')
                      <span class="error">{{$message}}</span>
@@ -28,7 +31,7 @@
                 </div>
                 </div>
               <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-block"> Ajouter le diplome  </button>
+                <button type="submit" class="btn btn-primary btn-block"> Enregister les modificationsn du diplome  </button>
               </div>
             </form>
           </div>

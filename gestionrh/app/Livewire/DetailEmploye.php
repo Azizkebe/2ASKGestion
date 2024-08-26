@@ -16,7 +16,7 @@ class DetailEmploye extends Component
         if($employe)
         {
             $this->filename = $employe->id_cloud_file_photo;
-            // $this->dispatch('close-modal');
+
         }
         else{
              return redirect()->back();
@@ -25,8 +25,8 @@ class DetailEmploye extends Component
     public function render()
     {
          $employes = Employe::with(['genre','matrimonial','domaine','niveauetude',
-        'diplome','contrat','direction','service','antenne','bureau','poste',
-        'photo','photocontrat','photodiplome','photoextrait','photocv'])->findOrFail($this->employe);
+        'direction','service','antenne','bureau','poste',
+        'photo'])->findOrFail($this->employe);
         // dd($employe);
         return view('livewire.detail-employe',compact('employes'));
     }

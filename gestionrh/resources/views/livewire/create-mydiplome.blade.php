@@ -18,7 +18,6 @@
                        <option value="">--Choisissez un employe--</option>
                         @foreach ($employe as $employe)
                        <option value="{{$employe->id}}">{{$employe->prenom}} {{$employe->nom}}</option>
-
                        @endforeach
                     </select>
                 </div>
@@ -26,6 +25,18 @@
                     @error('id_employe')
                         <span class="error">{{$message}}</span>
                     @enderror
+                </div>
+                <div class="form-group">
+                    <label for="diplome">Diplome</label>
+                    <select name="id_diplome" id="id_diplome" class="form-control" wire:model.live="id_diplome">
+                        <option value="">--Choississez un diplome --</option>
+                        @if (is_array($mondiplome) || is_object($mondiplome))
+                        @foreach ($mondiplome as $diplomes)
+                            <option value="{{$diplomes->id}}">{{$diplomes->diplome_etude}}</option>
+                        @endforeach
+
+                        @endif
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="Nom">Commentaire</label><br>

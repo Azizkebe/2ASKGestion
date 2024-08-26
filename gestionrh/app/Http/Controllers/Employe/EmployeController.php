@@ -5,11 +5,6 @@ namespace App\Http\Controllers\Employe;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Employe;
-use App\Models\CloudFilePhoto;
-use App\Models\CloudFileCv;
-use App\Models\CloudFileDiplome;
-use App\Models\CloudFileContrat;
-
 
 
 class EmployeController extends Controller
@@ -24,8 +19,8 @@ class EmployeController extends Controller
     public function liste()
     {
         $employe = Employe::with(['genre','matrimonial','domaine','niveauetude',
-        'diplome','contrat','direction','service','antenne','bureau','poste',
-        'photo','photocontrat','photodiplome','photoextrait','photocv'])->get();
+        'contrat','direction','service','antenne','bureau','poste',
+        'photo'])->get();
 
         return view('employe.liste',[
             'employe'=>$employe
@@ -33,12 +28,8 @@ class EmployeController extends Controller
     }
     public function detail(int $employe)
     {
-        // $employe = Employe::with(['genre','matrimonial','domaine','niveauetude',
-        // 'diplome','contrat','direction','service','antenne','bureau','poste',
-        // 'photo','photocontrat','photodiplome','photoextrait','photocv'])->findOrFail($employe);
-        // $employe = Employe::findOrFail($employe);
+
         return view('employe.details', compact('employe'));
-        // return view('employe.detail', compact('employe'));
     }
     public function editer($employe)
     {

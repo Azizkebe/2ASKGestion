@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\MyDiplome;
 
+
 class MyDiplomeController extends Controller
 {
     public function create()
@@ -14,7 +15,7 @@ class MyDiplomeController extends Controller
     }
     public function liste()
     {
-        $mydiplome = MyDiplome::with('employe')->get();
+        $mydiplome = MyDiplome::with(['employe','typediplome'])->get();
         return view('mydiplome.liste',[
             'mydiplome'=>$mydiplome,
         ]);

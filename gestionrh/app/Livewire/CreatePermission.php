@@ -39,9 +39,7 @@ class CreatePermission extends Component
         $this->nombre_de_jour = $this->donnees_employe->nombre_jour_permission ?? 0;
 
 
-        // $this->nombre_de_jour_conge_annuel = $this->donnees_employe->nombre_de_jour_annuel ?? 0;
     }
-    // $this->jours_pris =  $toDate->diffInDays($fromDate);
 
     if(isset($this->date_depart)&&(isset($this->date_retour)))
     {

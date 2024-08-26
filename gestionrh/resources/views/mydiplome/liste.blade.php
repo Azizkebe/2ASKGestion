@@ -23,9 +23,10 @@
                         <th></th>
                         <th>Prenom</th>
                         <th>Nom</th>
+                        <th>Diplome</th>
                         <th>Commentaire</th>
                         <th>Date Obtention du diplome</th>
-                        <th>Diplome</th>
+                        <th>Justificatif</th>
 
                         <th style="width: 10%">Action</th>
                       </tr>
@@ -45,6 +46,7 @@
                                 </td>
                                 <td>{{$mydiplome->employe->prenom}}</td>
                                 <td>{{$mydiplome->employe->nom}}</td>
+                                <td>{{$mydiplome->typediplome->diplome_etude}}</td>
                                 <td>{{$mydiplome->commentaire}}</td>
                                 <td>{{$mydiplome->date_obtention_diplome}}</td>
 

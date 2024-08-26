@@ -5,19 +5,20 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Employe;
 use App\Models\MyDiplome;
+use App\Models\MonDiplome;
 use Livewire\WithFileUploads;
 
 class EditMydiplome extends Component
 {
     use WithFileUploads;
-    public $id_employe, $commentaire, $date_obtention_diplome, $diplome, $mydiplome;
+    public $id_employe, $commentaire, $date_obtention_diplome, $diplome, $mydiplome, $id_diplome;
 
     public function mount($mydiplome)
     {
         $diplome = MyDiplome::findOrFail($this->mydiplome);
 
         $this->id_employe =  $diplome->id_employe ;
-
+        $this->id_diplome =  $diplome->id_diplome ;
         $this->commentaire = $diplome->commentaire;
         $this->date_obtention_diplome = $diplome->date_obtention_diplome ;
         $this->diplome = $diplome->diplome ;
@@ -25,11 +26,13 @@ class EditMydiplome extends Component
     public function render()
     {
         $employe = Employe::all();
+        $mondiplome = MonDiplome::all();
         $photo_diplome = MyDiplome::where('id_employe', $this->id_employe)->first();
 
         return view('livewire.edit-mydiplome',[
             'employe'=>$employe,
             'photodiplome'=>$photo_diplome,
+            'mondiplome'=>$mondiplome,
         ]);
     }
     public function update(MyDiplome $mydiplome)
@@ -41,11 +44,14 @@ class EditMydiplome extends Component
             'date_obtention_diplome'=>'required',
             'commentaire'=>'string|required',
             'diplome'=>'required',
+            'id_diplome'=>'required',
+
           ]);
 
            try {
 
             $diplome->id_employe = $this->id_employe;
+            $diplome->id_diplome = $this->id_diplome;
             $diplome->date_obtention_diplome = $this->date_obtention_diplome;
             $diplome->commentaire = $this->commentaire;
 

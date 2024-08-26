@@ -8,7 +8,7 @@
                     <div class="d-flex align-items-center">
                     <h4 class="card-title">Liste des diplomes</h4>
                     <button class="btn btn-primary btn-round ms-auto">
-                        <a href="{{route('diplome.create')}}" class="text-white"><i class="fa fa-plus"></i> Ajouter un diplome</a>
+                        <a href="{{route('mondiplome.create')}}" class="text-white"><i class="fa fa-plus"></i> Ajouter un diplome</a>
                     </button>
                     </div>
                 </div>
@@ -37,7 +37,7 @@
                                         title=""
                                         class="btn btn-link btn-primary btn-lg"
                                         data-original-title="Edit Task"
-                                        ><a href="{{route('diplome.editer',$diplome->id)}}"><i class="fa fa-edit"></i></a>
+                                        ><a href="{{route('mondiplome.editer',$diplome->id)}}"><i class="fa fa-edit"></i></a>
 
                                         </button>
                                         <button
@@ -47,7 +47,7 @@
                                         class="btn btn-link btn-danger"
                                         data-original-title="Remove"
                                         ><a onclick="return confirm('Etes vous sure de vouloir supprimer le compte')"
-                                        href="{{route('diplome.delete',$diplome->id)}}" class="btn btn-link btn-danger"><i class="fa fa-times"></i></a>
+                                        href="{{route('mondiplome.delete',$diplome->id)}}" class="btn btn-link btn-danger"><i class="fa fa-times"></i></a>
                                         </button>
                                     </div>
                                 </td>

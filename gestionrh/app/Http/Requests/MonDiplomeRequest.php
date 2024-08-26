@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DiplomeRequest extends FormRequest
+class MonDiplomeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,14 +22,14 @@ class DiplomeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'diplome_etude'=>'required|unique:diplomes,diplome_etude',
+            'diplome_etude'=>'required|unique:mon_diplomes,diplome_etude',
         ];
     }
     public function messages(): array
     {
         return [
             'diplome_etude.required'=>'Le diplome d\'etude est obligatoire',
-            'domaine_etude.unique'=>'Le diplome d\'etude existe déjà',
+            'diplome_etude.unique'=>'Le diplome d\'etude existe déjà',
         ];
     }
 }

@@ -8,19 +8,13 @@
           <div class="step-one">
               <div class="card">
                   <div class="card-header bg-primary">
-                      <div class="card-title text-white">Modification - Etape 1/4: Identification</div>
+                      <div class="card-title text-white">Modification - Etape 1/3: Identification</div>
                       <div style="display: flex; justify-content:end;">
                           <a href="" class="btn btn-success btn-md"> Liste des Employe</a>
                       </div>
                   </div>
                   <div class="card-body">
-                      <div class="mt-3">
-                          <label for="name">Nom</label>
-                          <input type="text" class="form-control" name="name" id="name" placeholder="nom" wire:model.live="name">
-                              @error('name')
-                                  <span class="error">Veuillez saisir le nom de l'employe</span>
-                              @enderror
-                  </div>
+
                   <div class="mt-3">
                           <label for="name">Prenom</label>
                           <input type="text" class="form-control" name="username" id="username" placeholder="Prenom" wire:model.live="username">
@@ -28,6 +22,34 @@
                               <span class="error">Veuillez saisir le prenom de l'employe</span>
                           @enderror
                   </div>
+                  <div class="mt-3">
+                    <label for="name">Nom</label>
+                    <input type="text" class="form-control" name="name" id="name" placeholder="nom" wire:model.live="name">
+                        @error('name')
+                            <span class="error">Veuillez saisir le nom de l'employe</span>
+                        @enderror
+                </div>
+                    <div class="mt-3">
+                        <label for="naissance">Date de Naissance</label>
+                        <input type="date" class="form-control" name="naissance" id="naissance" wire:model.live="naissance">
+                        @error('naissance')
+                            <span class="error">Veuillez choisir la date de naissance</span>
+                        @enderror
+                </div>
+                <div class="mt-3">
+                        <label for="age">AGE</label>
+                        <input type="text" class="form-control" name="age" id="age" wire:model.live="age" disabled >
+                        @error('age')
+                            <span class="error">Age de l'employe est obligatoire</span>
+                        @enderror
+                </div>
+                <div class="mt-3">
+                        <label for="lieu_naissance">Lieu de Naissance</label>
+                        <input type="text" class="form-control" name="lieu_naissance" id="lieu_naissance" wire:model.live="lieu_naissance">
+                        @error('lieu_naissance')
+                            <span class="error">Veuillez le lieu de naissance</span>
+                        @enderror
+                </div>
                   <div class="mt-3">
                     <label for="name">Telephone</label>
                     <input type="number" class="form-control" name="telephone" id="telephone" placeholder="telephone" wire:model.live="telephone" maxlength="9">
@@ -49,27 +71,7 @@
                               <span class="error">Veuillez saisir l'adresse Email</span>
                           @enderror
                   </div>
-                  <div class="mt-3">
-                          <label for="naissance">Date de Naissance</label>
-                          <input type="date" class="form-control" name="naissance" id="naissance" wire:model.live="naissance">
-                          @error('naissance')
-                              <span class="error">Veuillez choisir la date de naissance</span>
-                          @enderror
-                  </div>
-                  <div class="mt-3">
-                          <label for="age">AGE</label>
-                          <input type="text" class="form-control" name="age" id="age" wire:model.live="age" disabled >
-                          @error('age')
-                              <span class="error">Age de l'employe est obligatoire</span>
-                          @enderror
-                  </div>
-                  <div class="mt-3">
-                          <label for="lieu_naissance">Lieu de Naissance</label>
-                          <input type="text" class="form-control" name="lieu_naissance" id="lieu_naissance" wire:model.live="lieu_naissance">
-                          @error('lieu_naissance')
-                              <span class="error">Veuillez le lieu de naissance</span>
-                          @enderror
-                  </div>
+
                   <div class="mt-3">
                           <label for="sexe">Genre</label>
                           <select name="sexe" id="sexe" class="form-select" wire:model.live="sexe">
@@ -102,26 +104,7 @@
                                   <span class="error">Veuillez preciser le nombre d'enfant</span>
                               @enderror
                   </div>
-                  {{-- <div class="mt-3">
-                          <label for="image_extrait">Joindre les extraits de naissance des enfants</label>
-                          <input type="file" class="form-control" name="imageextrait" id="imageextrait" wire:model.live="imageextrait" multiple>
-                  </div>
-                  <div class="mt-3">
-                          <label for="image_profil">Joindre la photo de l'employe</label>
-                          <input type="file" class="form-control" name="imagephoto" wire:model.live="imagephoto" id="imagephoto" placeholder="Photo de l'employe" class="form-control" accept="image/png, image/jpg, image/jpeg" autocomplete="on">
-                          <div class="col-md-2">
-                          @error('imagephoto')
-                          <span class="error">Veuillez choisir le domaine d'etude</span>
-                          @enderror
-                        </div>
-                        <div class="col-md-2 mt-1">
-                            @if ($info_employe->id_cloud_file_photo)
-                                <img style="width: 50px;" src="{{asset('storage/'.$info_employe->photo->photo_employe)}} " alt=""><br>
-                                <a href="{{route('employe.delete_photo',$info_employe->id)}}"
-                                onclick="return confirm('Etes vous sure de supprimer la photo de profil')">Supprimer</a>
-                            @endif
-                        </div>
-                  </div> --}}
+
               </div>
           </div>
           @endif
@@ -130,7 +113,7 @@
           <div class="step-two">
               <div class="card">
                   <div class="card-header bg-secondary text-white">
-                      <div class="card-title text-white">Modification - Etape 2/4: Cursus et Diplome</div>
+                      <div class="card-title text-white">Modification - Etape 2/3: Cursus et Diplome</div>
                       <div style="display: flex; justify-content:end;">
                           <a href="" class="btn btn-success btn-md"> Liste des Employe</a>
                       </div>
@@ -160,7 +143,7 @@
                               <span class="error">Veuillez choisir le niveau d'etude</span>
                           @enderror
                       </div>
-                      <div class="mt-3">
+                      {{-- <div class="mt-3">
                           <label for="dernier_diplome">Dernier diplome Obtenu</label>
                           <select name="id_dernier_diplome" id="id_dernier_diplome" class="form-select form-control" wire:model.live="id_dernier_diplome" autocomplete="on">
                               <option value="">--Choisissez le dernier diplome obtenu --</option>
@@ -171,46 +154,6 @@
                           @error('id_dernier_diplome')
                               <span class="error">Veuillez choisir le dernier diplome obtenu </span>
                           @enderror
-                      </div>
-                      {{-- <div class="mt-3">
-                          <label for="image_diplome">Joindre le dernier diplome obtenu</label>
-                          <input type="file" class="form-control" name="imagediplome" id="imagediplome" wire:model.live="imagediplome">
-                          @error('imagediplome')
-                          <span class="error">Vous devez joindre votre diplome</span>
-                          @enderror
-                          <div class="col-md-2 mt-1">
-                            @if ($info_employe->id_cloud_file_diplome)
-
-                                <div style="height: 50;" class="client-logo">
-                                    <a href="{{asset('storage/'.$info_employe->photodiplome->image_diplome)}}"><img src="{{asset('icon/diplome.png')}}" alt="diplome" title="DIPLOME" class="w-100"></a>
-                                    <p><a href="{{route('employe.diplome_employe',$info_employe->id)}}"
-                                        onclick="return confirm('Etes vous sure de supprimer le diplome')">Supprimer</a></p>
-
-                                </div>
-
-                            @endif
-
-                          </div>
-                      </div>
-                      <div class="mt-3">
-                          <label for="image_cv">Joindre le CV de l'employe</label>
-                          <input type="file" class="form-control" name="imagecv" id="imagecv" wire:model.live="imagecv">
-                          @error('imagecv')
-                          <span class="error">Vous devez joindre votre CV</span>
-                          @enderror
-                          <div class="col-md-2 mt-1">
-
-                            @if ($info_employe->id_cloud_file_cv)
-                            <div style="height: 50;" class="client-logo">
-                                <a href="{{asset('storage/'.$info_employe->photocv->image_cv)}}">
-                                    <img src="{{asset('icon/cv.png')}}" alt="CV" title="CV" class="w-100"></a>
-                               <p><a href="{{route('employe.cv_employe',$info_employe->id )}}"
-                                onclick="return confirm('Etes vous sure de supprimer le CV')">Supprimer</a></p>
-                            </div>
-
-                            @endif
-
-                          </div>
                       </div> --}}
                   </div>
               </div>
@@ -220,7 +163,7 @@
          <div class="step-three">
           <div class="card">
               <div class="card-header bg-secondary text-white">
-                  <div class="card-title text-white">Modification - Etape 3/4: Service et Direction</div>
+                  <div class="card-title text-white">Modification - Etape 3/3: Service et Direction</div>
                   <div style="display: flex; justify-content:end;">
                       <a href="" class="btn btn-success btn-md"> Liste des Employe</a>
                   </div>
@@ -284,62 +227,18 @@
           </div>
       </div>
       @endif
-      @if ($currentStep == 4)
-      <div class="step-four">
-          <div class="card">
-              <div class="card-header bg-secondary text-white">
-                  <div class="card-title text-white">Modification - Etape 4/4: Contrat</div>
-                  <div style="display: flex; justify-content:end;">
-                      <a href="" class="btn btn-success btn-md"> Liste des Employe</a>
-                  </div>
-              </div>
-              <div class="card-body">
-                  <div class="mt-3">
-                      <label for="dernier_contrat">Type de Contrat Obtenu</label>
-                      <select name="id_dernier_contrat" id="id_dernier_contrat" class="form-select form-control" wire:model.live="id_dernier_contrat" autocomplete="on">
-                          <option value="">--Choisissez le dernier type de contrat --</option>
-                          @foreach ($contrat as $contrat)
-                              <option value="{{$contrat->id}}">{{$contrat->contrat}}</option>
-                          @endforeach
-                      </select>
 
-                      @error('id_dernier_contrat')
-                          <span class="error">Veuillez choisir le contrat obtenu</span>
-                      @enderror
-
-                  </div>
-                  {{-- <div class="mt-3">
-                      <label for="image_contrat">Joindre une copie du contrat de travail</label>
-                      <input type="file" class="form-control" name="imagecontrat" id="imagecontrat" wire:model.live="imagecontrat">
-                      @error('imagecontrat')
-                      <span class="error">Vous devez joindre une copie du contrat</span>
-                       @enderror
-                  </div> --}}
-                  {{-- <div class="col-md-2 mt-1">
-                    @if ($info_employe->id_cloud_file_contrat != NULL)
-                        <div>
-                            <a  style="height: 50;" class="client-logo" href="{{asset('storage/'.$info_employe->photocontrat->image_contrat)}}"><img src="{{asset('icon/contrat.png')}}" title="CONTRAT" alt="contrat" class="w-100"></a>
-                            <p> <a href="{{route('employe.contrat_employe',$info_employe->id)}}"
-                                onclick="return confirm('Etes vous sure de supprimer le contrat')">Supprimer</a></p>
-                        </div>
-                    @endif
-                  </div> --}}
-              </div>
-              </div>
-          </div>
-      </div>
-      @endif
              <div class="action-buttoms d-flex justify-content-between bg-white pt-2 pb-2">
                   @if ($currentStep == 1)
                   <div></div>
                   @endif
-                  @if ($currentStep == 2 || $currentStep == 3 || $currentStep == 4)
+                  @if ($currentStep == 2 || $currentStep == 3 )
                   <a href="" class="btn btn-secondary btn-md text-white" wire:click.prevent="decreaseStep()">Precedent</a>
                   @endif
-                  @if ($currentStep == 1 || $currentStep == 2 || $currentStep == 3)
+                  @if ($currentStep == 1 || $currentStep == 2 )
                   <a href="" class="btn btn-success btn-md text-white" wire:click.prevent="increaseStep()">Suivant</a>
                   @endif
-                  @if ($currentStep == 4)
+                  @if ($currentStep == 3)
                   <button type="submit" class="btn btn-primary">Enregistrer la modification</button>
                   @endif
               </div>

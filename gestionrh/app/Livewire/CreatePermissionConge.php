@@ -12,7 +12,9 @@ use Carbon\Carbon;
 
 class CreatePermissionConge extends Component
 {
-    public $id_employe, $id_conge, $nombre_de_jour, $date_depart, $date_retour, $jours_pris, $nombre_de_jour_demande, $permission_conge, $nombre_restant_jour;
+    public $id_employe, $id_conge, $nombre_de_jour, $date_depart,
+    $date_retour, $jours_pris, $nombre_de_jour_demande,
+    $permission_conge, $nombre_restant_jour, $som;
     public function render()
     {
         $toDate = Carbon::parse($this->date_depart);
@@ -21,18 +23,15 @@ class CreatePermissionConge extends Component
     if(isset($this->id_conge)){
 
         $this->donnees_employe = ParamTypeConge::where('id', $this->id_conge)->first();
-        $this->permission_conge = PermissionConge::where('id_employe', $this->id_employe)->get();
-
-
-        // dd($this->permission_conge);
+        // $this->permission_conge = PermissionConge::where('id_employe', $this->id_employe)->get();
 
         $this->nombre_de_jour = $this->donnees_employe->nombre_de_jour_reserve ?? 0;
-        // $this->nombre_restant_jour = $this->permission_conge->nombre_jour_restant;
-
 
     }
+
     if(isset($this->date_depart)&&(isset($this->date_retour)))
     {
+
         $this->jours_pris =  $toDate->diffInDays($fromDate);
 
 
@@ -49,7 +48,28 @@ class CreatePermissionConge extends Component
 
             toastr()->error('Desolé, Vous n\'avez plus de droit au congé');
         }
+
+
     }
+     if(isset($this->date_depart)&&(isset($this->date_retour))&&(isset($this->id_conge))&&(isset($this->id_employe)))
+     {
+         $totaldonnees = PermissionConge::where('id_employe', $this->id_employe)->get();
+        //  dd(count($totaldonnees));
+         $ind_donnees = PermissionConge::where('id_employe', $this->id_employe)->first();
+         $som = 0;
+         for ($i=0; $i <count($totaldonnees) ; $i++) {
+            $som = $som + $totaldonnees->nombre_jours_pris[$i];
+            dd($totaldonnees->nombre_jours_pris[$i]);
+         }
+         dd($som);
+            if($totaldonnees->nombre_jours_pris > $ind_donnees->paramtypeconge->nombre_de_jour_reserve){
+                dd('ok');
+
+            }
+
+     }
+
+
 
         $conge = ParamTypeConge::all();
         $employe = Employe::all();
@@ -61,12 +81,10 @@ class CreatePermissionConge extends Component
     }
     public function store(PermissionConge $permission)
     {
-        $this->donnees_employe = Conge::where('id', $this->id_conge)->first();
-        $this->permission_conge = PermissionConge::where('id', $this->id_conge)->first();
+        $this->donnees_employe = ParamTypeConge::where('id', $this->id_conge)->first();
 
-        $this->permission_conge->nombre_jour_restant = $this->donnees_employe->nombre_jour_conge - $this->nombre_de_jour_demande;
+        $this->nombre_de_jour = $this->donnees_employe->nombre_de_jour_reserve ?? 0;
 
-        $this->nombre_de_jour = $this->donnees_employe->nombre_jour_conge ?? 0;
 
         $this->validate([
 
@@ -78,7 +96,7 @@ class CreatePermissionConge extends Component
 
         try {
             $permission->id_employe = $this->id_employe;
-            $permission->id_conge =  $this->id_conge;
+            $permission->id_param_type_conge =  $this->id_conge;
             $permission->date_depart = $this->date_depart;
             $permission->date_retour = $this->date_retour;
 
@@ -90,7 +108,6 @@ class CreatePermissionConge extends Component
             if($this->nombre_de_jour_demande > $this->nombre_de_jour )
             {
                 toastr()->error('Attention, Le nombre de jour demandé est superieur au nombre de jour restant');
-                // return redirect()->back()->with('error','Verifiez les informations de saisie');
 
             }
             elseif(($this->nombre_de_jour === 0)and($this->nombre_de_jour <= 0))
@@ -101,18 +118,15 @@ class CreatePermissionConge extends Component
             }
             else
             {
-                // $permission->nombre_jours_pris = $this->nombre_de_jour_demande;
 
-                $this->nbr_jour_restant_conge = $this->nombre_de_jour - $this->nombre_de_jour_demande;
-                // $this->nbr_jour_restant_conge = $this->nombre_de_jour - $this->nombre_de_jour_demande;
+                $permission->nombre_jours_pris = $this->nombre_de_jour_demande;
 
-                // dd($permission);
                 $reussi = $permission->save();
 
                 if($reussi){
 
-                    $this->permission_conge->update(['nombre_jours_pris'=> $this->nombre_de_jour_demande,
-                    'nombre_jour_restant'=> $this->nbr_jour_restant_conge]);
+                    // $this->permission_conge->update(['nombre_jours_pris'=> $this->nombre_de_jour_demande,
+                    // 'nombre_jour_restant'=> $this->nbr_jour_restant_conge]);
 
                     $messages['prenom'] = $permission->employe->prenom;
                     $messages['nom'] = $permission->employe->nom;
