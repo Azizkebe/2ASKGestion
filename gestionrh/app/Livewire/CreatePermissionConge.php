@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\ParamTypeConge;
 use App\Models\Employe;
 use App\Models\PermissionConge;
+use App\Models\CongeHistorique;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\SendEmailToEmployeAfterAcceptedCongeNotification;
 use Carbon\Carbon;
@@ -51,11 +52,7 @@ class CreatePermissionConge extends Component
 
 
     }
-    //  if(isset($this->date_depart)&&(isset($this->date_retour))&&(isset($this->id_conge))&&(isset($this->id_employe)))
-    //  {
-    //      $totaldonnees = PermissionConge::where('id_employe', $this->id_employe)->get();
-    //      $ind_donnees = PermissionConge::where('id_employe', $this->id_employe)->first();
-    //  }
+
 
         $conge = ParamTypeConge::all();
         $employe = Employe::all();
@@ -111,6 +108,22 @@ class CreatePermissionConge extends Component
 
                 if($reussi){
 
+                    $data = PermissionConge::where('id_employe', $this->id_employe)->get();
+
+                    foreach ($data as $data) {
+
+                        $historique = new CongeHistorique();
+
+                        $historique->id_employe = $data->id_employe;
+                        $historique->id_param_type_conge =  $data->id_param_type_conge;
+                        $historique->date_depart = $data->date_depart;
+                        $historique->date_retour = $data->date_retour;
+                        $historique->nombre_jours_pris = $data->nombre_jours_pris;
+
+                        $historique->save();
+
+                    }
+
                     $messages['prenom'] = $permission->employe->prenom;
                     $messages['nom'] = $permission->employe->nom;
                     $messages['todate'] =  $permission->date_depart;
@@ -120,6 +133,7 @@ class CreatePermissionConge extends Component
 
                     Notification::route('mail', $permission->employe->email)->notify(new
                     SendEmailToEmployeAfterAcceptedCongeNotification($messages));
+
 
                 }
                  toastr()->success('Bravo, le congé est autorisé avec succes');
