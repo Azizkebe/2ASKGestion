@@ -23,10 +23,12 @@
                         <th></th>
                         <th>Nom</th>
                         <th>Prenom</th>
-                        <th>Nombre de Jours de permission</th>
-                        <th>Nombre de jours restant</th>
+
                         <th>Date de Depart</th>
                         <th>Date de Retour</th>
+                        <th>Justificatif</th>
+                        <th>Nombre de Jours de permission</th>
+                        <th>Nombre de jours restant</th>
                         <th>Deduction au congé</th>
 
                         <th style="width: 5%">commentaire</th>
@@ -51,10 +53,23 @@
                                  </td>
                                 <td>{{$permission->employe->nom}}</td>
                                 <td>{{$permission->employe->prenom}}</td>
+                                <td style="width: 20px;">{{$permission->date_depart}}</td>
+                                <td style="width:20%; padding:(0px;">{{$permission->date_retour}}</td>
+                                <td>
+                                    @if ($permission->imagepermission)
+                                    <a href="{{asset('storage/'.$permission->imagepermission->photo_permission)}}"><img
+                                        style=" width:50px;
+                                    height:50px;
+                                    background-position:center;
+                                    background-size:cover;"
+                                        src="{{asset('storage/'.$permission->imagepermission->photo_permission)}}" alt="">
+                                    </a>
+
+                                @endif
+                                </td>
                                 <td>{{$permission->nombre_de_jour}}</td>
                                 <td style="font-weight: bolder">{{$permission->employe->nombre_jour_permission}}</td>
-                                <td style="width: 20px;">{{$permission->date_depart}}</td>
-                                <td style="width:5px;">{{$permission->date_retour}}</td>
+
                                 <td>{{$permission->statutpermission->statut_permission ?? ''}}</td>
                                 <td>{{$permission->commentaire}}</td>
                                 {{-- <td>

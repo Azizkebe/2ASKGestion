@@ -18,4 +18,8 @@ class PermissionConge extends Model
     {
         return $this->belongsTo(ParamTypeConge::class,'id_param_type_conge','id');
     }
+    public function imageconge()
+    {
+        return $this->belongsTo(CloudFileConge::class,'id_cloud_file_conge');
+    }
 }

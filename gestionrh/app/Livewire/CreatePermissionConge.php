@@ -8,14 +8,17 @@ use App\Models\Employe;
 use App\Models\PermissionConge;
 use App\Models\CongeHistorique;
 use Illuminate\Support\Facades\Notification;
+use Livewire\WithFileUploads;
 use App\Notifications\SendEmailToEmployeAfterAcceptedCongeNotification;
+use App\Models\CloudFileConge;
 use Carbon\Carbon;
 
 class CreatePermissionConge extends Component
 {
+    use WithFileUploads;
     public $id_employe, $id_conge, $nombre_de_jour, $date_depart,
-    $date_retour, $jours_pris, $nombre_de_jour_demande,
-    $permission_conge, $nombre_restant_jour, $som;
+    $date_retour, $jours_pris, $nombre_de_jour_demande,$employe_conge,
+    $permission_conge, $nombre_restant_jour, $imageconge = '';
     public function render()
     {
         $toDate = Carbon::parse($this->date_depart);
@@ -23,27 +26,34 @@ class CreatePermissionConge extends Component
 
     if(isset($this->id_conge)){
 
+        $this->employe_conge = Employe::where('id', $this->id_employe)->first();
+
         $this->donnees_employe = ParamTypeConge::where('id', $this->id_conge)->first();
-        // $this->permission_conge = PermissionConge::where('id_employe', $this->id_employe)->get();
 
         $this->nombre_de_jour = $this->donnees_employe->nombre_de_jour_reserve ?? 0;
+
+        if(isset($this->employe_conge->nombre_conge_program)&&($this->employe_conge->nombre_conge_program != NULL))
+        {
+            $this->nombre_restant_jour = $this->employe_conge->nombre_conge_program;
+        }
 
     }
 
     if(isset($this->date_depart)&&(isset($this->date_retour)))
     {
+        $this->employe_conge = Employe::where('id', $this->id_employe)->first();
 
         $this->jours_pris =  $toDate->diffInDays($fromDate);
 
 
-        if($this->jours_pris > $this->nombre_de_jour)
+        if(($this->jours_pris > $this->nombre_de_jour)||($this->employe_conge->nombre_conge_program < 0))
         {
 
             $this->nombre_de_jour = 0;
 
             toastr()->error('Attention, Le nombre de jour demandé est superieur au nombre de jour resservé');
         }
-        if(($this->nombre_de_jour === 0)and($this->nombre_de_jour <= 0))
+        if(($this->nombre_de_jour === 0)and($this->nombre_de_jour <= 0)||($this->employe_conge->nombre_conge_program = 0))
         {
             $this->nombre_de_jour = 0;
 
@@ -64,6 +74,8 @@ class CreatePermissionConge extends Component
     }
     public function store(PermissionConge $permission)
     {
+        $this->employe_conge = Employe::where('id', $this->id_employe)->first();
+
         $this->donnees_employe = ParamTypeConge::where('id', $this->id_conge)->first();
 
         $this->nombre_de_jour = $this->donnees_employe->nombre_de_jour_reserve ?? 0;
@@ -105,10 +117,24 @@ class CreatePermissionConge extends Component
                 $permission->nombre_jours_pris = $this->nombre_de_jour_demande;
 
                 $reussi = $permission->save();
+                $this->handleImageCongeUpload($reussi,$this->imageconge,'CloudImageConge/Conge');
+
 
                 if($reussi){
 
                     $data = PermissionConge::where('id_employe', $this->id_employe)->get();
+
+                    if($this->employe_conge->nombre_conge_program == NULL)
+                    {
+                        $this->employe_conge->update(['nombre_conge_program'=> $this->donnees_employe->nombre_de_jour_reserve - $this->nombre_de_jour_demande]);
+
+                    }
+                    else{
+                        $nbr_existant = $this->employe_conge->nombre_conge_program;
+
+                        $this->employe_conge->update(['nombre_conge_program'=> $nbr_existant - $this->nombre_de_jour_demande]);
+
+                    }
 
                     foreach ($data as $data) {
 
@@ -138,12 +164,35 @@ class CreatePermissionConge extends Component
                 }
                  toastr()->success('Bravo, le congé est autorisé avec succes');
 
-                return redirect()->route('conge.liste');
+                return redirect()->route('permissionconge.liste');
 
             }
 
         } catch (Exception $e) {
             throw new Exception("Erreur est survenue lors de l'enregistrement", 1);
+
+        }
+    }
+    public function handleImageCongeUpload($data, $imageconge, $destination)
+    {
+
+        {
+            $fileName = time().".".$this->imageconge->extension();
+
+            $filePath = $this->imageconge->storeAs($destination,$fileName,'public');
+
+            $cloudfile = CloudFileConge::create([
+                'photo_conge'=> $filePath,
+            ]);
+
+            if(isset($cloudfile->id))
+            {
+
+             $conge = PermissionConge::where('id_employe',$this->id_employe)->first();
+             $conge->update(['id_cloud_file_conge'=> $cloudfile->id]);
+
+            }
+
 
         }
     }

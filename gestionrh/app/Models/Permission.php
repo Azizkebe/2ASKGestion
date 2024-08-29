@@ -19,4 +19,8 @@ class Permission extends Model
     {
         return $this->belongsTo(StatutPermission::class,'id_statut_permission','id');
     }
+    public function imagepermission()
+    {
+        return $this->belongsTo(CloudFilePermission::class,'id_cloud_file_permission');
+    }
 }

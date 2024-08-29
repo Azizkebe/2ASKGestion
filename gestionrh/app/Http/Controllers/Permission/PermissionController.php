@@ -14,7 +14,7 @@ class PermissionController extends Controller
     }
     public function liste()
     {
-        $permission = Permission::with(['employe','statutpermission'])->get();
+        $permission = Permission::with(['employe','statutpermission','imagepermission'])->get();
 
         return view('permission.liste', compact('permission'));
     }

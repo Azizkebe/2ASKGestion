@@ -8,6 +8,8 @@ use App\Models\StatutPermission;
 use Carbon\Carbon;
 use App\Models\Permission;
 use App\Models\Conge;
+use App\Models\CloudFilePermission;
+use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\SendEmailToEmployeAfterAcceptedPermissionNotification;
 
@@ -23,7 +25,9 @@ class CreatePermission extends Component
     public $st_permission;
     public $nombre_de_jour_conge_annuel;
     public $nbr_jour_restant_annuel;
+    public $imagepermission = '';
     public $error;
+    use WithFileUploads;
 
 
     public function render()
@@ -115,16 +119,13 @@ class CreatePermission extends Component
             }
             else
             {
-
-            // $this->nbr_jour_restant_annuel = $this->nombre_de_jour_conge_annuel - $permission->nombre_de_jour;
-
-            // $permission->nombre_de_jour_restant =  $this->nbr_jour_restant;
-
             $permission->commentaire =  $this->commentaire;
             $permission->id_statut_permission =  $this->st_permission;
 
-            //  dd($permission);
+
             $reussi = $permission->save();
+            $this->handleImagePermissionUpload($reussi,$this->imagepermission,'CloudImagePermission/Permission','id_cloud_file_permission');
+
 
             if($reussi){
 
@@ -132,19 +133,20 @@ class CreatePermission extends Component
 
                 $this->donnees_employe->update(['nombre_jour_permission'=> $this->nbr_jour_restant]);
 
+                $nbr_existant = $this->donnees_employe->nombre_conge_program;
 
-                // if($permission->id_statut_permission === '2')
-                // {
+                if(($permission->id_statut_permission === '2')&&($nbr_existant != NULL))
+                {
 
-                //     $this->donnees_employe->update(['nombre_jour_permission'=> $this->nbr_jour_restant]);
+                    $this->donnees_employe->update(['nombre_conge_program'=> $nbr_existant - $this->jours_pris]);
 
-                // }
-                // else
-                // {
+                }
+                else
+                {
 
-                //     $this->donnees_employe->update(['nombre_jour_permission'=> $this->nombre_de_jour]);
+                    $this->donnees_employe->update(['nombre_conge_program'=> $nbr_existant]);
 
-                // }
+                }
 
                 $messages['prenom'] = $permission->employe->prenom;
                 $messages['nom'] = $permission->employe->nom;
@@ -161,10 +163,33 @@ class CreatePermission extends Component
 
             return redirect()->route('permission.liste');
 
+            }
         }
+        catch (Exception $e) {
+                throw new Exception("Erreur est survenue lors de l\'attribution d\'une permission ");
+
+            }
     }
-    catch (Exception $e) {
-            throw new Exception("Erreur est survenue lors de l\'attribution d\'une permission ");
+    public function handleImagePermissionUpload($data, $imagepermission, $destination, $attributeName)
+    {
+
+        {
+            $fileName = time().".".$this->imagepermission->extension();
+
+            $filePath = $this->imagepermission->storeAs($destination,$fileName,'public');
+
+            $cloudfile = CloudFilePermission::create([
+                'photo_permission'=> $filePath,
+            ]);
+
+            if(isset($cloudfile->id))
+            {
+
+             $permis = Permission::where('id_employe',$this->id_employe)->first();
+             $permis->update(['id_cloud_file_permission'=> $cloudfile->id]);
+
+            }
+
 
         }
     }

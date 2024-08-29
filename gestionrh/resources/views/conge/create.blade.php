@@ -7,7 +7,7 @@
         <div class="card-header bg-primary">
             <div class="card-title text-white">Parametre des conges</div>
             <div style="display: flex; justify-content:end;">
-                <a href="{{route('conge.liste')}}" class="btn btn-success btn-md"> Liste des types define</a>
+                <a href="{{route('conge.liste')}}" class="btn btn-success btn-md"> Liste des types congés</a>
             </div>
         </div>
         <div class="card-body">

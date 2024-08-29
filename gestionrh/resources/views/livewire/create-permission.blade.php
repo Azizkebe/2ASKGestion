@@ -120,6 +120,16 @@
                    <span class="error">Pourquoi voulez-vous la permission</span>
                    @enderror
                 </div>
+                <div style="padding-left: 20px;" class="mt-3">
+                    <label for="imagepermission">Piece Justificative</label>
+                    <input type="file" accept="image/jpg, image/png, image/jpeg" name="imagepermission" id="imagepermission" wire:model.live="imagepermission">
+                    <div>
+                        @if ($imagepermission)
+                        <img style="width: 70px; height:70px;" src="{{$imagepermission->temporaryUrl()}}" alt="">
+                        @endif
+                   </div>
+                </div>
+
                 <div style="display: flex; justify-content:center" class="mb-3 mt-3">
                     <button type="submit" class="btn btn-primary"> Autoriser la permission</button>
                 </div>

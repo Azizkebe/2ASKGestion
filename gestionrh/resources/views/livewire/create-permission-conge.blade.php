@@ -3,7 +3,7 @@
         <div class="card-header bg-primary">
             <div class="card-title text-white">Congé</div>
             <div style="display: flex; justify-content:end;">
-                <a href="" class="btn btn-success btn-md"> Liste des congés</a>
+                <a href="{{route('permissionconge.liste')}}" class="btn btn-success btn-md"> Liste des congés autorisés</a>
             </div>
         </div>
         <div class="card-body">
@@ -113,6 +113,15 @@
                     @error('jours_pris')
                         <div class="error">Le champs est requis</div>
                     @enderror
+                </div>
+                <div style="padding-left: 20px;" class="mt-3">
+                    <label for="imageconge">Piece Justificative</label>
+                    <input type="file" accept="image/jpg, image/png, image/jpeg" name="imageconge" id="imageconge" wire:model.live="imageconge">
+                    <div>
+                        @if ($imageconge)
+                        <img style="width: 70px; height:70px;" src="{{$imageconge->temporaryUrl()}}" alt="">
+                        @endif
+                   </div>
                 </div>
 
                 <div style="display: flex; justify-content:center" class="mb-3 mt-3">
