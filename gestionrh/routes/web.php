@@ -41,9 +41,12 @@ Route::middleware('guest')->group(function(){
 });
 Route::middleware('auth')->group(function(){
     Route::get('/deconnexion',[UserAdminController::class,'deconnexion'])->name('deconnexion');
-    Route::get('/dashboard', function () {
+    Route::get('/dashboard', [UserAdminController::class,'tableaudebord'])->name('dashboard');
         return view('bienvenue');
-    })->name('dashboard');
+
+    // Route::get('/dashboard', function () {
+    //     return view('bienvenue');
+    // })->name('dashboard');
 
 });
 

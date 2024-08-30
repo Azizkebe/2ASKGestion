@@ -11,6 +11,7 @@ use App\Http\Requests\HandRequest;
 use App\Http\Requests\HandloginRequest;
 use App\Http\Requests\HandProfilRequest;
 use App\Models\User;
+use App\Models\Employe;
 use App\Models\ResetCodePassword;
 use App\Notifications\SendEmailToAdminAfterRegistration;
 use App\Http\Requests\SubmitAccessRequest;
@@ -217,5 +218,12 @@ class UserAdminController extends Controller
             throw new Exception("Erreur survenue lors de l'edition du profil", 1);
 
         }
+    }
+    public function tableaudebord()
+    {
+        $employe = Employe::all()->count();
+        return view('bienvenue', [
+            'employe'=>$employe,
+        ]);
     }
 }
