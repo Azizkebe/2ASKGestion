@@ -42,8 +42,8 @@
             <div class="collapse" id="dashboard">
               <ul class="nav nav-collapse">
                 <li>
-                  <a href="../demo1/index.html">
-                    <span class="sub-item">Dashboard 1</span>
+                  <a href="{{route('dashboard')}}">
+                    <span class="sub-item">Tableau de bord</span>
                   </a>
                 </li>
               </ul>

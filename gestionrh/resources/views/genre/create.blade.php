@@ -8,6 +8,9 @@
           <div class="card-body mx-100">
             <h4 class="card-title mt-3 text-center">Ajout de Genre</h4>
             <div>
+                <a href="{{route('genre.liste')}}" class="btn btn-sm btn-success float-end">Liste des Genres</a>
+            </div>
+            <div>
                 @if (session('success'))
                     <div class="alert alert-success">
                         <button type="button" class="close" data-dismiss="alert"

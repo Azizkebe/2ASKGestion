@@ -12,6 +12,12 @@ use App\Http\Requests\HandloginRequest;
 use App\Http\Requests\HandProfilRequest;
 use App\Models\User;
 use App\Models\Employe;
+use App\Models\FicheContrat;
+use App\Models\Membre;
+use App\Models\MyDiplome;
+use App\Models\Curriculum;
+use App\Models\Permission;
+use App\Models\PermissionConge;
 use App\Models\ResetCodePassword;
 use App\Notifications\SendEmailToAdminAfterRegistration;
 use App\Http\Requests\SubmitAccessRequest;
@@ -222,8 +228,21 @@ class UserAdminController extends Controller
     public function tableaudebord()
     {
         $employe = Employe::all()->count();
+        $fichecontrat = FicheContrat::all()->count();
+        $membre = Membre::all()->count();
+        $diplome = MyDiplome::all()->count();
+        $curriculum = Curriculum::all()->count();
+        $permission = Permission::all()->count();
+        $conge = PermissionConge::all()->count();
+
         return view('bienvenue', [
+            'permission'=>$permission,
+            'conge'=>$conge,
             'employe'=>$employe,
+            'contrat'=>$fichecontrat,
+            'membre'=>$membre,
+            'diplome'=>$diplome,
+            'curriculum'=>$curriculum,
         ]);
     }
 }
