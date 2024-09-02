@@ -18,4 +18,18 @@ class PermissionCongeController extends Controller
 
         return view('permissionconge.liste', compact('permissionlisteconge'));
     }
+    public function edit($permissionconge)
+    {
+        return view('permissionconge.edit', compact('permissionconge'));
+    }
+    public function delete($permissionconge)
+    {
+        $permission_conge = PermissionConge::findOrFail($permissionconge);
+
+        $permission_conge->delete();
+
+        toastr('le congé a été supprimé avec succes');
+
+        return redirect()->back();
+    }
 }

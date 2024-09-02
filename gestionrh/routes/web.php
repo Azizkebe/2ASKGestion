@@ -193,6 +193,9 @@ Route::middleware('auth')->group(function(){
     Route::prefix('permissionconge')->group(function(){
         Route::get('create',[PermissionCongeController::class, 'create'])->name('permissionconge.create');
         Route::get('liste',[PermissionCongeController::class, 'liste'])->name('permissionconge.liste');
+        Route::get('/edit/{permissionconge}',[PermissionCongeController::class, 'edit'])->name('permissionconge.editer');
+        Route::get('/delete/{permissionconge}',[PermissionCongeController::class, 'delete'])->name('permissionconge.delete');
+
     });
     Route::prefix('fichecontrat')->group(function(){
         Route::get('create',[FicheContratController::class, 'create'])->name('fiche_contrat.create');

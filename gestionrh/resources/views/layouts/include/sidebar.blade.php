@@ -2,7 +2,7 @@
     <div class="sidebar-logo">
       <!-- Logo Header -->
       <div class="logo-header" data-background-color="dark">
-        <a href="index.html" class="logo">
+        <a href="" class="logo">
           <img
             src="{{asset('admin/img/kaiadmin/logo_anpej.png')}}"
             alt="navbar brand"

@@ -77,7 +77,21 @@
                                         class="btn btn-link btn-primary btn-lg"
                                         data-original-title="Edit Task"
                                         >
-                                        <a href=""><i class="fa fa-edit"></i></a>
+                                        <a href="{{route('permissionconge.editer', $conge->id)}}"><i class="fa fa-edit"></i></a>
+
+                                        </button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-button-action">
+                                        <button
+                                        type="button"
+                                        data-bs-toggle="tooltip"
+                                        title=""
+                                        class="btn btn-danger"
+                                        data-original-title="delete Task"
+                                        >
+                                        <a onclick="return confirm('Etes vous sure de vouloir supprimer le congé')" href="{{route('permissionconge.delete', $conge->id)}}"><i class="fa fa-trash"></i></a>
 
                                         </button>
                                     </div>
