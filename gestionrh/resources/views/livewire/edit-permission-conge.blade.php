@@ -10,7 +10,7 @@
             <div class="mb-1">
 
             </div>
-            <form action="" method="POST" wire:submit.prevent="store">
+            <form action="" method="POST" wire:submit.prevent="update">
                 @csrf
                 @method('POST')
 

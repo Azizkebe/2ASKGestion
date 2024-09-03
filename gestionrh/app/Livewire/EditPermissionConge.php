@@ -9,7 +9,7 @@ use App\Models\PermissionConge;
 use App\Models\CongeHistorique;
 use Illuminate\Support\Facades\Notification;
 use Livewire\WithFileUploads;
-use App\Notifications\SendEmailToEmployeAfterAcceptedCongeNotification;
+use App\Notifications\SendEmailToEmployeAfterUpdateCongeNotification;
 use App\Models\CloudFileConge;
 use Carbon\Carbon;
 
@@ -88,8 +88,11 @@ class EditPermissionConge extends Component
             'employe'=>$employe,
         ]);
     }
-    public function update(PermissionConge $permission)
+    public function update(PermissionConge $permissionconge)
     {
+
+        $permissionconge = PermissionConge::findOrFail($this->permissionconge);
+
         $this->employe_conge = Employe::where('id', $this->id_employe)->first();
 
         $this->donnees_employe = ParamTypeConge::where('id', $this->id_conge)->first();
@@ -106,10 +109,10 @@ class EditPermissionConge extends Component
             'id_conge'=>'required',]);
 
         try {
-            $permission->id_employe = $this->id_employe;
-            $permission->id_param_type_conge =  $this->id_conge;
-            $permission->date_depart = $this->date_depart;
-            $permission->date_retour = $this->date_retour;
+            $permissionconge->id_employe = $this->id_employe;
+            $permissionconge->id_param_type_conge =  $this->id_conge;
+            $permissionconge->date_depart = $this->date_depart;
+            $permissionconge->date_retour = $this->date_retour;
 
             $toDate = Carbon::parse($this->date_depart);
             $fromDate = Carbon::parse($this->date_retour);
@@ -130,9 +133,9 @@ class EditPermissionConge extends Component
             else
             {
 
-                $permission->nombre_jours_pris = $this->nombre_de_jour_demande;
+                $permissionconge->nombre_jours_pris = $this->nombre_de_jour_demande;
 
-                $reussi = $permission->update();
+                $reussi = $permissionconge->update();
                 $this->handleImageCongeUpload($reussi,$this->imageconge,'CloudImageConge/Conge');
 
 
@@ -166,19 +169,19 @@ class EditPermissionConge extends Component
 
                     }
 
-                    $messages['prenom'] = $permission->employe->prenom;
-                    $messages['nom'] = $permission->employe->nom;
-                    $messages['todate'] =  $permission->date_depart;
-                    $messages['fordate'] = $permission->date_retour;
+                    $messages['prenom'] = $permissionconge->employe->prenom;
+                    $messages['nom'] = $permissionconge->employe->nom;
+                    $messages['todate'] =  $permissionconge->date_depart;
+                    $messages['fordate'] = $permissionconge->date_retour;
                     $messages['nbr_jour'] = $this->nombre_de_jour_demande;
-                    $messages['permission'] = $permission->conge->nombre_jour_conge ?? '';
+                    $messages['permission'] = $permissionconge->conge->nombre_jour_conge ?? '';
 
-                    Notification::route('mail', $permission->employe->email)->notify(new
+                    Notification::route('mail', $permissionconge->employe->email)->notify(new
                     SendEmailToEmployeAfterUpdateCongeNotification($messages));
 
 
                 }
-                 toastr()->success('Bravo, le congé est autorisé avec succes');
+                 toastr()->success('Bravo, le congé a été modifié avec succes');
 
                 return redirect()->route('permissionconge.liste');
 
@@ -186,6 +189,29 @@ class EditPermissionConge extends Component
 
         } catch (Exception $e) {
             throw new Exception("Erreur est survenue lors de l'enregistrement", 1);
+
+        }
+    }
+    public function handleImageCongeUpload($data, $imageconge, $destination)
+    {
+
+        {
+            $fileName = time().".".$this->imageconge->extension();
+
+            $filePath = $this->imageconge->storeAs($destination,$fileName,'public');
+
+            $cloudfile = CloudFileConge::create([
+                'photo_conge'=> $filePath,
+            ]);
+
+            if(isset($cloudfile->id))
+            {
+
+             $conge = PermissionConge::where('id_employe',$this->id_employe)->first();
+             $conge->update(['id_cloud_file_conge'=> $cloudfile->id]);
+
+            }
+
 
         }
     }

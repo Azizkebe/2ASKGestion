@@ -20,6 +20,7 @@
                   >
                     <thead>
                       <tr>
+                        <th></th>
                         <th>Nom</th>
                         <th>Prenom</th>
                         <th>Type de congé</th>
@@ -51,7 +52,7 @@
                                 <td>{{$conge->employe->nom}}</td>
                                 <td>{{$conge->employe->prenom}}</td>
                                 <td>{{$conge->paramtypeconge->type_de_conge}}</td>
-                                <td>{{$conge->nombre_jours_pris}}</td>
+                                <td>{{$conge->nombre_jours_pris}} jour(s)</td>
                                 <td>{{$conge->employe->nombre_conge_program}} jour(s)</td>
                                 <td style="width: 210px;">{{$conge->date_depart}}</td>
                                 <td style="width:5px;">{{$conge->date_retour}}</td>

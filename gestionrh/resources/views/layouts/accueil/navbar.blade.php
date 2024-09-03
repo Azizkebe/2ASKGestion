@@ -47,7 +47,7 @@
                 @endguest
                 @auth
                 <li class="nav-item">
-                    <a href="{{route('dashboard')}}" class="btn btn-label-info btn-round me-2">tableau de bord</a>
+                    <a href="{{route('dashboard')}}" class="btn btn-label-info btn-round me-2">Tableau de bord</a>
                     <a class="nav-link secondary-btn btn-sm" href="{{route('deconnexion')}}">Se deconnecter</a>
                 </li>
                 @endauth

@@ -27,13 +27,13 @@
                                 <h4 class="text-info fw-bold"> {{$permission}} autorisé(s)</h4>
                         </div>
                         <div class="progress progress-sm">
-                                <div
+                                {{-- <div
                                 class="progress-bar bg-info w-75"
                                 role="progressbar"
                                 aria-valuenow="{{$permission}}"
                                 aria-valuemin="0"
                                 aria-valuemax="100"
-                                ></div>
+                                ></div> --}}
                         </div>
                         <div class="d-flex justify-content-between mt-2">
                             <p class="text-muted mb-0">Total</p>
@@ -53,13 +53,13 @@
                                 <h4 class="text-info fw-bold"> {{$conge}} autorisé(s)</h4>
                         </div>
                         <div class="progress progress-sm">
-                                <div
+                                {{-- <div
                                 class="progress-bar bg-success w-75"
                                 role="progressbar"
                                 aria-valuenow="5"
                                 aria-valuemin="0"
                                 aria-valuemax="100"
-                                ></div>
+                                ></div> --}}
                         </div>
                         <div class="d-flex justify-content-between mt-2">
                             <p class="text-muted mb-0">Total</p>
@@ -79,13 +79,13 @@
                                 <h4 class="text-info fw-bold">{{$contrat}} enregistré(s)</h4>
                         </div>
                         <div class="progress progress-sm">
-                                <div
+                                {{-- <div
                                 class="progress-bar bg-danger w-75"
                                 role="progressbar"
                                 aria-valuenow="{{$contrat}}"
                                 aria-valuemin="0"
                                 aria-valuemax="{{$contrat}}"
-                                ></div>
+                                ></div> --}}
                         </div>
                         <div class="d-flex justify-content-between mt-2">
                             <p class="text-muted mb-0">Total</p>
@@ -105,13 +105,13 @@
                                 <h4 class="text-info fw-bold">{{$curriculum}} enregistré(s)</h4>
                         </div>
                         <div class="progress progress-sm">
-                                <div
+                                {{-- <div
                                 class="progress-bar bg-secondary w-75"
                                 role="progressbar"
                                 aria-valuenow="{{$curriculum}}"
                                 aria-valuemin="0"
                                 aria-valuemax="{{$curriculum}}"
-                                ></div>
+                                ></div> --}}
                         </div>
                         <div class="d-flex justify-content-between mt-2">
                             <p class="text-muted mb-0">Total</p>
@@ -133,13 +133,13 @@
                                 <h4 class="text-info fw-bold">{{$employe}} enregistré(s)</h4>
                         </div>
                         <div class="progress progress-sm">
-                                <div
+                                {{-- <div
                                 class="progress-bar bg-success w-75"
                                 role="progressbar"
                                 aria-valuenow="{{$employe}}"
                                 aria-valuemin="0"
                                 aria-valuemax="{{$employe}}"
-                                ></div>
+                                ></div> --}}
                         </div>
                         <div class="d-flex justify-content-between mt-2">
                             <p class="text-muted mb-0">Total</p>
@@ -159,13 +159,13 @@
                                 <h4 class="text-info fw-bold">{{$diplome}} enregistré(s)</h4>
                         </div>
                         <div class="progress progress-sm">
-                                <div
+                                {{-- <div
                                 class="progress-bar bg-warning w-75"
                                 role="progressbar"
                                 aria-valuenow="{{$diplome}}"
                                 aria-valuemin="0"
                                 aria-valuemax="{{$diplome}}"
-                                ></div>
+                                ></div> --}}
                         </div>
                         <div class="d-flex justify-content-between mt-2">
                             <p class="text-muted mb-0">Total</p>
@@ -185,13 +185,13 @@
                                 <h4 class="text-info fw-bold">{{$membre}} enregistré(s)</h4>
                         </div>
                         <div class="progress progress-sm">
-                                <div
+                                {{-- <div
                                 class="progress-bar bg-info w-75"
                                 role="progressbar"
                                 aria-valuenow="{{$membre}}"
                                 aria-valuemin="0"
                                 aria-valuemax="{{$membre}}"
-                                ></div>
+                                ></div> --}}
                         </div>
                         <div class="d-flex justify-content-between mt-2">
                             <p class="text-muted mb-0">Total</p>
