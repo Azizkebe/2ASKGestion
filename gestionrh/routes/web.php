@@ -23,6 +23,7 @@ use App\Http\Controllers\Employe\MonDiplomeController;
 use App\Http\Controllers\Permission\PermissionController;
 use App\Http\Controllers\Permission\PermissionCongeController;
 use App\Http\Controllers\Conge\CongeController;
+use App\Http\Controllers\Annee\YearController;
 use App\Http\Controllers\Contrat\FicheContratController;
 
 use App\Livewire\EditPhotoEmploye;
@@ -235,6 +236,10 @@ Route::middleware('auth')->group(function(){
         Route::get('/edit/{mydiplome}',[MyDiplomeController::class, 'edit'])->name('mydiplome.edit');
         Route::get('/delete/{mydiplome}',[MyDiplomeController::class,'delete'])->name('mydiplome.delete');
 
+    });
+    Route::prefix('setting')->group(function(){
+        Route::get('create',[YearController::class,'create'])->name('setting.create');
+        Route::get('liste',[YearController::class,'liste'])->name('setting.liste');
     });
 });
 
