@@ -15,8 +15,7 @@ class YearController extends Controller
     }
     public function liste()
     {
-        $year = YearTable::all();
-        return view('year.liste', compact('year'));
+        return view('year.liste');
     }
 
 }
