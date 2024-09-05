@@ -11,6 +11,10 @@
             <form action="" method="POST" wire:submit.prevent="store">
                 @csrf
                 @method('POST')
+
+                <div class="form-group">
+                    <label for="id_employe">Employe: </label>
+                </div>
                 <div class="form-group input-group">
                     <select name="id_employe" id="id_employe" wire:model.live="id_employe" class="form-select">
                        <option value="">--Choisissez un employe--</option>
@@ -25,6 +29,9 @@
                         <span class="error">{{$message}}</span>
                     @enderror
                 </div>
+                <div class="form-group">
+                    <label style="padding-right: 6px;" for="id_contrat">Contrat: </label>
+                </div>
                 <div class="form-group input-group">
                     <select name="id_contrat" id="id_contrat" wire:model.live="id_contrat" class="form-select">
                        <option value="">--Choisissez un contrat--</option>
@@ -38,6 +45,9 @@
                     @error('id_contrat')
                         <span class="error">{{$message}}</span>
                     @enderror
+                </div>
+                <div class="form-group">
+                    <label for="date_obtention_contrat">Date d'obtention du contrat</label>
                 </div>
                <div class="form-group input-group">
                     <input name="date_obtention_contrat" wire:model.live="date_obtention_contrat" class="form-control" placeholder="date d'obtention du contrat" type="date">
@@ -59,12 +69,12 @@
                     </div>
                     <div class="col col-md-3">
                         <input type="checkbox" name="date_always" id="date_always" wire:model.live="date_always">
-                        <label for="">Depuis toujours</label>
+                        <label for="">Toujours en cours</label>
                     </div>
 
                 </div>
                 <div class="form-group">
-                    <textarea name="commentaire" id="commentaire" wire:model.live="commentaire" class="form-control" cols="30" rows="3"></textarea>
+                    <textarea name="commentaire" id="commentaire" wire:model.live="commentaire" class="form-control" cols="30" rows="3" placeholder="commentaire"></textarea>
                     <div class="input-group">
                         @error('commentaire')
                         <span class="error">{{$message}}</span>
@@ -72,10 +82,13 @@
                     </div>
                 </div>
                 <div class="form-group mt-2">
-                    <input type="file" accept="image/jpg, image/jpeg, image/png" name="fichier_contrat" id="fichier_contrat" wire:model.live="fichier_contrat">
+                    <label for="">Joindre le contrat</label>
+                    <input type="file" name="fichier_contrat" id="fichier_contrat" wire:model.live="fichier_contrat">
                    <div>
                         @if ($fichier_contrat)
-                        <img style="width: 70px; height:70px;" src="{{$fichier_contrat->temporaryUrl()}}" alt="">
+                        <img style="width: 70px; height:70px;" src="{{$fichier_contrat->temporary_file_upload['rules']}}" alt="">
+                        {{-- <img style="width: 70px; height:70px;" src="{{$fichier_contrat->temporaryUrl()}}" alt=""> --}}
+                        <p style="height:80;" class="mt-3">{{$fichier_contrat->temporary_file_upload['rules']}}</p>
                         @endif
                    </div>
                 </div>

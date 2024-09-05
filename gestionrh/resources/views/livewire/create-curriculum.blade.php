@@ -47,10 +47,11 @@
                 </div>
                 <div class="form-group mt-2">
                     <label for="">Joindre le Curriculum Vitea(CV)</label>
-                    <input type="file" accept="image/jpg, image/jpeg, image/png" name="curriculum" id="curriculum" wire:model.live="curriculum">
+                    <input type="file" name="curriculum" id="curriculum" wire:model.live="curriculum">
                    <div class="mt-2">
                         @if ($curriculum)
-                        <img style="width: 70px; height:70px;" src="{{$curriculum->temporaryUrl()}}" alt="">
+                        {{-- <img style="width: 70px; height:70px;" src="{{$curriculum->temporaryUrl()}}" alt=""> --}}
+                        <p>{{$curriculum->temporary_file_upload['rules']}}</p>
                         @endif
                    </div>
                 </div>

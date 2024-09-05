@@ -121,7 +121,7 @@
                    @enderror
                 </div>
                 <div style="padding-left: 20px;" class="mt-3">
-                    <label for="imagepermission">Piece Justificative</label>
+                    <label for="imagepermission">Joindre la demande de permission</label>
                     <input type="file" accept="image/jpg, image/png, image/jpeg" name="imagepermission" id="imagepermission" wire:model.live="imagepermission">
                     <div>
                         @if ($imagepermission)

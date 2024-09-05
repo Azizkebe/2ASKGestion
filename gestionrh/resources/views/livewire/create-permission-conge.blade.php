@@ -115,7 +115,7 @@
                     @enderror
                 </div>
                 <div style="padding-left: 20px;" class="mt-3">
-                    <label for="imageconge">Piece Justificative</label>
+                    <label for="imageconge">Joindre la demande de congé</label>
                     <input type="file" accept="image/jpg, image/png, image/jpeg" name="imageconge" id="imageconge" wire:model.live="imageconge">
                     <div>
                         @if ($imageconge)

@@ -63,10 +63,10 @@
                     </div>
                 </div>
                 <div class="form-group mt-2">
-                    <input type="file" accept="image/jpg, image/jpeg, image/png" name="justificative" id="justificative" wire:model.live="justificative">
+                    <input type="file" name="justificative" id="justificative" wire:model.live="justificative">
                    <div class="mt-2">
                         @if ($justificative)
-                        <img style="width: 70px; height:70px;" src="{{$justificative->temporaryUrl()}}" alt="">
+                        <img style="width: 70px; height:70px;" src="{{$justificative->temporary_file_upload['rules']}}" alt="">
                         @endif
                    </div>
                 </div>

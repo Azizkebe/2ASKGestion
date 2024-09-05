@@ -58,10 +58,11 @@
                 </div>
                 <div class="form-group mt-2">
                     <label for="">Joindre le diplome</label>
-                    <input type="file" accept="image/jpg, image/jpeg, image/png" name="diplome" id="diplome" wire:model.live="diplome">
+                    <input type="file" name="diplome" id="diplome" wire:model.live="diplome">
                    <div class="mt-2">
                         @if ($diplome)
-                        <img style="width: 70px; height:70px;" src="{{$diplome->temporaryUrl()}}" alt="">
+                        {{-- <img style="width: 70px; height:70px;" src="" alt=""> --}}
+                        <p style="height: 80px">{{$diplome->temporary_file_upload['rules']}}</p>
                         @endif
                    </div>
                 </div>
