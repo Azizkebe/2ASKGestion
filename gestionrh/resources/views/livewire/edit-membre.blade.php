@@ -66,10 +66,10 @@
                     <input type="file" accept="image/jpg, image/jpeg, image/png" name="justificative" id="justificative" wire:model.live="justificative">
                    <div class="mt-2">
                     @if ($photo->photo_justificative)
-                    <span style="font-weight:bolder;">Image Anterieur: <img style="width:50px;" src="{{asset('storage/'.$photo->photo_justificative)}}" alt=""></span>
+                    <span style="font-weight:bolder;">Image Anterieur: <img style="height:50px;" src="{{asset('storage/'.$photo->photo_justificative)}}" alt=""></span>
 
                     @else
-                    <span style="font-weight:bolder;">Nouvelle Image: <img style="width: 70px; height:70px;" src="{{$photo->temporary()}}" alt="image"></span>
+                    <span style="font-weight:bolder;">Nouvelle Image: <p style="height:70px;">{{$photo->temporary_file_upload['rules']}}</p></span>
 
                     @endif
                    </div>

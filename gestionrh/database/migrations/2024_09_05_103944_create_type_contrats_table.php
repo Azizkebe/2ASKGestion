@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('fiche_contrats', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_contrat')->after('id_employe');
-            $table->foreign('id_contrat')->references('id')->on('contrats');
+        Schema::create('type_contrats', function (Blueprint $table) {
+            $table->id();
+            $table->enum('type_contrat',['Essai','Stage','Prestation','CDD','CDI'])->default('Prestation');
+            $table->timestamps();
         });
     }
 
@@ -22,8 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('fiche_contrats', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('type_contrats');
     }
 };

@@ -8,7 +8,7 @@
                 <a href="{{route('fiche_contrat.liste')}}" class="btn btn-success btn-sm">Liste de tous les contrats</a>
             </div>
 
-            <form action="" method="POST" wire:submit.prevent="store">
+            <form action="" method="POST" wire:submit.prevent="store" enctype="multipart/form-data">
                 @csrf
                 @method('POST')
 
@@ -35,8 +35,8 @@
                 <div class="form-group input-group">
                     <select name="id_contrat" id="id_contrat" wire:model.live="id_contrat" class="form-select">
                        <option value="">--Choisissez un contrat--</option>
-                        @foreach ($contrat as $contrat)
-                       <option value="{{$contrat->id}}">{{$contrat->contrat}}</option>
+                        @foreach ($typecontrat as $contrat)
+                       <option value="{{$contrat->id}}">{{$contrat->type_contrat}}</option>
 
                        @endforeach
                     </select>
@@ -58,20 +58,19 @@
                     </div>
                 </div>
                 <div class="row form-group">
-                    <div class="col col-md-9">
-                        <label for="date_obtention_contrat">Date de fin du contrat</label><br>
-                        <input name="date_fin_contrat" wire:model.live="date_fin_contrat" class="form-control" placeholder="Date de fin du contrat" type="date">
+                    <div class="col col-md-12">
+                        <label for="date_fin_contrat">Date de fin du contrat</label><br>
+                        @if ($cache == '5')
+                        <input name="date_fin_contrat" wire:model.live="date_fin_contrat" class="form-control" placeholder="Date de fin du contrat" type="date" hidden>
+                        @else
+                        <input name="date_fin_contrat" wire:model.live="date_fin_contrat" class="form-control" placeholder="Date de fin du contrat" type="date" required>
                         <div class="input-group">
                             @error('date_fin_contrat')
                             <span class="error">{{$message}}</span>
                             @enderror
                         </div>
+                        @endif
                     </div>
-                    <div class="col col-md-3">
-                        <input type="checkbox" name="date_always" id="date_always" wire:model.live="date_always">
-                        <label for="">Toujours en cours</label>
-                    </div>
-
                 </div>
                 <div class="form-group">
                     <textarea name="commentaire" id="commentaire" wire:model.live="commentaire" class="form-control" cols="30" rows="3" placeholder="commentaire"></textarea>
@@ -81,17 +80,25 @@
                         @enderror
                     </div>
                 </div>
-                <div class="form-group mt-2">
-                    <label for="">Joindre le contrat</label>
+                <div class="mt-3">
+                    <label for="fichier_contrat">Joindre le contrat</label>
                     <input type="file" name="fichier_contrat" id="fichier_contrat" wire:model.live="fichier_contrat">
+                    {{-- @if ($fichier_contrat)
+                    <p style="height:80;"class="mt-3">{{$fichier_contrat->temporary_file_upload['rules']}}</p>
+                    @endif --}}
+                    @error('fichier_contrat')
+                        <span class="error">le champs ne peut pas etre vide</span>
+                    @enderror
+                </div>
+                {{-- <div class="form-group mt-2">
+                    <label for="">Joindre le contrat</label>
+                    <input type="file" name="photo_contrat" id="photo_contrat" wire:model.live="photo_contrat">
                    <div>
-                        @if ($fichier_contrat)
-                        <img style="width: 70px; height:70px;" src="{{$fichier_contrat->temporary_file_upload['rules']}}" alt="">
-                        {{-- <img style="width: 70px; height:70px;" src="{{$fichier_contrat->temporaryUrl()}}" alt=""> --}}
+                        @if ($photo_contrat)
                         <p style="height:80;" class="mt-3">{{$fichier_contrat->temporary_file_upload['rules']}}</p>
                         @endif
                    </div>
-                </div>
+                </div> --}}
               <div class="form-group justify-content-center align-items-center text-center">
                 <button type="submit" class="btn btn-primary btn-block"> Ajouter le contrat </button>
               </div>

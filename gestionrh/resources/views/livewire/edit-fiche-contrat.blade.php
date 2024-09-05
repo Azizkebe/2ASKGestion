@@ -76,13 +76,12 @@
                     </div>
                 </div>
                 <div class="form-group mt-2">
-                    <input type="file" accept="image/jpg, image/jpeg, image/png" name="fichier_contrat" id="fichier_contrat" wire:model.live="fichier_contrat">
+                    <input type="file" name="fichier_contrat" id="fichier_contrat" wire:model.live="fichier_contrat">
                    <div>
                     @if ($fiche->fichier_contrat)
-                    <span style="font-weight:bolder;">Image Anterieur: <img style="width:50px;" src="{{asset('storage/'.$fiche->fichier_contrat)}}" alt=""></span>
-
+                    <span style="font-weight:bolder;">Image Anterieur: <p style="height:50px;">{{asset('storage/'.$fiche->fichier_contrat)}}</p></span>
                     @else
-                    <span style="font-weight:bolder;">Nouvelle Image: <img style="width: 70px; height:70px;" src="{{$fiche->temporary()}}" alt="image"></span>
+                    <span style="font-weight:bolder;">Nouvelle Image: <p style="height:70px">{{$fiche->temporary_file_upload['rules']}}</p></span>
 
                     @endif
                    </div>

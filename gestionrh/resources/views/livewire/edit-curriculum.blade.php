@@ -47,13 +47,15 @@
                 </div>
                 <div class="form-group mt-2">
                     <label for="">Joindre le Curriculum Vitea(CV)</label>
-                    <input type="file" accept="image/jpg, image/jpeg, image/png" name="curriculum" id="curriculum" wire:model.live="curriculum">
+                    <input type="file" name="curriculum" id="curriculum" wire:model.live="curriculum">
                    <div class="mt-2">
                     @if ($photocv->curriculum)
-                    <span style="font-weight:bolder;">Image Anterieur: <img style="width:50px;" src="{{asset('storage/'.$photocv->curriculum)}}" alt=""></span>
+                    {{-- <span style="font-weight:bolder;">Image Anterieur: <img style="width:50px;" src="{{asset('storage/'.$photocv->temporary_file_upload['rules'])}}" alt=""></span> --}}
+                    <span style="font-weight:bolder;">Image Anterieur: <p style="height:80px">{{asset('storage/'.$photocv->temporary_file_upload['rules'])}}</p></span>
 
                     @else
-                    <span style="font-weight:bolder;">Nouvelle Image: <img style="width: 70px; height:70px;" src="{{$photocv->temporary()}}" alt="image"></span>
+                    <span style="font-weight:bolder;">Nouvelle Image: <img style="width: 70px; height:70px;" src="{{$photocv->temporary_file_upload['rules']}}" alt="image"></span>
+                    <span style="font-weight:bolder;">Nouvelle Image: <p style="height: 80px;">{{$photocv->temporary_file_upload['rules']}}</p></span>
 
                     @endif
                    </div>
