@@ -48,18 +48,17 @@
                 <div class="form-group mt-2">
                     <label for="">Joindre le Curriculum Vitea(CV)</label>
                     <input type="file" name="curriculum" id="curriculum" wire:model.live="curriculum">
-                   <div class="mt-2">
-                    @if ($photocv->curriculum)
-                    {{-- <span style="font-weight:bolder;">Image Anterieur: <img style="width:50px;" src="{{asset('storage/'.$photocv->temporary_file_upload['rules'])}}" alt=""></span> --}}
-                    <span style="font-weight:bolder;">Image Anterieur: <p style="height:80px">{{asset('storage/'.$photocv->temporary_file_upload['rules'])}}</p></span>
-
-                    @else
-                    <span style="font-weight:bolder;">Nouvelle Image: <img style="width: 70px; height:70px;" src="{{$photocv->temporary_file_upload['rules']}}" alt="image"></span>
-                    <span style="font-weight:bolder;">Nouvelle Image: <p style="height: 80px;">{{$photocv->temporary_file_upload['rules']}}</p></span>
-
-                    @endif
-                   </div>
+                    <a href="{{asset('storage/'.$curriculum)}}">
+                        <img style="height: 50px;" src="{{asset('icon/cv.png')}}"
+                         alt="CV">
+                    </a>
                 </div>
+                <div>
+                    <span style="color:rgb(45, 139, 138)">Seul le fichier extensions pdf est autorisé</span>
+                </div>
+                @error('curriculum')
+                    <span class="error">le champs ne peut pas etre vide</span>
+                @enderror
               <div class="form-group justify-content-center align-items-center text-center">
                 <button type="submit" class="btn btn-primary btn-block"> Enregistrer les modifications du CV  </button>
               </div>

@@ -48,12 +48,13 @@
                 <div class="form-group mt-2">
                     <label for="">Joindre le Curriculum Vitea(CV)</label>
                     <input type="file" name="curriculum" id="curriculum" wire:model.live="curriculum">
-                   <div class="mt-2">
-                        @if ($curriculum)
-                        {{-- <img style="width: 70px; height:70px;" src="{{$curriculum->temporaryUrl()}}" alt=""> --}}
-                        <p>{{$curriculum->temporary_file_upload['rules']}}</p>
-                        @endif
-                   </div>
+                    <div>
+                        <span style="color:rgb(45, 139, 138)">le fichier extension pdf est autorisé </span>
+                    </div>
+
+                   @error('curriculum')
+                        <span class="error">le champs ne peut pas etre vide</span>
+                    @enderror
                 </div>
               <div class="form-group justify-content-center align-items-center text-center">
                 <button type="submit" class="btn btn-primary btn-block"> Ajouter le CV </button>

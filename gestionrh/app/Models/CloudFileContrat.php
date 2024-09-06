@@ -9,4 +9,6 @@ class CloudFileContrat extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+
 }

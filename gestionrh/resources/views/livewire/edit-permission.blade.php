@@ -108,6 +108,19 @@
                    <div class="mt-3">
                     <textarea name="commentaire" class="form-control" id="commentaire" placeholder="Motif de la demande" cols="30" rows="5" wire:model.live="commentaire"></textarea>
                    </div>
+                   <div class="form-group mt-2">
+                    <input type="file" name="imagepermission" id="imagepermission" wire:model.live="imagepermission">
+                    <a href="{{asset('storage/'.$imagepermission)}}">
+                        <img style="height: 50px;" src="{{asset('icon/demande.png')}}"
+                         alt="permission">
+                    </a>
+                    <div>
+                        <span style="color:rgb(45, 139, 138)">Seul le fichier extension pdf est autorisé</span>
+                    </div>
+                    @error('imagepermission')
+                        <span class="error">le champs ne peut pas etre vide</span>
+                    @enderror
+                </div>
                 </div>
                 <div style="display: flex; justify-content:center" class="mb-3 mt-3">
                     <button type="submit" class="btn btn-primary"> Mettre à jour la permission</button>

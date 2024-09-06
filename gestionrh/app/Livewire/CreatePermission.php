@@ -91,6 +91,7 @@ class CreatePermission extends Component
             'date_retour'=>'string|required',
             'commentaire'=>'string|required',
             'st_permission'=>'required',
+            'imagepermission'=>'required|mimes:pdf|max:8192',
 
 
 

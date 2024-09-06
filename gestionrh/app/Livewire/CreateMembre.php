@@ -39,6 +39,8 @@ class CreateMembre extends Component
             'id_type_membre'=>'integer|required',
             'prenom'=>'string|required',
             'nom'=>'string|required',
+            'justificative' =>'required|mimes:pdf|max:8192',
+
 
         ]);
         try {
@@ -53,6 +55,7 @@ class CreateMembre extends Component
 
             // dd($membre);
             $membre->save();
+            $this->render();
             toastr()->success('Le membre est enregisté avec succes');
 
             return redirect()->back();

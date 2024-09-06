@@ -47,17 +47,17 @@
                 </div>
                 <div class="form-group mt-2">
                     <label for="">Joindre le diplome</label>
-                    <input type="file" accept="image/jpg, image/jpeg, image/png" name="diplome" id="diplome" wire:model.live="diplome">
-                   <div class="mt-2">
-                    @if ($photodiplome->diplome)
-                    <span style="font-weight:bolder;">Image Anterieur: <p style="height:50px;">{{asset('storage/'.$photodiplome->diplome)}}</p></span>
-
-                    @else
-                    {{-- <span style="font-weight:bolder;">Nouvelle Image: <img style="width: 70px; height:70px;" src="{{$photodiplome->temporary()}}" alt="image"></span> --}}
-                    <span style="font-weight:bolder;">Nouvelle Image: <p style="height:70px;">{{$photodiplome->temporary_file_upload['rules']}}</span>
-
-                    @endif
-                   </div>
+                    <input type="file" name="diplome" id="diplome" wire:model.live="diplome">
+                    <a href="{{asset('storage/'.$diplome)}}">
+                        <img style="height: 50px;" src="{{asset('icon/diplome.png')}}"
+                         alt="diplome">
+                    </a>
+                    <div>
+                        <span style="color:rgb(45, 139, 138)">Seul le fichier extensions pdf est autorisé</span>
+                    </div>
+                    @error('diplome')
+                        <span class="error">le champs ne peut pas etre vide</span>
+                    @enderror
                 </div>
               <div class="form-group justify-content-center align-items-center text-center">
                 <button type="submit" class="btn btn-primary btn-block"> Enregistrer les modifications </button>

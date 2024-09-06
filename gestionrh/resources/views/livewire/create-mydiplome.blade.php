@@ -59,10 +59,12 @@
                 <div class="form-group mt-2">
                     <label for="">Joindre le diplome</label>
                     <input type="file" name="diplome" id="diplome" wire:model.live="diplome">
+                    <div>
+                        <span style="color:rgb(45, 139, 138)">Seul le fichier extension .pdf sont autorisé</span>
+                    </div>
                    <div class="mt-2">
                         @if ($diplome)
-                        {{-- <img style="width: 70px; height:70px;" src="" alt=""> --}}
-                        <p style="height: 80px">{{$diplome->temporary_file_upload['rules']}}</p>
+                        <p class="error">Veuillez joindre le diplome</p>
                         @endif
                    </div>
                 </div>

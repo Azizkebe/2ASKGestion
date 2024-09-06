@@ -28,8 +28,8 @@
                 <div class="form-group input-group">
                     <select name="id_contrat" id="id_contrat" wire:model.live="id_contrat" class="form-select">
                        <option value="">--Choisissez un contrat--</option>
-                        @foreach ($contrat as $contrat)
-                       <option value="{{$contrat->id}}">{{$contrat->contrat}}</option>
+                        @foreach ($typecontrat as $contrat)
+                       <option value="{{$contrat->id}}">{{$contrat->type_contrat}}</option>
 
                        @endforeach
                     </select>
@@ -48,7 +48,7 @@
                     </div>
                 </div>
                 <div class="row form-group">
-                    <div class="col col-md-9">
+                    <div class="col col-md-12">
                         <label for="date_obtention_contrat">Date de fin du contrat</label><br>
                         <input name="date_fin_contrat" wire:model.live="date_fin_contrat" class="form-control" placeholder="Date de fin du contrat" type="date">
                         <div class="input-group">
@@ -57,15 +57,6 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col col-md-3">
-                        @if ($fiche->date_always === 'En cours')
-                        <input type="checkbox" name="date_always" id="date_always" wire:model.live="date_always" checked>
-                        @else
-                        <input type="checkbox" name="date_always" id="date_always" wire:model.live="date_always">
-                        @endif
-                        <label for="">En cours</label>
-                    </div>
-
                 </div>
                 <div class="form-group">
                     <textarea name="commentaire" id="commentaire" wire:model.live="commentaire" class="form-control" cols="30" rows="3"></textarea>
@@ -75,16 +66,19 @@
                         @enderror
                     </div>
                 </div>
-                <div class="form-group mt-2">
+                <div class="mt-3">
+                    <label for="fichier_contrat">Joindre le contrat</label>
                     <input type="file" name="fichier_contrat" id="fichier_contrat" wire:model.live="fichier_contrat">
-                   <div>
-                    @if ($fiche->fichier_contrat)
-                    <span style="font-weight:bolder;">Image Anterieur: <p style="height:50px;">{{asset('storage/'.$fiche->fichier_contrat)}}</p></span>
-                    @else
-                    <span style="font-weight:bolder;">Nouvelle Image: <p style="height:70px">{{$fiche->temporary_file_upload['rules']}}</p></span>
-
-                    @endif
-                   </div>
+                    <a href="{{asset('storage/'.$fichier_contrat)}}">
+                        <img style="height: 50px;" src="{{asset('icon/contrat.png')}}"
+                         alt="contrat">
+                    </a>
+                    <div>
+                        <span style="color:rgb(45, 139, 138)">Seul les fichiers extensions pdf sont autorisés</span>
+                    </div>
+                    @error('fichier_contrat')
+                        <span class="error">le champs ne peut pas etre vide</span>
+                    @enderror
                 </div>
               <div class="form-group justify-content-center align-items-center text-center">
                 <button type="submit" class="btn btn-primary btn-block"> Enregistrer les modifications </button>

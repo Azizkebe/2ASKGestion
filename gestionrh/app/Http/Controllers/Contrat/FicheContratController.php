@@ -18,7 +18,6 @@ class FicheContratController extends Controller
     {
         $fichecontrat = FicheContrat::all();
 
-
         return view('fichecontrat.liste',[
             'fichecontrat'=>$fichecontrat,
         ]);

@@ -30,12 +30,11 @@ class EditMembre extends Component
     {
         $employe = Employe::all();
         $type = TypeMembre::all();
-        $photo = Membre::where('id_employe', $this->id_employe)->first();
 
         return view('livewire.edit-membre',[
             'employe'=> $employe,
             'type'=>$type,
-            'photo'=>$photo,
+
         ]);
     }
     public function update(Membre $membres)
@@ -47,6 +46,8 @@ class EditMembre extends Component
             'id_type_membre'=>'integer|required',
             'prenom'=>'string|required',
             'nom'=>'string|required',
+            'justificative' =>'mimes:pdf|max:8192',
+
           ]);
 
            try {

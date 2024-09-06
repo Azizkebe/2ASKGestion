@@ -28,7 +28,7 @@ class EditCurriculum extends Component
         $employe = Employe::all();
         return view('livewire.edit-curriculum',[
             'employe'=>$employe,
-            'photocv'=>$photo_cv,
+
         ]);
     }
     public function update(Curriculum $curricula)
@@ -39,7 +39,8 @@ class EditCurriculum extends Component
             'id_employe'=>'integer|required',
             'date_mis_a_jour'=>'required',
             'commentaire'=>'string|required',
-            'curriculum'=>'required',
+            'curriculum' =>'mimes:pdf|max:8192',
+
 
           ]);
 

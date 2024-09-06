@@ -31,7 +31,7 @@ class CreateMydiplome extends Component
             'id_employe'=>'integer|required',
             'date_obtention_diplome'=>'required',
             'commentaire'=>'string|required',
-            'diplome'=>'required',
+            'diplome' =>'required|mimes:pdf|max:8192',
             'id_diplome'=>'required',
 
         ]);

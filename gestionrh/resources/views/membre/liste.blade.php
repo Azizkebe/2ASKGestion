@@ -50,8 +50,9 @@
                                 <td>
                                     <div>
                                         <a href="{{asset('storage/'.$membre->photo_justificative)}}">
-                                        <img style="width:50px; height:50px;" src="{{asset('storage/'.
-                                         $membre->photo_justificative)}}" alt="">
+                                            <img style="height: 50px;"
+                                            title="{{$membre->Prenom}} {{$membre->Nom}}" src="{{asset('icon/membre.jpg')}}"
+                                             alt="contrat">
                                         </a>
                                     </div>
                                 </td>

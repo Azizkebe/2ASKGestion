@@ -37,17 +37,22 @@
                                 <td>
                                     @if ($contrat->fichier_contrat)
                                     <div>
+                                        <div style="height:80px;" class="client-logo">
                                         <a href="{{asset('storage/'.$contrat->fichier_contrat)}}">
+                                            <img src="{{asset('icon/contrat.png')}}"
+                                            title="contrat de {{$contrat->contrat->type_contrat}}" alt="contrat" class="w-100">
+                                        </a>
+                                        {{-- <a href="{{asset('storage/'.$contrat->fichier_contrat)}}">
                                         <img style="width:50px; height:50px;" src="{{asset('storage/'.
                                          $contrat->fichier_contrat)}}" alt="">
-                                        </a>
+                                        </a> --}}
                                     </div>
 
                                     @endif
                                 </td>
                                 <td>{{$contrat->employe->prenom}}</td>
                                 <td>{{$contrat->employe->nom}}</td>
-                                <td>{{$contrat->contrat->contrat}}</td>
+                                <td>{{$contrat->contrat->type_contrat}}</td>
                                 <td>{{$contrat->date_obtention_contrat}}</td>
                                 @if ($contrat->date_fin_contrat)
                                     <td> {{$contrat->date_fin_contrat}}</td>

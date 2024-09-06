@@ -32,7 +32,7 @@ class EditMydiplome extends Component
         return view('livewire.edit-mydiplome',[
             'employe'=>$employe,
             'photodiplome'=>$photo_diplome,
-            'mondiplome'=>$mondiplome,
+
         ]);
     }
     public function update(MyDiplome $mydiplome)
@@ -43,7 +43,7 @@ class EditMydiplome extends Component
             'id_employe'=>'integer|required',
             'date_obtention_diplome'=>'required',
             'commentaire'=>'string|required',
-            'diplome'=>'required',
+            'diplome'=>'mimes:pdf|max:8192',
             'id_diplome'=>'required',
 
           ]);

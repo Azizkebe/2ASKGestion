@@ -83,22 +83,17 @@
                 <div class="mt-3">
                     <label for="fichier_contrat">Joindre le contrat</label>
                     <input type="file" name="fichier_contrat" id="fichier_contrat" wire:model.live="fichier_contrat">
+                    <div>
+                        <span style="color:rgb(45, 139, 138)"> le fichier extensions pdf est autorisé</span>
+                    </div>
                     {{-- @if ($fichier_contrat)
-                    <p style="height:80;"class="mt-3">{{$fichier_contrat->temporary_file_upload['rules']}}</p>
+                    <p style="height:80;"class="mt-3">{{$fichier_contrat->temporary_file_upload()}}</p>
+                    <p style="height:80;" class="mt-3">{{$fichier_contrat->temporary_file_upload['rules']}}</p>
                     @endif --}}
                     @error('fichier_contrat')
                         <span class="error">le champs ne peut pas etre vide</span>
                     @enderror
                 </div>
-                {{-- <div class="form-group mt-2">
-                    <label for="">Joindre le contrat</label>
-                    <input type="file" name="photo_contrat" id="photo_contrat" wire:model.live="photo_contrat">
-                   <div>
-                        @if ($photo_contrat)
-                        <p style="height:80;" class="mt-3">{{$fichier_contrat->temporary_file_upload['rules']}}</p>
-                        @endif
-                   </div>
-                </div> --}}
               <div class="form-group justify-content-center align-items-center text-center">
                 <button type="submit" class="btn btn-primary btn-block"> Ajouter le contrat </button>
               </div>

@@ -54,8 +54,8 @@
                                 <td>
                                     <div>
                                         <a href="{{asset('storage/'.$mydiplome->diplome)}}">
-                                        <img style="width:50px; height:50px;" src="{{asset('storage/'.
-                                         $mydiplome->diplome)}}" alt="">
+                                            <img style="height: 40px;" src="{{asset('icon/diplome.png')}}"
+                                            title="{{$mydiplome->typediplome->diplome_etude}}" alt="diplome" >
                                         </a>
                                     </div>
                                 </td>

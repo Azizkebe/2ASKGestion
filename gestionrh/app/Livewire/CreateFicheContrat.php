@@ -44,8 +44,9 @@ class CreateFicheContrat extends Component
             'id_contrat'=>'required',
             'date_obtention_contrat'=>'required',
             'commentaire'=>'required',
-            'fichier_contrat'=>'image|mimes:pdf,png,jpg,jpeg',
-          ]);
+            'fichier_contrat' =>'required|mimes:pdf|max:8192',
+
+              ]);
 
            try {
             $fiche->id_employe = $this->id_employe;

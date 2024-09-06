@@ -7,6 +7,7 @@ use App\Models\Employe;
 use App\Models\StatutPermission;
 use Carbon\Carbon;
 use App\Models\Permission;
+use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\SendEmailToEmployeAfterModifyPermissionNotification;
 
@@ -24,6 +25,8 @@ class EditPermission extends Component
     public $nbr_jour_restant_annuel;
     public $error;
     public $permission;
+    public $imagepermission;
+    use WithFileUploads;
 
     public function mount($permission)
     {
@@ -64,7 +67,7 @@ class EditPermission extends Component
         {
 
             $this->nombre_de_jour = 0;
-            // $this->jours_pris = 0;
+
             $this->error = toastr()->error('Attention, Le nombre de jour demandé est superieur au nombre de jour resservé');
         }
         if(($this->nombre_de_jour === 0)and($this->nombre_de_jour <= 0))
@@ -98,6 +101,7 @@ class EditPermission extends Component
 
             'id_employe'=>'integer|required',
             'nombre_de_jour'=>'integer|required',
+            'imagepermission'=>'required|mimes:pdf|max:8192',
         ]);
         try {
             $permission->id_employe = $this->id_employe;
@@ -124,11 +128,6 @@ class EditPermission extends Component
             else
             {
 
-
-            //dd( $conge->nombre_de_jour);
-            // $this->nbr_jour_restant_annuel = $this->nombre_de_jour_conge_annuel - $permission->nombre_de_jour;
-
-            // $permission->nombre_de_jour_restant =  $this->nbr_jour_restant;
             $permission->commentaire =  $this->commentaire;
             $permission->id_statut_permission =  $this->st_permission;
 
@@ -141,19 +140,6 @@ class EditPermission extends Component
                 $this->nbr_jour_restant = $this->nombre_de_jour - $permission->nombre_de_jour;
 
                 $this->donnees_employe->update(['nombre_jour_permission'=> $this->nbr_jour_restant]);
-
-                // if($permission->id_statut_permission === '2')
-                // {
-
-                //     $this->donnees_employe->update(['nombre_jour_permission'=> $this->nbr_jour_restant]);
-
-                // }
-                // else
-                // {
-
-                //     $this->donnees_employe->update(['nombre_jour_permission'=> $this->nombre_de_jour]);
-
-                // }
 
                 $messages['prenom'] = $permission->employe->prenom;
                 $messages['nom'] = $permission->employe->nom;

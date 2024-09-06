@@ -51,9 +51,13 @@
                                 @if ($cv->curriculum)
                                 <td>
                                     <div>
-                                        <a href="{{asset('storage/'.$cv->curriculum)}}">
+                                        {{-- <a href="{{asset('storage/'.$cv->curriculum)}}">
                                         <img style="width:50px; height:50px;" src="{{asset('storage/'.
                                          $cv->curriculum)}}" alt="">
+                                        </a> --}}
+                                        <a href="{{asset('storage/'.$cv->curriculum)}}">
+                                            <img style="height: 40px;" src="{{asset('icon/cv.png')}}"
+                                            title="{{$cv->commentaire}}" alt="CV" >
                                         </a>
                                     </div>
                                 </td>

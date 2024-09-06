@@ -30,7 +30,7 @@
                 <div class="form-group">
                     <label for="Nom">Membre</label><br>
                     <select name="id_type_membre" id="id_type_membre" wire:model.live="id_type_membre" class="form-select">
-                       <option value="">--Choisissez un contrat--</option>
+                       <option value="">--Choisissez le type de membre--</option>
                         @foreach ($type as $type)
                        <option value="{{$type->id}}">{{$type->type_membre}}</option>
 
@@ -64,9 +64,12 @@
                 </div>
                 <div class="form-group mt-2">
                     <input type="file" name="justificative" id="justificative" wire:model.live="justificative">
+                    <div>
+                        <span style="color:rgb(45, 139, 138)">Seul les fichiers extensions .pdf sont autorisés</span>
+                    </div>
                    <div class="mt-2">
                         @if ($justificative)
-                        <img style="width: 70px; height:70px;" src="{{$justificative->temporary_file_upload['rules']}}" alt="">
+                        <p class="error">Veuillez joindre la justificative</p>
                         @endif
                    </div>
                 </div>

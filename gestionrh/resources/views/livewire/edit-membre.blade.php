@@ -63,16 +63,17 @@
                     </div>
                 </div>
                 <div class="form-group mt-2">
-                    <input type="file" accept="image/jpg, image/jpeg, image/png" name="justificative" id="justificative" wire:model.live="justificative">
-                   <div class="mt-2">
-                    @if ($photo->photo_justificative)
-                    <span style="font-weight:bolder;">Image Anterieur: <img style="height:50px;" src="{{asset('storage/'.$photo->photo_justificative)}}" alt=""></span>
-
-                    @else
-                    <span style="font-weight:bolder;">Nouvelle Image: <p style="height:70px;">{{$photo->temporary_file_upload['rules']}}</p></span>
-
-                    @endif
-                   </div>
+                    <input type="file" name="justificative" id="justificative" wire:model.live="justificative">
+                    <a href="{{asset('storage/'.$justificative)}}">
+                        <img style="height: 50px;" src="{{asset('icon/membre.jpg')}}"
+                         alt="contrat">
+                    </a>
+                    <div>
+                        <span style="color:rgb(45, 139, 138)">Seul le fichier extensions pdf est autorisé</span>
+                    </div>
+                    @error('justificative')
+                        <span class="error">le champs ne peut pas etre vide</span>
+                    @enderror
                 </div>
               <div class="form-group justify-content-center align-items-center text-center">
                 <button type="submit" class="btn btn-primary btn-block"> Enregistrer les modifications </button>

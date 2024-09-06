@@ -26,7 +26,7 @@ class CreateCurriculum extends Component
             'id_employe'=>'integer|required',
             'date_mis_a_jour'=>'required',
             'commentaire'=>'string|required',
-            'curriculum'=>'required',
+            'curriculum' =>'required|mimes:pdf|max:8192',
 
         ]);
         try {
@@ -38,7 +38,7 @@ class CreateCurriculum extends Component
             $reponse = $this->curriculum->storeAs('CloudImageCurriculum/Employe', $fileName, 'public');
             $curriculum->curriculum = $reponse;
 
-            // dd($membre);
+            // dd($curriculum);
             $curriculum->save();
             toastr()->success('Le CV est enregisté avec succes');
 

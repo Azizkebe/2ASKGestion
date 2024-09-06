@@ -122,10 +122,13 @@
                 </div>
                 <div style="padding-left: 20px;" class="mt-3">
                     <label for="imagepermission">Joindre la demande de permission</label>
-                    <input type="file" accept="image/jpg, image/png, image/jpeg" name="imagepermission" id="imagepermission" wire:model.live="imagepermission">
+                    <input type="file" name="imagepermission" id="imagepermission" wire:model.live="imagepermission">
                     <div>
+                        <span style="color:rgb(45, 139, 138)">Seul le fichiers extension .pdf est autorisé</span>
+                    </div>
+                   <div class="mt-2">
                         @if ($imagepermission)
-                        <img style="width: 70px; height:70px;" src="{{$imagepermission->temporaryUrl()}}" alt="">
+                        <p class="error">Veuillez joindre la demande de permission</p>
                         @endif
                    </div>
                 </div>

@@ -12,7 +12,7 @@ class FicheContrat extends Model
 
     public function contrat()
 {
-    return $this->belongsTo(Contrat::class, 'id_contrat');
+    return $this->belongsTo(TypeContrat::class, 'id_typecontrat');
 }
 public function employe()
 {
