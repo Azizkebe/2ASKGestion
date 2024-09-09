@@ -22,6 +22,7 @@
                         <th></th>
                         <th>Type de Congé</th>
                         <th>Nombre de Jour Reservé</th>
+                        <th>Annee Active</th>
 
                         <th style="width: 10%">Action</th>
                       </tr>
@@ -32,6 +33,7 @@
                                 <td></td>
                                 <td>{{$param->type_de_conge}}</td>
                                 <td>{{$param->nombre_de_jour_reserve}}</td>
+                                <td>{{$param->yeartable->session_ouvert ?? ''}}</td>
                                 <td>
                                     <div class="form-button-action">
                                         <button

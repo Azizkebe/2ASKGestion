@@ -15,6 +15,10 @@
                 @method('POST')
 
                 <div class="mt-3">
+                    <label for="nombre_de_jour">Session activée</label>
+                    <input type="text" class="form-control" name="session_encours" id="session_encours" wire:model.live="session_encours" readonly>
+                </div>
+                <div class="mt-3">
                     <label for="id_employe">Nom de l'employe</label>
                     <select name="id_employe" id="id_employe" class="form-select" wire:model.live="id_employe">
                         <option value="">--Choisissez un employé --</option>

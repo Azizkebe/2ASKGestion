@@ -11,13 +11,14 @@ use Illuminate\Support\Facades\Notification;
 use Livewire\WithFileUploads;
 use App\Notifications\SendEmailToEmployeAfterAcceptedCongeNotification;
 use App\Models\CloudFileConge;
+use App\Models\YearTable;
 use Carbon\Carbon;
 
 class CreatePermissionConge extends Component
 {
     use WithFileUploads;
     public $id_employe, $id_conge, $nombre_de_jour, $date_depart,
-    $date_retour, $jours_pris, $nombre_de_jour_demande,$employe_conge,
+    $date_retour, $jours_pris, $nombre_de_jour_demande,$employe_conge,$session_encours,
     $permission_conge, $nombre_restant_jour, $imageconge = '';
     public function render()
     {
@@ -30,13 +31,15 @@ class CreatePermissionConge extends Component
 
         $this->donnees_employe = ParamTypeConge::where('id', $this->id_conge)->first();
 
+        $this->session_encours =  $this->donnees_employe->yeartable->session_ouvert;
+
         $this->nombre_de_jour = $this->donnees_employe->nombre_de_jour_reserve ?? 0;
+
 
         if(isset($this->employe_conge->nombre_conge_program)&&($this->employe_conge->nombre_conge_program != NULL))
         {
             $this->nombre_restant_jour = $this->employe_conge->nombre_conge_program;
         }
-
     }
 
     if(isset($this->date_depart)&&(isset($this->date_retour)))
@@ -77,8 +80,12 @@ class CreatePermissionConge extends Component
         $this->employe_conge = Employe::where('id', $this->id_employe)->first();
 
         $this->donnees_employe = ParamTypeConge::where('id', $this->id_conge)->first();
+        $query = YearTable::where('id', $this->donnees_employe->id_yeartable)->first();
+        if($query->active == '1')
+        {
+            $this->nombre_de_jour = $this->donnees_employe->nombre_de_jour_reserve ?? 0;
 
-        $this->nombre_de_jour = $this->donnees_employe->nombre_de_jour_reserve ?? 0;
+        }
 
 
         $this->validate([
@@ -131,6 +138,7 @@ class CreatePermissionConge extends Component
                     }
                     else{
                         $nbr_existant = $this->employe_conge->nombre_conge_program;
+
 
                         $this->employe_conge->update(['nombre_conge_program'=> $nbr_existant - $this->nombre_de_jour_demande]);
 

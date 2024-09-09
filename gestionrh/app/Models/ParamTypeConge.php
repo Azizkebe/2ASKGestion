@@ -10,4 +10,9 @@ class ParamTypeConge extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function yeartable()
+    {
+        return $this->belongsTo(YearTable::class, 'id_yeartable');
+    }
 }

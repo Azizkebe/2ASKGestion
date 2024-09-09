@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\ParamTypeCongeRequest;
 use App\Models\ParamTypeConge;
+use App\Models\YearTable;
 
 class CongeController extends Controller
 {
@@ -17,16 +18,26 @@ class CongeController extends Controller
     public function store(ParamTypeCongeRequest $request, ParamTypeConge $param)
     {
         try {
-            $param->type_de_conge = $request->type_de_conge;
-            $param->nombre_de_jour_reserve = $request->nombre_de_jour_reserve;
 
-            // dd($param);
+            $year_active = YearTable::where('active','1')->first();
 
-            $param->save();
+            if($year_active)
+            {
+                $param->type_de_conge = $request->type_de_conge;
+                $param->nombre_de_jour_reserve = $request->nombre_de_jour_reserve;
+                $param->id_yeartable = $year_active->id;
+                $param->save();
 
-            toastr()->success('le type de congé est ajouté avec succes');
+                toastr()->success('le type de congé est ajouté avec succes');
 
-            return redirect()->back();
+                return redirect()->back();
+            }
+            else
+            {
+                toastr()->error('Aucune année n\'est activée');
+                return redirect()->back();
+            }
+
 
         } catch (Exception $th) {
 
@@ -36,7 +47,7 @@ class CongeController extends Controller
     }
     public function liste()
     {
-        $param = ParamTypeConge::all();
+        $param = ParamTypeConge::with('yeartable')->get();
 
         return view('conge.liste',[
             'param'=>$param,

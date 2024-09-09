@@ -37,7 +37,7 @@
                             @endif
                         </td>
                         <td>
-                            <button class="btn {{$year->active == '1' ? 'btn-danger' : 'btn-success'}}" onclick="toggleStatus({{$year->id}})">
+                            <button class="btn {{$year->active == '1' ? 'btn-danger' : 'btn-success'}}" wire:click="toggleStatus({{$year->id}})">
                                 {{
                                 $year->active == '1' ?
                                 'Rendre Inactif' :
