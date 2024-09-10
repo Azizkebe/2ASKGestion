@@ -49,11 +49,11 @@ class CreatePermission extends Component
     {
         $this->jours_pris =  $toDate->diffInDays($fromDate);
 
-        if($this->jours_pris > $this->nombre_de_jour)
+        if(($this->jours_pris > $this->nombre_de_jour) || ($this->jours_pris <= 3))
         {
 
             $this->nombre_de_jour = 0;
-            // $this->jours_pris = 0;
+
             $this->error = toastr()->error('Attention, Le nombre de jour demandé est superieur au nombre de jour resservé');
         }
         if(($this->nombre_de_jour === 0)and($this->nombre_de_jour <= 0))
@@ -63,10 +63,6 @@ class CreatePermission extends Component
             $this->error = 'Desolé, Vous avez pris toutes permissions accordées';
         }
     }
-
-
-
-
         $employe = Employe::all();
         $permissions = StatutPermission::all();
 
@@ -81,7 +77,7 @@ class CreatePermission extends Component
 
         $this->donnees_employe = Employe::where('id', $this->id_employe)->first();
 
-        $this->nombre_de_jour = $this->donnees_employe->nombre_jour_permission ?? 0;
+        // $this->nombre_de_jour = $this->donnees_employe->nombre_jour_permission ?? 0;
 
         $this->validate([
 
@@ -93,9 +89,8 @@ class CreatePermission extends Component
             'st_permission'=>'required',
             'imagepermission'=>'required|mimes:pdf|max:8192',
 
-
-
         ]);
+
         try {
             $permission->id_employe = $this->id_employe;
             $permission->date_depart = $this->date_depart;
@@ -106,23 +101,23 @@ class CreatePermission extends Component
 
             $permission->nombre_de_jour = $toDate->diffInDays($fromDate);
 
-            if($permission->nombre_de_jour > $this->nombre_de_jour )
-            {
-                $this->error = 'Attention, Le nombre de jour demandé est superieur au nombre de jour restant';
-                return redirect()->back()->with('error','Verifiez les informations de saisie');
+            // if($permission->nombre_de_jour > $this->nombre_de_jour )
+            // {
+            //     $this->error = 'Attention, Le nombre de jour demandé est superieur au nombre de jour restant';
+            //     return redirect()->back()->with('error','Verifiez les informations de saisie');
 
-            }
-            elseif(($this->nombre_de_jour === 0)and($this->nombre_de_jour <= 0))
-            {
-                $this->nombre_de_jour = 0;
-                $this->id_employe = 0;
-                $this->error = 'Desolé, Vous avez pris toutes vos permissions';
-            }
-            else
-            {
+            // }
+            // if(($this->nombre_de_jour === 0)and($this->nombre_de_jour <= 0))
+            // {
+            //     $this->nombre_de_jour = 0;
+            //     $this->id_employe = 0;
+            //     $this->error = 'Desolé, Vous avez pris toutes vos permissions';
+            // }
+
             $permission->commentaire =  $this->commentaire;
             $permission->id_statut_permission =  $this->st_permission;
 
+            dd($permission);
 
             $reussi = $permission->save();
             $this->handleImagePermissionUpload($reussi,$this->imagepermission,'CloudImagePermission/Permission','id_cloud_file_permission');
@@ -130,9 +125,9 @@ class CreatePermission extends Component
 
             if($reussi){
 
-                $this->nbr_jour_restant = $this->nombre_de_jour - $permission->nombre_de_jour;
+                // $this->nbr_jour_restant = $this->nombre_de_jour - $permission->nombre_de_jour;
 
-                $this->donnees_employe->update(['nombre_jour_permission'=> $this->nbr_jour_restant]);
+                // $this->donnees_employe->update(['nombre_jour_permission'=> $this->nbr_jour_restant]);
 
                 $nbr_existant = $this->donnees_employe->nombre_conge_program;
 
@@ -164,7 +159,7 @@ class CreatePermission extends Component
 
             return redirect()->route('permission.liste');
 
-            }
+
         }
         catch (Exception $e) {
                 throw new Exception("Erreur est survenue lors de l\'attribution d\'une permission ");
@@ -187,7 +182,11 @@ class CreatePermission extends Component
             {
 
              $permis = Permission::where('id_employe',$this->id_employe)->first();
-             $permis->update(['id_cloud_file_permission'=> $cloudfile->id]);
+             if($permis->id_cloud_file_permission == NULL)
+             {
+                 $permis->update(['id_cloud_file_permission'=> $cloudfile->id]);
+
+             }
 
             }
 

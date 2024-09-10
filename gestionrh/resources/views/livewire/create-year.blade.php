@@ -14,7 +14,7 @@
                 <input name="session_ouvert" class="form-control" placeholder="Annee de la session" type="text" value="{{old('session_ouvert')}}" wire:model.live="session_ouvert">
                 <div class="input-group">
                     @error('session_ouvert')
-                     <span class="error">L'annee de la session est requise</span>
+                     <span class="error">L'année de la session est requise</span>
                     @enderror
                 </div>
                 </div>

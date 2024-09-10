@@ -68,7 +68,7 @@
                         <span style="color:rgb(45, 139, 138)">Seul les fichiers extensions .pdf sont autorisés</span>
                     </div>
                    <div class="mt-2">
-                        @if ($justificative)
+                        @if ($justificative == NULL)
                         <p class="error">Veuillez joindre la justificative</p>
                         @endif
                    </div>

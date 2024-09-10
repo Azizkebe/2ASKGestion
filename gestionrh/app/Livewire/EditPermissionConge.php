@@ -32,7 +32,7 @@ class EditPermissionConge extends Component
         $this->date_depart = $permissionconge->date_depart;
 
         $photo_conge = CloudFileConge::where('id', $permissionconge->id_cloud_file_conge)->first();
-        $this->imageconge = $photo_conge->photo_conge;
+        // $this->imageconge = $photo_conge->photo_conge;
 
 
     }

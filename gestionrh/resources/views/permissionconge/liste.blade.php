@@ -58,17 +58,12 @@
                                 <td style="width:5px;">{{$conge->date_retour}}</td>
                                 <td>
                                 @if ($conge->imageconge)
-                                    <a href="{{asset('storage/'.$conge->imageconge->photo_conge)}}">
-                                        <img
-                                        style=" width:50px;
-                                    height:50px;
-                                    background-position:center;
-                                    background-size:cover;"
-                                        src="{{asset('storage/'.$conge->imageconge->photo_conge)}}" alt="">
-                                    </a>
+                                <a href="{{asset('storage/'.$conge->imageconge->photo_conge)}}">
+                                    <img style="height: 40px;" src="{{asset('icon/permission.png')}}"
+                                    title="permission de {{$conge->employe->nom}}" alt="permission" >
+                                </a>
                                 @endif
                                 </td>
-
                                 <td>
                                     <div class="form-button-action">
                                         <button

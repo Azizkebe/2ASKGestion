@@ -120,10 +120,13 @@
                 </div>
                 <div style="padding-left: 20px;" class="mt-3">
                     <label for="imageconge">Joindre la demande de congé</label>
-                    <input type="file" accept="image/jpg, image/png, image/jpeg" name="imageconge" id="imageconge" wire:model.live="imageconge">
+                    <input type="file" name="imageconge" id="imageconge" wire:model.live="imageconge">
                     <div>
-                        @if ($imageconge)
-                        <img style="width: 70px; height:70px;" src="{{$imageconge->temporaryUrl()}}" alt="">
+                        <span style="color:rgb(45, 139, 138)">Seul le fichiers extension .pdf est autorisé</span>
+                    </div>
+                   <div class="mt-2">
+                        @if ($imageconge == NULL)
+                        <p class="error">Veuillez joindre la demande de congé</p>
                         @endif
                    </div>
                 </div>

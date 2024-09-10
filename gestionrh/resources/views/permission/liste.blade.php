@@ -26,7 +26,7 @@
 
                         <th>Date de Depart</th>
                         <th>Date de Retour</th>
-                        <th>Justificatif</th>
+                        <th>Demande de Permission</th>
                         <th>Nombre de Jours de permission</th>
                         <th>Nombre de jours restant</th>
                         <th>Deduction au congé</th>
@@ -57,15 +57,19 @@
                                 <td style="width:20%; padding:(0px;">{{$permission->date_retour}}</td>
                                 <td>
                                     @if ($permission->imagepermission)
-                                    <a href="{{asset('storage/'.$permission->imagepermission->photo_permission)}}"><img
+                                    <a href="{{asset('storage/'.$permission->imagepermission->photo_permission)}}">
+                                        <img style="height: 40px;" src="{{asset('icon/permissionconge.png')}}"
+                                        title="permission de {{$permission->employe->nom}}" alt="permission" >
+                                    </a>
+                                    {{-- <a href="{{asset('storage/'.$permission->imagepermission->photo_permission)}}"><img
                                         style=" width:50px;
                                     height:50px;
                                     background-position:center;
                                     background-size:cover;"
                                         src="{{asset('storage/'.$permission->imagepermission->photo_permission)}}" alt="">
-                                    </a>
+                                    </a> --}}
 
-                                @endif
+                                    @endif
                                 </td>
                                 <td>{{$permission->nombre_de_jour}}</td>
                                 <td style="font-weight: bolder">{{$permission->employe->nombre_jour_permission}}</td>

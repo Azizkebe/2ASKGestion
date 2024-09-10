@@ -7,9 +7,6 @@
             </div>
         </div>
         <div class="card-body">
-            <div class="mb-1">
-
-            </div>
             <form action="" method="POST" wire:submit.prevent="update">
                 @csrf
                 @method('POST')
@@ -117,20 +114,17 @@
                 <div style="padding-left: 20px;" class="mt-3">
                     <label for="imageconge">Piece Justificative</label>
                     <input type="file" accept="image/jpg, image/png, image/jpeg" name="imageconge" id="imageconge" wire:model.live="imageconge">
-                    <div class="mt-2">
-                        @if ($imageconge)
-                        <span style="font-weight:bolder;">Image Anterieur: <img style="width:50px;" src="{{asset('storage/'.$imageconge)}}" alt=""></span>
 
-                        @else
-                        <span style="font-weight:bolder;">Nouvelle Image: <img style="width: 70px; height:70px;" src="{{$imageconge->temporary()}}" alt="image"></span>
-
-                        @endif
+                    <a href="{{asset('storage/'.$imageconge)}}">
+                        <img style="height: 50px;" src="{{asset('icon/permission.png')}}"
+                         alt="diplome">
+                    </a>
+                    <div>
+                        <span style="color:rgb(45, 139, 138)">Seul le fichier extensions pdf est autorisé</span>
                     </div>
-                    {{-- <div>
-                        @if ($imageconge)
-                        <img style="width: 70px; height:70px;" src="{{$imageconge->temporaryUrl()}}" alt="">
-                        @endif
-                   </div> --}}
+                    @error('imageconge')
+                        <span class="error">le champs ne peut pas etre vide</span>
+                    @enderror
                 </div>
 
                 <div style="display: flex; justify-content:center" class="mb-3 mt-3">

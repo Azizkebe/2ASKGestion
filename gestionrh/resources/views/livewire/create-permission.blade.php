@@ -127,7 +127,7 @@
                         <span style="color:rgb(45, 139, 138)">Seul le fichiers extension .pdf est autorisé</span>
                     </div>
                    <div class="mt-2">
-                        @if ($imagepermission)
+                        @if ($imagepermission == NULL )
                         <p class="error">Veuillez joindre la demande de permission</p>
                         @endif
                    </div>

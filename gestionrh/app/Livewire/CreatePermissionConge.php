@@ -19,7 +19,7 @@ class CreatePermissionConge extends Component
     use WithFileUploads;
     public $id_employe, $id_conge, $nombre_de_jour, $date_depart,
     $date_retour, $jours_pris, $nombre_de_jour_demande,$employe_conge,$session_encours,
-    $permission_conge, $nombre_restant_jour, $imageconge = '';
+    $permission_conge, $nombre_restant_jour, $imageconge;
     public function render()
     {
         $toDate = Carbon::parse($this->date_depart);
@@ -94,7 +94,10 @@ class CreatePermissionConge extends Component
             'nombre_de_jour'=>'integer|required',
             'date_depart'=>'string|required',
             'date_retour'=>'string|required',
-            'id_conge'=>'required',]);
+            'id_conge'=>'required',
+            'imageconge' =>'required|mimes:pdf|max:8192',
+
+        ]);
 
         try {
             $permission->id_employe = $this->id_employe;
@@ -123,8 +126,10 @@ class CreatePermissionConge extends Component
 
                 $permission->nombre_jours_pris = $this->nombre_de_jour_demande;
 
+
                 $reussi = $permission->save();
                 $this->handleImageCongeUpload($reussi,$this->imageconge,'CloudImageConge/Conge');
+
 
 
                 if($reussi){
@@ -195,9 +200,13 @@ class CreatePermissionConge extends Component
 
             if(isset($cloudfile->id))
             {
-
              $conge = PermissionConge::where('id_employe',$this->id_employe)->first();
-             $conge->update(['id_cloud_file_conge'=> $cloudfile->id]);
+
+             if($conge->id_cloud_file_conge == NULL)
+             {
+               $conge->update(['id_cloud_file_conge'=> $cloudfile->id]);
+
+             }
 
             }
 
