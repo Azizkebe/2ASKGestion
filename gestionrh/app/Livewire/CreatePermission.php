@@ -33,10 +33,8 @@ class CreatePermission extends Component
     public function render()
     {
 
-
         $toDate = Carbon::parse($this->date_depart);
         $fromDate = Carbon::parse($this->date_retour);
-
     // if(isset($this->id_employe)){
 
     //     $this->donnees_employe = Employe::where('id', $this->id_employe)->first();
@@ -50,24 +48,24 @@ class CreatePermission extends Component
         if($this->jours_pris > 3)
         {
 
-            $this->error = toastr()->error('Attention, la permission demandée ne devra pas depasser 3 jours');
+            toastr()->error('Attention, la permission demandée ne devra pas depasser 3 jours');
 
-            return redirect()->back();
+            // return redirect()->back();
         }
         if($this->jours_pris <= 0)
         {
             $this->error = 'Desolé, Vous ne pouvez pas programmer une permission';
-            return redirect()->back();
+            // return redirect()->back();
         }
     }
+
         $employe = Employe::all();
         $permissions = StatutPermission::all();
 
         return view('livewire.create-permission',[
             'employe'=>$employe,
             'permissions'=>$permissions,
-        ]
-    );
+            ]);
     }
     public function store(Permission $permission)
     {
