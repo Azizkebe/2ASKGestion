@@ -63,7 +63,7 @@
                         <span style="color:rgb(45, 139, 138)">Seul le fichier extension .pdf sont autorisé</span>
                     </div>
                    <div class="mt-2">
-                        @if ($diplome)
+                        @if ($diplome == NULL)
                         <p class="error">Veuillez joindre le diplome</p>
                         @endif
                    </div>

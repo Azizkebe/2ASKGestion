@@ -28,7 +28,7 @@
                         <th>Date de Retour</th>
                         <th>Demande de Permission</th>
                         <th>Nombre de Jours de permission</th>
-                        <th>Nombre de jours restant</th>
+                        {{-- <th>Nombre de jours restant</th> --}}
                         <th>Deduction au congé</th>
 
                         <th style="width: 5%">commentaire</th>
@@ -61,18 +61,10 @@
                                         <img style="height: 40px;" src="{{asset('icon/permissionconge.png')}}"
                                         title="permission de {{$permission->employe->nom}}" alt="permission" >
                                     </a>
-                                    {{-- <a href="{{asset('storage/'.$permission->imagepermission->photo_permission)}}"><img
-                                        style=" width:50px;
-                                    height:50px;
-                                    background-position:center;
-                                    background-size:cover;"
-                                        src="{{asset('storage/'.$permission->imagepermission->photo_permission)}}" alt="">
-                                    </a> --}}
-
                                     @endif
                                 </td>
                                 <td>{{$permission->nombre_de_jour}}</td>
-                                <td style="font-weight: bolder">{{$permission->employe->nombre_jour_permission}}</td>
+                                {{-- <td style="font-weight: bolder">{{$permission->employe->nombre_jour_permission}}</td> --}}
 
                                 <td>{{$permission->statutpermission->statut_permission ?? ''}}</td>
                                 <td>{{$permission->commentaire}}</td>

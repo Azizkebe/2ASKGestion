@@ -10,8 +10,8 @@
                 <h6 class="op-7 mb-2">Voir les donnees statistiques </h6>
               </div>
               <div class="ms-md-auto py-2 py-md-0">
-                <a href="{{route('permission.liste')}}" class="btn btn-label-info btn-round me-2">Liste des permissions</a>
-                <a href="{{route('permissionconge.liste')}}" class="btn btn-primary btn-round">Liste des congés</a>
+                <a href="{{route('permissionconge.liste')}}" class="btn btn-label-info btn-round me-2">Liste des congés</a>
+                <a href="{{route('setting.liste')}}" class="btn btn-primary btn-round">Prametrer l'annee</a>
               </div>
             </div>
         </div>

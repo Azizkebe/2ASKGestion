@@ -97,7 +97,7 @@ class CreatePermission extends Component
             $permission->commentaire =  $this->commentaire;
             $permission->id_statut_permission =  $this->st_permission;
 
-            dd($permission);
+            // dd($permission);
 
             $reussi = $permission->save();
             $this->handleImagePermissionUpload($reussi,$this->imagepermission,'CloudImagePermission/Permission','id_cloud_file_permission');
@@ -105,7 +105,7 @@ class CreatePermission extends Component
 
             if($reussi){
 
-                // $this->nbr_jour_restant = $this->nombre_de_jour - $permission->nombre_de_jour;
+                $this->nbr_jour_restant = $this->nombre_de_jour - $permission->nombre_de_jour;
 
                 // $this->donnees_employe->update(['nombre_jour_permission'=> $this->nbr_jour_restant]);
 
