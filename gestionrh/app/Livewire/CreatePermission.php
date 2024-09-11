@@ -37,30 +37,27 @@ class CreatePermission extends Component
         $toDate = Carbon::parse($this->date_depart);
         $fromDate = Carbon::parse($this->date_retour);
 
-    if(isset($this->id_employe)){
+    // if(isset($this->id_employe)){
 
-        $this->donnees_employe = Employe::where('id', $this->id_employe)->first();
-        $this->nombre_de_jour = $this->donnees_employe->nombre_jour_permission ?? 0;
-
-
-    }
+    //     $this->donnees_employe = Employe::where('id', $this->id_employe)->first();
+    //     $this->nombre_de_jour = $this->donnees_employe->nombre_jour_permission ?? 0;
+    // }
 
     if(isset($this->date_depart)&&(isset($this->date_retour)))
     {
         $this->jours_pris =  $toDate->diffInDays($fromDate);
 
-        if(($this->jours_pris > $this->nombre_de_jour) || ($this->jours_pris <= 3))
+        if($this->jours_pris > 3)
         {
 
-            $this->nombre_de_jour = 0;
+            $this->error = toastr()->error('Attention, la permission demandée ne devra pas depasser 3 jours');
 
-            $this->error = toastr()->error('Attention, Le nombre de jour demandé est superieur au nombre de jour resservé');
+            return redirect()->back();
         }
-        if(($this->nombre_de_jour === 0)and($this->nombre_de_jour <= 0))
+        if($this->jours_pris <= 0)
         {
-            $this->nombre_de_jour = 0;
-
-            $this->error = 'Desolé, Vous avez pris toutes permissions accordées';
+            $this->error = 'Desolé, Vous ne pouvez pas programmer une permission';
+            return redirect()->back();
         }
     }
         $employe = Employe::all();
@@ -77,12 +74,10 @@ class CreatePermission extends Component
 
         $this->donnees_employe = Employe::where('id', $this->id_employe)->first();
 
-        // $this->nombre_de_jour = $this->donnees_employe->nombre_jour_permission ?? 0;
-
         $this->validate([
 
             'id_employe'=>'integer|required',
-            'nombre_de_jour'=>'integer|required',
+            // 'nombre_de_jour'=>'integer|required',
             'date_depart'=>'string|required',
             'date_retour'=>'string|required',
             'commentaire'=>'string|required',
@@ -100,19 +95,6 @@ class CreatePermission extends Component
             $fromDate = Carbon::parse($this->date_retour);
 
             $permission->nombre_de_jour = $toDate->diffInDays($fromDate);
-
-            // if($permission->nombre_de_jour > $this->nombre_de_jour )
-            // {
-            //     $this->error = 'Attention, Le nombre de jour demandé est superieur au nombre de jour restant';
-            //     return redirect()->back()->with('error','Verifiez les informations de saisie');
-
-            // }
-            // if(($this->nombre_de_jour === 0)and($this->nombre_de_jour <= 0))
-            // {
-            //     $this->nombre_de_jour = 0;
-            //     $this->id_employe = 0;
-            //     $this->error = 'Desolé, Vous avez pris toutes vos permissions';
-            // }
 
             $permission->commentaire =  $this->commentaire;
             $permission->id_statut_permission =  $this->st_permission;
