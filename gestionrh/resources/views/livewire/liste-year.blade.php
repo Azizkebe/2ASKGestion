@@ -3,7 +3,7 @@
         <div class="card-header">
           <h4 class="card-title">Liste des annees</h4>
             <div style="display:flex; justify-content:end;">
-                <a href="{{route('setting.create')}}" class="btn btn-success btn-sm">Ajouter une Session</a>
+                <a href="{{route('setting.create')}}" class="btn btn-success btn-sm">Ajouter une Session</a>&nbsp;
             </div>
         </div>
         <div class="card-body">
@@ -18,9 +18,8 @@
                     <th>Session</th>
                     <th>Annee en Cours</th>
                     <th>Statut</th>
-
-
                     <th>Action</th>
+                    <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -66,6 +65,10 @@
                                 href="" class="btn btn-link btn-danger"><i class="fa fa-times"></i></a>
                                 </button>
                             </div>
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-warning fload-right" wire:click="ConfigureButton()">Migrer les conges restants</button>
+
                         </td>
 
                     </tr>

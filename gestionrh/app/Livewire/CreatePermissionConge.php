@@ -126,11 +126,8 @@ class CreatePermissionConge extends Component
 
                 $permission->nombre_jours_pris = $this->nombre_de_jour_demande;
 
-
                 $reussi = $permission->save();
                 $this->handleImageCongeUpload($reussi,$this->imageconge,'CloudImageConge/Conge');
-
-
 
                 if($reussi){
 

@@ -16,16 +16,6 @@ class EmployeController extends Controller
     {
         return view('employe.create');
     }
-    public function liste()
-    {
-        $employe = Employe::with(['genre','matrimonial','domaine','niveauetude',
-        'contrat','direction','service','antenne','bureau','poste',
-        'photo'])->get();
-
-        return view('employe.liste',[
-            'employe'=>$employe
-        ]);
-    }
     public function detail(int $employe)
     {
 
@@ -34,6 +24,10 @@ class EmployeController extends Controller
     public function editer($employe)
     {
         return view('employe.edit', compact('employe'));
+    }
+    public function liste()
+    {
+        return view('employe.liste');
     }
 
     public function editer_dossier($employe)

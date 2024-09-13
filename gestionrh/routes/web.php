@@ -24,6 +24,7 @@ use App\Http\Controllers\Permission\PermissionController;
 use App\Http\Controllers\Permission\PermissionCongeController;
 use App\Http\Controllers\Conge\CongeController;
 use App\Http\Controllers\Annee\YearController;
+use App\Http\Controllers\MigreConge\RestCongeController;
 use App\Http\Controllers\Contrat\FicheContratController;
 
 use App\Livewire\EditPhotoEmploye;
@@ -241,6 +242,11 @@ Route::middleware('auth')->group(function(){
         Route::get('create',[YearController::class,'create'])->name('setting.create');
         Route::get('liste',[YearController::class,'liste'])->name('setting.liste');
     });
+
+    // Route::prefix('migrer')->group(function(){
+    //     Route::get('create',[RestCongeController::class,'create'])->name('migrer.create');
+    //     Route::get('liste',[YearController::class,'liste'])->name('setting.liste');
+    // });
 });
 
 
