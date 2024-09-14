@@ -18,7 +18,7 @@
                   >
                     <thead>
                       <tr>
-                        {{-- <th>Re......</th> --}}
+                        <th>Re......</th>
                         <th></th>
                         <th>Nom</th>
                         <th>Prenom</th>

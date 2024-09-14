@@ -5,18 +5,17 @@ class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bo
   <nav
     class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex"
   >
-    {{-- <div class="input-group">
-      <div class="input-group-prepend">
-        <button type="submit" class="btn btn-search pe-1">
-          <i class="fa fa-search search-icon"></i>
-        </button>
-      </div>
-      <input
-        type="text"
-        placeholder="Search ..."
-        class="form-control"
-      />
-    </div> --}}
+    <div style=" display: flex;
+    align-items:flex-start;
+    justify-content:flex-start;
+    padding:5px;
+    margin:5px;">
+        <button style="background:#1a2035;" class="btn btn-sm"><a href="https://anpej.sn/accueil/" target="_blank" class="text-white" ><i class=" text-white fa fa-globe "></i> Site Officiel</a></button>&nbsp;
+        <button style="background:#1a2035;" class="btn btn-sm"><a href="https://webmail.anpej.sn/" target="_blank" class="text-white" ><i class=" text-white fa fa-envelope-open "></i> Webmail</a></button>&nbsp;
+        <button style="background:#1a2035;" class="btn  btn-sm"><a href="https://www.emploijeunes.sn/user/login" target="_blank" class="text-white" target="_blank" ><i class=" text-white fa fa-laptop "></i> Emploi-jeunes</a></button>&nbsp;
+        <button style="background:#1a2035;" class="btn  btn-sm"><a href="http://intervention.anpej.sn/login" class="text-white" target="_blank"><i class=" text-white fa fa-random "></i> Ges-Intervention</a></button>&nbsp;
+        <button style="background:#1a2035;" class="btn  btn-sm"><a href="http://10.0.0.133" target="_blank" class="text-white"><i class="text-white fa fa-database"></i> Ges-Stock</a></button>&nbsp;
+    </div>
   </nav>
 
   <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
@@ -31,7 +30,17 @@ class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bo
         aria-expanded="false"
         aria-haspopup="true"
       >
-        <i class="fa fa-search"></i>
+      <div style=" display: flex;
+      align-items:flex-start;
+      justify-content:flex-start;
+      padding:5px;
+      margin:5px;">
+          <button style="background:#1a2035;" class="btn btn-sm"><a href="https://anpej.sn/accueil/" target="_blank" class="text-white" ><i class=" text-white fa fa-globe "></i></a></button>&nbsp;
+          <button style="background:#1a2035;" class="btn btn-sm"><a href="https://webmail.anpej.sn/" target="_blank" class="text-white"><i class=" text-white fa fa-envelope-open "></i></a></button>&nbsp;
+          <button style="background:#1a2035;" class="btn  btn-sm"><a href="https://www.emploijeunes.sn/user/login" target="_blank" class="text-white" target="_blank" ><i class=" text-white fa fa-laptop "></i></a></button>&nbsp;
+          <button style="background:#1a2035;" class="btn  btn-sm"><a href="http://intervention.anpej.sn/login" class="text-white" target="_blank"><i class=" text-white fa fa-random "></i></a></button>&nbsp;
+          <button style="background:#1a2035;" class="btn  btn-sm"><a href="http://10.0.0.133" target="_blank" class="text-white"><i class="text-white fa fa-database"></i></a></button>&nbsp;
+      </div>
       </a>
       <ul class="dropdown-menu dropdown-search animated fadeIn">
         <form class="navbar-left navbar-form nav-search">
@@ -45,6 +54,7 @@ class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bo
         </form>
       </ul>
     </li>
+
     {{-- <li class="nav-item topbar-icon dropdown hidden-caret">
       <a
         class="nav-link dropdown-toggle"
