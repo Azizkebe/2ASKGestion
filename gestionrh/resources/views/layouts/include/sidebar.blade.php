@@ -78,6 +78,28 @@
             </div>
           </li>
           <li class="nav-item">
+            <a data-bs-toggle="collapse" href="#role">
+              <i class="fas fa-layer-group"></i>
+              <p>Role</p>
+              <span class="caret"></span>
+            </a>
+            <div class="collapse" id="role">
+              <ul class="nav nav-collapse">
+                <li>
+                  <a href="{{route('role.create')}}">
+                    <span class="sub-item">Ajouter un role</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="{{route('role.liste')}}">
+                    <span class="sub-item">Liste des roles</span>
+                  </a>
+                </li>
+
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
             <a data-bs-toggle="collapse" href="#sidebarLayouts">
               <i class="fas fa-th-list"></i>
               <p>Employe</p>

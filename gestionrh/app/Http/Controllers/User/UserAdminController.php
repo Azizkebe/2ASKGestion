@@ -170,7 +170,11 @@ class UserAdminController extends Controller
     }
     public function login()
     {
-        return view('frontend.auth.login');
+        if(!empty(Auth::check()))
+        {
+            return view('admin.dashboard');
+        }
+            return view('frontend.auth.login');
     }
     public function handlogin(HandloginRequest $request)
     {

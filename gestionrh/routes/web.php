@@ -23,6 +23,8 @@ use App\Http\Controllers\Employe\MonDiplomeController;
 use App\Http\Controllers\Permission\PermissionController;
 use App\Http\Controllers\Permission\PermissionCongeController;
 use App\Http\Controllers\Conge\CongeController;
+use App\Http\Controllers\Role\RoleController;
+use App\Http\Controllers\Role\PermissionTableController;
 use App\Http\Controllers\Annee\YearController;
 use App\Http\Controllers\MigreConge\RestCongeController;
 use App\Http\Controllers\Contrat\FicheContratController;
@@ -41,7 +43,7 @@ Route::middleware('guest')->group(function(){
   Route::get('/login',[UserAdminController::class, 'login'])->name('login');
   Route::post('/handlogin',[UserAdminController::class,'handlogin'])->name('handlogin');
 });
-Route::middleware('auth')->group(function(){
+Route::middleware('userAdmin')->group(function(){
     Route::get('/deconnexion',[UserAdminController::class,'deconnexion'])->name('deconnexion');
     Route::get('/dashboard', [UserAdminController::class,'tableaudebord'])->name('dashboard');
         return view('bienvenue');
@@ -52,7 +54,7 @@ Route::middleware('auth')->group(function(){
 
 });
 
-Route::middleware('auth')->group(function(){
+Route::middleware('userAdmin')->group(function(){
 
     Route::prefix('user')->group(function(){
         Route::get('/listeregister',[UserAdminController::class,'list_register'])->name('listregister');
@@ -243,10 +245,24 @@ Route::middleware('auth')->group(function(){
         Route::get('liste',[YearController::class,'liste'])->name('setting.liste');
     });
 
-    // Route::prefix('migrer')->group(function(){
-    //     Route::get('create',[RestCongeController::class,'create'])->name('migrer.create');
-    //     Route::get('liste',[YearController::class,'liste'])->name('setting.liste');
-    // });
+    Route::prefix('permissionrole')->group(function(){
+        Route::get('/create',[PermissionTableController::class, 'create'])->name('permissionrole.create');
+        Route::post('/create',[PermissionTableController::class, 'store'])->name('permissionrole.store');
+        Route::get('/liste',[PermissionTableController::class, 'liste'])->name('permissionrole.liste');
+        Route::get('/edit/{permissionrole}',[PermissionTableController::class, 'editer'])->name('permissionrole.editer');
+        Route::put('/update/{permissionrole}',[PermissionTableController::class, 'update'])->name('permissionrole.update');
+        Route::get('/delete/{permissionrole}',[PermissionTableController::class, 'delete'])->name('permissionrole.delete');
+
+    });
+    Route::prefix('role')->group(function(){
+        Route::get('/create',[RoleController::class, 'create'])->name('role.create');
+        Route::post('/create',[RoleController::class, 'store'])->name('role.store');
+        Route::get('/liste',[RoleController::class, 'liste'])->name('role.liste');
+        Route::get('/edit/{role}',[RoleController::class, 'editer'])->name('role.editer');
+        Route::put('/update/{role}',[RoleController::class, 'update'])->name('role.update');
+        Route::get('/delete/{role}',[RoleController::class, 'delete'])->name('role.delete');
+
+    });
 });
 
 
