@@ -38,6 +38,16 @@
               <div class="form-group input-group">
                 <input name="phone" class="form-control" placeholder="Telephone" type="number" value="{{$user->phone}}">
             </div>
+                <div class="form-group input-group">
+                    <div class="input-group">
+                        <select name="role_id" id="role_id" class="form-select">
+                            <option value="">-- Choississez un role --</option>
+                            @foreach ($role as $role)
+                            <option {{$user->role_id == $role->id ? 'selected' : ''}} value="{{$role->id}}">{{$role->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
               <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-block"> Enregistrer les modifications </button>
               </div>

@@ -22,8 +22,10 @@
                       <tr>
                         <th>Prenom</th>
                         <th>Nom</th>
+                        <th>Role</th>
                         <th>Telephone</th>
                         <th>Email</th>
+
                         <th style="width: 10%">Action</th>
                       </tr>
                         </thead>
@@ -32,6 +34,7 @@
                             <tr>
                                 <td>{{$user->username}}</td>
                                 <td>{{$user->name}}</td>
+                                <td>{{$user->role->name ?? ''}}</td>
                                 <td>{{$user->phone}}</td>
                                 <td>{{$user->email}}</td>
                                 <td>

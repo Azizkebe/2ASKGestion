@@ -51,13 +51,23 @@
                     @enderror
                 </div>
             </div>
-
+            <div class="form-group input-group">
+                <div class="input-group">
+                    <select name="role_id" id="role_id" class="form-select">
+                        <option value="">-- Choississez un role --</option>
+                        @foreach ($role as $role)
+                        <option value="{{$role->id}}">{{$role->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
               <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-block"> Creer le Compte  </button>
               </div>
-              <p class="text-center">
-                <a href="{{route('listregister')}}">Voir la liste</a>
-              </p>
+              <div style="display: flex; float:right">
+                <a class="btn btn-warning btn-sm" href="{{route('listregister')}}">Voir la liste des utilisateurs</a>
+              </div>
+
             </form>
           </div>
         </div>

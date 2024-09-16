@@ -15,6 +15,7 @@ use App\Models\Employe;
 use App\Models\FicheContrat;
 use App\Models\Membre;
 use App\Models\MyDiplome;
+use App\Models\RoleModel;
 use App\Models\Curriculum;
 use App\Models\Permission;
 use App\Models\PermissionConge;
@@ -32,7 +33,9 @@ class UserAdminController extends Controller
     }
     public function register()
     {
-        return view('admin.auth.register');
+        $role = RoleModel::all();
+
+        return view('admin.auth.register', compact('role'));
     }
     public function handleregister(HandRequest $request)
     {
@@ -44,6 +47,8 @@ class UserAdminController extends Controller
             $user->email = $request->email;
             $user->password = Hash::make('default');
             $user->phone = $request->phone;
+            $user->role_id = $request->role_id;
+
             // dd($user);
             $user->save();
 
@@ -124,8 +129,11 @@ class UserAdminController extends Controller
     public function edit($user)
     {
         $user = User::findOrFail($user);
-
-        return view('admin.auth.edit', compact('user'));
+        $role = RoleModel::all();
+        return view('admin.auth.edit',[
+            'user'=>$user,
+            'role'=>$role,
+        ]);
     }
     public function update($user, Request $request)
     {
@@ -136,7 +144,9 @@ class UserAdminController extends Controller
             $user->username = $request->username;
             $user->email = $request->email;
             $user->phone = $request->phone;
+            $user->role_id = $request->role_id;
 
+            // dd($user);
             $user->update();
 
             return redirect()->route('listregister')->with('success','Les infos de l\'utilisateurs sont mises à jour');

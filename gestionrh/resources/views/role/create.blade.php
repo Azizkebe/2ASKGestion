@@ -13,7 +13,6 @@
             <form action="{{route('role.store')}}" method="POST">
                 @csrf
                 @method('POST')
-
                 <div class="row mb-3 mt-3">
                     <label style="text-align: left;" for="inputText" class="col-sm-12 col-form-control">Nom</label>
                     <div class="col-sm-12">
@@ -40,7 +39,7 @@
                                         @foreach ($value['group'] as $group)
                                         <div class="col-md-4">
                                             <label for="">
-                                                <input type="checkbox" name="" id=""> {{$group['name']}}
+                                                <input type="checkbox" value="{{$group['id']}}" name="permission_id[]"> {{$group['name']}}
                                             </label>
 
                                         </div>
