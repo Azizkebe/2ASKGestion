@@ -23,6 +23,7 @@
                         <th>Prenom</th>
                         <th>Nom</th>
                         <th>Role</th>
+                        <th>Date de Creation</th>
                         <th>Telephone</th>
                         <th>Email</th>
 
@@ -34,7 +35,8 @@
                             <tr>
                                 <td>{{$user->username}}</td>
                                 <td>{{$user->name}}</td>
-                                <td>{{$user->role->name ?? ''}}</td>
+                                <td style="color:rgb(255, 25, 0)">{{$user->role->name ?? ''}}</td>
+                                <td>{{$user->created_at}}</td>
                                 <td>{{$user->phone}}</td>
                                 <td>{{$user->email}}</td>
                                 <td>

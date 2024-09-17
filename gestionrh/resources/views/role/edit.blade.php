@@ -10,13 +10,13 @@
             <div style="display: flex; justify-content:end;">
                 <p><a href="{{route('role.liste')}}" class="btn btn-success btn-sm">Liste des Roles</a></p>
             </div>
-            <form action="{{route('role.update',$role->id)}}" method="POST">
+            {{-- <form action="{{route('role.update',$role->id)}}" method="POST"> --}}
+            <form action="" method="POST">
                 @csrf
-                @method('PUT')
                 <div class="row mb-3 mt-3">
                     <label style="text-align: left;" for="inputText" class="col-sm-12 col-form-control">Nom</label>
                     <div class="col-sm-12">
-                        <input type="text" name="nom" placeholder="Nom" class="form-control" value="{{$role->name}}">
+                        <input type="text" name="nom" placeholder="Nom" class="form-control" value="{{$getRecord->name}}">
                     </div>
                     <div class="input-group">
                         @error('nom')
@@ -28,7 +28,7 @@
                     <label style="text-align: left;
                     display:block; margin-bottom:20px;" for="inputText" class="col-sm-12 col-form-control">Permission</label>
 
-                        @foreach ($result as $value)
+                        @foreach ($getPermission as $value)
 
                         <div style="margin-bottom: 20px; text-align:justify;" class="row">
 
@@ -52,6 +52,7 @@
                                         <div class="col-md-4">
                                             <label for="">
                                                 <input type="checkbox" {{$checked}} value="{{$group['id']}}" name="permission_id[]"> {{$group['name']}}
+                                                {{-- <input type="checkbox" value="{{$group['id']}}" name="permission_id[]"> {{$group['name']}} --}}
                                             </label>
 
                                         </div>

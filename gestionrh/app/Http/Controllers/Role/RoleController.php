@@ -60,38 +60,45 @@ class RoleController extends Controller
     }
     public function editer($role)
     {
-        $getPermission = PermissionModel::groupBy('groupby')->get();
-        $result = [];
-        foreach($getPermission as $value)
-        {
-            $getPermissionGroup = PermissionModel::where('groupby',$value->groupby)->get();
-            $data = [];
-            $data['id'] = $value->id;
-            $data['name'] = $value->name;
-            $group = [];
-            foreach($getPermissionGroup as $valueG)
-            {
-                $dataG = [];
-                $dataG['id'] = $valueG->id;
-                $dataG['name'] = $valueG->name;
-                $group[] = $dataG;
-            }
-            $data['group'] = $group;
-            $result[] = $data;
-        }
+        // $getPermission = PermissionModel::groupBy('groupby')->get();
+        // $result = [];
+        // foreach($getPermission as $value)
+        // {
+        //     $getPermissionGroup = PermissionModel::where('groupby',$value->groupby)->get();
+        //     $data = [];
+        //     $data['id'] = $value->id;
+        //     $data['name'] = $value->name;
+        //     $group = [];
+        //     foreach($getPermissionGroup as $valueG)
+        //     {
+        //         $dataG = [];
+        //         $dataG['id'] = $valueG->id;
+        //         $dataG['name'] = $valueG->name;
+        //         $group[] = $dataG;
+        //     }
+        //     $data['group'] = $group;
+        //     $result[] = $data;
+        // }
 
-        $role = RoleModel::findOrFail($role);
-        $getRolePermission = PermissionRoleModel::where('role_id', $role->id)->get();
+        // $role = RoleModel::findOrFail($role);
+        // $getRolePermission = PermissionRoleModel::where('role_id', $role->id)->get();
 
-        return view('role.edit',[
-            'role'=>$role,
-            'result'=>$result,
-            'getRolePermission' => $getRolePermission,
-        ]);
+        // return view('role.edit',[
+        //     'role'=>$role,
+        //     'result'=>$result,
+        //     'getRolePermission' => $getRolePermission,
+        // ]);
+        $data['getRecord'] = RoleModel::getSingle($role);
+        $data['getPermission'] = PermissionModel::getRecord();
+        $data['getRolePermission'] = PermissionRoleModel::getRolePermission($role);
+
+        return view('role.edit', $data);
+
     }
     public function update(Request $request, $role)
     {
-        $role = RoleModel::findOrFail($role);
+        // dd($request->all());
+        $role = RoleModel::getSingle($role);
 
         $role->name = $request->nom;
 

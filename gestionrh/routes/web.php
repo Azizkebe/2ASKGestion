@@ -259,7 +259,7 @@ Route::middleware('userAdmin')->group(function(){
         Route::post('/create',[RoleController::class, 'store'])->name('role.store');
         Route::get('/liste',[RoleController::class, 'liste'])->name('role.liste');
         Route::get('/edit/{role}',[RoleController::class, 'editer'])->name('role.editer');
-        Route::put('/update/{role}',[RoleController::class, 'update'])->name('role.update');
+        Route::post('/edit/{role}',[RoleController::class, 'update'])->name('role.update');
         Route::get('/delete/{role}',[RoleController::class, 'delete'])->name('role.delete');
 
     });

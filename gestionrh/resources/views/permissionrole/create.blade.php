@@ -31,7 +31,7 @@
                 </div>
                 <div class="form-group input-group">
 
-                    <input name="groupby" class="form-control" placeholder="Groupby Ex: 1"  type="number" min="1" value="{{old('groupby')}}">
+                    <input name="groupby" class="form-control" placeholder="Groupby Ex: 1"  type="number" min="0" value="{{old('groupby')}}">
                     <div class="input-group">
                         @error('groupby')
                          <span class="error">{{$message}}</span>

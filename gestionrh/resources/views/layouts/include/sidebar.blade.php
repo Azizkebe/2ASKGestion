@@ -55,6 +55,17 @@
             </span>
             <h4 class="text-section">Components</h4>
           </li>
+          @php
+              $permissionUser = App\Models\PermissionRoleModel::getPermission('User', Auth::user()->role_id);
+              $permissionUser = App\Models\PermissionRoleModel::getPermission('Dashboard', Auth::user()->role_id);
+              $permissionUser = App\Models\PermissionRoleModel::getPermission('Role', Auth::user()->role_id);
+              $permissionUser = App\Models\PermissionRoleModel::getPermission('Employe', Auth::user()->role_id);
+              $permissionUser = App\Models\PermissionRoleModel::getPermission('Contrat', Auth::user()->role_id);
+              $permissionUser = App\Models\PermissionRoleModel::getPermission('Membre', Auth::user()->role_id);
+              $permissionUser = App\Models\PermissionRoleModel::getPermission('Diplome', Auth::user()->role_id);
+              $permissionUser = App\Models\PermissionRoleModel::getPermission('CV', Auth::user()->role_id);
+              $permissionUser = App\Models\PermissionRoleModel::getPermission('Permission', Auth::user()->role_id);
+          @endphp
           <li class="nav-item">
             <a data-bs-toggle="collapse" href="#base">
               <i class="fas fa-layer-group"></i>
