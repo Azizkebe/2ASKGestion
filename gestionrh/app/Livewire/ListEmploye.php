@@ -8,6 +8,8 @@ use Carbon\Carbon;
 use App\Models\YearTable;
 use App\Models\ParamTypeConge;
 use App\Models\PermissionConge;
+use App\Models\PermissionRoleModel;
+use Auth;
 
 
 class ListEmploye extends Component
@@ -74,10 +76,27 @@ class ListEmploye extends Component
     }
     public function render()
     {
+        $permissionEmploye = PermissionRoleModel::getPermission('Employe', Auth::user()->role_id);
+        if(empty($permissionEmploye))
+        {
+            abort('404');
+        }
+
+        $PermissionAdd = PermissionRoleModel::getPermission('Ajouter Employe', Auth::user()->role_id);
+        $PermissionEdit = PermissionRoleModel::getPermission('Editer Employe', Auth::user()->role_id);
+        $PermissionDel = PermissionRoleModel::getPermission('Delete Employe', Auth::user()->role_id);
+
 
         $employe = Employe::with(['genre','matrimonial','domaine','niveauetude',
         'contrat','direction','service','antenne','bureau','poste',
         'photo'])->get();
-        return view('livewire.list-employe', compact('employe'));
+        return view('livewire.list-employe', [
+            'employe'=> $employe,
+            'PermissionAdd'=> $PermissionAdd,
+            'PermissionEdit'=> $PermissionEdit,
+            'PermissionDel'=> $PermissionDel,
+
+
+        ]);
     }
 }

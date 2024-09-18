@@ -17,6 +17,7 @@ class MembreController extends Controller
     }
     public function liste()
     {
+
         $membre = Membre::with(['employe','typemembre'])->get();
         return view('membre.liste',[
             'membre'=>$membre,

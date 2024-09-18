@@ -4,10 +4,13 @@
                 <div class="card-header">
                     <div class="d-flex align-items-center">
                     <h4 class="card-title">Liste des Employe</h4>
-                    <button class="btn btn-primary btn-round ms-auto">
-                        <a href="{{route('employe.create')}}" class="text-white"><i class="fa fa-plus"></i> Ajouter un Employe</a>
-                        {{-- <button class="btn btn-sm" wire:click="ConfigureButton()" wire:model.live="test">Config</button> --}}
+                   @if (!empty($PermissionAdd))
+                   <button class="btn btn-primary btn-round ms-auto">
+                    <a href="{{route('employe.create')}}" class="text-white"><i class="fa fa-plus"></i> Ajouter un Employe</a>
+                    {{-- <button class="btn btn-sm" wire:click="ConfigureButton()" wire:model.live="test">Config</button> --}}
                     </button>
+                    @endif
+
                     </div>
                 </div>
               <div class="card-body">
@@ -28,7 +31,9 @@
                         <th>Service</th>
 
                         <th style="width: 5%">Detail</th>
+                        @if (!empty($PermissionEdit)||(!empty($PermissionDel)))
                         <th style="width: 10%">Action</th>
+                        @endif
                         <th></th>
                       </tr>
                         </thead>
@@ -59,6 +64,7 @@
                                 <td>{{$employe->service->service ?? ''}}</td>
                                 <td>
                                     <div class="form-button-action">
+                                        @if (!empty($PermissionEdit))
                                         <button
                                         type="button"
                                         data-bs-toggle="tooltip"
@@ -69,20 +75,13 @@
                                         <a href="{{route('employe.detail',$employe->id)}}"><i class="fa fa-info"></i></a>
 
                                         </button>
+                                        @endif
+
                                     </div>
                                 </td>
                                 <td>
                                     <div class="form-button-action">
-                                        <button
-                                        type="button"
-                                        data-bs-toggle="tooltip"
-                                        title=""
-                                        class="btn btn-link btn-primary btn-lg"
-                                        data-original-title="Edit Task"
-                                        >
-                                        <a href="{{route('employe.editer',$employe->id)}}"><i class="fa fa-edit"></i></a>
-
-                                        </button>
+                                        @if (!empty($PermissionDel))
                                         <button
                                         type="button"
                                         data-bs-toggle="tooltip"
@@ -92,6 +91,8 @@
                                         ><a onclick="return confirm('Etes vous sure de vouloir supprimer l\'employe')"
                                         href="{{route('employe.delete',$employe->id)}}" class="btn btn-link btn-danger"><i class="fa fa-times"></i></a>
                                         </button>
+                                        @endif
+
                                     </div>
                                 </td>
                                 <td></td>

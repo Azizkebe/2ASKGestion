@@ -53,13 +53,12 @@ class CreateMembre extends Component
             $reponse = $this->justificative->storeAs('CloudImageMembre/Employe', $fileName, 'public');
             $membre->photo_justificative = $reponse;
 
-            // dd($membre);
             $membre->save();
-            $this->render();
+
             toastr()->success('Le membre est enregisté avec succes');
 
-            return redirect()->back();
-            resetValue();
+            return redirect()->route('membre.liste');
+
 
         } catch (Exception $e) {
             throw new Exception("Erreur survenue lors de l'enregistrement", 1);

@@ -7,9 +7,11 @@
                 <div class="card-header">
                     <div class="d-flex align-items-center">
                     <h4 class="card-title">Liste des Curriculum Vitae</h4>
+                    @if (!empty($PermissionAdd))
                     <button class="btn btn-primary btn-round ms-auto">
                         <a href="{{route('curriculum.create')}}" class="text-white"><i class="fa fa-plus"></i> Ajouter un curriculum</a>
                     </button>
+                    @endif
                     </div>
                 </div>
               <div class="card-body">
@@ -26,8 +28,9 @@
                         <th>Commentaire</th>
                         <th>Date de la derniere mise à jour</th>
                         <th>Curriculum Vitea</th>
-
+                        @if (!empty($PermissionEdit)||(!empty($PermissionDel)))
                         <th style="width: 10%">Action</th>
+                        @endif
                       </tr>
                         </thead>
                             <tbody>
@@ -67,6 +70,7 @@
 
                                 <td>
                                     <div class="form-button-action">
+                                        @if (!empty($PermissionEdit))
                                         <button
                                         type="button"
                                         data-bs-toggle="tooltip"
@@ -76,6 +80,9 @@
                                         ><a href="{{route('curriculum.edit', $cv->id)}}"><i class="fa fa-edit"></i></a>
 
                                         </button>
+                                        @endif
+
+                                        @if (!empty($PermissionDel))
                                         <button
                                         type="button"
                                         data-bs-toggle="tooltip"
@@ -85,6 +92,8 @@
                                         ><a onclick="return confirm('Etes vous sure de vouloir supprimer le CV de l\'employe')"
                                         href="{{route('curriculum.delete',$cv->id)}}" class="btn btn-link btn-danger"><i class="fa fa-times"></i></a>
                                         </button>
+                                        @endif
+
                                     </div>
                                 </td>
                                 </tr>

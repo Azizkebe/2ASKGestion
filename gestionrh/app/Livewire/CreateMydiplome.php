@@ -48,7 +48,7 @@ class CreateMydiplome extends Component
             $diplome->save();
             toastr()->success('Le diplome est enregisté avec succes');
 
-            return redirect()->back();
+            return redirect()->route('mydiplome.liste');
 
 
         } catch (Exception $e) {

@@ -72,8 +72,8 @@ class CreateFicheContrat extends Component
 
             toastr()->success('le contrat est enregistré avec succes');
 
-            return redirect()->back();
-            $this->render();
+            return redirect()->route('fiche_contrat.liste');
+            // $this->render();
 
            } catch (Exception $e) {
                 throw new Exception("Erreur survenue lors de l'enregistrement", 1);

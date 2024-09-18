@@ -42,7 +42,7 @@ class CreateCurriculum extends Component
             $curriculum->save();
             toastr()->success('Le CV est enregisté avec succes');
 
-            return redirect()->back();
+            return redirect()->route('curriculum.liste');
             resetValue();
 
         } catch (Exception $e) {

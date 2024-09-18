@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Contrat;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\FicheContrat;
+use App\Models\PermissionRoleModel;
+use Auth;
 
 use App\Http\Requests\FicheContratRequest;
 
@@ -16,10 +18,23 @@ class FicheContratController extends Controller
     }
     public function liste()
     {
+        $permissionContrat = PermissionRoleModel::getPermission('Contrat', Auth::user()->role_id);
+        if(empty($permissionContrat))
+        {
+            abort('404');
+        }
+
+        $PermissionAdd = PermissionRoleModel::getPermission('Ajouter Contrat', Auth::user()->role_id);
+        $PermissionEdit = PermissionRoleModel::getPermission('Editer Contrat', Auth::user()->role_id);
+        $PermissionDel = PermissionRoleModel::getPermission('Delete Contrat', Auth::user()->role_id);
+
         $fichecontrat = FicheContrat::all();
 
         return view('fichecontrat.liste',[
             'fichecontrat'=>$fichecontrat,
+            'PermissionAdd'=> $PermissionAdd,
+            'PermissionEdit'=> $PermissionEdit,
+            'PermissionDel'=> $PermissionDel,
         ]);
     }
     public function edit($fichecontrat)

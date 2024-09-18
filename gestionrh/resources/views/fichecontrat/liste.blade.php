@@ -7,9 +7,12 @@
                 <div class="card-header">
                     <div class="d-flex align-items-center">
                     <h4 class="card-title">Liste des contrats</h4>
+                    @if (!empty($PermissionAdd))
                     <button class="btn btn-primary btn-round ms-auto">
                         <a href="{{route('fiche_contrat.create')}}" class="text-white"><i class="fa fa-plus"></i> Ajouter un contrat</a>
                     </button>
+                    @endif
+
                     </div>
                 </div>
               <div class="card-body">
@@ -27,8 +30,9 @@
                         <th  style="width: 10%">Debut du contrat</th>
                         <th  style="width: 10%">Fin du contrat</th>
                         <th>Commentaire</th>
-
+                        @if (!empty($PermissionEdit) ||(!empty($PermissionAdd)))
                         <th style="width: 10%">Action</th>
+                        @endif
                       </tr>
                         </thead>
                             <tbody>
@@ -62,6 +66,7 @@
                                 <td>{{$contrat->commentaire}}</td>
                                 <td>
                                     <div class="form-button-action">
+                                        @if (!empty($PermissionEdit))
                                         <button
                                         type="button"
                                         data-bs-toggle="tooltip"
@@ -69,8 +74,9 @@
                                         class="btn btn-link btn-primary btn-lg"
                                         data-original-title="Edit Task"
                                         ><a href="{{route('fiche_contrat.editer', $contrat->id)}}"><i class="fa fa-edit"></i></a>
-
                                         </button>
+                                        @endif
+                                        @if (!empty($PermissionDel))
                                         <button
                                         type="button"
                                         data-bs-toggle="tooltip"
@@ -80,6 +86,8 @@
                                         ><a onclick="return confirm('Etes vous sure de vouloir supprimer la fiche du contrat')"
                                         href="{{route('fiche_contrat.delete',$contrat->id)}}" class="btn btn-link btn-danger"><i class="fa fa-times"></i></a>
                                         </button>
+                                        @endif
+
                                     </div>
                                 </td>
                                 </tr>
