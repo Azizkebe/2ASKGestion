@@ -27,45 +27,53 @@
     </div>
     <div class="sidebar-wrapper scrollbar scrollbar-inner">
       <div class="sidebar-content">
+
         <ul class="nav nav-secondary">
-          <li class="nav-item active">
-            <a
-              data-bs-toggle="collapse"
-              href="#dashboard"
-              class="collapsed"
-              aria-expanded="false"
-            >
-              <i class="fas fa-home"></i>
-              <p>Dashboard</p>
-              <span class="caret"></span>
-            </a>
-            <div class="collapse" id="dashboard">
-              <ul class="nav nav-collapse">
-                <li>
-                  <a href="{{route('dashboard')}}">
-                    <span class="sub-item">Tableau de bord</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </li>
+            @php
+            $permissionUser = App\Models\PermissionRoleModel::getPermission('User', Auth::user()->role_id);
+            $permissionDashboard = App\Models\PermissionRoleModel::getPermission('Dashboard', Auth::user()->role_id);
+            $permissionRole = App\Models\PermissionRoleModel::getPermission('Role', Auth::user()->role_id);
+            $permissionEmploye = App\Models\PermissionRoleModel::getPermission('Employe', Auth::user()->role_id);
+            $permissionContrat = App\Models\PermissionRoleModel::getPermission('Contrat', Auth::user()->role_id);
+            // $permissionMembre = App\Models\PermissionRoleModel::getPermission('Membre', Auth::user()->role_id);
+            $permissionDiplome = App\Models\PermissionRoleModel::getPermission('Diplome', Auth::user()->role_id);
+            $permissionCV = App\Models\PermissionRoleModel::getPermission('CV', Auth::user()->role_id);
+            $permissionconge = App\Models\PermissionRoleModel::getPermission('Permission', Auth::user()->role_id);
+            $permissionsetting= App\Models\PermissionRoleModel::getPermission('Setting', Auth::user()->role_id);
+            @endphp
+            @if (!empty($permissionDashboard))
+
+            <li class="nav-item active">
+                <a
+                  data-bs-toggle="collapse"
+                  href="#dashboard"
+                  class="collapsed"
+                  aria-expanded="false"
+                >
+                  <i class="fas fa-home"></i>
+                  <p>Dashboard</p>
+                  <span class="caret"></span>
+                </a>
+                <div class="collapse" id="dashboard">
+                  <ul class="nav nav-collapse">
+                    <li>
+                      <a href="{{route('dashboard')}}">
+                        <span class="sub-item">Tableau de bord</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            @endif
+
           <li class="nav-section">
             <span class="sidebar-mini-icon">
               <i class="fa fa-ellipsis-h"></i>
             </span>
             <h4 class="text-section">Components</h4>
           </li>
-          @php
-              $permissionUser = App\Models\PermissionRoleModel::getPermission('User', Auth::user()->role_id);
-              $permissionUser = App\Models\PermissionRoleModel::getPermission('Dashboard', Auth::user()->role_id);
-              $permissionUser = App\Models\PermissionRoleModel::getPermission('Role', Auth::user()->role_id);
-              $permissionUser = App\Models\PermissionRoleModel::getPermission('Employe', Auth::user()->role_id);
-              $permissionUser = App\Models\PermissionRoleModel::getPermission('Contrat', Auth::user()->role_id);
-              $permissionUser = App\Models\PermissionRoleModel::getPermission('Membre', Auth::user()->role_id);
-              $permissionUser = App\Models\PermissionRoleModel::getPermission('Diplome', Auth::user()->role_id);
-              $permissionUser = App\Models\PermissionRoleModel::getPermission('CV', Auth::user()->role_id);
-              $permissionUser = App\Models\PermissionRoleModel::getPermission('Permission', Auth::user()->role_id);
-          @endphp
+
+          @if (!empty($permissionUser))
           <li class="nav-item">
             <a data-bs-toggle="collapse" href="#base">
               <i class="fas fa-layer-group"></i>
@@ -88,6 +96,8 @@
               </ul>
             </div>
           </li>
+          @endif
+          @if (!empty($permissionRole))
           <li class="nav-item">
             <a data-bs-toggle="collapse" href="#role">
               <i class="fas fa-layer-group"></i>
@@ -110,6 +120,8 @@
               </ul>
             </div>
           </li>
+          @endif
+          @if (!empty($permissionEmploye))
           <li class="nav-item">
             <a data-bs-toggle="collapse" href="#sidebarLayouts">
               <i class="fas fa-th-list"></i>
@@ -151,7 +163,8 @@
               </ul>
             </div>
           </li>
-
+          @endif
+          @if (!empty($permissionconge))
           <li class="nav-item">
             <a data-bs-toggle="collapse" href="#permission">
               <i class="fas fa-layer-group"></i>
@@ -183,6 +196,9 @@
               </ul>
             </div>
           </li>
+          @endif
+          @if (!empty($permissionsetting))
+
 
           <li class="nav-item">
             <a data-bs-toggle="collapse" href="#submenu">
@@ -447,9 +463,10 @@
                                                 <li>
                                             </li>
                                         </ul>
-                                        </div>
-                                    </li>
-                                    </ul>
-                                </div>
-                                </div>
-  </div>
+                                    </div>
+                            </li>
+                    </ul>
+            </div>
+        @endif
+    </div>
+</div>

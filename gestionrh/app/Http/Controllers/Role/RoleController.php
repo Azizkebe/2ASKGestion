@@ -8,6 +8,7 @@ use App\Models\RoleModel;
 use App\Models\PermissionModel;
 use App\Models\PermissionRoleModel;
 use App\Http\Requests\RoleRequest;
+use Auth;
 
 class RoleController extends Controller
 {
@@ -54,9 +55,25 @@ class RoleController extends Controller
     }
     public function liste()
     {
+        $permissionRole = PermissionRoleModel::getPermission('Role', Auth::user()->role_id);
+        if(empty($permissionRole))
+        {
+            abort('404');
+        }
 
-        $role = RoleModel::all();
-        return view('role.liste', compact('role'));
+        $data['PermissionAdd'] = PermissionRoleModel::getPermission('Ajouter Role', Auth::user()->role_id);
+        $data['PermissionEdit'] = PermissionRoleModel::getPermission('Editer Role', Auth::user()->role_id);
+        $data['PermissionDel'] = PermissionRoleModel::getPermission('Delete Role', Auth::user()->role_id);
+
+
+        $data['getRecord'] = RoleModel::getRecordRole();
+
+        // dd($data);
+        return view('role.liste', $data);
+
+        // $role = RoleModel::all();
+        // return view('role.liste', compact('role'));
+
     }
     public function editer($role)
     {

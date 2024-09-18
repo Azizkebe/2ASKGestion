@@ -15,7 +15,7 @@ class RoleModel extends Model
     {
         return RoleModel::findOrFail($role);
     }
-    static function getRecord()
+    static public function getRecord()
     {
         $getPermission = PermissionModel::groupBy('groupby')->get();
         $result = [];
@@ -38,5 +38,9 @@ class RoleModel extends Model
         }
         return $result;
 
+    }
+    static public function getRecordRole()
+    {
+        return RoleModel::get();
     }
 }

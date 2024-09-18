@@ -56,9 +56,6 @@
   <body>
     <div class="wrapper">
       <!-- Sidebar -->
-     @include('layouts.include.sidebar')
-      <!-- End Sidebar -->
-
       <div class="main-panel">
         <div class="main-header">
           <div class="main-header-logo">
@@ -99,6 +96,10 @@
 
        @include('layouts.include.footer')
       </div>
+     @include('layouts.include.sidebar')
+      <!-- End Sidebar -->
+
+
 
       <!-- Custom template | don't include it in your project! -->
 

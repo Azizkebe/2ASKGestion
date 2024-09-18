@@ -18,7 +18,7 @@
                   >
                     <thead>
                       <tr>
-                        <th>Re......</th>
+                        {{-- <th>Re......</th> --}}
                         <th></th>
                         <th>Nom</th>
                         <th>Prenom</th>
@@ -36,9 +36,9 @@
                              @forelse ($employe as $employe)
                             <tr>
 
-                                <td>
+                                {{-- <td>
                                     <button class="btn btn-warning btn-sm" wire:click="ConfigureButton({{$employe->id}})">Migrer les conges restants</button>
-                                </td>
+                                </td> --}}
                                 <td>
                                     @if ($employe->photo)
                                         <div style="background-image: url('{{asset('storage/'.

@@ -30,7 +30,7 @@ class PermissionRoleModel extends Model
     static public function getPermission($slug, $role_id)
     {
         return PermissionRoleModel::select('permission_role_models.id')
-        ->join('permission_models','permission_id','=','permission_role_models.permission_id')
+        ->join('permission_models','permission_models.id','=','permission_role_models.permission_id')
         ->where('permission_role_models.role_id','=',$role_id)
         ->where('permission_models.slug','=',$slug)->count();
     }
