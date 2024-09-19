@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Employe;
 use App\Models\Membre;
 use App\Models\TypeMembre;
+use App\Models\PermissionRoleModel;
+use Auth;
 
 class MembreController extends Controller
 {
@@ -17,6 +19,15 @@ class MembreController extends Controller
     }
     public function liste()
     {
+        $permissionMembre = PermissionRoleModel::getPermission('Membre', Auth::user()->role_id);
+        if(empty($permissionMembre))
+        {
+            abort('404');
+        }
+
+        $PermissionAdd = PermissionRoleModel::getPermission('Ajouter Membre', Auth::user()->role_id);
+        $PermissionEdit = PermissionRoleModel::getPermission('Editer Membre', Auth::user()->role_id);
+        $PermissionDel = PermissionRoleModel::getPermission('Supprimer Membre', Auth::user()->role_id);
 
         $membre = Membre::with(['employe','typemembre'])->get();
         return view('membre.liste',[

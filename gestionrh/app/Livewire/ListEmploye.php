@@ -84,7 +84,7 @@ class ListEmploye extends Component
 
         $PermissionAdd = PermissionRoleModel::getPermission('Ajouter Employe', Auth::user()->role_id);
         $PermissionEdit = PermissionRoleModel::getPermission('Editer Employe', Auth::user()->role_id);
-        $PermissionDel = PermissionRoleModel::getPermission('Delete Employe', Auth::user()->role_id);
+        $PermissionDel = PermissionRoleModel::getPermission('Supprimer Employe', Auth::user()->role_id);
 
 
         $employe = Employe::with(['genre','matrimonial','domaine','niveauetude',

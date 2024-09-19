@@ -7,9 +7,11 @@
                 <div class="card-header">
                     <div class="d-flex align-items-center">
                     <h4 class="card-title">Liste des diplomes</h4>
+                    @if (!empty($PermissionAdd))
                     <button class="btn btn-primary btn-round ms-auto">
                         <a href="{{route('mydiplome.create')}}" class="text-white"><i class="fa fa-plus"></i> Ajouter un diplome</a>
                     </button>
+                    @endif
                     </div>
                 </div>
               <div class="card-body">
@@ -27,8 +29,9 @@
                         <th>Commentaire</th>
                         <th>Date Obtention du diplome</th>
                         <th>Justificatif</th>
-
+                        @if (!empty($PermissionEdit)||($PermissionDel))
                         <th style="width: 10%">Action</th>
+                        @endif
                       </tr>
                         </thead>
                             <tbody>
@@ -65,6 +68,7 @@
 
                                 <td>
                                     <div class="form-button-action">
+                                        @if (!empty($PermissionEdit))
                                         <button
                                         type="button"
                                         data-bs-toggle="tooltip"
@@ -74,6 +78,9 @@
                                         ><a href="{{route('mydiplome.edit', $mydiplome->id)}}"><i class="fa fa-edit"></i></a>
 
                                         </button>
+                                        @endif
+
+                                        @if (!empty($PermissionDel))
                                         <button
                                         type="button"
                                         data-bs-toggle="tooltip"
@@ -83,6 +90,7 @@
                                         ><a onclick="return confirm('Etes vous sure de vouloir supprimer le diplome de l\'employe')"
                                         href="{{route('mydiplome.delete',$mydiplome->id)}}" class="btn btn-link btn-danger"><i class="fa fa-times"></i></a>
                                         </button>
+                                        @endif
                                     </div>
                                 </td>
                                 </tr>

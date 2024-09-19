@@ -30,7 +30,7 @@
                         <th  style="width: 10%">Debut du contrat</th>
                         <th  style="width: 10%">Fin du contrat</th>
                         <th>Commentaire</th>
-                        @if (!empty($PermissionEdit) ||(!empty($PermissionAdd)))
+                        @if (!empty($PermissionEdit) ||(!empty($PermissionDel)))
                         <th style="width: 10%">Action</th>
                         @endif
                       </tr>

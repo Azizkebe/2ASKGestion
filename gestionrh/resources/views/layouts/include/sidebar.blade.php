@@ -30,16 +30,19 @@
 
         <ul class="nav nav-secondary">
             @php
-            $permissionUser = App\Models\PermissionRoleModel::getPermission('User', Auth::user()->role_id);
-            $permissionDashboard = App\Models\PermissionRoleModel::getPermission('Dashboard', Auth::user()->role_id);
-            $permissionRole = App\Models\PermissionRoleModel::getPermission('Role', Auth::user()->role_id);
+            $permissionUser = App\Models\PermissionRoleModel::getPermission('Utilisateur', Auth::user()->role_id);
+            $permissionDashboard = App\Models\PermissionRoleModel::getPermission('Tableau de bord', Auth::user()->role_id);
+            $permissionRole = App\Models\PermissionRoleModel::getPermission('Profil', Auth::user()->role_id);
             $permissionEmploye = App\Models\PermissionRoleModel::getPermission('Employe', Auth::user()->role_id);
             $permissionContrat = App\Models\PermissionRoleModel::getPermission('Contrat', Auth::user()->role_id);
-            // $permissionMembre = App\Models\PermissionRoleModel::getPermission('Membre', Auth::user()->role_id);
+            $permissionMembre = App\Models\PermissionRoleModel::getPermission('Membre', Auth::user()->role_id);
             $permissionDiplome = App\Models\PermissionRoleModel::getPermission('Diplome', Auth::user()->role_id);
             $permissionCV = App\Models\PermissionRoleModel::getPermission('CV', Auth::user()->role_id);
             $permissionconge = App\Models\PermissionRoleModel::getPermission('Permission', Auth::user()->role_id);
-            $permissionsetting= App\Models\PermissionRoleModel::getPermission('Setting', Auth::user()->role_id);
+            $permissionsetting= App\Models\PermissionRoleModel::getPermission('Configuration', Auth::user()->role_id);
+            $permission_conge = App\Models\PermissionRoleModel::getPermission('Conge', Auth::user()->role_id);
+            $permission_Permission = App\Models\PermissionRoleModel::getPermission('Permission', Auth::user()->role_id);
+            $permissionGroup = App\Models\PermissionRoleModel::getPermission('Group_Permission', Auth::user()->role_id);
             @endphp
             @if (!empty($permissionDashboard))
 
@@ -97,6 +100,30 @@
             </div>
           </li>
           @endif
+          @if (!empty($permissionGroup))
+          <li class="nav-item">
+            <a data-bs-toggle="collapse" href="#groupe">
+              <i class="fas fa-layer-group"></i>
+              <p>Groupe de Permission</p>
+              <span class="caret"></span>
+            </a>
+            <div class="collapse" id="groupe">
+              <ul class="nav nav-collapse">
+                <li>
+                  <a href="{{route('permissionrole.create')}}">
+                    <span class="sub-item">Ajouter un group de permission</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="{{route('permissionrole.liste')}}">
+                    <span class="sub-item">Liste des groupes</span>
+                  </a>
+                </li>
+
+              </ul>
+            </div>
+          </li>
+          @endif
           @if (!empty($permissionRole))
           <li class="nav-item">
             <a data-bs-toggle="collapse" href="#role">
@@ -140,38 +167,111 @@
                     <span class="sub-item">Liste des Employes</span>
                   </a>
                 </li>
+              </ul>
+            </div>
+          </li>
+          @endif
+          @if (!empty($permissionContrat))
+          <li class="nav-item">
+            <a data-bs-toggle="collapse" href="#contrat">
+              <i class="fas fa-layer-group"></i>
+              <p>Contrat</p>
+              <span class="caret"></span>
+            </a>
+            <div class="collapse" id="contrat">
+              <ul class="nav nav-collapse">
                 <li>
-                    <a href="{{route('fiche_contrat.create')}}">
-                      <span class="sub-item">Ajouter un contrat</span>
-                    </a>
+                  <a href="{{route('fiche_contrat.create')}}">
+                    <span class="sub-item">Ajouter un contrat</span>
+                  </a>
                 </li>
                 <li>
-                    <a href="{{route('membre.create')}}">
-                      <span class="sub-item">Ajouter un membre</span>
-                    </a>
+                  <a href="{{route('fiche_contrat.liste')}}">
+                    <span class="sub-item">Liste des contrats</span>
+                  </a>
+                </li>
+
+              </ul>
+            </div>
+          </li>
+          @endif
+          @if (!empty($permissionMembre))
+          <li class="nav-item">
+            <a data-bs-toggle="collapse" href="#membre">
+              <i class="fas fa-layer-group"></i>
+              <p>Membre</p>
+              <span class="caret"></span>
+            </a>
+            <div class="collapse" id="membre">
+              <ul class="nav nav-collapse">
+                <li>
+                  <a href="{{route('membre.create')}}">
+                    <span class="sub-item">Ajouter un membre</span>
+                  </a>
                 </li>
                 <li>
-                    <a href="{{route('mydiplome.create')}}">
-                      <span class="sub-item">Ajouter un diplome</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{route('curriculum.create')}}">
-                      <span class="sub-item">Ajouter un curriculum vitae</span>
-                    </a>
+                  <a href="{{route('membre.liste')}}">
+                    <span class="sub-item">Liste des membres</span>
+                  </a>
                 </li>
               </ul>
             </div>
           </li>
           @endif
-          @if (!empty($permissionconge))
+          @if (!empty($permissionDiplome))
           <li class="nav-item">
-            <a data-bs-toggle="collapse" href="#permission">
+            <a data-bs-toggle="collapse" href="#diplome">
               <i class="fas fa-layer-group"></i>
-              <p>Permission & Congé</p>
+              <p>Diplome</p>
               <span class="caret"></span>
             </a>
-            <div class="collapse" id="permission">
+            <div class="collapse" id="diplome">
+              <ul class="nav nav-collapse">
+                <li>
+                  <a href="{{route('mydiplome.create')}}">
+                    <span class="sub-item">Ajouter un diplome</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="{{route('mydiplome.liste')}}">
+                    <span class="sub-item">Liste des diplomes</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          @endif
+          @if (!empty($permissionCV))
+          <li class="nav-item">
+            <a data-bs-toggle="collapse" href="#cv">
+              <i class="fas fa-layer-group"></i>
+              <p>Curriculum Vitae</p>
+              <span class="caret"></span>
+            </a>
+            <div class="collapse" id="cv">
+              <ul class="nav nav-collapse">
+                <li>
+                  <a href="{{route('curriculum.create')}}">
+                    <span class="sub-item">Ajouter un cv</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="{{route('curriculum.liste')}}">
+                    <span class="sub-item">Liste des cv</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          @endif
+          @if (!empty($permission_Permission))
+          <li class="nav-item">
+            <a data-bs-toggle="collapse" href="#permission_permission">
+              <i class="fas fa-layer-group"></i>
+              <p>Demande de permission</p>
+              <span class="caret"></span>
+            </a>
+            <div class="collapse" id="permission_permission">
               <ul class="nav nav-collapse">
                 <li>
                   <a href="{{route('permission.create')}}">
@@ -183,6 +283,19 @@
                     <span class="sub-item">Liste des permissions</span>
                   </a>
                 </li>
+              </ul>
+            </div>
+          </li>
+          @endif
+          @if (!empty($permission_conge))
+          <li class="nav-item">
+            <a data-bs-toggle="collapse" href="#permission">
+              <i class="fas fa-layer-group"></i>
+              <p>Demande de Congé</p>
+              <span class="caret"></span>
+            </a>
+            <div class="collapse" id="permission">
+              <ul class="nav nav-collapse">
                 <li>
                     <a href="{{route('permissionconge.create')}}">
                       <span class="sub-item">Assigner un congé</span>
@@ -198,8 +311,6 @@
           </li>
           @endif
           @if (!empty($permissionsetting))
-
-
           <li class="nav-item">
             <a data-bs-toggle="collapse" href="#submenu">
               <i class="fas fa-bars"></i>

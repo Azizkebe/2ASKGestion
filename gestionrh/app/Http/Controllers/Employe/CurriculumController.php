@@ -24,7 +24,7 @@ class CurriculumController extends Controller
 
         $PermissionAdd = PermissionRoleModel::getPermission('Ajouter CV', Auth::user()->role_id);
         $PermissionEdit = PermissionRoleModel::getPermission('Editer CV', Auth::user()->role_id);
-        $PermissionDel = PermissionRoleModel::getPermission('Delete CV', Auth::user()->role_id);
+        $PermissionDel = PermissionRoleModel::getPermission('Supprimer CV', Auth::user()->role_id);
 
         $curriculum = Curriculum::with('employe')->get();
 

@@ -55,15 +55,15 @@ class RoleController extends Controller
     }
     public function liste()
     {
-        $permissionRole = PermissionRoleModel::getPermission('Role', Auth::user()->role_id);
+        $permissionRole = PermissionRoleModel::getPermission('Profil', Auth::user()->role_id);
         if(empty($permissionRole))
         {
             abort('404');
         }
 
-        $data['PermissionAdd'] = PermissionRoleModel::getPermission('Ajouter Role', Auth::user()->role_id);
-        $data['PermissionEdit'] = PermissionRoleModel::getPermission('Editer Role', Auth::user()->role_id);
-        $data['PermissionDel'] = PermissionRoleModel::getPermission('Delete Role', Auth::user()->role_id);
+        $data['PermissionAdd'] = PermissionRoleModel::getPermission('Ajouter Profil', Auth::user()->role_id);
+        $data['PermissionEdit'] = PermissionRoleModel::getPermission('Editer Profil', Auth::user()->role_id);
+        $data['PermissionDel'] = PermissionRoleModel::getPermission('Supprimer Profil', Auth::user()->role_id);
 
 
         $data['getRecord'] = RoleModel::getRecordRole();

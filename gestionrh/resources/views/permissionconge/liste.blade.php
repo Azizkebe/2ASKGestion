@@ -7,9 +7,11 @@
                 <div class="card-header">
                     <div class="d-flex align-items-center">
                     <h4 class="card-title">Liste des congés autorisés</h4>
+                    @if (!empty($PermissionAdd))
                     <button class="btn btn-primary btn-round ms-auto">
                         <a href="{{route('permissionconge.create')}}" class="text-white"><i class="fa fa-plus"></i>Assigner un Congé</a>
                     </button>
+                    @endif
                     </div>
                 </div>
               <div class="card-body">
@@ -30,8 +32,9 @@
                         <th>Date de Retour</th>
                         <th>Justificative</th>
                         <th>Nombre de jours restants</th>
-
+                        @if (!empty($PermissionEdit)||(!empty($PermissionDel)))
                         <th style="width: 10%">Action</th>
+                        @endif
                       </tr>
                         </thead>
                             <tbody>
@@ -66,6 +69,7 @@
                                 </td>
                                 <td>
                                     <div class="form-button-action">
+                                        @if (!empty($PermissionEdit))
                                         <button
                                         type="button"
                                         data-bs-toggle="tooltip"
@@ -74,12 +78,14 @@
                                         data-original-title="Edit Task"
                                         >
                                         <a href="{{route('permissionconge.editer', $conge->id)}}"><i class="fa fa-edit"></i></a>
-
                                         </button>
+                                        @endif
+
                                     </div>
                                 </td>
                                 <td>
                                     <div class="form-button-action">
+                                        @if (!empty($PermissionDel))
                                         <button
                                         type="button"
                                         data-bs-toggle="tooltip"
@@ -88,8 +94,9 @@
                                         data-original-title="delete Task"
                                         >
                                         <a onclick="return confirm('Etes vous sure de vouloir supprimer le congé')" href="{{route('permissionconge.delete', $conge->id)}}"><i class="fa fa-trash"></i></a>
-
                                         </button>
+                                        @endif
+
                                     </div>
                                 </td>
                                 </tr>

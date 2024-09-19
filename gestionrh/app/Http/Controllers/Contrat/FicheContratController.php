@@ -26,7 +26,7 @@ class FicheContratController extends Controller
 
         $PermissionAdd = PermissionRoleModel::getPermission('Ajouter Contrat', Auth::user()->role_id);
         $PermissionEdit = PermissionRoleModel::getPermission('Editer Contrat', Auth::user()->role_id);
-        $PermissionDel = PermissionRoleModel::getPermission('Delete Contrat', Auth::user()->role_id);
+        $PermissionDel = PermissionRoleModel::getPermission('Supprimer Contrat', Auth::user()->role_id);
 
         $fichecontrat = FicheContrat::all();
 
