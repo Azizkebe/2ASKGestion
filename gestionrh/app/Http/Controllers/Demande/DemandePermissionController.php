@@ -9,6 +9,6 @@ class DemandePermissionController extends Controller
 {
     public function create()
     {
-        return view('demande.permission');
+        return view('demande.create');
     }
 }

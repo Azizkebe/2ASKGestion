@@ -28,6 +28,7 @@ use App\Http\Controllers\Role\PermissionTableController;
 use App\Http\Controllers\Annee\YearController;
 use App\Http\Controllers\MigreConge\RestCongeController;
 use App\Http\Controllers\Contrat\FicheContratController;
+use App\Http\Controllers\Demande\DemandePermissionController;
 
 use App\Livewire\EditPhotoEmploye;
 
@@ -261,6 +262,13 @@ Route::middleware('userAdmin')->group(function(){
         Route::get('/edit/{role}',[RoleController::class, 'editer'])->name('role.editer');
         Route::post('/edit/{role}',[RoleController::class, 'update'])->name('role.update');
         Route::get('/delete/{role}',[RoleController::class, 'delete'])->name('role.delete');
+
+    });
+    Route::prefix('demandepermission')->group(function(){
+        Route::get('create',[DemandePermissionController::class, 'create'])->name('demandepermission.create');
+        Route::get('liste',[DemandePermissionController::class, 'liste'])->name('demandepermission.liste');
+        Route::get('/edit/{permissionconge}',[DemandePermissionController::class, 'edit'])->name('demandepermission.editer');
+        Route::get('/delete/{permissionconge}',[DemandePermissionController::class, 'delete'])->name('demandepermission.delete');
 
     });
 });
