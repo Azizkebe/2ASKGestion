@@ -2,7 +2,7 @@
 
 @section('content')
 
-@livewire('create-demande-permission')
+@livewire('create-permission-demande')
 
 @endsection
 

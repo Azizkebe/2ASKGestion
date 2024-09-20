@@ -87,7 +87,6 @@
                     data-provide="datepicker" data-date-autoclose="true"
                     data-date-format="d/m/yyyy" data-date-today-highlight="true"
                     onchange="this.dispatchEvent(new InputEvent('input'))">
-
                     <script>
                          $(document).ready(function(){
                             $('#date_r').datepicker({

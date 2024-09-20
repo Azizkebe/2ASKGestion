@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class DemandePermissionController extends Controller
 {
+
     public function create()
     {
         return view('demande.create');

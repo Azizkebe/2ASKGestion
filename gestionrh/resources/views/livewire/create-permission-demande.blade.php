@@ -1,25 +1,22 @@
-@extends('layouts.website')
-
-@section('content')
 <div class="container-fluid">
     <div class="card">
         <div class="card-header bg-primary">
             <div class="card-title text-white">Demande de Permission</div>
             <div style="display: flex; justify-content:end;">
-                <a href="{{route('employe.liste')}}" class="btn btn-success btn-md"> Liste des Employe</a>
+                <a href="" class="btn btn-success btn-md"> Liste des demandes en attente</a>
             </div>
         </div>
         <div class="card-body">
-            <form action="" method="POST">
+            <form action="">
                 @csrf
                 @method('POST')
                 <div class="mt-3">
                     <label for="prename">Prenom</label>
-                    <input type="text" class="form-control" name="prenom" id="prenom" placeholder="Prenom" wire:model.live="prenom">
+                    <input type="text" class="form-control" name="prenom" id="prenom" placeholder="Prenom" wire:model.live="prenom" readonly>
                 </div>
                 <div class="mt-3">
                     <label for="prename">Nom</label>
-                    <input type="text" class="form-control" name="nom" id="nom" placeholder="nom" wire:model.live="nom">
+                    <input type="text" class="form-control" name="nom" id="nom" placeholder="nom" wire:model.live="nom" readonly>
                 </div>
                 <div class="mt-3">
                     <label for="prename">Date de depart</label>
@@ -69,22 +66,25 @@
                     </script>
                 </div>
                 <div class="mt-3">
-                    <textarea class="form-control" name="motif_permission" id="motif_permission" cols="10" rows="5" wire:model.live="motif_permission"></textarea>
+                    <label for=""> Nombre de jours souhaité:
+                        <input type="number" class="btn btn-sm btn-success" name="nombre_jours_pris" id="nombre_jours_pris" wire:model.live="nombre_jours_pris" readonly>
+                    </label>
                 </div>
                 <div class="mt-3">
+                    <textarea class="form-control" name="motif_permission" id="motif_permission" cols="10" rows="5" wire:model.live="motif_permission"></textarea>
+                </div>
+
+                <div class="mt-3">
                     <label for="chef_antenne"> Chef Antenne</label>
-                    <select name="" id="" class="form-control">
+                    <select name="id_chef_antenne" id="" class="form-select" wire:model.live="id_chef_antenne">
                         <option value="">OPTION 1</option>
-                        <option value="">OPTION 1</option>
+                        <option value="">OPTION 2</option>
                     </select>
                 </div>
-              <div class="mt-3">
-                <button type="submit" class="btn btn-primary btn-block"> Envoyer la demande </button>
-              </div>
+                <div style="display: flex; justify-content:center;" class="mt-3">
+                    <button type="submit" class="btn btn-primary btn-block text-center"> Envoyer la demande </button>
+                </div>
             </form>
         </div>
     </div>
 </div>
-
-
-@endsection
