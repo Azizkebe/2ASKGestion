@@ -1,15 +1,15 @@
 <div class="container-fluid">
     <div class="card">
         <div class="card-header bg-primary">
-            <div class="card-title text-white">Demande de Permission</div>
+            <div class="card-title text-white">Modification la demande de Permission</div>
             <div style="display: flex; justify-content:end;">
-                <a href="" class="btn btn-success btn-md"> Liste des demandes en attente</a>
+                <a href="{{route('demandepermission.liste')}}" class="btn btn-success btn-md"> Liste des demandes en attente</a>
             </div>
         </div>
         <div class="card-body">
-            <form action="" method="POST" wire:submit.prevent="store">
+            <form action="" method="POST" wire:submit.prevent="update">
                 @csrf
-                @method('POST')
+                @method('PUT')
                 <div class="mt-3">
                     <label for="prename">Prenom</label>
                     <input type="text" class="form-control" name="prenom" id="prenom" placeholder="Prenom" wire:model.live="prenom" readonly>
@@ -129,17 +129,9 @@
                     </select>
                 </div>
                 @endif
-                {{-- <div class="mt-3">
-                    <label for="chef_antenne"> Chef Antenne</label>
-                    <select name="id_chef_antenne" id="" class="form-select" wire:model.live="id_chef_antenne">
-                        @foreach ($users_antenne as $antenne)
-                            <option value="{{$antenne->id}}">{{$antenne->username}} {{$antenne->name}}</option>
-                        @endforeach
-                    </select>
-                </div> --}}
 
                 <div style="display: flex; justify-content:center;" class="mt-3">
-                    <button type="submit" class="btn btn-primary btn-block text-center"> Envoyer la demande </button>
+                    <button type="submit" class="btn btn-primary btn-block text-center"> Mettre à jour la demande </button>
                 </div>
             </form>
         </div>

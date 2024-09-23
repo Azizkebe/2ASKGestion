@@ -267,8 +267,8 @@ Route::middleware('userAdmin')->group(function(){
     Route::prefix('demandepermission')->group(function(){
         Route::get('create',[DemandePermissionController::class, 'create'])->name('demandepermission.create');
         Route::get('liste',[DemandePermissionController::class, 'liste'])->name('demandepermission.liste');
-        Route::get('/edit/{permissionconge}',[DemandePermissionController::class, 'edit'])->name('demandepermission.editer');
-        Route::get('/delete/{permissionconge}',[DemandePermissionController::class, 'delete'])->name('demandepermission.delete');
+        Route::get('/edit/{demandepermission}',[DemandePermissionController::class, 'edit'])->name('demandepermission.editer');
+        Route::get('/delete/{demandepermission}',[DemandePermissionController::class, 'delete'])->name('demandepermission.delete');
 
     });
 });

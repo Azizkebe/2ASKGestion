@@ -18,8 +18,10 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('date_depart')->nullable();
             $table->string('date_retour')->nullable();
+            $table->string('nombre_jour')->nullable();
             $table->string('motif_demande')->nullable();
-
+            $table->string('id_chef_antenne')->nullable();
+            $table->enum('Demande',['En cours','Acceptée','Rejetée'])->default('En cours');
             $table->timestamps();
         });
     }

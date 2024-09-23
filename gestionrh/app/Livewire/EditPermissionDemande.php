@@ -9,7 +9,7 @@ use App\Models\DemandePermission;
 use Auth;
 use Carbon\Carbon;
 
-class CreatePermissionDemande extends Component
+class EditPermissionDemande extends Component
 {
     public $prenom;
     public $nom;
@@ -19,6 +19,23 @@ class CreatePermissionDemande extends Component
     public $nombre_jours_pris;
     public $id_chef_antenne;
     public $users;
+    public $demandepermission;
+
+    public function mount($demandepermission)
+    {
+
+        $permission = DemandePermission::findOrFail($this->demandepermission);
+
+        $this->prenom = $permission->prenom;
+        $this->nom = $permission->nom;
+
+        $this->date_retour = $permission->date_retour;
+        $this->date_depart = $permission->date_depart;
+        $this->nombre_jours_pris = $permission->nombre_jour;
+        $this->motif_permission = $permission->motif_demande;
+        $this->id_chef_antenne = $permission->id_chef_antenne;
+
+    }
 
     public function render()
     {
@@ -53,14 +70,15 @@ class CreatePermissionDemande extends Component
             }
 
         }
-
-        return view('livewire.create-permission-demande',[
+        return view('livewire.edit-permission-demande',[
             'users_antenne'=>  $users_antenne,
             'users_directeur'=> $users_directeur,
         ]);
     }
-    public function store(DemandePermission $permission)
+    public function update(DemandePermission $demandepermission)
     {
+        $permission = DemandePermission::findOrFail($this->demandepermission);
+
         $this->validate([
 
             'nom'=>'required',
@@ -74,6 +92,7 @@ class CreatePermissionDemande extends Component
         ]);
 
         try {
+
             $toDate = Carbon::parse($this->date_depart);
             $fromDate = Carbon::parse($this->date_retour);
 
@@ -98,15 +117,22 @@ class CreatePermissionDemande extends Component
             $permission->motif_demande = $this->motif_permission;
             $permission->id_chef_antenne = $this->id_chef_antenne;
 
-            $permission->save();
-            toastr()->success('Bravo, La demande a été transféré au chef d\'antenne');
+            if ($permission->Demande == 'En cours')
+            {
+                $permission->update();
+                toastr()->success('Bravo, La demande a été modifiée');
+                return redirect()->route('demandepermission.liste');
 
-            return redirect()->route('demandepermission.liste');
+            }
+            else
+            {
+                $this->nombre_jours_pris = '';
+                toastr()->error('Vous ne pouvez pas modifier la demande, Elle a été dejà traitée');
+            }
 
         } catch (Exception $e) {
-            throw new Exception("Erreur survenue lors de l'enregistrement");
-
+            throw new Exception('Erreur survenue lors de la mise à jour');
         }
-    }
 
+    }
 }
