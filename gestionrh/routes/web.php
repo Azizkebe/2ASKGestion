@@ -29,6 +29,7 @@ use App\Http\Controllers\Annee\YearController;
 use App\Http\Controllers\MigreConge\RestCongeController;
 use App\Http\Controllers\Contrat\FicheContratController;
 use App\Http\Controllers\Demande\DemandePermissionController;
+use App\Http\Controllers\Demande\DemandeAntenneController;
 
 use App\Livewire\EditPhotoEmploye;
 
@@ -269,6 +270,13 @@ Route::middleware('userAdmin')->group(function(){
         Route::get('liste',[DemandePermissionController::class, 'liste'])->name('demandepermission.liste');
         Route::get('/edit/{demandepermission}',[DemandePermissionController::class, 'edit'])->name('demandepermission.editer');
         Route::get('/delete/{demandepermission}',[DemandePermissionController::class, 'delete'])->name('demandepermission.delete');
+
+    });
+    Route::prefix('demandeantenne')->group(function(){
+        Route::get('create',[DemandeAntenneController::class, 'create'])->name('demandeantenne.create');
+        Route::get('liste',[DemandeAntenneController::class, 'liste'])->name('demandeantenne.liste');
+        Route::get('/edit/{demandeantenne}',[DemandeAntenneController::class, 'edit'])->name('demandeantenne.editer');
+        Route::get('/delete/{demandeantenne}',[DemandeAntenneController::class, 'delete'])->name('demandeantenne.delete');
 
     });
 });

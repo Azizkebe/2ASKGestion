@@ -333,9 +333,9 @@ class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bo
                   class="avatar-img rounded"/>
               </div>
               <div class="u-text">
-                <h4>{{Auth::user()->username}} {{Auth::user()->name}} </h4>
-                <p class="text-muted">{{Auth::user()->email}}</p>
-                <p class="text-muted">Profil: {{Auth::user()->role->name}}</p>
+                <h4>{{Auth::user()->username}} {{Auth::user()->name ?? ''}} </h4>
+                <p class="text-muted">{{Auth::user()->email ?? ''}}</p>
+                <p class="text-muted">Profil: {{Auth::user()->role->name ?? ''}}</p>
                 <a href="{{route('profil_user',Auth::user()->id)}}"
                   class="btn btn-xs btn-secondary btn-sm">Voir Profil</a>
               </div>

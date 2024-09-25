@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('nombre_jour')->nullable();
             $table->string('motif_demande')->nullable();
             $table->string('id_chef_antenne')->nullable();
-            $table->enum('Demande',['En cours','Acceptée','Rejetée'])->default('En cours');
+
             $table->timestamps();
         });
     }

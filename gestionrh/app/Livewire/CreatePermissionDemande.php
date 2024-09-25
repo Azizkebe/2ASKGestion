@@ -97,7 +97,9 @@ class CreatePermissionDemande extends Component
 
             $permission->motif_demande = $this->motif_permission;
             $permission->id_chef_antenne = $this->id_chef_antenne;
+            $permission->id_statut_permission = '1';
 
+            // dd($permission);
             $permission->save();
             toastr()->success('Bravo, La demande a été transféré au chef d\'antenne');
 

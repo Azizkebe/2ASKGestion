@@ -43,7 +43,8 @@
             $permission_conge = App\Models\PermissionRoleModel::getPermission('Conge', Auth::user()->role_id);
             $permission_Permission = App\Models\PermissionRoleModel::getPermission('Permission', Auth::user()->role_id);
             $permissionGroup = App\Models\PermissionRoleModel::getPermission('Group_Permission', Auth::user()->role_id);
-            $permissionDemandEmploye= App\Models\PermissionRoleModel::getPermission('Chef Antenne', Auth::user()->role_id);
+            $permissionDemandEmploye= App\Models\PermissionRoleModel::getPermission('Permission_Employe', Auth::user()->role_id);
+            $permissionantenne= App\Models\PermissionRoleModel::getPermission('Liste demande antenne', Auth::user()->role_id);
             @endphp
             @if (!empty($permissionDashboard))
 
@@ -177,26 +178,48 @@
           <li class="nav-item">
             <a data-bs-toggle="collapse" href="#permissionemploye">
               <i class="fas fa-layer-group"></i>
-              <p>Demande Employe</p>
+              <p>Demande de permission</p>
               <span class="caret"></span>
             </a>
             <div class="collapse" id="permissionemploye">
               <ul class="nav nav-collapse">
                 <li>
                   <a href="{{route('demandepermission.create')}}">
-                    <span class="sub-item">Employe - permission</span>
+                    <span class="sub-item">Ajouter une permission</span>
                   </a>
                 </li>
                 <li>
                   <a href="{{route('demandepermission.liste')}}">
-                    <span class="sub-item">Liste des Permission Employe</span>
+                    <span class="sub-item">Liste de mes Permissions</span>
                   </a>
                 </li>
               </ul>
             </div>
           </li>
           @endif
-
+          @if (!empty($permissionantenne))
+          <li class="nav-item">
+            <a data-bs-toggle="collapse" href="#demandeantenne">
+              <i class="fas fa-layer-group"></i>
+              <p>Permissions soumis</p>
+              <span class="caret"></span>
+            </a>
+            <div class="collapse" id="demandeantenne">
+              <ul class="nav nav-collapse">
+                {{-- <li>
+                  <a href="{{route('demandepermission.create')}}">
+                    <span class="sub-item">Employe - permission</span>
+                  </a>
+                </li> --}}
+                <li>
+                  <a href="{{route('demandeantenne.liste')}}">
+                    <span class="sub-item">Liste des demandes à traiter </span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          @endif
           @if (!empty($permissionContrat))
           <li class="nav-item">
             <a data-bs-toggle="collapse" href="#contrat">

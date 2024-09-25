@@ -47,8 +47,6 @@ class EditPermissionDemande extends Component
 
         $users = User::where('role_id', Auth::user()->role_id)->get();
 
-        // dd(Auth::user()->role->name);
-
         $role_directeur = RoleModel::where('name','Directeur')->first();
         $role_antenne = RoleModel::where('name','Chef Antenne')->first();
         $role_employeur = RoleModel::where('name','Employe')->first();
