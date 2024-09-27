@@ -19,10 +19,9 @@ class EditDemandeAntenne extends Component
     public $motif_permission;
     public $nombre_jours_pris;
     public $id_chef_antenne;
-    public $users;
     public $demandeantenne;
     public $statut_demande;
-    public $id_directeur;
+    public $id_responsable;
     public $rep;
 
     public function mount($demandeantenne)
@@ -54,6 +53,11 @@ class EditDemandeAntenne extends Component
 
             $this->rep = "0";
         }
+        // if(isset($this->id_responsable))
+        // {
+        //     $users = User::where('id', $this->id_responsable)->get();
+        //     dd($users);
+        // }
 
         $role_resp = RoleModel::where('name','Ressource Humaine')->first();
         $users_resp = User::where('role_id', $role_resp->id)->get();
@@ -94,14 +98,23 @@ class EditDemandeAntenne extends Component
                 $this->nombre_jours_pris =  '';
                 $permission->nombre_jour =  $this->nombre_jours_pris;
             }
-            if ($permission->statut->statut_demande == 'En cours')
+            if($permission->statut->statut_demande == 'En cours')
             {
-
                 $permission->id_statut_permission = $this->statut_demande;
-                $permission->update();
-                toastr()->success('Bravo, Vous avez repondu à la demande');
-                return redirect()->route('demandepermission.liste');
 
+                $permission->id_statut_permission_rh = '1';
+
+                if(isset($this->id_responsable))
+                {
+                    $permission->id_responsable = $this->id_responsable;
+                }
+
+
+                // dd($permission);
+
+                $permission->update();
+                toastr()->success('Bravo, Vous avez repondu à la demande et a été transmis au RH.');
+                return redirect()->route('demandepermission.liste');
             }
             else
             {

@@ -18,5 +18,9 @@ class DemandePermission extends Model
     {
         return $this->belongsTo(User::class,'id_chef_antenne','id');
     }
+    public function statut_rh()
+    {
+        return $this->belongsTo(StatutPermissionRh::class, 'id_statut_permission_rh');
+    }
 
 }

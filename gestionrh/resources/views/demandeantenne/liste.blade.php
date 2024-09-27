@@ -30,6 +30,7 @@
                         <th>Nombre de jour souhaité</th>
                         <th>Motif de la demande</th>
                         <th>Statut de la demande</th>
+                        <th>Statut de validation du RH</th>
 
                         <th style="width: 10%">Action</th>
                       </tr>
@@ -47,6 +48,7 @@
                                 <td>{{$permission->nombre_jour}}</td>
                                 <td>{{$permission->motif_demande}}</td>
                                 <td>{{$permission->statut->statut_demande}}</td>
+                                <td>{{$permission->statut_rh->statut_demande_rh}}</td>
                                 <td>
                                     <div class="form-button-action">
                                         <button
