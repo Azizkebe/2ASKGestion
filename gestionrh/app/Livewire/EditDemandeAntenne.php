@@ -53,11 +53,6 @@ class EditDemandeAntenne extends Component
 
             $this->rep = "0";
         }
-        // if(isset($this->id_responsable))
-        // {
-        //     $users = User::where('id', $this->id_responsable)->get();
-        //     dd($users);
-        // }
 
         $role_resp = RoleModel::where('name','Ressource Humaine')->first();
         $users_resp = User::where('role_id', $role_resp->id)->get();

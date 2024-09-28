@@ -19,7 +19,7 @@
             <form action="{{route('handleregister')}}" method="POST">
                 @csrf
                 @method('POST')
-              <div class="form-group input-group">
+            <div class="form-group input-group">
                 <input name="username" class="form-control" placeholder="Prenom" type="text" value="{{old('username')}}">
                 <div class="input-group">
                     @error('username')
@@ -64,6 +64,14 @@
               <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-block"> Creer le Compte  </button>
               </div>
+              {{-- <div>
+                <select name="id_employe" id="id_employe" class="form-select">
+                    <option value="">-- Veuillez choisir employe --</option>
+                    @foreach ($employe as $item)
+                        <option value="{{$item->id}}">{{$item->prenom}} {{$item->nom}}</option>
+                    @endforeach
+                </select>
+              </div> --}}
               <div style="display: flex; float:right">
                 <a class="btn btn-warning btn-sm" href="{{route('listregister')}}">Voir la liste des utilisateurs</a>
               </div>

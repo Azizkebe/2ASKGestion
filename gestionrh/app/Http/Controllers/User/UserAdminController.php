@@ -34,14 +34,20 @@ class UserAdminController extends Controller
     public function register()
     {
         $role = RoleModel::all();
+        // $employe = Employe::all();
 
-        return view('admin.auth.register', compact('role'));
+        return view('admin.auth.register',[
+            'role'=>$role,
+            // 'employe'=>$employe,
+
+        ]);
     }
     public function handleregister(HandRequest $request)
     {
         try {
             $user = new User();
 
+            // $user->id_employe = $request->id_employe;
             $user->name = $request->name;
             $user->username = $request->username;
             $user->email = $request->email;
@@ -76,7 +82,7 @@ class UserAdminController extends Controller
 
                        throw new Exception('Une Erreur est survenue lors de l\'envoi du email');
                    }
-               }
+            }
 
         } catch (Exception $e) {
             throw new Exception("Ereur survenue lors de l'enregistement de l'utilisateur", 1);

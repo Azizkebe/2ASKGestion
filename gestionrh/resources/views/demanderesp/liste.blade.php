@@ -6,7 +6,7 @@
         <div class="card">
                 <div class="card-header">
                     <div class="d-flex align-items-center">
-                    <h4 class="card-title">Liste des demandes de permission des conseillers</h4>
+                    <h4 class="card-title">Liste autorisation des permissions</h4>
                     <button class="btn btn-primary btn-round ms-auto">
                         {{-- <a href="{{route('demandepermission.create')}}" class="text-white"><i class="fa fa-plus"></i> Ajouter un domaine</a> --}}
                     </button>
@@ -29,14 +29,14 @@
                         <th>Date de retour</th>
                         <th>Nombre de jour souhaité</th>
                         <th>Motif de la demande</th>
-                        <th>Statut de la demande</th>
-                        <th>Statut de validation du RH</th>
-
+                        <th>Nom du Chef Antenne</th>
+                        <th>Statut de reponse du seperieur</th>
+                        <th>Statut du RH</th>
                         <th style="width: 10%">Action</th>
                       </tr>
                         </thead>
                             <tbody>
-                             @forelse ($demandeantenne as $permission)
+                             @forelse ($demande_resp as $permission)
                             <tr>
                                 <td></td>
                                 <td>{{$permission->prenom}}</td>
@@ -47,8 +47,9 @@
                                 <td>{{$permission->date_retour}}</td>
                                 <td>{{$permission->nombre_jour}}</td>
                                 <td>{{$permission->motif_demande}}</td>
+                                <td>{{$permission->user->username}} {{$permission->user->name}}</td>
                                 <td>{{$permission->statut->statut_demande}}</td>
-                                <td>{{$permission->statut_rh->statut_demande_rh ?? ''}}</td>
+                                <td>{{$permission->statut_rh->statut_demande_rh}}</td>
                                 <td>
                                     <div class="form-button-action">
                                         <button
@@ -57,7 +58,7 @@
                                         title=""
                                         class="btn btn-link btn-primary btn-lg"
                                         data-original-title="Edit Task"
-                                        ><a href="{{route('demandeantenne.editer', $permission->id)}}"><i class="fa fa-edit"></i></a>
+                                        ><a href="{{route('demande_resp.editer', $permission->id)}}"><i class="fa fa-edit"></i></a>
 
                                         </button>
                                         <button
@@ -67,7 +68,7 @@
                                         class="btn btn-link btn-danger"
                                         data-original-title="Remove"
                                         ><a onclick="return confirm('Etes vous sure de vouloir supprimer la demande')"
-                                        href="{{route('demandeantenne.delete', $permission->id)}}" class="btn btn-link btn-danger"><i class="fa fa-times"></i></a>
+                                        href="" class="btn btn-link btn-danger"><i class="fa fa-times"></i></a>
                                         </button>
                                     </div>
                                 </td>

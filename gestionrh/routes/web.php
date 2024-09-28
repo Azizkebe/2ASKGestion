@@ -30,6 +30,7 @@ use App\Http\Controllers\MigreConge\RestCongeController;
 use App\Http\Controllers\Contrat\FicheContratController;
 use App\Http\Controllers\Demande\DemandePermissionController;
 use App\Http\Controllers\Demande\DemandeAntenneController;
+use App\Http\Controllers\Demande\AcceptdemandeController;
 
 use App\Livewire\EditPhotoEmploye;
 
@@ -273,10 +274,16 @@ Route::middleware('userAdmin')->group(function(){
 
     });
     Route::prefix('demandeantenne')->group(function(){
-        Route::get('create',[DemandeAntenneController::class, 'create'])->name('demandeantenne.create');
+        // Route::get('create',[DemandeAntenneController::class, 'create'])->name('demandeantenne.create');
         Route::get('liste',[DemandeAntenneController::class, 'liste'])->name('demandeantenne.liste');
         Route::get('/edit/{demandeantenne}',[DemandeAntenneController::class, 'edit'])->name('demandeantenne.editer');
         Route::get('/delete/{demandeantenne}',[DemandeAntenneController::class, 'delete'])->name('demandeantenne.delete');
+
+    });
+    Route::prefix('demande_resp')->group(function(){
+        Route::get('liste',[AcceptdemandeController::class, 'liste'])->name('demande_resp.liste');
+        Route::get('/edit/{demande_resp}',[AcceptdemandeController::class, 'edit'])->name('demande_resp.editer');
+        Route::get('/delete/{demande_resp}',[AcceptdemandeController::class, 'delete'])->name('demande_resp.delete');
 
     });
 });
