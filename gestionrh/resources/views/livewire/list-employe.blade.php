@@ -64,7 +64,7 @@
                                 <td>{{$employe->service->service ?? ''}}</td>
                                 <td>
                                     <div class="form-button-action">
-                                        @if (!empty($PermissionEdit))
+                                        {{-- @if (!empty($PermissionEdit)) --}}
                                         <button
                                         type="button"
                                         data-bs-toggle="tooltip"
@@ -75,7 +75,8 @@
                                         <a href="{{route('employe.detail',$employe->id)}}"><i class="fa fa-info"></i></a>
 
                                         </button>
-                                        @endif
+
+                                        {{-- @endif --}}
 
                                     </div>
                                 </td>
@@ -95,7 +96,19 @@
 
                                     </div>
                                 </td>
-                                <td></td>
+                                <td>
+                                    @if (!empty($PermissionEdit))
+                                    <button
+                                    type="button"
+                                    data-bs-toggle="tooltip"
+                                    title=""
+                                    class="btn btn-link btn-primary btn-lg"
+                                    data-original-title="Edit Task"
+                                    ><a href="{{route('employe.editer',$employe->id)}}"><i class="fa fa-edit"></i></a>
+
+                                    </button>
+                                    @endif
+                                </td>
 
                                 </tr>
                              @empty

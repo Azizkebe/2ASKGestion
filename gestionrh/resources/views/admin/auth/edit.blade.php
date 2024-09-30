@@ -26,18 +26,17 @@
             <form action="{{route('update', $user->id)}}" method="POST">
                 @csrf
                 @method('PUT')
-              <div class="form-group input-group">
-                <input name="username" class="form-control" placeholder="Prenom" type="text" value="{{$user->username}}">
-            </div>
-              <div class="form-group input-group">
-                <input name="name" class="form-control" placeholder="Nom" type="text" value="{{$user->name}}">
-             </div>
-              <div class="form-group input-group">
-                <input name="email" class="form-control" placeholder="Email address" type="email" value="{{$user->email}}">
-            </div>
-              <div class="form-group input-group">
-                <input name="phone" class="form-control" placeholder="Telephone" type="number" value="{{$user->phone}}">
-            </div>
+
+                <div class="form-group input-group">
+                    <div class="input-group">
+                        <select name="id_employe" id="id_employe" class="form-select">
+                            <option value="">-- Choississez un role --</option>
+                            @foreach ($employe as $employe)
+                            <option {{$user->id_employe == $employe->id ? 'selected' : ''}} value="{{$employe->id}}">{{$employe->prenom}} {{$employe->nom}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
                 <div class="form-group input-group">
                     <div class="input-group">
                         <select name="role_id" id="role_id" class="form-select">

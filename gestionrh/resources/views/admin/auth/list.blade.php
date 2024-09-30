@@ -33,11 +33,11 @@
                             <tbody>
                              @forelse ($user as $user)
                             <tr>
-                                <td>{{$user->username}}</td>
-                                <td>{{$user->name}}</td>
+                                <td>{{$user->employe->prenom ?? ''}}</td>
+                                <td>{{$user->employe->nom ?? ''}}</td>
                                 <td style="color:rgb(255, 25, 0)">{{$user->role->name ?? ''}}</td>
                                 <td>{{$user->created_at}}</td>
-                                <td>{{$user->phone}}</td>
+                                <td>{{$user->employe->telephone ?? ''}}</td>
                                 <td>{{$user->email}}</td>
                                 <td>
                                     <div class="form-button-action">

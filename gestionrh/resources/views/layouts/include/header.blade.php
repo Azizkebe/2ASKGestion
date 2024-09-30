@@ -312,14 +312,14 @@ class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bo
       >
         <div class="avatar-sm">
           <img
-            src="https://ui-avatars.com/api/?name={{Auth::user()->name ?? 'None'}}"
+            src="https://ui-avatars.com/api/?name={{Auth::user()->employe->nom ?? 'None'}}"
             alt="..."
             class="avatar-img rounded-circle"
           />
         </div>
         <span style="margin-right: 15px;" class="profile-username">
           <span class="op-7">Bonjour,</span>
-          <span class="fw-bold">{{Auth::user()->name}}</span>
+          <span class="fw-bold">{{Auth::user()->employe->prenom}} {{Auth::user()->employe->nom}}</span>
         </span>
       </a>
       <ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -328,12 +328,12 @@ class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bo
             <div class="user-box">
               <div class="avatar-lg">
                 <img
-                  src="https://ui-avatars.com/api/?name={{Auth::user()->name ?? 'None'}}"
+                  src="https://ui-avatars.com/api/?name={{Auth::user()->employe->nom ?? 'None'}}"
                   alt="image profile"
                   class="avatar-img rounded"/>
               </div>
               <div class="u-text">
-                <h4>{{Auth::user()->username}} {{Auth::user()->name ?? ''}} </h4>
+                <h4>{{Auth::user()->employe->prenom ?? ''}} {{Auth::user()->employe->nom ?? ''}} </h4>
                 <p class="text-muted">{{Auth::user()->email ?? ''}}</p>
                 <p class="text-muted">Profil: {{Auth::user()->role->name ?? ''}}</p>
                 <a href="{{route('profil_user',Auth::user()->id)}}"

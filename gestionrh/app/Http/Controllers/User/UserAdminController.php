@@ -34,11 +34,11 @@ class UserAdminController extends Controller
     public function register()
     {
         $role = RoleModel::all();
-        // $employe = Employe::all();
+        $employe = Employe::all();
 
         return view('admin.auth.register',[
             'role'=>$role,
-            // 'employe'=>$employe,
+            'employe'=>$employe,
 
         ]);
     }
@@ -46,14 +46,19 @@ class UserAdminController extends Controller
     {
         try {
             $user = new User();
+            $donnees_employe = Employe::where('id', $request->id_employe)->first();
 
-            // $user->id_employe = $request->id_employe;
-            $user->name = $request->name;
-            $user->username = $request->username;
-            $user->email = $request->email;
+            $user->id_employe = $request->id_employe;
+            $user->email = $donnees_employe->email;
             $user->password = Hash::make('default');
-            $user->phone = $request->phone;
             $user->role_id = $request->role_id;
+            // $user->id_employe = $request->id_employe;
+            // $user->name = $request->name;
+            // $user->username = $request->username;
+            // $user->email = $request->email;
+            // $user->password = Hash::make('default');
+            // $user->phone = $request->phone;
+            // $user->role_id = $request->role_id;
 
             // dd($user);
             $user->save();
@@ -61,18 +66,24 @@ class UserAdminController extends Controller
             if($user)
             {
                 try {
-                   ResetCodePassword::where('email', $user->email)->delete();
+
+                    // ResetCodePassword::where('email', $user->email)->delete();
+                    ResetCodePassword::where('email', $user->email)->delete();
 
 
                    $data = [
 
-                       'email'=> $user->email,
+                    'email'=> $user->email,
+                    // 'email'=> $user->email,
                    ];
 
                    ResetCodePassword::create($data);
 
                    Notification::route('mail', $user->email)->notify(new
                    SendEmailToAdminAfterRegistration($user->email));
+
+                //    Notification::route('mail', $user->email)->notify(new
+                //    SendEmailToAdminAfterRegistration($user->email));
 
                    //Redirigez l'utilisateur vers une l'url
                    return redirect()->back()->with('success', 'L\'utilisateur est enregistré avec succes');
@@ -128,7 +139,7 @@ class UserAdminController extends Controller
     }
     public function list_register()
     {
-        $user = User::all();
+        $user = User::with('employe')->get();
 
         return view('admin.auth.list', compact('user'));
     }
@@ -136,9 +147,11 @@ class UserAdminController extends Controller
     {
         $user = User::findOrFail($user);
         $role = RoleModel::all();
+        $employe = Employe::all();
         return view('admin.auth.edit',[
             'user'=>$user,
             'role'=>$role,
+            'employe'=>$employe,
         ]);
     }
     public function update($user, Request $request)
@@ -146,10 +159,10 @@ class UserAdminController extends Controller
         try {
             $user = User::findOrFail($user);
 
-            $user->name = $request->name;
-            $user->username = $request->username;
-            $user->email = $request->email;
-            $user->phone = $request->phone;
+            $user->id_employe = $request->id_employe;
+            // $user->email = $request->username;
+            // $user->email = $request->email;
+            // $user->phone = $request->phone;
             $user->role_id = $request->role_id;
 
             // dd($user);
@@ -194,6 +207,7 @@ class UserAdminController extends Controller
     }
     public function handlogin(HandloginRequest $request)
     {
+
         if(auth()->attempt($request->only('email','password')))
         {
             return redirect()->route('dashboard');

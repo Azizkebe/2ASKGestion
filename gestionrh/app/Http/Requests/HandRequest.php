@@ -22,22 +22,24 @@ class HandRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>'required',
-            'username'=>'required',
-            'email'=>'required|unique:users,email',
-            'phone'=>'required|max:9|unique:users,phone',
+            // 'name'=>'required',
+            // 'username'=>'required',
+            // 'email'=>'required|unique:users,email',
+            'id_employe'=>'required',
+            // 'phone'=>'required|max:9|unique:users,phone',
         ];
     }
     public function messages(): array{
         return [
-            'username.required'=>'Mettez votre prenom',
-            'name.required'=>'Mettez votre nom',
-            'email.required'=>'Email est requis',
-            'email.unique'=>'Email existe déjà',
-            'email.email'=>'Veuillez fournir une addresse valide',
-            'phone.required'=>'Le Telephone est requis',
-            'phone.unique'=>'Le Telephone existe déjà',
-            'phone.max'=>'Telephone doit etre au maximum 9 quatre chiffres',
+            'id_employe.required'=>'L\'employe est requis',
+            // 'username.required'=>'Mettez votre prenom',
+            // 'name.required'=>'Mettez votre nom',
+            // 'email.required'=>'Email est requis',
+            // 'email.unique'=>'Email existe déjà',
+            // 'email.email'=>'Veuillez fournir une addresse valide',
+            // 'phone.required'=>'Le Telephone est requis',
+            // 'phone.unique'=>'Le Telephone existe déjà',
+            // 'phone.max'=>'Telephone doit etre au maximum 9 quatre chiffres',
 
         ];
     }
