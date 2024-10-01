@@ -118,19 +118,22 @@
                     @enderror
                 </div>
                 @if ($rep == '1')
-                <div class="mt-3">
-                    <label for="id_responsable">Transmis pour validation finale: </label>
-                    <select name="id_responsable" id="id_responsable" class="form-select" wire:model.live="id_responsable" required>
-                        <option value="">-- choississez un reponsable pour la validation finale</option>
-                        @foreach ($users_resp as $responsable)
-                            <option value="{{$responsable->id}}">{{$responsable->employe->prenom}} {{$responsable->employe->nom}}</option>
-                        @endforeach
-                    </select>
-                </div>
+                    <div class="mt-3">
+                        <label for="id_responsable">Transmis pour validation finale: </label>
+                        <select name="id_responsable" id="id_responsable" class="form-select" wire:model.live="id_responsable" required>
+                            <option value="">-- choississez un reponsable pour la validation finale</option>
+                            @foreach ($users_resp as $responsable)
+                                <option value="{{$responsable->id}}">{{$responsable->employe->prenom}} {{$responsable->employe->nom}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 @endif
-                @if ($rep == 0)
-                <div class="mt-3"></div>
-                @endif
+                {{-- @if ($rep == 0)
+                    <div class="mt-3">
+                        <label for="commentaire_antenne">Motif du rejet: </label>
+                        <textarea name="" id="" cols="30" rows="10" class="form-control"></textarea>
+                    </div>
+                @endif --}}
                 <div style="display: flex; justify-content:center;" class="mt-3">
                     <button type="submit" class="btn btn-primary btn-block text-center"> Valider la reponse </button>
                 </div>

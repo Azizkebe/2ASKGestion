@@ -10,6 +10,14 @@
             <form action="" method="POST" wire:submit.prevent="store">
                 @csrf
                 @method('POST')
+
+                <div class="mt-3">
+                    <label for="nombre_de_jour">Nombre de Jour de Permission Restant</label>
+                    <input type="number" class="form-control" name="nombre_de_jour" id="nombre_de_jour" wire:model.live="nombre_de_jour" readonly>
+                    {{-- @error('nombre_de_jour')
+                        <span class="error"> Le nombre de jour est requis</span>
+                    @enderror --}}
+                </div>
                 <div class="mt-3">
                     <label for="prename">Prenom</label>
                     <input type="text" class="form-control" name="prenom" id="prenom" placeholder="Prenom" wire:model.live="prenom" readonly>

@@ -5,6 +5,8 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\DemandePermission;
 use App\Models\StatutPermission;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\SendEmailToEmployeAfterAcceptedDemandeNotification;
 use App\Models\User;
 use Carbon\Carbon;
 use App\Models\RoleModel;
@@ -104,12 +106,22 @@ class EditDemandeAntenne extends Component
                     $permission->id_responsable = $this->id_responsable;
                 }
 
+                $reponse = $permission->update();
 
-                // dd($permission);
+                if($reponse)
+                {
+                    // dd($permission->prenom);
+                    $messages['prenom'] = $permission->prenom;
+                    $messages['nom'] = $permission->nom;
+                    $messages['nbr_jour'] = $permission->nombre_jour;
+                    Notification::route('mail', $permission->email)->notify(new
+                    SendEmailToEmployeAfterAcceptedDemandeNotification($messages));
 
-                $permission->update();
-                toastr()->success('Bravo, Vous avez repondu à la demande et a été transmis au RH.');
-                return redirect()->route('demandeantenne.liste');
+                    toastr()->success('Bravo, Vous avez repondu à la demande et a été transmis au RH.');
+                    return redirect()->route('demandeantenne.liste');
+                }
+
+
             }
             else
             {

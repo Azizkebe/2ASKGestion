@@ -5,6 +5,9 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\DemandePermission;
 use App\Models\StatutPermissionRH;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\SendEmailToRhAfterAcceptedDemandeNotification;
+use App\Notifications\SendEmailToSuperieurAfterAcceptedDemandeNotification;
 use App\Models\RoleModel;
 use App\Models\User;
 use App\Models\Employe;
@@ -76,6 +79,18 @@ class EditAcceptePermission extends Component
                 {
                     $employe = Employe::where('email', $permission->email)->first();
                     $employe->update(['nombre_conge_program'=> $employe->nombre_conge_program - $permission->nombre_jour]);
+
+                    $messages['prenom'] = $permission->prenom;
+                    $messages['nom'] = $permission->nom;
+                    $messages['nbr_jour'] = $permission->nombre_jour;
+                    Notification::route('mail', $permission->email)->notify(new
+                    SendEmailToRhAfterAcceptedDemandeNotification($messages));
+
+                    $messages['user_prenom'] = $permission->user->employe->prenom;
+                    $messages['user_nom'] = $permission->user->employe->nom;
+                    $messages['user_nbr_jour'] = $permission->nombre_jour;
+                    Notification::route('mail', $permission->user->employe->email)->notify(new
+                    SendEmailToSuperieurAfterAcceptedDemandeNotification($messages));
 
                     toastr()->success('Bravo, Vous avez repondu à la demande adressée.');
                     return redirect()->route('demande_resp.liste');

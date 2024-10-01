@@ -21,6 +21,7 @@ class CreatePermissionDemande extends Component
     public $nombre_jours_pris;
     public $id_chef_antenne;
     public $users;
+    public $nombre_de_jour;
 
     public function render()
     {
@@ -30,6 +31,7 @@ class CreatePermissionDemande extends Component
         $this->prenom = Auth::user()->employe->prenom;
         $this->nom = Auth::user()->employe->nom;
 
+        $this->nombre_de_jour = Auth::user()->employe->nombre_conge_program;
         $users = User::where('role_id', Auth::user()->role_id)->get();
         // dd($users);
 
@@ -56,6 +58,18 @@ class CreatePermissionDemande extends Component
             if($toDate->diffInDays($fromDate) <= 3)
             {
                 $this->nombre_jours_pris =  $toDate->diffInDays($fromDate);
+
+                if(isset($this->nombre_jours_pris) <= $this->nombre_de_jour)
+                {
+                    $this->nombre_jours_pris =  '';
+                    toastr()->error('Vous ne pouvez plus demandé une permission');
+
+                }
+                else
+                {
+                    $permission->nombre_jour =  $this->nombre_jours_pris;
+
+                }
             }
 
         }
@@ -83,6 +97,8 @@ class CreatePermissionDemande extends Component
             $toDate = Carbon::parse($this->date_depart);
             $fromDate = Carbon::parse($this->date_retour);
 
+            $this->nombre_de_jour = Auth::user()->employe->nombre_conge_program;
+
             $permission->prenom = Auth::user()->employe->prenom;
             $permission->nom = Auth::user()->employe->nom;
             $permission->email = Auth::user()->employe->email;
@@ -92,7 +108,18 @@ class CreatePermissionDemande extends Component
             if($toDate->diffInDays($fromDate) <= 3)
             {
                 $this->nombre_jours_pris =  $toDate->diffInDays($fromDate);
-                $permission->nombre_jour =  $this->nombre_jours_pris;
+
+                if(isset($this->nombre_jours_pris) <= $this->nombre_de_jour)
+                {
+                    $this->nombre_jours_pris =  '';
+                    toastr()->error('Vous ne pouvez plus demané une permission');
+
+                }
+                else
+                {
+                    $permission->nombre_jour =  $this->nombre_jours_pris;
+
+                }
 
             }
             else
@@ -104,18 +131,14 @@ class CreatePermissionDemande extends Component
             $permission->motif_demande = $this->motif_permission;
             $permission->id_chef_antenne = $this->id_chef_antenne;
             $permission->id_statut_permission = '1';
-            $permission->id_statut_permission_rh = '1';
+            // $permission->id_statut_permission_rh = '1';
 
-            // dd($permission);
             $reponse = $permission->save();
             if($reponse)
             {
                 $messages['prenom'] = $permission->user->employe->prenom;
-                $messages['nom'] = $permissionn->user->employe->nom;
+                $messages['nom'] = $permission->user->employe->nom;
                 $messages['nbr_jour'] = $permission->nombre_jour;
-
-                dd($permission->user->employe->email);
-
                 Notification::route('mail', $permission->user->employe->email)->notify(new
                 SendEmailToEmployeAfterDemandeNotification($messages));
 

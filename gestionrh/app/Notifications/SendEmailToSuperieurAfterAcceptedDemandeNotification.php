@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class SendEmailToEmployeAfterDemandeNotification extends Notification
+class SendEmailToSuperieurAfterAcceptedDemandeNotification extends Notification
 {
     use Queueable;
     public $messages;
@@ -15,9 +15,9 @@ class SendEmailToEmployeAfterDemandeNotification extends Notification
     /**
      * Create a new notification instance.
      */
-    public function __construct($messages)
+    public function __construct($message)
     {
-        $this->messages = $messages;
+        $this->messages = $message;
     }
 
     /**
@@ -36,12 +36,10 @@ class SendEmailToEmployeAfterDemandeNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-
-        ->subject('Notifation de permission')
-        ->line('Bonjour '.$this->messages['prenom'].' '. $this->messages['nom'].',')
-        ->line('Vous avez une nouvelle notification de demande de permission de '.$this->messages['nbr_jour']. ' jour(s)')
-        ->line('Veuillez consulter la plateforme, Merci');
-
+        ->subject('Information de retour du RH suite à votre demande')
+        ->line('Bonjour '.$this->messages['user_prenom'].' '. $this->messages['user_nom'].',')
+        ->line('Vous avez une nouvelle notification venant du RH suite à la validation de la demande adressée de '.$this->messages['user_nbr_jour']. ' jour(s)')
+        ->line('Veuillez consulter la plateforme, Merci !!!');
     }
 
     /**
