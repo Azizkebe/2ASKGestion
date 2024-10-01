@@ -68,7 +68,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-sm-6 col-md-6 col-xl-3">
+            {{-- <div class="col-12 col-sm-6 col-md-6 col-xl-3">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
@@ -79,13 +79,6 @@
                                 <h4 class="text-info fw-bold">{{$contrat}} enregistré(s)</h4>
                         </div>
                         <div class="progress progress-sm">
-                                {{-- <div
-                                class="progress-bar bg-danger w-75"
-                                role="progressbar"
-                                aria-valuenow="{{$contrat}}"
-                                aria-valuemin="0"
-                                aria-valuemax="{{$contrat}}"
-                                ></div> --}}
                         </div>
                         <div class="d-flex justify-content-between mt-2">
                             <p class="text-muted mb-0">Total</p>
@@ -93,8 +86,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-12 col-sm-6 col-md-6 col-xl-3">
+            </div> --}}
+            {{-- <div class="col-12 col-sm-6 col-md-6 col-xl-3">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
@@ -105,13 +98,6 @@
                                 <h4 class="text-info fw-bold">{{$curriculum}} enregistré(s)</h4>
                         </div>
                         <div class="progress progress-sm">
-                                {{-- <div
-                                class="progress-bar bg-secondary w-75"
-                                role="progressbar"
-                                aria-valuenow="{{$curriculum}}"
-                                aria-valuemin="0"
-                                aria-valuemax="{{$curriculum}}"
-                                ></div> --}}
                         </div>
                         <div class="d-flex justify-content-between mt-2">
                             <p class="text-muted mb-0">Total</p>
@@ -119,10 +105,10 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
         <div class="row row-card-no-pd">
-            <div class="col-12 col-sm-6 col-md-6 col-xl-3">
+            {{-- <div class="col-12 col-sm-6 col-md-6 col-xl-3">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
@@ -133,13 +119,6 @@
                                 <h4 class="text-info fw-bold">{{$employe}} enregistré(s)</h4>
                         </div>
                         <div class="progress progress-sm">
-                                {{-- <div
-                                class="progress-bar bg-success w-75"
-                                role="progressbar"
-                                aria-valuenow="{{$employe}}"
-                                aria-valuemin="0"
-                                aria-valuemax="{{$employe}}"
-                                ></div> --}}
                         </div>
                         <div class="d-flex justify-content-between mt-2">
                             <p class="text-muted mb-0">Total</p>
@@ -147,8 +126,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-12 col-sm-6 col-md-6 col-xl-3">
+            </div> --}}
+            {{-- <div class="col-12 col-sm-6 col-md-6 col-xl-3">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
@@ -159,13 +138,6 @@
                                 <h4 class="text-info fw-bold">{{$diplome}} enregistré(s)</h4>
                         </div>
                         <div class="progress progress-sm">
-                                {{-- <div
-                                class="progress-bar bg-warning w-75"
-                                role="progressbar"
-                                aria-valuenow="{{$diplome}}"
-                                aria-valuemin="0"
-                                aria-valuemax="{{$diplome}}"
-                                ></div> --}}
                         </div>
                         <div class="d-flex justify-content-between mt-2">
                             <p class="text-muted mb-0">Total</p>
@@ -173,8 +145,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-12 col-sm-6 col-md-6 col-xl-3">
+            </div> --}}
+            {{-- <div class="col-12 col-sm-6 col-md-6 col-xl-3">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
@@ -185,13 +157,6 @@
                                 <h4 class="text-info fw-bold">{{$membre}} enregistré(s)</h4>
                         </div>
                         <div class="progress progress-sm">
-                                {{-- <div
-                                class="progress-bar bg-info w-75"
-                                role="progressbar"
-                                aria-valuenow="{{$membre}}"
-                                aria-valuemin="0"
-                                aria-valuemax="{{$membre}}"
-                                ></div> --}}
                         </div>
                         <div class="d-flex justify-content-between mt-2">
                             <p class="text-muted mb-0">Total</p>
@@ -199,7 +164,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             {{-- <div class="col-12 col-sm-6 col-md-6 col-xl-3">
                 <div class="card">
                     <div class="card-body">

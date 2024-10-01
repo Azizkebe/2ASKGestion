@@ -66,10 +66,9 @@
                                 </button>
                             </div>
                         </td>
-                        <td>
+                        {{-- <td>
                             <button class="btn btn-sm btn-warning fload-right" wire:click="ConfigureButton()">Migrer les conges restants</button>
-
-                        </td>
+                        </td> --}}
 
                     </tr>
                     @endforeach

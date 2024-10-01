@@ -29,6 +29,7 @@ class UserAdminController extends Controller
 {
     public function dashboard()
     {
+
         return view('admin.dashboard');
     }
     public function register()
@@ -201,6 +202,7 @@ class UserAdminController extends Controller
     {
         if(!empty(Auth::check()))
         {
+
             return view('admin.dashboard');
         }
             return view('frontend.auth.login');
@@ -261,22 +263,23 @@ class UserAdminController extends Controller
     }
     public function tableaudebord()
     {
-        $employe = Employe::all()->count();
-        $fichecontrat = FicheContrat::all()->count();
-        $membre = Membre::all()->count();
-        $diplome = MyDiplome::all()->count();
-        $curriculum = Curriculum::all()->count();
-        $permission = Permission::all()->count();
-        $conge = PermissionConge::all()->count();
+        // dd(Auth::user()->id_employe);
+        $employe = Employe::where('id', Auth::user()->id_employe)->count();
+        // $fichecontrat = FicheContrat::all()->count();
+        // $membre = Membre::all()->count();
+        // $diplome = MyDiplome::all()->count();
+        // $curriculum = Curriculum::all()->count();
+        $permission = Permission::where('id_employe', Auth::user()->id_employe)->count();
+        $conge = PermissionConge::where('id_employe', Auth::user()->id_employe)->count();
 
         return view('bienvenue', [
             'permission'=>$permission,
             'conge'=>$conge,
-            'employe'=>$employe,
-            'contrat'=>$fichecontrat,
-            'membre'=>$membre,
-            'diplome'=>$diplome,
-            'curriculum'=>$curriculum,
+            // 'employe'=>$employe,
+            // 'contrat'=>$fichecontrat,
+            // 'membre'=>$membre,
+            // 'diplome'=>$diplome,
+            // 'curriculum'=>$curriculum,
         ]);
     }
 }
