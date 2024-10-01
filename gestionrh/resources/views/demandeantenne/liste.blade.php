@@ -28,7 +28,7 @@
                         <th>Date de depart</th>
                         <th>Date de retour</th>
                         <th>Nombre de jour souhaité</th>
-                        <th>Motif de la demande</th>
+                        <th style="width:50%;">Motif de la demande</th>
                         <th>Statut de la demande</th>
                         <th>Statut de validation du RH</th>
 
@@ -45,8 +45,8 @@
 
                                 <td>{{$permission->date_depart}}</td>
                                 <td>{{$permission->date_retour}}</td>
-                                <td>{{$permission->nombre_jour}}</td>
-                                <td>{{$permission->motif_demande}}</td>
+                                <td style="text-align: center;">{{$permission->nombre_jour}}</td>
+                                <td style="width:50%;">{{$permission->motif_demande}}</td>
                                 <td>{{$permission->statut->statut_demande}}</td>
                                 <td>{{$permission->statut_rh->statut_demande_rh ?? ''}}</td>
                                 <td>

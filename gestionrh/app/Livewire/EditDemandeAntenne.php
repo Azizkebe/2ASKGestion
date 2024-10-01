@@ -109,7 +109,7 @@ class EditDemandeAntenne extends Component
 
                 $permission->update();
                 toastr()->success('Bravo, Vous avez repondu à la demande et a été transmis au RH.');
-                return redirect()->route('demandepermission.liste');
+                return redirect()->route('demandeantenne.liste');
             }
             else
             {

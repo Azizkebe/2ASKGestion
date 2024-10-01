@@ -47,7 +47,7 @@
                                 <td>{{$permission->date_retour}}</td>
                                 <td>{{$permission->nombre_jour}}</td>
                                 <td>{{$permission->motif_demande}}</td>
-                                <td>{{$permission->user->username}} {{$permission->user->name}}</td>
+                                <td>{{$permission->user->employe->prenom}} {{$permission->user->employe->nom}}</td>
                                 <td>{{$permission->statut->statut_demande}}</td>
                                 <td>{{$permission->statut_rh->statut_demande_rh}}</td>
                                 <td>

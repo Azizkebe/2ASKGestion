@@ -45,6 +45,7 @@
             $permissionGroup = App\Models\PermissionRoleModel::getPermission('Group_Permission', Auth::user()->role_id);
             $permissionDemandEmploye= App\Models\PermissionRoleModel::getPermission('Permission_Employe', Auth::user()->role_id);
             $permissionantenne= App\Models\PermissionRoleModel::getPermission('Liste demande antenne', Auth::user()->role_id);
+            $permission_rh= App\Models\PermissionRoleModel::getPermission('Ressources Humaines', Auth::user()->role_id);
             @endphp
             @if (!empty($permissionDashboard))
 
@@ -329,6 +330,24 @@
                 </li>
                 <li>
                   <a href="{{route('permission.liste')}}">
+                    <span class="sub-item">Liste des permissions</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          @endif
+          @if (!empty($permission_rh))
+          <li class="nav-item">
+            <a data-bs-toggle="collapse" href="#permission_rh">
+              <i class="fas fa-layer-group"></i>
+              <p>Autorisation Permission</p>
+              <span class="caret"></span>
+            </a>
+            <div class="collapse" id="permission_rh">
+              <ul class="nav nav-collapse">
+                <li>
+                  <a href="{{route('demande_resp.liste')}}">
                     <span class="sub-item">Liste des permissions</span>
                   </a>
                 </li>

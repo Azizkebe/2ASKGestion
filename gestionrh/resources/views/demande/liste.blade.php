@@ -30,8 +30,9 @@
                         <th>Date de depart</th>
                         <th>Date de retour</th>
                         <th>Nombre de jour souhaité</th>
-                        <th>Motif de la demande</th>
+                        <th style="width:50%;">Motif de la demande</th>
                         <th>Statut de la demande</th>
+                        <th>Statut de validation du RH</th>
                         @if (!empty($permissionDemandEdit)|| (!empty($permissionDemandDel)))
                         <th style="width: 10%">Action</th>
                         @endif
@@ -44,13 +45,16 @@
                                 <td>{{$permission->prenom}}</td>
                                 <td>{{$permission->nom}}</td>
                                 <td>{{$permission->email}}</td>
-                                <td>{{$permission->user->username}} {{$permission->user->name}}</td>
+                                <td>{{$permission->user->employe->prenom}} {{$permission->user->employe->nom}}</td>
                                 <td>{{$permission->date_depart}}</td>
                                 <td>{{$permission->date_retour}}</td>
                                 <td>{{$permission->nombre_jour}}</td>
                                 <td>{{$permission->motif_demande}}</td>
                                 <td>
                                     {{$permission->statut->statut_demande}}
+                                </td>
+                                <td>
+                                    {{$permission->statut_rh->statut_demande_rh ?? 'En attente'}}
                                 </td>
                                 <td>
                                     <div class="form-button-action">

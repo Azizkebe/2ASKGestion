@@ -6,6 +6,8 @@ use Livewire\Component;
 use App\Models\RoleModel;
 use App\Models\User;
 use App\Models\DemandePermission;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\SendEmailToEmployeAfterDemandeNotification;
 use Auth;
 use Carbon\Carbon;
 
@@ -25,20 +27,24 @@ class CreatePermissionDemande extends Component
         $toDate = Carbon::parse($this->date_depart);
         $fromDate = Carbon::parse($this->date_retour);
 
-        $this->prenom = Auth::user()->username;
-        $this->nom = Auth::user()->name;
+        $this->prenom = Auth::user()->employe->prenom;
+        $this->nom = Auth::user()->employe->nom;
 
         $users = User::where('role_id', Auth::user()->role_id)->get();
+        // dd($users);
 
-        // dd(Auth::user()->role->name);
+        // $roledirect = RoleModel::where('id', Auth::user()->role_id)->first();
+        // dd($roledirect);
 
         $role_directeur = RoleModel::where('name','Directeur')->first();
         $role_antenne = RoleModel::where('name','Chef Antenne')->first();
-        $role_employeur = RoleModel::where('name','Employe')->first();
+
+        // $role_employeur = RoleModel::where('name','Employe')->first();
 
         $users_directeur = User::where('role_id', $role_directeur->id)->get();
         $users_antenne = User::where('role_id', $role_antenne->id)->get();
 
+        // dd($users_antenne);
 
         if(isset($this->date_depart)&&(isset($this->date_retour)))
         {
@@ -56,7 +62,7 @@ class CreatePermissionDemande extends Component
 
         return view('livewire.create-permission-demande',[
             'users_antenne'=>  $users_antenne,
-            'users_directeur'=> $users_directeur,
+
         ]);
     }
     public function store(DemandePermission $permission)
@@ -77,9 +83,9 @@ class CreatePermissionDemande extends Component
             $toDate = Carbon::parse($this->date_depart);
             $fromDate = Carbon::parse($this->date_retour);
 
-            $permission->prenom = Auth::user()->name;
-            $permission->nom = Auth::user()->username;
-            $permission->email = Auth::user()->email;
+            $permission->prenom = Auth::user()->employe->prenom;
+            $permission->nom = Auth::user()->employe->nom;
+            $permission->email = Auth::user()->employe->email;
             $permission->date_depart = $this->date_depart;
             $permission->date_retour = $this->date_retour;
 
@@ -98,12 +104,25 @@ class CreatePermissionDemande extends Component
             $permission->motif_demande = $this->motif_permission;
             $permission->id_chef_antenne = $this->id_chef_antenne;
             $permission->id_statut_permission = '1';
+            $permission->id_statut_permission_rh = '1';
 
             // dd($permission);
-            $permission->save();
-            toastr()->success('Bravo, La demande a été transféré au chef d\'antenne');
+            $reponse = $permission->save();
+            if($reponse)
+            {
+                $messages['prenom'] = $permission->user->employe->prenom;
+                $messages['nom'] = $permissionn->user->employe->nom;
+                $messages['nbr_jour'] = $permission->nombre_jour;
 
-            return redirect()->route('demandepermission.liste');
+                dd($permission->user->employe->email);
+
+                Notification::route('mail', $permission->user->employe->email)->notify(new
+                SendEmailToEmployeAfterDemandeNotification($messages));
+
+                toastr()->success('Bravo, La demande a été transféré au chef d\'antenne');
+
+                return redirect()->route('demandepermission.liste');
+            }
 
         } catch (Exception $e) {
             throw new Exception("Erreur survenue lors de l'enregistrement");

@@ -123,7 +123,7 @@
                     <select name="id_responsable" id="id_responsable" class="form-select" wire:model.live="id_responsable" required>
                         <option value="">-- choississez un reponsable pour la validation finale</option>
                         @foreach ($users_resp as $responsable)
-                            <option value="{{$responsable->id}}">{{$responsable->username}} {{$responsable->name}}</option>
+                            <option value="{{$responsable->id}}">{{$responsable->employe->prenom}} {{$responsable->employe->nom}}</option>
                         @endforeach
                     </select>
                 </div>

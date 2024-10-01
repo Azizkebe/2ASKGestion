@@ -109,7 +109,7 @@
                     <select name="id_chef_antenne" id="" class="form-select" wire:model.live="id_chef_antenne">
                         <option value="">--- choississez un chef d'antenne ---</option>
                         @foreach ($users_antenne as $antenne)
-                        <option value="{{$antenne->id}}">{{$antenne->username}} {{$antenne->name}}</option>
+                        <option value="{{$antenne->id}}">{{$antenne->employe->prenom}} {{$antenne->employe->nom}}</option>
                         @endforeach
                     </select>
                 </div>

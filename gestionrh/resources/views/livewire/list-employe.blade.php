@@ -81,6 +81,19 @@
                                     </div>
                                 </td>
                                 <td>
+                                    @if (!empty($PermissionEdit))
+                                    <button
+                                    type="button"
+                                    data-bs-toggle="tooltip"
+                                    title=""
+                                    class="btn btn-link btn-primary btn-lg"
+                                    data-original-title="Edit Task"
+                                    ><a href="{{route('employe.editer',$employe->id)}}"><i class="fa fa-edit"></i></a>
+
+                                    </button>
+                                    @endif
+                                </td>
+                                <td>
                                     <div class="form-button-action">
                                         @if (!empty($PermissionDel))
                                         <button
@@ -96,19 +109,7 @@
 
                                     </div>
                                 </td>
-                                <td>
-                                    @if (!empty($PermissionEdit))
-                                    <button
-                                    type="button"
-                                    data-bs-toggle="tooltip"
-                                    title=""
-                                    class="btn btn-link btn-primary btn-lg"
-                                    data-original-title="Edit Task"
-                                    ><a href="{{route('employe.editer',$employe->id)}}"><i class="fa fa-edit"></i></a>
 
-                                    </button>
-                                    @endif
-                                </td>
 
                                 </tr>
                              @empty

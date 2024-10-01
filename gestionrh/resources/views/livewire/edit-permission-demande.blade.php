@@ -109,7 +109,7 @@
                     <select name="id_chef_antenne" id="" class="form-select" wire:model.live="id_chef_antenne">
                         <option value="">--- choississez un chef d'antenne ---</option>
                         @foreach ($users_antenne as $antenne)
-                        <option value="{{$antenne->id}}">{{$antenne->username}} {{$antenne->name}}</option>
+                        <option value="{{$antenne->id}}">{{$antenne->employe->prenom}} {{$antenne->employe->nom}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -120,14 +120,14 @@
                 </div>
                 @endif
                 @if ((Auth::user()->name == 'Chef Antenne')||(Auth::user()->name == 'Directeur'))
-                <div class="mt-3">
+                {{-- <div class="mt-3">
                     <label for="directeur"> Directeur</label>
                     <select name="id_directeur" id="" class="form-select" wire:model.live="id_directeur">
                         @foreach ($users_directeur as $directeur)
                         <option value="{{$directeur->id}}">{{$directeur->username}} {{$directeur->name}}</option>
                         @endforeach
                     </select>
-                </div>
+                </div> --}}
                 @endif
 
                 <div style="display: flex; justify-content:center;" class="mt-3">

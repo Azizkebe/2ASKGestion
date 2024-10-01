@@ -24,6 +24,7 @@ class EditPermissionDemande extends Component
     public function mount($demandepermission)
     {
 
+
         $permission = DemandePermission::findOrFail($this->demandepermission);
 
         $this->prenom = $permission->prenom;
@@ -42,14 +43,14 @@ class EditPermissionDemande extends Component
         $toDate = Carbon::parse($this->date_depart);
         $fromDate = Carbon::parse($this->date_retour);
 
-        $this->prenom = Auth::user()->username;
-        $this->nom = Auth::user()->name;
+        $this->prenom = Auth::user()->employe->prenom;
+        $this->nom = Auth::user()->employe->nom;
 
         $users = User::where('role_id', Auth::user()->role_id)->get();
 
         $role_directeur = RoleModel::where('name','Directeur')->first();
         $role_antenne = RoleModel::where('name','Chef Antenne')->first();
-        $role_employeur = RoleModel::where('name','Employe')->first();
+        // $role_employeur = RoleModel::where('name','Employe')->first();
 
         $users_directeur = User::where('role_id', $role_directeur->id)->get();
         $users_antenne = User::where('role_id', $role_antenne->id)->get();
@@ -70,7 +71,7 @@ class EditPermissionDemande extends Component
         }
         return view('livewire.edit-permission-demande',[
             'users_antenne'=>  $users_antenne,
-            'users_directeur'=> $users_directeur,
+            // 'users_directeur'=> $users_directeur,
         ]);
     }
     public function update(DemandePermission $demandepermission)
@@ -94,9 +95,9 @@ class EditPermissionDemande extends Component
             $toDate = Carbon::parse($this->date_depart);
             $fromDate = Carbon::parse($this->date_retour);
 
-            $permission->prenom = Auth::user()->name;
-            $permission->nom = Auth::user()->username;
-            $permission->email = Auth::user()->email;
+            $permission->prenom = Auth::user()->employe->prenom;
+            $permission->nom = Auth::user()->employe->nom;
+            $permission->email = Auth::user()->employe->email;
             $permission->date_depart = $this->date_depart;
             $permission->date_retour = $this->date_retour;
 
@@ -115,8 +116,10 @@ class EditPermissionDemande extends Component
             $permission->motif_demande = $this->motif_permission;
             $permission->id_chef_antenne = $this->id_chef_antenne;
 
-            if ($permission->Demande == 'En cours')
+            if ($permission->id_statut_permission == '1')
             {
+                $permission->id_statut_permission_rh = '1';
+
                 $permission->update();
                 toastr()->success('Bravo, La demande a été modifiée');
                 return redirect()->route('demandepermission.liste');
