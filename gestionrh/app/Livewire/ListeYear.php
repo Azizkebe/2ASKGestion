@@ -23,38 +23,45 @@ class ListeYear extends Component
     }
      public function ConfigureButton()
     {
-         $currentYear = Carbon::now()->format('Y');
+        //  $currentYear = Carbon::now()->format('Y');
 
-            $employe = Employe::whereDoesntHave('year_table', function
-            ($query) use ($currentYear){
-                $query->where('annee_en_cours', '=', $currentYear);
-            })->get();
+        //     $employe = Employe::whereDoesntHave('year_table', function
+        //     ($query) use ($currentYear){
+        //         $query->where('annee_en_cours', '=', $currentYear);
+        //     })->get();
 
-            if($employe->count() == 0)
-            {
-                return redirect()->back()->with('Erreur','Tous les conges restants sont restitués');
-            }
-
-        // $totalPaid = 0;
-        // $infoYear = YearTable::where('active','1')->first();
-        // $year_info = $infoYear->annee_en_cours;
-        // $currentYear = Carbon::now()->format('Y');
-        // if($year_info == $currentYear)
-        // {
-        //     $paramconge = ParamTypeConge::where('id_yeartable',$infoYear->id)->first();
-        //     $globalpermission = PermissionConge::where('id_param_type_conge',$paramconge->id)->get();
-        //     foreach($globalpermission  as $global)
+        //     if($employe->count() == 0)
         //     {
-        //         $totalPaid = $global->nombre_jours_pris + $totalPaid;
-        //         dd($totalPaid);
+        //         return redirect()->back()->with('Erreur','Tous les conges restants sont restitués');
         //     }
 
+        $totalPaid = 0;
+        $infoYear = YearTable::where('active','1')->first();
+        $year_info = $infoYear->annee_en_cours;
+        $currentYear = Carbon::now()->format('Y');
+        if($year_info == $currentYear)
+        {
+            $paramconge = ParamTypeConge::where('id_yeartable',$infoYear->id)->first();
+            $globalpermission = PermissionConge::where('id_param_type_conge',$paramconge->id)->get();
 
-        // }
+            foreach($globalpermission  as $global)
+            {
+                $result = $global->employe()->where('id', $global->id)->get();
+                dd($result);
+                // $employe = Employe::where('id', $global->id_employe)->get();
+
+                // $totalPaid = $global->nombre_jours_pris + $totalPaid;
+
+                // foreach ($employe as $employe) {
+
+                //     $employe->update(['nombre_conge_program' => $employe->nombre_conge_program + $totalPaid]);
+                // }
+            }
+        }
     }
     public function render()
     {
-            $date_affiche = 2;
+            $date_affiche = 3;
             $mois_affiche = 10;
 
             $currentDay = Carbon::now()->day;
