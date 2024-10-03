@@ -12,6 +12,7 @@ use Auth;
 
 class ListeYear extends Component
 {
+    public $paramconge;
     public function toggleStatus(YearTable $curent_year)
     {
         //Mettre à jour toutes les lignes de table active à 0
@@ -41,28 +42,44 @@ class ListeYear extends Component
         $infoYear = YearTable::where('active','1')->first();
         $year_info = $infoYear->annee_en_cours;
         $currentYear = Carbon::now()->format('Y');
+
+
         if($year_info == $currentYear)
         {
-            $paramconge = ParamTypeConge::where('id_yeartable',$infoYear->id)->first();
-            $globalpermission = PermissionConge::where('id_param_type_conge',$paramconge->id)
-                                                ->where('id_employe', Auth::user()->id_employe)->get();
+            $lastYear_id = $infoYear->id - 1;
+            $this->paramconge = ParamTypeConge::where('id_yeartable',$lastYear_id)->first();
 
+            $globalpermission = PermissionConge::where('id_param_type_conge',$this->paramconge->id)
+                                                ->where('id_employe', 27)->get();
             foreach($globalpermission  as $global)
             {
-                // $employe = Employe::where('id', $global->id_employe)->first();
-
-
                 $totalPaid = $global->nombre_jours_pris + $totalPaid;
-
-                // $totalRest = $paramconge->nombre_de_jour_reserve - $totalPaid;
-
-
-                // $employe->update(['nombre_conge_program'=> $totalRest + $employe->nombre_conge_program]);
-
             }
-            dd($totalPaid);
-            toastr()->success('Bravo, Tous les congés sont restitués');
-            return redirect()->back();
+
+            $employe1 = Employe::where('id', Auth::user()->id_employe)->first();
+            $totalRest = $this->paramconge->nombre_de_jour_reserve - $totalPaid;
+            $totalAjout = $employe1->nombre_conge_program + $totalRest;
+
+             $result_passe = $employe1->update(['nombre_conge_program'=> $totalAjout]);
+
+             if($result_passe)
+             {
+                $globalpermission = PermissionConge::where('id_employe', Auth::user()->id_employe)->get();
+                foreach($globalpermission  as $global)
+                {
+                    $this->paramconge->id = 0;
+                    toastr()->success('Bravo, Tous les congés sont restitués');
+                    return redirect()->back();
+
+                }
+             }
+             else
+             {
+                toastr()->error('Impossible d\'effectuer l\'operation');
+                return redirect()->back();
+             }
+
+
         }
     }
     public function render()
