@@ -131,7 +131,7 @@ class CreatePermissionDemande extends Component
             $permission->motif_demande = $this->motif_permission;
             $permission->id_chef_antenne = $this->id_chef_antenne;
             $permission->id_statut_permission = '1';
-            // $permission->id_statut_permission_rh = '1';
+            $permission->id_statut_permission_rh = '1';
 
             $reponse = $permission->save();
             if($reponse)

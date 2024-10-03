@@ -19,6 +19,7 @@ use App\Models\RoleModel;
 use App\Models\Curriculum;
 use App\Models\Permission;
 use App\Models\PermissionConge;
+use App\Models\DemandePermission;
 use App\Models\ResetCodePassword;
 use App\Notifications\SendEmailToAdminAfterRegistration;
 use App\Http\Requests\SubmitAccessRequest;
@@ -272,12 +273,24 @@ class UserAdminController extends Controller
         $permission = Permission::where('id_employe', Auth::user()->id_employe)->count();
         $conge = PermissionConge::where('id_employe', Auth::user()->id_employe)->count();
 
+        $demande_permission_total = DemandePermission::where('email', Auth::user()->email)->count();
+
+        $demande_permission_encours = DemandePermission::where('email', Auth::user()->email)
+                                                ->where('id_statut_permission_rh','1')->count();
+        $demande_permission_accept = DemandePermission::where('email', Auth::user()->email)
+                                                ->where('id_statut_permission_rh','2')->count();
+        $demande_permission_rejet = DemandePermission::where('email', Auth::user()->email)
+                                                ->where('id_statut_permission_rh','3')->count();
+
+
+
         return view('bienvenue', [
             'permission'=>$permission,
             'conge'=>$conge,
-            // 'employe'=>$employe,
-            // 'contrat'=>$fichecontrat,
-            // 'membre'=>$membre,
+            'demande_permission_total'=>$demande_permission_total,
+            'demande_permission_encours'=>$demande_permission_encours,
+            'demande_permission_accept'=>$demande_permission_accept,
+            'demande_permission_rejet'=>$demande_permission_rejet,
             // 'diplome'=>$diplome,
             // 'curriculum'=>$curriculum,
         ]);

@@ -10,7 +10,11 @@ class Employe extends Model
     use HasFactory;
     protected $guarded = [];
 
-    public function genre()
+public function year_table()
+{
+    return $this->hasMany(YearTable::class);
+}
+public function genre()
 {
     return $this->belongsTo(Genre::class, 'id_genre');
 }

@@ -4,6 +4,9 @@
           <h4 class="card-title">Liste des annees</h4>
             <div style="display:flex; justify-content:end;">
                 <a href="{{route('setting.create')}}" class="btn btn-success btn-sm">Ajouter une Session</a>&nbsp;
+                @if ($is_visible)
+                <button class="btn btn-primary" wire:click="ConfigureButton()">Add conges restants</button>
+                @endif
             </div>
         </div>
         <div class="card-body">
