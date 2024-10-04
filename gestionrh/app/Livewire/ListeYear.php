@@ -6,8 +6,10 @@ use Livewire\Component;
 use App\Models\YearTable;
 use App\Models\ParamTypeConge;
 use App\Models\PermissionConge;
+use App\Models\PermissionRoleModel;
 use App\Models\Employe;
 use Carbon\Carbon;
+
 use Auth;
 
 class ListeYear extends Component
@@ -84,6 +86,18 @@ class ListeYear extends Component
     }
     public function render()
     {
+
+        $permissionConfiguration = PermissionRoleModel::getPermission('Configuration', Auth::user()->role_id);
+        if(empty($permissionConfiguration))
+        {
+            abort('404');
+        }
+        $permission_config_status = PermissionRoleModel::getPermission('Config_status', Auth::user()->role_id);
+        $permission_config_add = PermissionRoleModel::getPermission('Config_ajout', Auth::user()->role_id);
+        $permission_config_del = PermissionRoleModel::getPermission('Config_supprime', Auth::user()->role_id);
+        $permission_config_edit = PermissionRoleModel::getPermission('Config_editer', Auth::user()->role_id);
+
+
             $date_affiche = 3;
             $mois_affiche = 10;
 
@@ -102,6 +116,10 @@ class ListeYear extends Component
             return view('livewire.liste-year', [
                 'year'=>$year,
                 'is_visible'=> $is_visible,
+                'permission_config_status'=>$permission_config_status,
+                'permission_config_add'=>$permission_config_add,
+                'permission_config_del'=>$permission_config_del,
+                'permission_config_edit'=>$permission_config_edit,
             ]);
     }
 }

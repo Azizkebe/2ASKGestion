@@ -2,6 +2,9 @@
 
 @section('content')
     <div class="container">
+        @php
+         $permissionConfiguration = App\Models\PermissionRoleModel::getPermission('Configuration', Auth::user()->role_id);
+        @endphp
         <div class="page-inner">
             <div
               class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
@@ -11,7 +14,9 @@
               </div>
               <div class="ms-md-auto py-2 py-md-0">
                 {{-- <a href="{{route('migrer.create')}}" class="btn btn-label-info btn-round me-2">Migrer conge restant des congés</a> --}}
-                <a href="{{route('setting.liste')}}" class="btn btn-primary btn-round">Prametrer l'annee</a>
+                @if (!empty($permissionConfiguration))
+                <a href="{{route('setting.liste')}}" class="btn btn-primary btn-round">Configuration</a>
+                @endif
               </div>
             </div>
         </div>

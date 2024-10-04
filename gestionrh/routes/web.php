@@ -31,6 +31,7 @@ use App\Http\Controllers\Contrat\FicheContratController;
 use App\Http\Controllers\Demande\DemandePermissionController;
 use App\Http\Controllers\Demande\DemandeAntenneController;
 use App\Http\Controllers\Demande\AcceptdemandeController;
+use App\Http\Controllers\Demande\DemandePermissionCongeController;
 
 use App\Livewire\EditPhotoEmploye;
 
@@ -284,6 +285,13 @@ Route::middleware('userAdmin')->group(function(){
         Route::get('liste',[AcceptdemandeController::class, 'liste'])->name('demande_resp.liste');
         Route::get('/edit/{demande_resp}',[AcceptdemandeController::class, 'edit'])->name('demande_resp.editer');
         Route::get('/delete/{demande_resp}',[AcceptdemandeController::class, 'delete'])->name('demande_resp.delete');
+
+    });
+    Route::prefix('demandeconge')->group(function(){
+        Route::get('create',[DemandePermissionCongeController::class, 'create'])->name('demandeconge.create');
+        Route::get('liste',[DemandePermissionCongeController::class, 'liste'])->name('demandeconge.liste');
+        // Route::get('/edit/{demandepermission}',[DemandePermissionCongeController::class, 'edit'])->name('demandeconge.editer');
+        // Route::get('/delete/{demandepermission}',[DemandePermissionCongeController::class, 'delete'])->name('demandeconge.delete');
 
     });
 });
