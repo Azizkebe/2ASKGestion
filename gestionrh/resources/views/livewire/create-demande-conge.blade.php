@@ -7,7 +7,7 @@
             </div>
         </div>
         <div class="card-body">
-            <form action="" method="POST" wire:submit.prevent="store">
+            <form action="" method="POST" wire:submit.prevent="Store">
                 @csrf
                 @method('POST')
 
@@ -23,7 +23,7 @@
                     <input type="text" class="form-control" name="prenom" id="prenom" placeholder="Prenom" wire:model.live="prenom" readonly>
                 </div>
                 <div>
-                    @error('nom')
+                    @error('prenom')
                     <span class="error">le prenom est requis</span>
                     @enderror
                 </div>
@@ -44,6 +44,11 @@
                             <option value="{{$item->id}}">{{$item->type_de_conge}}</option>
                         @endforeach
                     </select>
+                </div>
+                <div>
+                    @error('id_type_conge')
+                    <span class="error">le type de congé est obligatoire</span>
+                    @enderror
                 </div>
                 <div class="mt-3">
                     <label for="prename">Date de depart</label>
@@ -75,7 +80,7 @@
                     @enderror
                 </div>
                 <div class="mt-3">
-                    <label for="prename">Date de retour</label>
+                    <label for="date_retour">Date de retour</label>
                     <input type="text" class="form-control" id="date_r" name="date_retour" wire:model.live="date_retour" autocomplete="off"
                     data-provide="datepicker" data-date-autoclose="true"
                     data-date-format="d/m/yyyy" data-date-today-highlight="true"
@@ -126,9 +131,9 @@
                     <label for="chef_antenne"> Chef Antenne</label>
                     <select name="id_chef_antenne" id="" class="form-select" wire:model.live="id_chef_antenne">
                         <option value="">--- choississez un chef d'antenne ---</option>
-                        {{-- @foreach ($users_antenne as $antenne)
+                        @foreach ($users_antenne as $antenne)
                         <option value="{{$antenne->id}}">{{$antenne->employe->prenom}} {{$antenne->employe->nom}}</option>
-                        @endforeach --}}
+                        @endforeach
                     </select>
                 </div>
                 <div>
@@ -137,16 +142,6 @@
                     @enderror
                 </div>
                 @endif
-                {{-- @if ((Auth::user()->name == 'Chef Antenne')||(Auth::user()->name == 'Directeur'))
-                <div class="mt-3">
-                    <label for="directeur"> Directeur</label>
-                    <select name="id_directeur" id="" class="form-select" wire:model.live="id_directeur">
-                        @foreach ($users_directeur as $directeur)
-                        <option value="{{$directeur->id}}">{{$directeur->username}} {{$directeur->name}}</option>
-                        @endforeach
-                    </select>
-                </div> --}}
-                {{-- @endif --}}
                 <div style="display: flex; justify-content:center;" class="mt-3">
                     <button type="submit" class="btn btn-primary btn-block text-center"> Envoyer la demande </button>
                 </div>

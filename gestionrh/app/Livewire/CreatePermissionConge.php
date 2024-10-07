@@ -62,8 +62,6 @@ class CreatePermissionConge extends Component
 
             toastr()->error('Desolé, Vous n\'avez plus de droit au congé');
         }
-
-
     }
 
 
