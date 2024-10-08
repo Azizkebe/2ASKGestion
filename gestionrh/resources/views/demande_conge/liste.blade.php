@@ -46,12 +46,12 @@
                                 <td>{{$demande->prenom}}</td>
                                 <td>{{$demande->nom}}</td>
                                 <td>{{$demande->email}}</td>
-                                <td>{{$demande->id_param_type_conge}}</td>
-                                <td>{{$demande->user->employe->prenom}} {{$permission->user->employe->nom}}</td>
+                                <td>{{$demande->param_type_conge->type_de_conge}}</td>
+                                <td>{{$demande->user->employe->prenom}} {{$demande->user->employe->nom}}</td>
                                 <td>{{$demande->date_depart}}</td>
                                 <td>{{$demande->date_retour}}</td>
                                 <td>{{$demande->nombre_jour_conge_pris}}</td>
-                                <td>{{$demande->motif_demande}}</td>
+                                <td>{{$demande->motif_demande_conge}}</td>
                                 <td>
                                     {{$demande->statut->statut_demande}}
                                 </td>
@@ -67,7 +67,8 @@
                                         title=""
                                         class="btn btn-link btn-primary btn-lg"
                                         data-original-title="Edit Task"
-                                        ><a href="{{route('demandepermission.editer',$permission->id )}}"><i class="fa fa-edit"></i></a>
+                                        >
+                                        <a href="{{route('demandeconge.editer',$demande->id )}}"><i class="fa fa-edit"></i></a>
                                         </button>
                                         {{-- @endif --}}
                                         {{-- @if (!empty($permissionDemandDel)) --}}
@@ -77,8 +78,9 @@
                                         title=""
                                         class="btn btn-link btn-danger"
                                         data-original-title="Remove"
-                                        ><a onclick="return confirm('Etes vous sure de vouloir supprimer le compte')"
-                                        href="{{route('demandepermission.delete', $permission->id)}}" class="btn btn-link btn-danger"><i class="fa fa-times"></i></a>
+                                        >
+                                        {{-- <a onclick="return confirm('Etes vous sure de vouloir supprimer le compte')"
+                                        href="{{route('demandeconge.delete', $demande->id)}}" class="btn btn-link btn-danger"><i class="fa fa-times"></i></a> --}}
                                         </button>
                                         {{-- @endif --}}
                                     </div>

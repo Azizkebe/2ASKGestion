@@ -151,6 +151,37 @@
             </div>
           </li>
           @endif
+          <li class="nav-item">
+            <a data-bs-toggle="collapse" href="#magasin">
+              <i class="fas fa-bars"></i>
+              <p>Magasin</p>
+              <span class="caret"></span>
+            </a>
+            <div class="collapse" id="magasin">
+                <ul class="nav nav-collapse">
+                    <li>
+                        <a data-bs-toggle="collapse" href="#mag1">
+                          <span class="sub-item">Fourniture</span>
+                          <span class="caret"></span>
+                        </a>
+                        <div class="collapse" id="mag1">
+                          <ul class="nav nav-collapse subnav">
+                            <li>
+                              <a href="">
+                                <span class="sub-item">Faire une demande</span>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="">
+                                <span class="sub-item">Valider une demande</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
           @if (!empty($permissionEmploye))
           <li class="nav-item">
             <a data-bs-toggle="collapse" href="#sidebarLayouts">

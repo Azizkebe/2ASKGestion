@@ -22,4 +22,8 @@ class DemandeConge extends Model
     {
         return $this->belongsTo(StatutPermissionRh::class, 'id_statut_permission_rh');
     }
+    public function param_type_conge()
+    {
+        return $this->belongsTo(ParamTypeConge::class, 'id_param_type_conge');
+    }
 }

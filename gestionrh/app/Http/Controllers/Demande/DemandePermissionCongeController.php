@@ -17,4 +17,8 @@ class DemandePermissionCongeController extends Controller
         $demande_conge = DemandeConge::all();
         return view('demande_conge.liste', compact('demande_conge'));
     }
+    public function edit($demande_conge)
+    {
+        return view('demande_conge.edit', compact('demande_conge'));
+    }
 }

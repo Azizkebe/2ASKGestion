@@ -32,7 +32,9 @@ use App\Http\Controllers\Demande\DemandePermissionController;
 use App\Http\Controllers\Demande\DemandeAntenneController;
 use App\Http\Controllers\Demande\AcceptdemandeController;
 use App\Http\Controllers\Demande\DemandePermissionCongeController;
-
+use App\Http\Controllers\Projet\ProjetController;
+use App\Http\Controllers\Article\ArticleController;
+use App\Http\Controllers\Fourniture\FournitureController;
 use App\Livewire\EditPhotoEmploye;
 
 // Route::get('/dashboard',[UserAdminController::class,'dashboard'])->name('dashboard');
@@ -244,6 +246,22 @@ Route::middleware('userAdmin')->group(function(){
         Route::get('/delete/{mydiplome}',[MyDiplomeController::class,'delete'])->name('mydiplome.delete');
 
     });
+    Route::prefix('projet')->group(function(){
+        Route::get('create',[ProjetController::class, 'create'])->name('projet.create');
+        Route::post('create',[ProjetController::class, 'store'])->name('projet.store');
+        Route::get('liste',[ProjetController::class, 'liste'])->name('projet.liste');
+        Route::get('/edit/{projet}',[ProjetController::class,'editer'])->name('projet.editer');
+        Route::put('/update/{projet}',[ProjetController::class,'update'])->name('projet.update');
+        Route::get('/delete/{projet}',[ProjetController::class,'delete'])->name('projet.delete');
+    });
+    Route::prefix('article')->group(function(){
+        Route::get('create',[ArticleController::class, 'create'])->name('article.create');
+        Route::post('create',[ArticleController::class, 'store'])->name('article.store');
+        Route::get('liste',[ArticleController::class, 'liste'])->name('article.liste');
+        Route::get('/edit/{article}',[ArticleController::class,'editer'])->name('article.editer');
+        Route::put('/update/{article}',[ArticleController::class,'update'])->name('article.update');
+        Route::get('/delete/{article}',[ArticleController::class,'delete'])->name('article.delete');
+    });
     Route::prefix('setting')->group(function(){
         Route::get('create',[YearController::class,'create'])->name('setting.create');
         Route::get('liste',[YearController::class,'liste'])->name('setting.liste');
@@ -290,9 +308,17 @@ Route::middleware('userAdmin')->group(function(){
     Route::prefix('demandeconge')->group(function(){
         Route::get('create',[DemandePermissionCongeController::class, 'create'])->name('demandeconge.create');
         Route::get('liste',[DemandePermissionCongeController::class, 'liste'])->name('demandeconge.liste');
-        // Route::get('/edit/{demandepermission}',[DemandePermissionCongeController::class, 'edit'])->name('demandeconge.editer');
+        Route::get('/edit/{demandeconge}',[DemandePermissionCongeController::class, 'edit'])->name('demandeconge.editer');
         // Route::get('/delete/{demandepermission}',[DemandePermissionCongeController::class, 'delete'])->name('demandeconge.delete');
 
+    });
+    Route::prefix('fourniture')->group(function(){
+        Route::get('add',[FournitureController::class, 'add'])->name('fourniture.add');
+        Route::post('create',[FournitureController::class, 'store'])->name('fourniture.store');
+        Route::get('liste',[FournitureController::class, 'liste'])->name('fourniture.liste');
+        // Route::get('/edit/{article}',[ArticleController::class,'editer'])->name('article.editer');
+        // Route::put('/update/{article}',[ArticleController::class,'update'])->name('article.update');
+        // Route::get('/delete/{article}',[ArticleController::class,'delete'])->name('article.delete');
     });
 });
 
