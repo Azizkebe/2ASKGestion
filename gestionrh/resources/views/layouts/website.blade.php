@@ -142,8 +142,15 @@
     <script src="{{asset('admin//js/setting-demo.js')}}"></script>
     {{-- <script src="{{asset('admin//js/demo.js')}}"></script> --}}
 
+<script async>
+const myModal = document.getElementById('myModal')
+const myInput = document.getElementById('myInput')
 
-    <script>
+myModal.addEventListener('shown.bs.modal', () => {
+  myInput.focus()
+})
+</script>
+    <script async>
       $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
         type: "line",
         height: "70",
@@ -171,7 +178,7 @@
         fillColor: "rgba(255, 165, 52, .14)",
       });
     </script>
-     <script>
+     <script async>
         $(document).ready(function () {
           $("#basic-datatables").DataTable({});
 
@@ -228,11 +235,11 @@
           });
         });
       </script>
-     <script>
+    <script async>
     window.addEventListener('show-form', event =>{
         $('#exampleModal').modal('show')
     })
-</script>
+    </script>
 {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> --}}
 {{-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> --}}
 @livewireScripts

@@ -167,7 +167,7 @@
                         <div class="collapse" id="mag1">
                           <ul class="nav nav-collapse subnav">
                             <li>
-                              <a href="">
+                              <a href="{{route('fourniture.liste')}}">
                                 <span class="sub-item">Faire une demande</span>
                               </a>
                             </li>

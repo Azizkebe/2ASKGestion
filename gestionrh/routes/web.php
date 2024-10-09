@@ -314,11 +314,14 @@ Route::middleware('userAdmin')->group(function(){
     });
     Route::prefix('fourniture')->group(function(){
         Route::get('add',[FournitureController::class, 'add'])->name('fourniture.add');
-        Route::post('create',[FournitureController::class, 'store'])->name('fourniture.store');
+        Route::post('add',[FournitureController::class, 'store'])->name('fourniture.store');
         Route::get('liste',[FournitureController::class, 'liste'])->name('fourniture.liste');
+        Route::get('delete_fourniture/{fourniture}',[FournitureController::class,'delete_fourniture'])->name('delete_fourniture.delete');
+        Route::get('detail/{fourniture}',[FournitureController::class,'detail'])->name('fourniture.detail');
+        Route::post('detail_article',[FournitureController::class,'detail_save'])->name('fourniture.detail_save');
         // Route::get('/edit/{article}',[ArticleController::class,'editer'])->name('article.editer');
         // Route::put('/update/{article}',[ArticleController::class,'update'])->name('article.update');
-        // Route::get('/delete/{article}',[ArticleController::class,'delete'])->name('article.delete');
+        // Route::get('/delete/{fourniture}',[FournitureController::class,'delete'])->name('fourniture.delete');
     });
 });
 

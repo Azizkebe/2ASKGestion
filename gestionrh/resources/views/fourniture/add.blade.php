@@ -10,7 +10,7 @@
             <div style="display: flex; justify-content:end;">
                 <a href="{{route('fourniture.liste')}}" class="btn btn-success btn-sm">Liste des articles</a>
             </div>
-            <form action="" method="POST">
+            <form action="{{route('fourniture.store')}}" method="POST">
                 @csrf
                 @method('POST')
                 <div class="mt-3">
@@ -33,7 +33,7 @@
                 </div>
                 <div>
                     @error('motif')
-                        <span>{{$message}}</span>
+                        <span class="error">{{$message}}</span>
                     @enderror
                 </div>
               <div class="mt-3 form-group">
