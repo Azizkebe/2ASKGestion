@@ -48,26 +48,37 @@ class FournitureController extends Controller
     {
         $fourni = Fourniture::findOrFail($fourniture);
         $article = Article::all();
-        $panier_fourni = PanierArticle::all();
+        $panier = PanierArticle::all();
 
         return view('fourniture.detail', [
             'fourni'=> $fourni,
             'article'=> $article,
-            'panier_fourni'=>$panier_fourni,
+            'panier'=> $panier,
         ]);
     }
-    public function detail_save(Request $request, PanierArticle $panier_fourni)
+    public function store_detail(Request $request, PanierArticle $panier)
     {
-        // $fourni = Fourniture::findOrFail($fourniture);
+        // $article = new Article;
+        $panier->id_article = $request->id_article;
+        $panier->Quantite_demandee = $request->quantite_demande;
 
-        $panier_fourni->id_article = $request->id_article;
-        $panier_fourni->Quantite_demandee = $request->quantite_demande;
-
-        $panier_fourni->save();
-
-        toastr()->success('L\'article a été ajouté avec succes');
+        $panier->save();
+        toastr()->success('L\'article est ajouté avec succes');
         return redirect()->back();
+
     }
+    // public function detail_save(Request $request, PanierArticle $panier_fourni)
+    // {
+    //     // $fourni = Fourniture::findOrFail($fourniture);
+
+    //     $panier_fourni->id_article = $request->id_article;
+    //     $panier_fourni->Quantite_demandee = $request->quantite_demande;
+
+    //     $panier_fourni->save();
+
+    //     toastr()->success('L\'article a été ajouté avec succes');
+    //     return redirect()->back();
+    // }
     public function delete(int $fourniture, DetailFourniture $detail_fourni)
     {
         $fourni_delete = DetailFourniture::findOrFail($fourniture);

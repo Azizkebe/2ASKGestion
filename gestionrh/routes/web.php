@@ -34,6 +34,7 @@ use App\Http\Controllers\Demande\AcceptdemandeController;
 use App\Http\Controllers\Demande\DemandePermissionCongeController;
 use App\Http\Controllers\Projet\ProjetController;
 use App\Http\Controllers\Article\ArticleController;
+use App\Http\Controllers\Article\PanierArticleController;
 use App\Http\Controllers\Fourniture\FournitureController;
 use App\Livewire\EditPhotoEmploye;
 
@@ -318,10 +319,15 @@ Route::middleware('userAdmin')->group(function(){
         Route::get('liste',[FournitureController::class, 'liste'])->name('fourniture.liste');
         Route::get('delete_fourniture/{fourniture}',[FournitureController::class,'delete_fourniture'])->name('delete_fourniture.delete');
         Route::get('detail/{fourniture}',[FournitureController::class,'detail'])->name('fourniture.detail');
-        Route::post('detail_article',[FournitureController::class,'detail_save'])->name('fourniture.detail_save');
+        Route::post('detail/{fourniture}',[FournitureController::class,'store_detail'])->name('fourniture.store_detail');
+        // Route::post('detail_article',[FournitureController::class,'detail_save'])->name('fourniture.detail_save');
         // Route::get('/edit/{article}',[ArticleController::class,'editer'])->name('article.editer');
         // Route::put('/update/{article}',[ArticleController::class,'update'])->name('article.update');
         // Route::get('/delete/{fourniture}',[FournitureController::class,'delete'])->name('fourniture.delete');
+    });
+    Route::prefix('panier_article')->group(function(){
+        Route::get('edit/{panier_article}', [PanierArticleController::class,'editer'])->name('panier_article.edit');
+        Route::get('delete/{panier_article}', [PanierArticleController::class,'delete'])->name('panier_article.delete');
     });
 });
 
