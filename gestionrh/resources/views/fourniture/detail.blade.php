@@ -25,47 +25,16 @@
                         <i class="fa fa-plus"></i> Ajouter des articles
                     </button>
                     {{-- DEEBUT ADD ARTICLE  --}}
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h1 class="modal-title fs-5" id="exampleModalLabel">Ajout Article de Fourniture - {{$fourni->projet->name_projet}} </h1>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <form action="{{route('fourniture.store_detail', $fourni->id)}}" method="POST">
-                                @csrf
-                                @method('POST')
-                                <div class="modal-body">
-                                <div class="mt-3 mb-3">
-                                    <label for="">Article:</label>
-                                    <select name="id_article" id="id_article" class="form-select">
-                                        <option value="">-- choisir un article --</option>
-                                        @foreach ($article as $article)
-                                            <option value="{{$article->id}}">{{$article->name_article}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="mt-3">
-                                    <label for="">Quantite demandée</label>
-                                    <input type="number" name="quantite_demande" min="0" id="quantite_demande" class="form-control">
-                                </div>
-                                </div>
-                                <div class="modal-footer">
-                                <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                                <button type="submit" class="btn btn-primary">Ajouter un article</button>
-                                </div>
-                            </form>
-                            </div>
-                        </div>
-                    </div>
+                    @include('fourniture.modal.addmodal')
                     {{-- FIN ADD ARTICLE --}}
 
                     {{-- DEBUT EDIT ARTICLE --}}
+                    @include('fourniture.modal.editmodal')
                     {{-- <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                           <div class="modal-content">
                             <div class="modal-header">
-                              <h1 class="modal-title fs-5" id="editModal">Ajout Article de Fourniture - {{$fourni->projet->name_projet}} </h1>
+                              <h1 class="modal-title fs-5" id="exampleModalLabel">Ajout Article de Fourniture - {{$fourni->projet->name_projet}} </h1>
                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <form action="" method="POST">
@@ -73,6 +42,7 @@
                                 @method('PUT')
                                 <div class="modal-body">
                                 <div class="mt-3 mb-3">
+
                                     <label for="">Article:</label>
                                     <select name="id_article" id="id_article" class="form-select">
                                         <option value="">-- choisir un article --</option>
@@ -83,17 +53,19 @@
                                 </div>
                                 <div class="mt-3">
                                     <label for="">Quantite demandée</label>
+
                                     <input type="number" name="quantite_demande" min="0" id="quantite_demande" class="form-control">
                                 </div>
                                 </div>
                                 <div class="modal-footer">
-                                <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                                <button type="submit" class="btn btn-primary">Ajouter un article</button>
+                                <button type="reset" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
+                                <button type="submit" class="btn btn-primary">Mettre à jour</button>
                                 </div>
                             </form>
                             </div>
                         </div>
                     </div> --}}
+                    {{-- <p>{{$panier}}</p> --}}
                     {{-- FIN EDIT ARTICLE --}}
             </div>
             <div class="table-responsive">
@@ -123,8 +95,8 @@
                                       title=""
                                       class="btn btn-link btn-primary btn-lg"
                                       data-original-title="Edit Task"
-                                      ><a href="{{route('panier_article.edit', $detail->id)}}"><i class="fa fa-edit"></i></a>
-
+                                      >
+                                      <a href="" data-bs-toggle="modal" data-bs-target="#editModal" class="editModal"><i class="fa fa-edit"></i></a>
                                       </button>
                                       <button
                                       type="button"
@@ -148,4 +120,16 @@
     </div>
 </div>
 
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function(){
+            $(document).on('click', '.editModal', function(){
+                var stud_id = $(this).val();
+
+                $('#editModal').modal('show');
+            })
+        });
+    </script>
 @endsection

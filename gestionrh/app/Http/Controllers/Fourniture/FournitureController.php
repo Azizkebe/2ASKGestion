@@ -56,15 +56,39 @@ class FournitureController extends Controller
             'panier'=> $panier,
         ]);
     }
-    public function store_detail(Request $request, PanierArticle $panier)
+    public function store_detail(Request $request, PanierArticle $panier, int $fourniture )
     {
-        // $article = new Article;
+
+        $panier->id_fournisseur = $fourniture;
         $panier->id_article = $request->id_article;
         $panier->Quantite_demandee = $request->quantite_demande;
 
         $panier->save();
         toastr()->success('L\'article est ajouté avec succes');
         return redirect()->back();
+
+    }
+    // public function editer_article(int $fourniture)
+    // {
+    //     $paniers = PanierArticle::where('id_fourniture',$fourniture)->first();
+        // $fourni = Fourniture::findOrFail($fourniture);
+        // $article = Article::all();
+        // return view('fourniture.modal.editmodal',[
+            // 'panier'=>$paniers,
+            // 'fourni'=>$fourni,
+            // 'article'=>$article,
+        // ]);
+
+    // }
+    public function update_article(PanierArticle $panier, Request $requete)
+    {
+        $panier = PanierArticle::findOrFail($fourniture);
+        $panier->id_article = $requete->id_article;
+        $panier->Quantite_demandee = $requete->quantite_demandee;
+
+        dd($panier);
+
+
 
     }
     // public function detail_save(Request $request, PanierArticle $panier_fourni)
