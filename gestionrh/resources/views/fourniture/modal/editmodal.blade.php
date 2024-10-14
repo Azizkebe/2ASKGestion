@@ -10,9 +10,9 @@
             @method('PUT')
             <div class="modal-body">
             <div class="mt-3 mb-3">
-                {{$panier}}
+                {{-- {{$panier}} --}}
                 <label for="">Article:</label>
-                {{$fourni->id}}
+                {{-- {{$fourni->id}} --}}
                 <select name="id_article" id="id_article" class="form-select">
                     <option value="">-- choisir un article --</option>
                     @foreach ($article as $article)
@@ -23,7 +23,7 @@
             <div class="mt-3">
                 <label for="">Quantite demandée</label>
 
-                <input type="number" name="quantite_demande" min="0" id="quantite_demande" class="form-control">
+                <input type="number" name="quantite_demande" id="quantity" min="0" id="quantite_demande" class="form-control">
             </div>
             </div>
             <div class="modal-footer">

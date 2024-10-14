@@ -96,7 +96,8 @@
                                       class="btn btn-link btn-primary btn-lg"
                                       data-original-title="Edit Task"
                                       >
-                                      <a href="" data-bs-toggle="modal" data-bs-target="#editModal" class="editModal"><i class="fa fa-edit"></i></a>
+                                      <a href="" data-bs-toggle="modal" data-myquantity="{{$detail->Quantite_demandee}}"
+                                        data-myarticle="{{$detail->article->name_article}}" data-bs-target="#editModal" class="editModal"><i class="fa fa-edit"></i></a>
                                       </button>
                                       <button
                                       type="button"
@@ -122,7 +123,7 @@
 
 @endsection
 
-@section('script')
+{{-- @section('script')
     <script>
         $(document).ready(function(){
             $(document).on('click', '.editModal', function(){
@@ -132,4 +133,4 @@
             })
         });
     </script>
-@endsection
+@endsection --}}
