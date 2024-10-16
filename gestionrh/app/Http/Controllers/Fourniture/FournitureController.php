@@ -10,6 +10,8 @@ use App\Models\Article;
 use App\Models\Fourniture;
 use App\Models\DetailFourniture;
 use App\Models\PanierArticle;
+use App\Models\User;
+use Auth;
 
 class FournitureController extends Controller
 {
@@ -26,6 +28,7 @@ class FournitureController extends Controller
     }
     public function store(FournitureRequest $request,Fourniture $fourni )
     {
+
        $fourni->id_projet = $request->id_projet;
        $fourni->motif = $request->motif;
 
@@ -47,6 +50,7 @@ class FournitureController extends Controller
     public function detail(int $fourniture)
     {
         $fourni = Fourniture::findOrFail($fourniture);
+        // $article = new Article;
         $article = Article::all();
         $panier = PanierArticle::all();
 
@@ -56,10 +60,12 @@ class FournitureController extends Controller
             'panier'=> $panier,
         ]);
     }
-    public function store_detail(Request $request, PanierArticle $panier, int $fourniture )
+    public function store_detail(Request $request, PanierArticle $panier )
     {
+        $user = Auth::user();
+        $user_id = $user->id;
 
-        $panier->id_fournisseur = $fourniture;
+        $panier->user_id= $user_id;
         $panier->id_article = $request->id_article;
         $panier->Quantite_demandee = $request->quantite_demande;
 
@@ -80,15 +86,18 @@ class FournitureController extends Controller
         // ]);
 
     // }
-    public function update_article(PanierArticle $panier, Request $requete)
+    public function update_article(PanierArticle $panier, Request $requete, int $fourniture)
     {
-        $panier = PanierArticle::findOrFail($fourniture);
+
+        $panier = PanierArticle::where('id_fourniture', $fourniture)->first();
         $panier->id_article = $requete->id_article;
         $panier->Quantite_demandee = $requete->quantite_demandee;
+        $panier->id_fourniture = $fourniture;
 
-        dd($panier);
+        $panier->update();
 
-
+        toastr()->success('L\'article a été mise à jour');
+        return redirect()->back();
 
     }
     // public function detail_save(Request $request, PanierArticle $panier_fourni)
@@ -111,5 +120,25 @@ class FournitureController extends Controller
 
         toastr()->success('L\'article a été retiré avec succes');
         return redirect()->back();
+    }
+    public function produit_article()
+    {
+        $article =  Article::all();
+        return view('fourniture.modal.addmodal', compact('article'));
+    }
+    public function cash_fourniture()
+    {
+        $user = Auth::user();
+        $userid = $user->id;
+
+        $panier = PanierArticle::where('user_id', $userid)->get();
+        dd($panier);
+        $order = new DemandeFourniture;
+        foreach($panier as $data)
+        $order->user_id = $data->user_id;
+        $order->Projet ;
+        $order->Bureau ;
+        $order->name_article = $data->article->name_article;
+        $order->quantite_demande ;
     }
 }

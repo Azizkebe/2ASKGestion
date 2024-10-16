@@ -315,20 +315,23 @@ Route::middleware('userAdmin')->group(function(){
     });
     Route::prefix('fourniture')->group(function(){
         Route::get('add',[FournitureController::class, 'add'])->name('fourniture.add');
+        // Route::get('produit_article',[FournitureController::class, 'produit_article'])->name('produit.article');
         Route::post('add',[FournitureController::class, 'store'])->name('fourniture.store');
         Route::get('liste',[FournitureController::class, 'liste'])->name('fourniture.liste');
         Route::get('delete_fourniture/{fourniture}',[FournitureController::class,'delete_fourniture'])->name('delete_fourniture.delete');
         Route::get('detail/{fourniture}',[FournitureController::class,'detail'])->name('fourniture.detail');
+        Route::get('fourniture_create',[FournitureController::class,'cash_fourniture'])->name('fourniture_cash');
         Route::post('detail/{fourniture}',[FournitureController::class,'store_detail'])->name('fourniture.store_detail');
         // Route::post('detail_article',[FournitureController::class,'detail_save'])->name('fourniture.detail_save');
         Route::get('/edit/{fourniture}',[FournitureController::class,'editer_article'])->name('fourniture.editer_article');
-        Route::put('/update/{fourniture}',[ArticleController::class,'update_article'])->name('fourniture.update_article');
+        Route::put('/update/{fourniture}',[FournitureController::class,'update_article'])->name('fourniture.update_article');
+        // Route::put('/update/{fourniture}',[ArticleController::class,'update_article'])->name('fourniture.update_article');
         // Route::get('/delete/{fourniture}',[FournitureController::class,'delete'])->name('fourniture.delete');
     });
     Route::prefix('panier_article')->group(function(){
         // Route::get('create',[])
         Route::get('edit/{panier_article}', [PanierArticleController::class,'editer'])->name('panier_article.edit');
-        // Route::get('update/{panier_article}', [PanierArticleController::class,'update'])->name('panier_article.update');
+        Route::put('update/{panier_article}', [PanierArticleController::class,'update'])->name('panier_article.update');
         Route::get('delete/{panier_article}', [PanierArticleController::class,'delete'])->name('panier_article.delete');
     });
 });

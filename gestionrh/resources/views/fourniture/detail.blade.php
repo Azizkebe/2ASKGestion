@@ -97,7 +97,10 @@
                                       data-original-title="Edit Task"
                                       >
                                       <a href="" data-bs-toggle="modal" data-myquantity="{{$detail->Quantite_demandee}}"
-                                        data-myarticle="{{$detail->article->name_article}}" data-bs-target="#editModal" class="editModal"><i class="fa fa-edit"></i></a>
+                                        data-myarticle="{{$detail->article->name_article ?? ''}}" data-bs-target="#editModal" class="editModal"
+                                      >
+                                      {{-- <a href="{{route('panier_article.edit',$detail->id)}}"> --}}
+                                      <i class="fa fa-edit"></i></a>
                                       </button>
                                       <button
                                       type="button"
@@ -115,7 +118,11 @@
                                <td colspan="6">Aucune Article trouvé</td>
                            @endforelse
                           </tbody>
+
                 </table>
+               <a href="{{route('fourniture_cash')}}" class="btn btn-success btn-sm">Envoyer pour validation</a>&nbsp;&nbsp;
+                <a href="" class="btn btn-danger btn-sm">Annuler</a>
+
             </div>
         </div>
     </div>

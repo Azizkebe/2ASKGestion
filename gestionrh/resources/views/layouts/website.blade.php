@@ -251,7 +251,7 @@ myModal.addEventListener('shown.bs.modal', () => {
             var modal = $(this)
 
             modal.find('.modal-body #quantity').val(quantity)
-            modal.find('.modal-body selected #id_article').val(article)
+            modal.find('.modal-body #id_article').val(article)
             // $(document).on('click', '.editModal', function(){
             //     var stud_id = $(this).val();
 
