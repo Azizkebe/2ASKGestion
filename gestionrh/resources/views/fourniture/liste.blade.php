@@ -21,22 +21,23 @@
                     <thead>
                       <tr>
                         <th>ID</th>
-                        <th>Nom du Projet</th>
+                        <th>Projet</th>
                         <th>Motif</th>
-                        <th>Bureau</th>
+                        <th>Service</th>
                         <th>Etat</th>
 
                         <th style="width: 10%">Action</th>
                       </tr>
                         </thead>
                             <tbody>
-                             @forelse ($fourniture as $fourni)
+                             @forelse ($fourniture as $demande)
                             <tr>
-                                <td>{{$fourni->id}}</td>
-                                <td>{{$fourni->projet->name_projet}}</td>
-                                <td>{{$fourni->motif}}</td>
-                                <td></td>
-                                <td></td>
+                                <td>{{$demande->id}}</td>
+                                <td>{{$demande->Projet}}</td>
+                                <td>{{$demande->Motif}}</td>
+                                <td>{{$demande->Bureau}}</td>
+                                {{-- <td>{{$fourni->bureau}}</td> --}}
+                                <td>{{$demande->Etat ?? 'Nouvelle demande'}}</td>
                                 <td>
                                     <div class="form-button-action">
                                         <button
@@ -45,8 +46,15 @@
                                         title=""
                                         class="btn btn-link btn-primary btn-lg"
                                         data-original-title="Edit Task"
+                                        ><a href="{{route('fourniture.detail', $demande->id)}}"><i class="fa fa-info"></i></a>
+                                        </button>
+                                        <button
+                                        type="button"
+                                        data-bs-toggle="tooltip"
+                                        title=""
+                                        class="btn btn-link btn-primary btn-lg"
+                                        data-original-title="Edit Task"
                                         ><a href=""><i class="fa fa-edit"></i></a>
-
                                         </button>
                                         <button
                                         type="button"
@@ -55,7 +63,7 @@
                                         class="btn btn-link btn-danger"
                                         data-original-title="Remove"
                                         ><a onclick="return confirm('Etes vous sure de vouloir supprimer la fourniture')"
-                                        href="{{route('delete_fourniture.delete', $fourni)}}" class="btn btn-link btn-danger"><i class="fa fa-times"></i></a>
+                                        href="{{route('delete_fourniture.delete', $demande->id)}}" class="btn btn-link btn-danger"><i class="fa fa-times"></i></a>
                                         </button>
                                     </div>
                                 </td>

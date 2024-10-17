@@ -36,6 +36,7 @@ use App\Http\Controllers\Projet\ProjetController;
 use App\Http\Controllers\Article\ArticleController;
 use App\Http\Controllers\Article\PanierArticleController;
 use App\Http\Controllers\Fourniture\FournitureController;
+use App\Http\Controllers\Fourniture\DemandeFournitureController;
 use App\Livewire\EditPhotoEmploye;
 
 // Route::get('/dashboard',[UserAdminController::class,'dashboard'])->name('dashboard');
@@ -333,6 +334,12 @@ Route::middleware('userAdmin')->group(function(){
         Route::get('edit/{panier_article}', [PanierArticleController::class,'editer'])->name('panier_article.edit');
         Route::put('update/{panier_article}', [PanierArticleController::class,'update'])->name('panier_article.update');
         Route::get('delete/{panier_article}', [PanierArticleController::class,'delete'])->name('panier_article.delete');
+    });
+    Route::prefix('demande_fourniture')->group(function(){
+        // Route::get('create',[])
+        Route::get('edit/{demande_fourniture}', [DemandeFournitureController::class,'editer'])->name('demande_fourniture.edit');
+        Route::put('update/{demande_fourniture}', [PanierArticleController::class,'update'])->name('panier_article.update');
+        Route::get('delete/{demande_fourniture}', [PanierArticleController::class,'delete'])->name('panier_article.delete');
     });
 });
 

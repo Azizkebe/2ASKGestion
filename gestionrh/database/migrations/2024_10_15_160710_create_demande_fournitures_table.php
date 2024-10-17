@@ -18,6 +18,10 @@ return new class extends Migration
             $table->string('Motif')->nullable();
             $table->string('Bureau')->nullable();
             $table->string('Etat')->nullable();
+            $table->string('Article')->nullable();
+            // $table->string('id_fourniture')->nullable();
+            $table->string('Quantite_demandee')->nullable();
+            $table->string('Quantite_accordee')->nullable();
 
             $table->timestamps();
         });

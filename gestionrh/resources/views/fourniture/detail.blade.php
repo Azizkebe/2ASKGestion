@@ -77,6 +77,8 @@
                             <th>ID</th>
                             <th>Article</th>
                             <th>Quantite demandée</th>
+                            <th>Quantite accordee</th>
+                            <th>Projet</th>
                             <th style="width: 10%">Action</th>
                         </tr>
                     </thead>
@@ -86,7 +88,8 @@
                               <td>{{$detail->id}}</td>
                               <td>{{$detail->article->name_article ?? ''}}</td>
                               <td>{{$detail->Quantite_demandee ?? ''}}</td>
-                              <td></td>
+                              <td>{{$detail->Quantite_accordee}}</td>
+                              <td>{{$detail->fourniture->projet->name_projet}}</td>
                               <td>
                                   <div class="form-button-action">
                                       <button
@@ -121,7 +124,7 @@
 
                 </table>
                <a href="{{route('fourniture_cash')}}" class="btn btn-success btn-sm">Envoyer pour validation</a>&nbsp;&nbsp;
-                <a href="" class="btn btn-danger btn-sm">Annuler</a>
+                <a href="" type="reset" class="btn btn-danger btn-sm">Annuler</a>
 
             </div>
         </div>

@@ -10,6 +10,7 @@ use App\Models\Article;
 use App\Models\Fourniture;
 use App\Models\DetailFourniture;
 use App\Models\PanierArticle;
+use App\Models\DemandeFourniture;
 use App\Models\User;
 use Auth;
 
@@ -17,7 +18,9 @@ class FournitureController extends Controller
 {
     public function liste()
     {
-        $fourniture = Fourniture::all();
+        // $fourniture = Fourniture::all();
+        $fourniture = DemandeFourniture::all();
+        // dd($fourniture);
         return view('fourniture.liste', compact('fourniture'));
     }
 
@@ -60,13 +63,15 @@ class FournitureController extends Controller
             'panier'=> $panier,
         ]);
     }
-    public function store_detail(Request $request, PanierArticle $panier )
+    public function store_detail(Request $request, PanierArticle $panier, int $fourniture )
     {
         $user = Auth::user();
         $user_id = $user->id;
 
         $panier->user_id= $user_id;
         $panier->id_article = $request->id_article;
+        $panier->id_fourniture = $fourniture;
+        $panier->bureau = $user->employe->service->service;
         $panier->Quantite_demandee = $request->quantite_demande;
 
         $panier->save();
@@ -115,7 +120,7 @@ class FournitureController extends Controller
     public function delete(int $fourniture, DetailFourniture $detail_fourni)
     {
         $fourni_delete = DetailFourniture::findOrFail($fourniture);
-        // $fourni_delete->delete();
+
         dd($fourni_delete);
 
         toastr()->success('L\'article a été retiré avec succes');
@@ -131,14 +136,43 @@ class FournitureController extends Controller
         $user = Auth::user();
         $userid = $user->id;
 
-        $panier = PanierArticle::where('user_id', $userid)->get();
-        dd($panier);
-        $order = new DemandeFourniture;
-        foreach($panier as $data)
-        $order->user_id = $data->user_id;
-        $order->Projet ;
-        $order->Bureau ;
-        $order->name_article = $data->article->name_article;
-        $order->quantite_demande ;
+        $data = PanierArticle::where('user_id','=',$userid)->get();
+
+        if($data->count() >= 1)
+        {
+            foreach($data  as $data)
+            {
+                $order = new DemandeFourniture();
+                // $fourniture = Fourniture::
+
+                $order->user_id = $data->user_id;
+                $order->Projet = $data->fourniture->projet->name_projet ;
+                $order->Motif = $data->fourniture->motif ;
+                $order->Bureau = $data->bureau;
+                $order->Article = $data->article->name_article;
+                $order->Quantite_demandee = $data->Quantite_demandee;
+                $order->Quantite_accordee = $data->Quantite_accordee;
+
+                $order->save();
+
+                $article_panier_id = $data->id;
+
+                $article_panier = PanierArticle::find($article_panier_id);
+
+                $article_panier->delete();
+            }
+            toastr()->success('la commande est envoyée pour validation avec succes');
+            return redirect()->back();
+
+        }
+        else
+        {
+            toastr()->error('Aucune demande trouvée');
+            return redirect()->back();
+        }
+
+
+
     }
+
 }
