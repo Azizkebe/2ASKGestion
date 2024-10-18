@@ -14,4 +14,8 @@ class Service extends Model
     {
         return $this->belongsTo(Direction::class, 'id_direction');
     }
+    public function employe()
+    {
+        return $this->belongsTo(Employe::class, 'id_chef_service');
+    }
 }

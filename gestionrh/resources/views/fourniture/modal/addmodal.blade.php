@@ -20,7 +20,7 @@
             </div>
             <div class="mt-3">
                 <label for="">Quantite demandée</label>
-                <input type="number" name="quantite_demande" min="0" id="quantite_demande" class="form-control">
+                <input type="number" name="quantite_demande" min="1" value="1" id="quantite_demande" class="form-control">
             </div>
             </div>
             <div class="modal-footer">

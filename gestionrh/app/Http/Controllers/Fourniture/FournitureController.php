@@ -19,8 +19,8 @@ class FournitureController extends Controller
     public function liste()
     {
         // $fourniture = Fourniture::all();
-        $fourniture = DemandeFourniture::all();
-        // dd($fourniture);
+        $fourniture =Fourniture::where('user_id', Auth::user()->id)->get();
+
         return view('fourniture.liste', compact('fourniture'));
     }
 
@@ -32,8 +32,13 @@ class FournitureController extends Controller
     public function store(FournitureRequest $request,Fourniture $fourni )
     {
 
+       $user = Auth::user();
+       $user_id = $user->id;
        $fourni->id_projet = $request->id_projet;
        $fourni->motif = $request->motif;
+       $fourni->user_id = $user_id;
+    //    $fourni->id_superieur = $user->employe->service->id_chef_service;
+       $fourni->bureau = $user->employe->service->service;
 
        $fourni->save();
 
@@ -53,9 +58,9 @@ class FournitureController extends Controller
     public function detail(int $fourniture)
     {
         $fourni = Fourniture::findOrFail($fourniture);
-        // $article = new Article;
+
         $article = Article::all();
-        $panier = PanierArticle::all();
+        $panier = PanierArticle::where('id_fourniture',$fourniture )->get();
 
         return view('fourniture.detail', [
             'fourni'=> $fourni,
@@ -65,13 +70,8 @@ class FournitureController extends Controller
     }
     public function store_detail(Request $request, PanierArticle $panier, int $fourniture )
     {
-        $user = Auth::user();
-        $user_id = $user->id;
-
-        $panier->user_id= $user_id;
         $panier->id_article = $request->id_article;
         $panier->id_fourniture = $fourniture;
-        $panier->bureau = $user->employe->service->service;
         $panier->Quantite_demandee = $request->quantite_demande;
 
         $panier->save();
@@ -131,45 +131,75 @@ class FournitureController extends Controller
         $article =  Article::all();
         return view('fourniture.modal.addmodal', compact('article'));
     }
-    public function cash_fourniture()
+    public function cash_fourniture(int $fourniture )
     {
+        // dd($fourniture);
         $user = Auth::user();
-        $userid = $user->id;
+        // $userid = $user->id;
+        // $fourniture = Fourniture::where('user_id','=',$userid)->first();
 
-        $data = PanierArticle::where('user_id','=',$userid)->get();
+        $data = PanierArticle::where('id_fourniture',$fourniture)->get();
 
         if($data->count() >= 1)
         {
-            foreach($data  as $data)
-            {
-                $order = new DemandeFourniture();
-                // $fourniture = Fourniture::
 
-                $order->user_id = $data->user_id;
-                $order->Projet = $data->fourniture->projet->name_projet ;
-                $order->Motif = $data->fourniture->motif ;
-                $order->Bureau = $data->bureau;
-                $order->Article = $data->article->name_article;
-                $order->Quantite_demandee = $data->Quantite_demandee;
-                $order->Quantite_accordee = $data->Quantite_accordee;
+        $four = Fourniture::where('id','=',$fourniture)->first();
 
-                $order->save();
+        $four->update(['id_validateur'=> $user->employe->service->id_chef_service, 'id_etat_demande'=>'1']);
 
-                $article_panier_id = $data->id;
-
-                $article_panier = PanierArticle::find($article_panier_id);
-
-                $article_panier->delete();
-            }
-            toastr()->success('la commande est envoyée pour validation avec succes');
+        if($four)
+        {
+            toastr()->success('la demande est envoyée pour validation avec succes');
             return redirect()->back();
+        }
+        else{
+            toastr()->error('Impossible d\'envoyer la demande');
+            return redirect()->back();
+        }
 
         }
-        else
-        {
+        else{
+            // dd('faux');
             toastr()->error('Aucune demande trouvée');
             return redirect()->back();
         }
+        // $user = Auth::user();
+        // $userid = $user->id;
+
+        // $data = PanierArticle::where('user_id','=',$userid)->get();
+
+        // if($data->count() >= 1)
+        // {
+        //     foreach($data  as $data)
+        //     {
+        //         $order = new DemandeFourniture();
+        //         // $fourniture = Fourniture::
+
+        //         $order->user_id = $data->user_id;
+        //         $order->Projet = $data->fourniture->projet->name_projet ;
+        //         $order->Motif = $data->fourniture->motif ;
+        //         $order->Bureau = $data->bureau;
+        //         $order->Article = $data->article->name_article;
+        //         $order->Quantite_demandee = $data->Quantite_demandee;
+        //         $order->Quantite_accordee = $data->Quantite_accordee;
+
+        //         $order->save();
+
+        //         $article_panier_id = $data->id;
+
+        //         $article_panier = PanierArticle::find($article_panier_id);
+
+        //         $article_panier->delete();
+        //     }
+        //     toastr()->success('la commande est envoyée pour validation avec succes');
+        //     return redirect()->back();
+
+        // }
+        // else
+        // {
+        //     toastr()->error('Aucune demande trouvée');
+        //     return redirect()->back();
+        // }
 
 
 

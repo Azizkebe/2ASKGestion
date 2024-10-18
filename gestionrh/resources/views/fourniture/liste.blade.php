@@ -33,10 +33,9 @@
                              @forelse ($fourniture as $demande)
                             <tr>
                                 <td>{{$demande->id}}</td>
-                                <td>{{$demande->Projet}}</td>
-                                <td>{{$demande->Motif}}</td>
-                                <td>{{$demande->Bureau}}</td>
-                                {{-- <td>{{$fourni->bureau}}</td> --}}
+                                <td>{{$demande->projet->name_projet}}</td>
+                                <td>{{$demande->motif}}</td>
+                                <td>{{$demande->bureau}}</td>
                                 <td>{{$demande->Etat ?? 'Nouvelle demande'}}</td>
                                 <td>
                                     <div class="form-button-action">

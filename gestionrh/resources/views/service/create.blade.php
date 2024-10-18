@@ -36,6 +36,7 @@
                         <span class="error">{{$message}}</span>
                     @enderror
                 </div>
+
                <div class="form-group input-group">
                 <input name="service" class="form-control" placeholder="service" type="text" value="{{old('service')}}">
                 <div class="input-group">
@@ -43,6 +44,14 @@
                      <span class="error">{{$message}}</span>
                     @enderror
                 </div>
+                </div>
+                <div class="form-group input-group">
+                    <select name="id_chef" id="id_chef" class="form-select">
+                       <option value="">--Choisir le chef de service --</option>
+                        @foreach ($employe as $chef)
+                       <option value="{{$chef->id}}">{{$chef->prenom}} {{$chef->nom}}</option>
+                       @endforeach
+                    </select>
                 </div>
               <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-block"> Ajouter le service  </button>

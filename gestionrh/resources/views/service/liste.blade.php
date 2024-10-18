@@ -22,6 +22,7 @@
                       <tr>
                         <th>Direction</th>
                         <th>Service</th>
+                        <th>Chef de Service</th>
 
                         <th style="width: 10%">Action</th>
                       </tr>
@@ -31,6 +32,7 @@
                             <tr>
                                 <td>{{$service->direction->direction}}</td>
                                 <td>{{$service->service}}</td>
+                                <td>{{$service->employe->prenom ?? ''}} {{$service->employe->nom ?? ''}}</td>
                                 <td>
                                     <div class="form-button-action">
                                         <button

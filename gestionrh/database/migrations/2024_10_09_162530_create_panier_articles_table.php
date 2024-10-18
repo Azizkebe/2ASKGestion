@@ -13,11 +13,9 @@ return new class extends Migration
     {
         Schema::create('panier_articles', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id')->nullable();
             $table->string('id_fourniture')->nullable();
             $table->unsignedBigInteger('id_article');
             $table->foreign('id_article')->references('id')->on('articles');
-            $table->string('bureau')->nullable();
             $table->string('Quantite_demandee')->nullable();
             $table->string('Quantite_accordee')->nullable();
 

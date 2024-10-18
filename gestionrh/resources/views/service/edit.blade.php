@@ -26,6 +26,7 @@
                     <select name="id_direction" id="id_direction" class="form-select">
                        <option value="">--Choisissez une direction--</option>
                         @foreach ($direction as $direction)
+
                        <option value="{{$direction->id}}" {{$direction->id === $service->id_direction ? 'selected' : ''}}>{{$direction->direction}}</option>
                        @endforeach
                     </select>
@@ -42,6 +43,14 @@
                      <span class="error">{{$message}}</span>
                     @enderror
                 </div>
+                </div>
+                <div class="form-group input-group">
+                    <select name="id_chef" id="id_chef" class="form-select">
+                       <option value="">--Choisir un chef de service--</option>
+                        @foreach ($employe as $employe)
+                       <option value="{{$employe->id}}" {{$employe->id == $service->id_chef_service ? 'selected' : ''}}>{{$employe->prenom}} {{$employe->nom}}</option>
+                       @endforeach
+                    </select>
                 </div>
               <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-block"> Ajouter le service  </button>

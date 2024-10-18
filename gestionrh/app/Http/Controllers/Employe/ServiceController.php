@@ -7,19 +7,25 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ServiceRequest;
 use App\Models\Service;
 use App\Models\Direction;
+use App\Models\Employe;
 
 class ServiceController extends Controller
 {
     public function create()
     {
         $direction = Direction::all();
-        return view('service.create', compact('direction'));
+        $employe = Employe::all();
+        return view('service.create', [
+            'direction'=>$direction,
+            'employe'=>$employe,
+        ]);
     }
     public function store(ServiceRequest $request, Service $service)
     {
         try {
             $service->id_direction = $request->id_direction;
             $service->service = $request->service;
+            $service->id_chef_service = $request->id_chef;
 
             // dd( $service);
             $service->save();
@@ -42,10 +48,12 @@ class ServiceController extends Controller
     {
         $service = Service::findOrFail($service);
         $direction = Direction::all();
+        $employe = Employe::all();
 
         return view('service.edit',[
             'service'=>$service,
             'direction'=>$direction,
+            'employe'=>$employe,
         ]);
     }
     public function update(Request $request, $service)
@@ -55,8 +63,8 @@ class ServiceController extends Controller
 
             $service->id_direction = $request->id_direction;
             $service->service = $request->service;
+            $service->id_chef_service = $request->id_chef;
 
-            // dd($service);
             $service->update();
 
             return redirect()->route('service.liste')->with('success', 'Le service est mise à jour');

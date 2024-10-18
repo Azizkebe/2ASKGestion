@@ -102,7 +102,6 @@
                                       <a href="" data-bs-toggle="modal" data-myquantity="{{$detail->Quantite_demandee}}"
                                         data-myarticle="{{$detail->article->name_article ?? ''}}" data-bs-target="#editModal" class="editModal"
                                       >
-                                      {{-- <a href="{{route('panier_article.edit',$detail->id)}}"> --}}
                                       <i class="fa fa-edit"></i></a>
                                       </button>
                                       <button
@@ -123,7 +122,7 @@
                           </tbody>
 
                 </table>
-               <a href="{{route('fourniture_cash')}}" class="btn btn-success btn-sm">Envoyer pour validation</a>&nbsp;&nbsp;
+               <a href="{{route('fourniture_cash', $fourni)}}" class="btn btn-success btn-sm">Envoyer pour validation</a>&nbsp;&nbsp;
                 <a href="" type="reset" class="btn btn-danger btn-sm">Annuler</a>
 
             </div>

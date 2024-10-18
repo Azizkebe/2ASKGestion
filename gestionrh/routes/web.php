@@ -321,7 +321,7 @@ Route::middleware('userAdmin')->group(function(){
         Route::get('liste',[FournitureController::class, 'liste'])->name('fourniture.liste');
         Route::get('delete_fourniture/{fourniture}',[FournitureController::class,'delete_fourniture'])->name('delete_fourniture.delete');
         Route::get('detail/{fourniture}',[FournitureController::class,'detail'])->name('fourniture.detail');
-        Route::get('fourniture_create',[FournitureController::class,'cash_fourniture'])->name('fourniture_cash');
+        Route::get('add/{fourniture}',[FournitureController::class,'cash_fourniture'])->name('fourniture_cash');
         Route::post('detail/{fourniture}',[FournitureController::class,'store_detail'])->name('fourniture.store_detail');
         // Route::post('detail_article',[FournitureController::class,'detail_save'])->name('fourniture.detail_save');
         Route::get('/edit/{fourniture}',[FournitureController::class,'editer_article'])->name('fourniture.editer_article');
