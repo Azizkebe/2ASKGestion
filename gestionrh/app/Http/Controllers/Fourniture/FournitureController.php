@@ -16,6 +16,7 @@ use Auth;
 
 class FournitureController extends Controller
 {
+    public $error;
     public function liste()
     {
         // $fourniture = Fourniture::all();
@@ -58,7 +59,10 @@ class FournitureController extends Controller
     public function detail(int $fourniture)
     {
         $fourni = Fourniture::findOrFail($fourniture);
-
+        if($fourni['id_etat_demande'] == '1')
+        {
+            $this->error = '1';
+        }
         $article = Article::all();
         $panier = PanierArticle::where('id_fourniture',$fourniture )->get();
 
@@ -66,6 +70,9 @@ class FournitureController extends Controller
             'fourni'=> $fourni,
             'article'=> $article,
             'panier'=> $panier,
+            'error'=> $this->error,
+
+
         ]);
     }
     public function store_detail(Request $request, PanierArticle $panier, int $fourniture )
@@ -145,10 +152,12 @@ class FournitureController extends Controller
 
         $four = Fourniture::where('id','=',$fourniture)->first();
 
-        $four->update(['id_validateur'=> $user->employe->service->id_chef_service, 'id_etat_demande'=>'1']);
+        $four->update(['id_validateur'=> $user->employe->service->id_chef_service,
+         'id_etat_demande'=>'1']);
 
         if($four)
         {
+
             toastr()->success('la demande est envoyée pour validation avec succes');
             return redirect()->back();
         }

@@ -21,9 +21,19 @@
                     </div>
                 </div>
             <div class="d-flex justify-content:end mb-3">
-                    <button class="btn btn-primary btn-round ms-auto" data-bs-toggle="modal" data-bs-target="#exampleModal">
+
+                @if ($error != '1')
+
+                        <button class="btn btn-primary btn-round ms-auto" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <i class="fa fa-plus"></i> Ajouter des articles
+                        </button>
+
+                @endif
+                    {{-- <button class="btn btn-primary btn-round ms-auto" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         <i class="fa fa-plus"></i> Ajouter des articles
-                    </button>
+                    </button> --}}
+
+
                     {{-- DEEBUT ADD ARTICLE  --}}
                     @include('fourniture.modal.addmodal')
                     {{-- FIN ADD ARTICLE --}}
@@ -90,6 +100,7 @@
                               <td>{{$detail->Quantite_demandee ?? ''}}</td>
                               <td>{{$detail->Quantite_accordee}}</td>
                               <td>{{$detail->fourniture->projet->name_projet}}</td>
+                              @if ($error != '1')
                               <td>
                                   <div class="form-button-action">
                                       <button
@@ -115,14 +126,19 @@
                                       </button>
                                   </div>
                               </td>
+                              @endif
                               </tr>
                            @empty
-                               <td colspan="6">Aucune Article trouvé</td>
+                               <td colspan="7">Aucune Article trouvé</td>
                            @endforelse
                           </tbody>
 
                 </table>
-               <a href="{{route('fourniture_cash', $fourni)}}" class="btn btn-success btn-sm">Envoyer pour validation</a>&nbsp;&nbsp;
+                @if ($error != '1')
+                <a href="{{route('fourniture_cash', $fourni)}}" class="btn btn-success btn-sm">Envoyer pour validation</a>
+                @endif
+
+               &nbsp;&nbsp;
                 <a href="" type="reset" class="btn btn-danger btn-sm">Annuler</a>
 
             </div>
