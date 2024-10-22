@@ -12,17 +12,23 @@ use App\Models\DetailFourniture;
 use App\Models\PanierArticle;
 use App\Models\DemandeFourniture;
 use App\Models\User;
+use App\Models\EtatDemande;
 use Auth;
 
 class FournitureController extends Controller
 {
     public $error;
+    public $rejet;
     public function liste()
     {
         // $fourniture = Fourniture::all();
         $fourniture =Fourniture::where('user_id', Auth::user()->id)->get();
+        $etat = EtatDemande::all();
 
-        return view('fourniture.liste', compact('fourniture'));
+        return view('fourniture.liste',[
+            'fourniture'=>$fourniture,
+            'etat'=>$etat,
+        ]);
     }
 
     public function add()
@@ -172,45 +178,26 @@ class FournitureController extends Controller
             toastr()->error('Aucune demande trouvée');
             return redirect()->back();
         }
-        // $user = Auth::user();
-        // $userid = $user->id;
+    }
+    public function validation()
+    {
+        // dd($fourniture);
 
-        // $data = PanierArticle::where('user_id','=',$userid)->get();
-
-        // if($data->count() >= 1)
-        // {
-        //     foreach($data  as $data)
-        //     {
-        //         $order = new DemandeFourniture();
-        //         // $fourniture = Fourniture::
-
-        //         $order->user_id = $data->user_id;
-        //         $order->Projet = $data->fourniture->projet->name_projet ;
-        //         $order->Motif = $data->fourniture->motif ;
-        //         $order->Bureau = $data->bureau;
-        //         $order->Article = $data->article->name_article;
-        //         $order->Quantite_demandee = $data->Quantite_demandee;
-        //         $order->Quantite_accordee = $data->Quantite_accordee;
-
-        //         $order->save();
-
-        //         $article_panier_id = $data->id;
-
-        //         $article_panier = PanierArticle::find($article_panier_id);
-
-        //         $article_panier->delete();
-        //     }
-        //     toastr()->success('la commande est envoyée pour validation avec succes');
-        //     return redirect()->back();
-
-        // }
-        // else
-        // {
-        //     toastr()->error('Aucune demande trouvée');
-        //     return redirect()->back();
-        // }
-
-
+        $fourniture = Fourniture::where('id_validateur', Auth::user()->id_employe)->get();
+        $etat = EtatDemande::all();
+        return view('fourniture.validation',[
+            'fourniture'=>$fourniture,
+            'etat'=>$etat,
+        ]);
+    }
+    public function edit($fourniture)
+    {
+      $com_fourniture = Fourniture::findOrFail($fourniture);
+      $etat = EtatDemande::all();
+      return view('fourniture.validedit', [
+        'com_fourniture'=>$com_fourniture,
+        'etat'=>$etat,
+      ]);
 
     }
 

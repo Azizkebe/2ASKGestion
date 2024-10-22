@@ -326,7 +326,8 @@ Route::middleware('userAdmin')->group(function(){
         // Route::post('detail_article',[FournitureController::class,'detail_save'])->name('fourniture.detail_save');
         Route::get('/edit/{fourniture}',[FournitureController::class,'editer_article'])->name('fourniture.editer_article');
         Route::put('/update/{fourniture}',[FournitureController::class,'update_article'])->name('fourniture.update_article');
-        // Route::put('/update/{fourniture}',[ArticleController::class,'update_article'])->name('fourniture.update_article');
+        Route::get('/validation',[FournitureController::class, 'validation'])->name('fourniture.validation');
+        Route::get('/validation/edit/{fourniture}',[FournitureController::class,'edit'])->name('fourniture.edit');
         // Route::get('/delete/{fourniture}',[FournitureController::class,'delete'])->name('fourniture.delete');
     });
     Route::prefix('panier_article')->group(function(){

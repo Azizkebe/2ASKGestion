@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('fournitures', function (Blueprint $table) {
-            $table->string('id_etat_demande')->nullable();
+        Schema::create('etat_demandes', function (Blueprint $table) {
+            $table->id();
+            $table->enum('statut_demande',['En cours','Valider','Rejeter'])->default('En cours');
+            $table->timestamps();
         });
     }
 
@@ -21,8 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('fournitures', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('etat_demandes');
     }
 };

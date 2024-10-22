@@ -46,6 +46,7 @@
             $permissionDemandEmploye= App\Models\PermissionRoleModel::getPermission('Permission_Employe', Auth::user()->role_id);
             $permissionantenne= App\Models\PermissionRoleModel::getPermission('Liste demande antenne', Auth::user()->role_id);
             $permission_rh= App\Models\PermissionRoleModel::getPermission('Ressources Humaines', Auth::user()->role_id);
+            $permission_magasin= App\Models\PermissionRoleModel::getPermission('Magasin', Auth::user()->role_id);
             @endphp
             @if (!empty($permissionDashboard))
 
@@ -151,6 +152,7 @@
             </div>
           </li>
           @endif
+          @if (!empty($permission_magasin))
           <li class="nav-item">
             <a data-bs-toggle="collapse" href="#magasin">
               <i class="fas fa-bars"></i>
@@ -172,7 +174,7 @@
                               </a>
                             </li>
                             <li>
-                              <a href="">
+                              <a href="{{route('fourniture.validation')}}">
                                 <span class="sub-item">Valider une demande</span>
                               </a>
                             </li>
@@ -181,7 +183,8 @@
                     </li>
                 </ul>
             </div>
-        </li>
+          </li>
+          @endif
           @if (!empty($permissionEmploye))
           <li class="nav-item">
             <a data-bs-toggle="collapse" href="#sidebarLayouts">

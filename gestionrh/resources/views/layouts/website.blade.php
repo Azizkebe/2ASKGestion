@@ -240,7 +240,14 @@ myModal.addEventListener('shown.bs.modal', () => {
         $('#exampleModal').modal('show')
     })
     </script>
-    <script>
+       <script async>
+         $(document).on('click', '#validModal', function(){
+                // var stud_id = $(this).val();
+
+                $('#validModal').modal('show');
+            })
+        </script>
+    <script async>
         $('#editModal').on('show.bs.modal',function(event){
             console.log('Opend Modal');
             var button = $(event.relatedTarget)

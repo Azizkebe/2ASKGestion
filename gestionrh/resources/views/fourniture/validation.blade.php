@@ -6,15 +6,18 @@
         <div class="card">
                 <div class="card-header">
                     <div class="d-flex align-items-center">
-                    <h4 class="card-title">Liste des Fournitures</h4>
+                    <h4 class="card-title">Liste des validations</h4>
                     <button class="btn btn-primary btn-round ms-auto">
-                        <a href="{{route('fourniture.add')}}" class="text-white"><i class="fa fa-plus"></i> Ajouter une Fourniture</a>
+                        {{-- <a href="{{route('fourniture.add')}}" class="text-white"><i class="fa fa-plus"></i> Ajouter une Fourniture</a> --}}
                     </button>
+                    </div>
+                    <div>
+                        @include('fourniture.modal.validatemodal')
                     </div>
                 </div>
               <div class="card-body">
+
                 <div class="table-responsive">
-                    @include('fourniture.modal.validatemodal')
                   <table
                     id="add-row"
                     class="display table table-striped table-hover"
@@ -33,11 +36,12 @@
                             <tbody>
                              @forelse ($fourniture as $demande)
                             <tr>
+
                                 <td>{{$demande->id}}</td>
                                 <td>{{$demande->projet->name_projet}}</td>
                                 <td>{{$demande->motif}}</td>
                                 <td>{{$demande->bureau}}</td>
-                                <td>{{$demande->etat->statut_demande ?? 'Nouvelle demande'}}</td>
+                                <td>{{$demande->etat->statut_demande}}</td>
                                 <td>
                                     <div class="form-button-action">
                                         <button
@@ -46,15 +50,18 @@
                                         title=""
                                         class="btn btn-link btn-primary btn-lg"
                                         data-original-title="Edit Task"
-                                        ><a href="{{route('fourniture.detail', $demande->id)}}"><i class="fa fa-info"></i></a>
-                                        </button>
+                                        >
+                                        <a href="{{route('fourniture.detail', $demande->id)}}"><i class="fa fa-info"></i></a>
+
+
                                         <button
                                         type="button"
                                         data-bs-toggle="tooltip"
                                         title=""
                                         class="btn btn-link btn-primary btn-lg"
-                                        data-original-title="Edit Task"
-                                        ><a href=""><i class="fa fa-edit"></i></a>
+                                        data-original-title="Edit Task">
+                                        {{-- <a href="" data-bs-toggle="modal" data-bs-target="#validModal" class="validModal"><i class="fa fa-edit"></i></a> --}}
+                                        <a href="{{route('fourniture.edit', $demande->id)}}"><i class="fa fa-edit"></i></a>
                                         </button>
                                         <button
                                         type="button"
@@ -62,8 +69,9 @@
                                         title=""
                                         class="btn btn-link btn-danger"
                                         data-original-title="Remove"
-                                        ><a onclick="return confirm('Etes vous sure de vouloir supprimer la fourniture')"
-                                        href="{{route('delete_fourniture.delete', $demande->id)}}" class="btn btn-link btn-danger"><i class="fa fa-times"></i></a>
+                                        >
+                                        {{-- <a onclick="return confirm('Etes vous sure de vouloir supprimer la fourniture')"
+                                        href="{{route('delete_fourniture.delete', $demande->id)}}" class="btn btn-link btn-danger"><i class="fa fa-times"></i></a> --}}
                                         </button>
                                     </div>
                                 </td>
