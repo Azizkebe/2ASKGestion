@@ -1,35 +1,71 @@
-<div class="modal fade" id="validModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal Update-->
+<div class="modal fade" id="update" tabindex="-1" aria-labelledby="update" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Changement de Statut -  </h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <form action="" method="POST">
-            @csrf
-            @method('POST')
-            <div class="modal-body">
-            <div class="mt-3 mb-3">
-                <label for="">Changement de Statut...</label>
-                {{-- <select name="id_etat" id="id_etat" class="form-select">
-                    <option value="">-- choisir un etat --</option>
-                    @foreach ($etat as $etat)
-                        <option value="{{$etat->id}}">{{$etat->statut_demande}}</option>
-                    @endforeach
-                </select> --}}
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="update">Suivi de la demande</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-
-            {{-- <div class="mt-3">
-                <label for="">Commentaire</label>
-                <textarea name="commentaire" id="commentaire" cols="15" rows="5" class="form-control"></textarea>
-            </div> --}}
-
-            </div>
-            <div class="modal-footer">
-            <button type="reset" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
-            <button type="submit" class="btn btn-primary">Enregistrer</button>
-            </div>
-        </form>
+            <form id="update" action="">
+                <div class="modal-body">
+                    <input type="hidden" class="form-control" id="e_id" name="id" value=""/>
+                    <div class="modal-body">
+                        <table class="table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <td>Validateur</td>
+                                <td>Projet</td>
+                                <td>Validation N+1</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="text" class="form-control" id="e_validateur" name="e_validateur" value="" readonly></td>
+                                <td><input type="text" class="form-control" id="e_projet" name="e_projet" value="" readonly/></td>
+                                <td><input type="text" class="form-control" id="e_etat" name="e_etat" value="" readonly/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                        {{-- <div class="form-group row">
+                            <label for="" class="col-sm-3 col-form-label">Projet</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="e_projet" name="e_projet" value=""/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="" class="col-sm-3 col-form-label">Validateur</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="e_validateur" name="e_validateur" value=""/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="" class="col-sm-3 col-form-label">Etat</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="e_etat" name="e_etat" value=""/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="" class="col-sm-3 col-form-label">Motif</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="e_motif" name="e_motif" value=""/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="" class="col-sm-3 col-form-label">Service</label>
+                            <div class="col-sm-9">
+                                <input type="tel" class="form-control" id="e_service" name="e_service" value=""/>
+                            </div>
+                        </div> --}}
+                    </div>
+                    <!-- form add end -->
+                </div>
+                <div class="modal-footer">
+                <button type="reset" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+
+<!-- End Modal Update-->

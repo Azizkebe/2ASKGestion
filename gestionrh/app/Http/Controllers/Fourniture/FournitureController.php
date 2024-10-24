@@ -8,6 +8,7 @@ use App\Http\Requests\FournitureRequest;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\SendEmailToAfterDemandeNotification;
 use App\Notifications\SendEmailToResponseSupDemandeNotification;
+use App\Notifications\SendEmailToAfterValidSupNotification;
 use App\Models\Projet;
 use App\Models\Article;
 use App\Models\Fourniture;
@@ -16,6 +17,7 @@ use App\Models\PanierArticle;
 use App\Models\DemandeFourniture;
 use App\Models\User;
 use App\Models\EtatDemande;
+use App\Models\RoleModel;
 use Auth;
 
 class FournitureController extends Controller
@@ -24,13 +26,15 @@ class FournitureController extends Controller
     public $rejet;
     public function liste()
     {
-        // $fourniture = Fourniture::all();
+
         $fourniture =Fourniture::where('user_id', Auth::user()->id)->get();
+
         $etat = EtatDemande::all();
 
         return view('fourniture.liste',[
             'fourniture'=>$fourniture,
             'etat'=>$etat,
+
         ]);
     }
 
@@ -215,6 +219,9 @@ class FournitureController extends Controller
         $com_fourniture = Fourniture::findOrFail($fourniture);
         try {
 
+            $role_resp = RoleModel::where('name','Comptable Matieres')->first();
+            $users_resp = User::where('role_id', $role_resp->id)->first();
+            // dd($users_resp->employe);
             if($com_fourniture->id_etat_demande == '1')
             {
                 $com_fourniture->id_etat_demande = $request->id_etat;
@@ -230,8 +237,28 @@ class FournitureController extends Controller
                     Notification::route('mail', $com_fourniture->user->employe->email)->notify(
                         new SendEmailToResponseSupDemandeNotification($messages)
                     );
+                        if($com_fourniture['id_etat_demande'] == '2')
+                        {
+                            $com_fourniture->update(['id_user_comptable'=> $users_resp->id, 'id_etat_valid_comptable'=> '1']);
 
+                            $messages_resp['prenom'] = $users_resp->employe->prenom;
+                            $messages_resp['nom'] = $users_resp->employe->nom;
+
+                            Notification::route('mail', $users_resp->email)->notify(
+                                new SendEmailToAfterValidSupNotification($messages_resp)
+                            );
+                        }
+                        else
+                        {
+                            toastr()->error('Impossible de transferer la demande');
+                            return redirect()->back();
+                        }
                     toastr()->success('Bravo, vous avez repondu à la demande');
+                    return redirect()->back();
+                }
+                else
+                {
+                    toastr()->error('Desolé, nous pouvons pas traiter la demande');
                     return redirect()->back();
                 }
 

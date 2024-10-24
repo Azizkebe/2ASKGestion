@@ -241,11 +241,19 @@ myModal.addEventListener('shown.bs.modal', () => {
     })
     </script>
        <script async>
-         $(document).on('click', '#validModal', function(){
-                // var stud_id = $(this).val();
+         $(document).on('click', '.update', function(){
 
-                $('#validModal').modal('show');
-            })
+            var _this = $(this).parents('tr');
+			$('#e_id').val(_this.find('.id').text());
+			$('#e_projet').val(_this.find('.projet').text());
+			$('#e_motif').val(_this.find('.motif').text());
+			$('#e_service').val(_this.find('.bureau').text());
+			$('#e_validateur').val(_this.find('.validateur').text());
+			$('#e_etat').val(_this.find('.etat').text());
+
+            $('#update').modal('show');
+
+            });
         </script>
     <script async>
         $('#editModal').on('show.bs.modal',function(event){

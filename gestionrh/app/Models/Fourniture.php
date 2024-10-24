@@ -22,4 +22,8 @@ class Fourniture extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+    // public function validateur()
+    // {
+    //     return $this->belongsTo(User::class, 'user_id');
+    // }
 }

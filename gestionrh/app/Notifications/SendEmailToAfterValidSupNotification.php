@@ -7,17 +7,17 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class SendEmailToResponseSupDemandeNotification extends Notification
+class SendEmailToAfterValidSupNotification extends Notification
 {
     use Queueable;
-    public $messages;
+    public $messages_resp;
 
     /**
      * Create a new notification instance.
      */
     public function __construct($message)
     {
-        $this->messages = $message;
+        $this->messages_resp = $message;
     }
 
     /**
@@ -37,10 +37,10 @@ class SendEmailToResponseSupDemandeNotification extends Notification
     {
         return (new MailMessage)
 
-        ->subject('Reponse de votre superieur à la demande adressée')
-        ->line('Bonjour '.$this->messages['prenom'].' '. $this->messages['nom'])
-        ->line('Nous vous invitons à consulter le statut de la demande suite à la reponse du N+1 ')
-        ->line('Connectez-vous sur la plateforme pour plus de details');
+        ->subject('Avis de validation de la demande')
+        ->line('Bonjour '.$this->messages_resp['prenom'].' '. $this->messages_resp['nom'])
+        ->line('Vous avez une nouvelle demande de fourniture pour validation ')
+        ->line('Veuillez vous connecter sur la plateforme');
     }
 
     /**

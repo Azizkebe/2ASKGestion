@@ -25,7 +25,7 @@
                   </div>
                   <div class="mt-3">
                     <label for="">Commentaire</label>
-                    <textarea name="commentaire" id="commentaire" cols="15" rows="5" class="form-control"></textarea>
+                    <textarea name="commentaire" id="commentaire" cols="15" rows="5" class="form-control" value="{{$com_fourniture->commentaire}}"></textarea>
                   </div>
               <div style="display: flex; justify-content:center;" class="form-group">
                 <button type="submit" class="btn btn-primary btn-round w-50"> Enregistrer </button>

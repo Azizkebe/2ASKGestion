@@ -35,11 +35,12 @@
                             <tbody>
                              @forelse ($fourniture as $demande)
                             <tr>
-                                <td>{{$demande->id}}</td>
-                                <td>{{$demande->projet->name_projet}}</td>
-                                <td>{{$demande->motif}}</td>
-                                <td>{{$demande->bureau}}</td>
-                                <td>{{$demande->etat->statut_demande ?? 'Nouvelle demande'}}</td>
+                                <td class="id">{{$demande->id}}</td>
+                                <td class="projet">{{$demande->projet->name_projet}}</td>
+                                <td class="motif">{{$demande->motif}}</td>
+                                <td class="bureau">{{$demande->bureau}}</td>
+                                <td class="etat">{{$demande->etat->statut_demande ?? 'Nouvelle demande'}}</td>
+                                <td class="validateur" hidden>{{$demande->user->employe->service->employe->prenom}} {{$demande->user->employe->service->employe->nom}}</td>
                                 {{-- <td>{{$demande->id_etat_demande}}</td> --}}
                                 <td>
                                     <div class="form-button-action">
@@ -59,7 +60,11 @@
                                         data-original-title="Edit Task"
                                         >
                                         {{-- <a href=""> --}}
-                                            <a href="" data-bs-toggle="modal" data-bs-target="#validModal" class="validModal"><i class="fa fa-edit"></i></a>
+                                            {{-- <a href="" class="m-r-15 text-muted update" data-bs-toggle="modal" data-bs-target="#update" data-id={{$demande->id}}><i class="fa fa-eye"></i></a> --}}
+                                            <a href="" class="m-r-15 text-muted update" data-bs-toggle="modal" data-bs-target="#update" data-bs-id="'.$demande->id.'"><i class="fa fa-eye"></i></a>
+                                                {{-- <a href="" class="m-r-15 text-muted update" data-bs-toggle="modal" data-id="'.$demande->id.'" data-target="#update">
+                                                    <i class="fa fa-eye"></i>
+                                                </a> --}}
                                             {{-- <i class="fa fa-edit"></i></a> --}}
                                         </button>
                                         @if ($demande->id_etat_demande == '1' || $demande->id_etat_demande == '2' || $demande->id_etat_demande == '3')
