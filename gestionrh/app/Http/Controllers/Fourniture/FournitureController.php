@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Fourniture;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\FournitureRequest;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\SendEmailToAfterDemandeNotification;
+use App\Notifications\SendEmailToResponseSupDemandeNotification;
 use App\Models\Projet;
 use App\Models\Article;
 use App\Models\Fourniture;
@@ -65,7 +68,7 @@ class FournitureController extends Controller
     public function detail(int $fourniture)
     {
         $fourni = Fourniture::findOrFail($fourniture);
-        if($fourni['id_etat_demande'] == '1')
+        if($fourni['id_etat_demande'] == '1' || $fourni['id_etat_demande'] == '2' || $fourni['id_etat_demande'] == '3')
         {
             $this->error = '1';
         }
@@ -146,8 +149,10 @@ class FournitureController extends Controller
     }
     public function cash_fourniture(int $fourniture )
     {
-        // dd($fourniture);
+
         $user = Auth::user();
+
+        // dd($user->employe->service->employe);
         // $userid = $user->id;
         // $fourniture = Fourniture::where('user_id','=',$userid)->first();
 
@@ -163,6 +168,12 @@ class FournitureController extends Controller
 
         if($four)
         {
+            $messages['prenom'] = $user->employe->service->employe->prenom;
+            $messages['nom'] = $user->employe->service->employe->nom;
+
+            Notification::route('mail', $user->employe->service->employe->email)->notify(
+                new SendEmailToAfterDemandeNotification($messages)
+            );
 
             toastr()->success('la demande est envoyée pour validation avec succes');
             return redirect()->back();
@@ -174,14 +185,13 @@ class FournitureController extends Controller
 
         }
         else{
-            // dd('faux');
+
             toastr()->error('Aucune demande trouvée');
             return redirect()->back();
         }
     }
     public function validation()
     {
-        // dd($fourniture);
 
         $fourniture = Fourniture::where('id_validateur', Auth::user()->id_employe)->get();
         $etat = EtatDemande::all();
@@ -198,6 +208,44 @@ class FournitureController extends Controller
         'com_fourniture'=>$com_fourniture,
         'etat'=>$etat,
       ]);
+
+    }
+    public function update_fourniture($fourniture, Request $request)
+    {
+        $com_fourniture = Fourniture::findOrFail($fourniture);
+        try {
+
+            if($com_fourniture->id_etat_demande == '1')
+            {
+                $com_fourniture->id_etat_demande = $request->id_etat;
+                $com_fourniture->commentaire = $request->commentaire;
+
+                $confirm = $com_fourniture->update();
+
+                if($confirm)
+                {
+                    $messages['prenom'] = $com_fourniture->user->employe->prenom;
+                    $messages['nom'] = $com_fourniture->user->employe->nom;
+
+                    Notification::route('mail', $com_fourniture->user->employe->email)->notify(
+                        new SendEmailToResponseSupDemandeNotification($messages)
+                    );
+
+                    toastr()->success('Bravo, vous avez repondu à la demande');
+                    return redirect()->back();
+                }
+
+            }
+            else
+            {
+                toastr()->error('Désolé, vous avez déjà repondu à la demande');
+                return redirect()->route('fourniture.validation');
+            }
+
+        } catch (Exception $e) {
+            throw new Exception("Erreur lors de la validation", 1);
+
+        }
 
     }
 

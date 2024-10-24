@@ -25,6 +25,8 @@
                     <thead>
                       <tr>
                         <th>ID</th>
+                        <th>Date Reception</th>
+                        <th>Demandeur</th>
                         <th>Projet</th>
                         <th>Motif</th>
                         <th>Service</th>
@@ -38,6 +40,8 @@
                             <tr>
 
                                 <td>{{$demande->id}}</td>
+                                <td>{{$demande->updated_at}}</td>
+                                <th>{{$demande->user->employe->prenom}} {{$demande->user->employe->nom}}</th>
                                 <td>{{$demande->projet->name_projet}}</td>
                                 <td>{{$demande->motif}}</td>
                                 <td>{{$demande->bureau}}</td>
@@ -77,7 +81,7 @@
                                 </td>
                                 </tr>
                              @empty
-                                 <td colspan="5">Aucune donnée trouvé</td>
+                                 <td colspan="9">Aucune donnée trouvé</td>
                              @endforelse
                             </tbody>
                     </table>

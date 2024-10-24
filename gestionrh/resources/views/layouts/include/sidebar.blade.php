@@ -47,6 +47,9 @@
             $permissionantenne= App\Models\PermissionRoleModel::getPermission('Liste demande antenne', Auth::user()->role_id);
             $permission_rh= App\Models\PermissionRoleModel::getPermission('Ressources Humaines', Auth::user()->role_id);
             $permission_magasin= App\Models\PermissionRoleModel::getPermission('Magasin', Auth::user()->role_id);
+            $permission_projet= App\Models\PermissionRoleModel::getPermission('Projet', Auth::user()->role_id);
+            $permission_article= App\Models\PermissionRoleModel::getPermission('Article', Auth::user()->role_id);
+
             @endphp
             @if (!empty($permissionDashboard))
 
@@ -185,6 +188,73 @@
             </div>
           </li>
           @endif
+          @if (!empty($permission_projet))
+          <li class="nav-item">
+            <a data-bs-toggle="collapse" href="#projet">
+              <i class="fas fa-bars"></i>
+              <p>Projet</p>
+              <span class="caret"></span>
+            </a>
+            <div class="collapse" id="projet">
+                <ul class="nav nav-collapse">
+                    <li>
+                        <a data-bs-toggle="collapse" href="#projet1">
+                          <span class="sub-item">Projet</span>
+                          <span class="caret"></span>
+                        </a>
+                        <div class="collapse" id="projet1">
+                          <ul class="nav nav-collapse subnav">
+                            <li>
+                              <a href="{{route('projet.create')}}">
+                                <span class="sub-item">Ajout un projet</span>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="{{route('projet.liste')}}">
+                                <span class="sub-item">Liste des projets</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+          </li>
+          @endif
+          @if (!empty($permission_article))
+          <li class="nav-item">
+            <a data-bs-toggle="collapse" href="#article">
+              <i class="fas fa-bars"></i>
+              <p>Article</p>
+              <span class="caret"></span>
+            </a>
+            <div class="collapse" id="article">
+                <ul class="nav nav-collapse">
+                    <li>
+                        <a data-bs-toggle="collapse" href="#article1">
+                          <span class="sub-item">Article</span>
+                          <span class="caret"></span>
+                        </a>
+                        <div class="collapse" id="article1">
+                          <ul class="nav nav-collapse subnav">
+                            <li>
+                              <a href="{{route('article.create')}}">
+                                <span class="sub-item">Ajout un article</span>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="{{route('article.liste')}}">
+                                <span class="sub-item">Liste des articles</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+          </li>
+          @endif
+
           @if (!empty($permissionEmploye))
           <li class="nav-item">
             <a data-bs-toggle="collapse" href="#sidebarLayouts">

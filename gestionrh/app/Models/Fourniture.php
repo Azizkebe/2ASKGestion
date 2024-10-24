@@ -18,4 +18,8 @@ class Fourniture extends Model
     {
         return $this->belongsTo(EtatDemande::class, 'id_etat_demande');
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

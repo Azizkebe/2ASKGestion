@@ -11,19 +11,19 @@
             <div class="modal-body">
             <div class="mt-3 mb-3">
                 <label for="">Changement de Statut...</label>
-                <select name="id_etat" id="id_etat" class="form-select">
-                    {{-- <option value="">-- choisir un etat --</option> --}}
+                {{-- <select name="id_etat" id="id_etat" class="form-select">
+                    <option value="">-- choisir un etat --</option>
                     @foreach ($etat as $etat)
                         <option value="{{$etat->id}}">{{$etat->statut_demande}}</option>
                     @endforeach
-                </select>
+                </select> --}}
             </div>
-            {{-- @if($rejet) --}}
-            <div class="mt-3">
+
+            {{-- <div class="mt-3">
                 <label for="">Commentaire</label>
                 <textarea name="commentaire" id="commentaire" cols="15" rows="5" class="form-control"></textarea>
-            </div>
-            {{-- @endif --}}
+            </div> --}}
+
             </div>
             <div class="modal-footer">
             <button type="reset" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>

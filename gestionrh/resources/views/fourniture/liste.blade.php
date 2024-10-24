@@ -13,6 +13,8 @@
                     </div>
                 </div>
               <div class="card-body">
+
+                @include('fourniture.modal.validatemodal')
                 <div class="table-responsive">
                     @include('fourniture.modal.validatemodal')
                   <table
@@ -38,6 +40,7 @@
                                 <td>{{$demande->motif}}</td>
                                 <td>{{$demande->bureau}}</td>
                                 <td>{{$demande->etat->statut_demande ?? 'Nouvelle demande'}}</td>
+                                {{-- <td>{{$demande->id_etat_demande}}</td> --}}
                                 <td>
                                     <div class="form-button-action">
                                         <button
@@ -54,17 +57,38 @@
                                         title=""
                                         class="btn btn-link btn-primary btn-lg"
                                         data-original-title="Edit Task"
-                                        ><a href=""><i class="fa fa-edit"></i></a>
+                                        >
+                                        {{-- <a href=""> --}}
+                                            <a href="" data-bs-toggle="modal" data-bs-target="#validModal" class="validModal"><i class="fa fa-edit"></i></a>
+                                            {{-- <i class="fa fa-edit"></i></a> --}}
                                         </button>
+                                        @if ($demande->id_etat_demande == '1' || $demande->id_etat_demande == '2' || $demande->id_etat_demande == '3')
+                                        <div style="display: none;">
+                                            <button
+                                            type="button"
+                                            data-bs-toggle="tooltip"
+                                            title=""
+                                            class="btn btn-link btn-danger"
+                                            data-original-title="Remove"
+                                            >
+                                            <a onclick="return confirm('Etes vous sure de vouloir supprimer la fourniture')"
+                                            href="{{route('delete_fourniture.delete', $demande->id)}}" class="btn btn-link btn-danger"><i class="fa fa-times"></i>
+                                           </a>
+                                            </button>
+                                        </div>
+                                        @else
                                         <button
                                         type="button"
                                         data-bs-toggle="tooltip"
                                         title=""
                                         class="btn btn-link btn-danger"
                                         data-original-title="Remove"
-                                        ><a onclick="return confirm('Etes vous sure de vouloir supprimer la fourniture')"
-                                        href="{{route('delete_fourniture.delete', $demande->id)}}" class="btn btn-link btn-danger"><i class="fa fa-times"></i></a>
+                                        >
+                                        <a onclick="return confirm('Etes vous sure de vouloir supprimer la fourniture')"
+                                        href="{{route('delete_fourniture.delete', $demande->id)}}" class="btn btn-link btn-danger"><i class="fa fa-times"></i>
+                                       </a>
                                         </button>
+                                        @endif
                                     </div>
                                 </td>
                                 </tr>

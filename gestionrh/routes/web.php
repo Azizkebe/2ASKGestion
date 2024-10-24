@@ -328,6 +328,7 @@ Route::middleware('userAdmin')->group(function(){
         Route::put('/update/{fourniture}',[FournitureController::class,'update_article'])->name('fourniture.update_article');
         Route::get('/validation',[FournitureController::class, 'validation'])->name('fourniture.validation');
         Route::get('/validation/edit/{fourniture}',[FournitureController::class,'edit'])->name('fourniture.edit');
+        Route::put('/validation/update/{fourniture}',[FournitureController::class,'update_fourniture'])->name('fourniture.update');
         // Route::get('/delete/{fourniture}',[FournitureController::class,'delete'])->name('fourniture.delete');
     });
     Route::prefix('panier_article')->group(function(){

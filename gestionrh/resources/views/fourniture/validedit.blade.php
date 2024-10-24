@@ -11,9 +11,9 @@
                 {{-- <a href="{{route('genre.liste')}}" class="btn btn-sm btn-success float-end">Liste des Genres</a> --}}
             </div>
 
-            <form action="" method="POST">
+            <form action="{{route('fourniture.update', $com_fourniture)}}" method="POST">
                 @csrf
-                @method('POST')
+                @method('PUT')
                 <div class="mt-3">
                     <label for=""><span class="error">*</span>Changement Statut...</label>
                     <select name="id_etat" id="id_etat" class="form-select">
