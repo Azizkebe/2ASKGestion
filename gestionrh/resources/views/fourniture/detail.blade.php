@@ -22,13 +22,13 @@
                 </div>
             <div class="d-flex justify-content:end mb-3">
 
-                @if ($error != '1')
-
-                        <button class="btn btn-primary btn-round ms-auto" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <i class="fa fa-plus"></i> Ajouter des articles
-                        </button>
-
-                @endif
+                {{-- @if ($error != '1' || $fourni->id_etat_valid_comptable != NULL || $fourni->id_etat_valid_comptable != '') --}}
+                    @if ($error != '1' || $fourni->id_user_comptable == Auth::user()->id_employe)
+                    <button class="btn btn-primary btn-round ms-auto" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <i class="fa fa-plus"></i> Ajouter des articles
+                    </button>
+                    @endif
+                {{-- @endif --}}
                     {{-- <button class="btn btn-primary btn-round ms-auto" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         <i class="fa fa-plus"></i> Ajouter des articles
                     </button> --}}
@@ -100,7 +100,7 @@
                               <td>{{$detail->Quantite_demandee ?? ''}}</td>
                               <td>{{$detail->Quantite_accordee}}</td>
                               <td>{{$detail->fourniture->projet->name_projet}}</td>
-                              @if ($error != '1')
+                              @if ($error != '1' || $fourni->id_user_comptable == Auth::user()->id_employe)
                               <td>
                                   <div class="form-button-action">
                                       <button

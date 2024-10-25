@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Notification;
 use App\Notifications\SendEmailToAfterDemandeNotification;
 use App\Notifications\SendEmailToResponseSupDemandeNotification;
 use App\Notifications\SendEmailToAfterValidSupNotification;
+use App\Notifications\SendEmailAfterResponseComptableNotification;
+use App\Notifications\SendEmailAfterResponseComptableSupNotification;
 use App\Models\Projet;
 use App\Models\Article;
 use App\Models\Fourniture;
@@ -17,6 +19,7 @@ use App\Models\PanierArticle;
 use App\Models\DemandeFourniture;
 use App\Models\User;
 use App\Models\EtatDemande;
+use App\Models\EtatValidMagasin;
 use App\Models\RoleModel;
 use Auth;
 
@@ -196,8 +199,11 @@ class FournitureController extends Controller
     }
     public function validation()
     {
+        // dd(Auth::user()->id_employe);
 
-        $fourniture = Fourniture::where('id_validateur', Auth::user()->id_employe)->get();
+        $fourniture = Fourniture::where('id_validateur', Auth::user()->id_employe)
+                                ->orWhere('id_user_comptable', Auth::user()->id_employe)->get();
+
         $etat = EtatDemande::all();
         return view('fourniture.validation',[
             'fourniture'=>$fourniture,
@@ -214,6 +220,17 @@ class FournitureController extends Controller
       ]);
 
     }
+    public function edit_validation($fourniture)
+    {
+        $com_fourniture = Fourniture::findOrFail($fourniture);
+        $etat = EtatValidMagasin::all();
+
+        return view('fourniture.editcomptable',[
+            'com_fourniture'=>$com_fourniture,
+            'etat'=>$etat,
+        ]);
+
+    }
     public function update_fourniture($fourniture, Request $request)
     {
         $com_fourniture = Fourniture::findOrFail($fourniture);
@@ -221,7 +238,7 @@ class FournitureController extends Controller
 
             $role_resp = RoleModel::where('name','Comptable Matieres')->first();
             $users_resp = User::where('role_id', $role_resp->id)->first();
-            // dd($users_resp->employe);
+            // dd($users_resp->employe->id);
             if($com_fourniture->id_etat_demande == '1')
             {
                 $com_fourniture->id_etat_demande = $request->id_etat;
@@ -239,7 +256,7 @@ class FournitureController extends Controller
                     );
                         if($com_fourniture['id_etat_demande'] == '2')
                         {
-                            $com_fourniture->update(['id_user_comptable'=> $users_resp->id, 'id_etat_valid_comptable'=> '1']);
+                            $com_fourniture->update(['id_user_comptable'=> $users_resp->employe->id,'id_etat_valid_comptable'=> '1']);
 
                             $messages_resp['prenom'] = $users_resp->employe->prenom;
                             $messages_resp['nom'] = $users_resp->employe->nom;
@@ -254,7 +271,7 @@ class FournitureController extends Controller
                             return redirect()->back();
                         }
                     toastr()->success('Bravo, vous avez repondu à la demande');
-                    return redirect()->back();
+                    return redirect()->route('fourniture.validation');
                 }
                 else
                 {
@@ -273,6 +290,38 @@ class FournitureController extends Controller
             throw new Exception("Erreur lors de la validation", 1);
 
         }
+
+    }
+    public function update_validation($fourniture, Request $request)
+    {
+        $com_fourniture = Fourniture::findOrFail($fourniture);
+        //  dd($request->id_etat);
+        $com_fourniture->id_etat_valid_comptable = $request->id_etat;
+        $com_fourniture->commentaire = $request->commentaire;
+
+        $response = $com_fourniture->update();
+
+        if($response)
+        {
+            $messages['prenom'] = $com_fourniture->user->employe->prenom;
+            $messages['nom'] = $com_fourniture->user->employe->nom;
+
+            $messages_resp['prenom'] = $com_fourniture->user_comptable->prenom;
+            $messages_resp['nom'] = $com_fourniture->user_comptable->nom;
+
+            Notification::route('mail', $com_fourniture->user->employe->email)->notify(
+                new SendEmailAfterResponseComptableNotification($messages)
+            );
+            Notification::route('mail', $com_fourniture->user_comptable->email)->notify(
+                new SendEmailAfterResponseComptableSupNotification($messages_resp)
+            );
+
+
+            toastr()->success('Bravo, vous avez repondu à la demande');
+            return redirect()->route('fourniture.validation');
+        }
+
+
 
     }
 

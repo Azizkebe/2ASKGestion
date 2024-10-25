@@ -246,10 +246,13 @@ myModal.addEventListener('shown.bs.modal', () => {
             var _this = $(this).parents('tr');
 			$('#e_id').val(_this.find('.id').text());
 			$('#e_projet').val(_this.find('.projet').text());
+			$('#e_projet2').val(_this.find('.projet2').text());
 			$('#e_motif').val(_this.find('.motif').text());
 			$('#e_service').val(_this.find('.bureau').text());
-			$('#e_validateur').val(_this.find('.validateur').text());
+			$('#e_validateur1').val(_this.find('.validateur1').text());
+			$('#e_validateur2').val(_this.find('.validateur2').text());
 			$('#e_etat').val(_this.find('.etat').text());
+			$('#e_etat2').val(_this.find('.etat2').text());
 
             $('#update').modal('show');
 

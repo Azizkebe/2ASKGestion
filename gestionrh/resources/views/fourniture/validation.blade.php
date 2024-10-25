@@ -30,7 +30,8 @@
                         <th>Projet</th>
                         <th>Motif</th>
                         <th>Service</th>
-                        <th>Etat</th>
+                        <th>Etat de Validation du N+1</th>
+                        <th>Etat de validation Finale</th>
 
                         <th style="width: 10%">Action</th>
                       </tr>
@@ -46,6 +47,7 @@
                                 <td>{{$demande->motif}}</td>
                                 <td>{{$demande->bureau}}</td>
                                 <td>{{$demande->etat->statut_demande}}</td>
+                                <td>{{$demande->etat_valid->statut_demande ?? ''}}</td>
                                 <td>
                                     <div class="form-button-action">
                                         <button
@@ -57,7 +59,7 @@
                                         >
                                         <a href="{{route('fourniture.detail', $demande->id)}}"><i class="fa fa-info"></i></a>
 
-
+                                        @if ($demande->id_user_comptable == NULL || $demande->id_user_comptable == '')
                                         <button
                                         type="button"
                                         data-bs-toggle="tooltip"
@@ -67,6 +69,17 @@
                                         {{-- <a href="" data-bs-toggle="modal" data-bs-target="#validModal" class="validModal"><i class="fa fa-edit"></i></a> --}}
                                         <a href="{{route('fourniture.edit', $demande->id)}}"><i class="fa fa-edit"></i></a>
                                         </button>
+                                        @else
+                                        <button
+                                        type="button"
+                                        data-bs-toggle="tooltip"
+                                        title=""
+                                        class="btn btn-link btn-primary btn-lg"
+                                        data-original-title="Edit Task">
+                                        {{-- <a href="" data-bs-toggle="modal" data-bs-target="#validModal" class="validModal"><i class="fa fa-edit"></i></a> --}}
+                                        <a href="{{route('fourniture.edit_valid', $demande->id)}}"><i class="fa fa-edit"></i></a>
+                                        </button>
+                                        @endif
                                         <button
                                         type="button"
                                         data-bs-toggle="tooltip"

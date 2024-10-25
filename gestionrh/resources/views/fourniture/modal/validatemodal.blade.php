@@ -20,9 +20,14 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><input type="text" class="form-control" id="e_validateur" name="e_validateur" value="" readonly></td>
+                                <td><input type="text" class="form-control" id="e_validateur1" name="e_validateur1" value="" readonly></td>
                                 <td><input type="text" class="form-control" id="e_projet" name="e_projet" value="" readonly/></td>
                                 <td><input type="text" class="form-control" id="e_etat" name="e_etat" value="" readonly/></td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" class="form-control" id="e_validateur2" name="e_validateur2" value="" readonly></td>
+                                <td><input type="text" class="form-control" id="e_projet2" name="e_projet2" value="" readonly/></td>
+                                <td><input type="text" class="form-control" id="e_etat2" name="e_etat2" value="" readonly/></td>
                             </tr>
                         </tbody>
                     </table>
@@ -61,7 +66,7 @@
                 </div>
                 <div class="modal-footer">
                 <button type="reset" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                {{-- <button type="submit" class="btn btn-primary">Enregistrer</button> --}}
                 </div>
             </form>
         </div>
