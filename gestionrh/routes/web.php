@@ -335,7 +335,7 @@ Route::middleware('userAdmin')->group(function(){
     });
     Route::prefix('panier_article')->group(function(){
         // Route::get('create',[])
-        Route::get('edit/{panier_article}', [PanierArticleController::class,'editer'])->name('panier_article.edit');
+        Route::get('edit', [PanierArticleController::class,'editer'])->name('panier_article.edit');
         Route::put('update/{panier_article}', [PanierArticleController::class,'update'])->name('panier_article.update');
         Route::get('delete/{panier_article}', [PanierArticleController::class,'delete'])->name('panier_article.delete');
     });

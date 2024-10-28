@@ -96,8 +96,8 @@
                            @forelse ($panier as $detail)
                           <tr>
                               <td>{{$detail->id}}</td>
-                              <td>{{$detail->article->name_article ?? ''}}</td>
-                              <td>{{$detail->Quantite_demandee ?? ''}}</td>
+                              <td class="article">{{$detail->article->name_article ?? ''}}</td>
+                              <td class="Qte_demande">{{$detail->Quantite_demandee ?? ''}}</td>
                               <td>{{$detail->Quantite_accordee}}</td>
                               <td>{{$detail->fourniture->projet->name_projet}}</td>
                               @if ($error != '1' || $fourni->id_user_comptable == Auth::user()->id_employe)
@@ -110,10 +110,10 @@
                                       class="btn btn-link btn-primary btn-lg"
                                       data-original-title="Edit Task"
                                       >
-                                      <a href="" data-bs-toggle="modal" data-myquantity="{{$detail->Quantite_demandee}}"
+                                      {{-- <a href="" data-bs-toggle="modal" data-myquantity="{{$detail->Quantite_demandee}}"
                                         data-myarticle="{{$detail->article->name_article ?? ''}}" data-bs-target="#editModal" class="editModal"
-                                      >
-                                      <i class="fa fa-edit"></i></a>
+                                      > --}}
+                                      <a data-bs-href="{{route('panier_article.edit', $detail->id)}}" class="m-r-15 text-muted editModal" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-id="{{$detail->id}}"><i class="fa fa-edit"></i></a>
                                       </button>
                                       <button
                                       type="button"

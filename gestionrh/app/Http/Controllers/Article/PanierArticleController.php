@@ -10,21 +10,24 @@ use App\Models\Article;
 
 class PanierArticleController extends Controller
 {
-    public function editer(int $panier_article)
+    public function editer(Request $request)
     {
-        $panier = PanierArticle::findOrFail($panier_article);
+
+        $panier = PanierArticle::where('id', $request->id)->get();
 
         // $fourni = Fourniture::findOrFail($panier->id_fourniture);
         $article = Article::all();
+
+        return response()->json(['panier'=>$panier,'article'=>$article]);
         // return view('fourniture.detail', [
         //     'panier'=>$panier,
         //     'fourni'=>$fourni,
         //     'article'=>$article,
         // ]);
-        return view('fourniture.modal.editmodal', [
-            'article'=>$article,
-            // 'panier_article'=>$panier_article,
-        ]);
+        // return view('fourniture.modal.editmodal', [
+        //     'article'=>$article,
+        //     // 'panier_article'=>$panier_article,
+        // ]);
     }
     public function update(int $panier_article)
     {

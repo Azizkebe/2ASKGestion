@@ -259,17 +259,45 @@ myModal.addEventListener('shown.bs.modal', () => {
             });
         </script>
     <script async>
-        $('#editModal').on('show.bs.modal',function(event){
-            console.log('Opend Modal');
-            var button = $(event.relatedTarget)
+        $(document).on('click','.editModal',function(e){
+            var art_id =  $(this).attr('data-bs-id');
+            $.ajax({
+                url:"{{route('panier_article.edit')}}",
+                type:"GET",
+                data:{id:art_id},
+                success:function(data){
+                    var panier = data.panier;
+                    var article = data.article;
+                    var htmlarticle = "<option value=''>Select Subject</option>";
+                    $("#id_article").val(article[0]['id']);
 
-            var quantity = button.data('myquantity')
-            var article = button.data('myarticle')
+                    // console.log(panier[0]['id_article']);
+                    for(let i=0; i< article.length; i++)
+                    {
+                        if(panier[0]['id_article'] == article[i][id]){
+                            htmlarticle += `<option value="`+article[i]['id']+`" selected>`+article[i]['name_article']+`</option>`;
+                        }else{
+                            htmlarticle += `<option value="`+article[i]['id']+`">`+article[i]['name_article']+`</option>`;
+                        }
 
-            var modal = $(this)
+                    }
 
-            modal.find('.modal-body #quantity').val(quantity)
-            modal.find('.modal-body #id_article').val(article)
+                }
+            });
+
+            var _this = $(this).parents('tr');
+			$('#qte_demande').val(_this.find('.Qte_demande').text());
+			// $('#article').val(_this.find('.article').text());
+
+            // var button = $(event.relatedTarget)
+
+            // var quantity = button.data('myquantity')
+            // var article = button.data('myarticle')
+
+            // var modal = $(this)
+
+            // modal.find('.modal-body #quantity').val(quantity)
+            // modal.find('.modal-body #id_article').val(article)
             // $(document).on('click', '.editModal', function(){
             //     var stud_id = $(this).val();
 
