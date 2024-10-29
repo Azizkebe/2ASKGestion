@@ -325,7 +325,7 @@ Route::middleware('userAdmin')->group(function(){
         Route::post('detail/{fourniture}',[FournitureController::class,'store_detail'])->name('fourniture.store_detail');
         // Route::post('detail_article',[FournitureController::class,'detail_save'])->name('fourniture.detail_save');
         Route::get('/edit/{fourniture}',[FournitureController::class,'editer_article'])->name('fourniture.editer_article');
-        Route::put('/update/{fourniture}',[FournitureController::class,'update_article'])->name('fourniture.update_article');
+        // Route::put('/update/{fourniture}',[FournitureController::class,'update_article'])->name('fourniture.update_article');
         Route::get('/validation',[FournitureController::class, 'validation'])->name('fourniture.validation');
         Route::get('/validation/edit/{fourniture}',[FournitureController::class,'edit'])->name('fourniture.edit');
         Route::get('/validation/edit_valid/{fourniture}',[FournitureController::class,'edit_validation'])->name('fourniture.edit_valid');
@@ -335,16 +335,16 @@ Route::middleware('userAdmin')->group(function(){
     });
     Route::prefix('panier_article')->group(function(){
         // Route::get('create',[])
-        Route::get('edit', [PanierArticleController::class,'editer'])->name('panier_article.edit');
-        Route::put('update/{panier_article}', [PanierArticleController::class,'update'])->name('panier_article.update');
+        Route::get('/edit', [PanierArticleController::class,'editer'])->name('panier_article.edit');
+        Route::post('/edit', [PanierArticleController::class,'update'])->name('update_Article');
         Route::get('delete/{panier_article}', [PanierArticleController::class,'delete'])->name('panier_article.delete');
     });
-    Route::prefix('demande_fourniture')->group(function(){
-        // Route::get('create',[])
-        Route::get('edit/{demande_fourniture}', [DemandeFournitureController::class,'editer'])->name('demande_fourniture.edit');
-        Route::put('update/{demande_fourniture}', [PanierArticleController::class,'update'])->name('panier_article.update');
-        Route::get('delete/{demande_fourniture}', [PanierArticleController::class,'delete'])->name('panier_article.delete');
-    });
+    // Route::prefix('demande_fourniture')->group(function(){
+    //     Route::get('create',[])
+    //     Route::get('edit/{demande_fourniture}', [DemandeFournitureController::class,'editer'])->name('demande_fourniture.edit');
+    //     Route::put('update/{demande_fourniture}', [PanierArticleController::class,'update'])->name('panier_article.update');
+    //     Route::get('delete/{demande_fourniture}', [PanierArticleController::class,'delete'])->name('panier_article.delete');
+    // });
 });
 
 

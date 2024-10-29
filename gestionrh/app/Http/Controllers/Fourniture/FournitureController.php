@@ -114,20 +114,20 @@ class FournitureController extends Controller
         // ]);
 
     // }
-    public function update_article(PanierArticle $panier, Request $requete, int $fourniture)
-    {
+    // public function update_article(PanierArticle $panier, Request $requete, int $fourniture)
+    // {
 
-        $panier = PanierArticle::where('id_fourniture', $fourniture)->first();
-        $panier->id_article = $requete->id_article;
-        $panier->Quantite_demandee = $requete->quantite_demandee;
-        $panier->id_fourniture = $fourniture;
+    //     $panier = PanierArticle::where('id_fourniture', $fourniture)->first();
+    //     $panier->id_article = $requete->id_article;
+    //     $panier->Quantite_demandee = $requete->quantite_demandee;
+    //     $panier->id_fourniture = $fourniture;
 
-        $panier->update();
+    //     $panier->update();
 
-        toastr()->success('L\'article a été mise à jour');
-        return redirect()->back();
+    //     toastr()->success('L\'article a été mise à jour');
+    //     return redirect()->back();
 
-    }
+    // }
     // public function detail_save(Request $request, PanierArticle $panier_fourni)
     // {
     //     // $fourni = Fourniture::findOrFail($fourniture);

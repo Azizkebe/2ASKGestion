@@ -86,8 +86,7 @@ class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bo
                 <div class="notif-img">
                   <img
                     src="assets/img/jm_denis.jpg"
-                    alt="Img Profile"
-                  />
+                    alt="Img Profile"/>
                 </div>
                 <div class="notif-content">
                   <span class="subject">Jimmy Denis</span>
@@ -194,9 +193,7 @@ class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bo
               <a href="#">
                 <div class="notif-img">
                   <img
-                    src="assets/img/profile2.jpg"
-                    alt="Img Profile"
-                  />
+                    src="assets/img/profile2.jpg"alt="Img"/>
                 </div>
                 <div class="notif-content">
                   <span class="block">

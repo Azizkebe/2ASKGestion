@@ -14,26 +14,22 @@ class PanierArticleController extends Controller
     {
 
         $panier = PanierArticle::where('id', $request->id)->get();
-
-        // $fourni = Fourniture::findOrFail($panier->id_fourniture);
         $article = Article::all();
 
         return response()->json(['panier'=>$panier,'article'=>$article]);
-        // return view('fourniture.detail', [
-        //     'panier'=>$panier,
-        //     'fourni'=>$fourni,
-        //     'article'=>$article,
-        // ]);
-        // return view('fourniture.modal.editmodal', [
-        //     'article'=>$article,
-        //     // 'panier_article'=>$panier_article,
-        // ]);
-    }
-    public function update(int $panier_article)
-    {
-        $panier = PanierArticle::findOrFail($panier_article);
 
-        // return view('fourniture.detail', compact('panier'));
+    }
+    public function update(Request $request)
+    {
+        $panier = PanierArticle::findOrFail($request->id);
+
+        dd($panier);
+        $panier->id_article = $request->id_article;
+        $panier->Quantite_demandee = $request->qte_demande;
+
+        $panier->save();
+
+        return response()->json(['success'=>true,'msg'=>'l\'article a été modifié avec success']);
     }
 
     public function delete(int $panier_article)

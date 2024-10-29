@@ -142,14 +142,14 @@
     <script src="{{asset('admin//js/setting-demo.js')}}"></script>
     {{-- <script src="{{asset('admin//js/demo.js')}}"></script> --}}
 
-<script async>
+{{-- <script async>
 const myModal = document.getElementById('myModal')
 const myInput = document.getElementById('myInput')
 
-myModal.addEventListener('shown.bs.modal', () => {
-  myInput.focus()
-})
-</script>
+myModal.addEventListener('show.bs.modal', () => {
+  myInput.focus();
+});
+</script> --}}
     <script async>
       $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
         type: "line",
@@ -238,9 +238,9 @@ myModal.addEventListener('shown.bs.modal', () => {
     <script async>
     window.addEventListener('show-form', event =>{
         $('#exampleModal').modal('show')
-    })
+    });
     </script>
-       <script async>
+        <script async>
          $(document).on('click', '.update', function(){
 
             var _this = $(this).parents('tr');
@@ -259,52 +259,84 @@ myModal.addEventListener('shown.bs.modal', () => {
             });
         </script>
     <script async>
-        $(document).on('click','.editModal',function(e){
-            var art_id =  $(this).attr('data-bs-id');
+        $(document).ready(function(){
+            $(".editModal").click(function(){
+                var detail_id =  $(this).attr('data-bs-id');
             $.ajax({
                 url:"{{route('panier_article.edit')}}",
                 type:"GET",
-                data:{id:art_id},
+                data:{id:detail_id},
                 success:function(data){
                     var panier = data.panier;
                     var article = data.article;
-                    var htmlarticle = "<option value=''>Select Subject</option>";
-                    $("#id_article").val(article[0]['id']);
+                    var htmlarticle = "<option value=''>Selectionner un article </option>";
 
-                    // console.log(panier[0]['id_article']);
                     for(let i=0; i< article.length; i++)
                     {
-                        if(panier[0]['id_article'] == article[i][id]){
+                        if(panier[0]['id_article'] == article[i]['id']){
                             htmlarticle += `<option value="`+article[i]['id']+`" selected>`+article[i]['name_article']+`</option>`;
+
                         }else{
                             htmlarticle += `<option value="`+article[i]['id']+`">`+article[i]['name_article']+`</option>`;
                         }
 
                     }
 
+                    var result = $("#edit_article").html(htmlarticle);
                 }
             });
-
             var _this = $(this).parents('tr');
 			$('#qte_demande').val(_this.find('.Qte_demande').text());
-			// $('#article').val(_this.find('.article').text());
 
-            // var button = $(event.relatedTarget)
+            });
+            // updateArticle
+            $("#update_Article").submit(function(){
 
-            // var quantity = button.data('myquantity')
-            // var article = button.data('myarticle')
+            var formData = $(this).serialize();
 
-            // var modal = $(this)
+            $.ajax({
+                url:"{{route('update_Article')}}",
+                method:"POST",
+                data:formData,
+                success:function(data){
+                    var article = data.id_article;
+                    console.log(article);
+                    if(data.success == true){
+                        location.reload();
+                    }
+                    else{
+                        alert(data.msg);
+                        }
+                    }
+                });
 
-            // modal.find('.modal-body #quantity').val(quantity)
-            // modal.find('.modal-body #id_article').val(article)
-            // $(document).on('click', '.editModal', function(){
-            //     var stud_id = $(this).val();
-
-            //     $('#editModal').modal('show');
-            // })
+            });
         });
     </script>
+    {{-- <script async>
+        $(document).ready(function(){
+            $("#update_Article").submit(function(){
+                var formData = $(this).serialize();
+                console.log(formData);
+                $.ajax({
+                    url:"{{route('panier_article.update')}}",
+                    type:"POST",
+                    data:formData,
+                    success:function(data){
+                        // console.log(data);
+                        if(data.success == true)
+                    {
+                        location.reload();
+                    }else{
+
+                        alert(data.msg);
+                    }
+
+                    }
+                });
+            });
+        });
+    </script> --}}
 {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> --}}
 {{-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> --}}
 @livewireScripts

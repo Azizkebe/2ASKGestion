@@ -113,7 +113,7 @@
                                       {{-- <a href="" data-bs-toggle="modal" data-myquantity="{{$detail->Quantite_demandee}}"
                                         data-myarticle="{{$detail->article->name_article ?? ''}}" data-bs-target="#editModal" class="editModal"
                                       > --}}
-                                      <a data-bs-href="{{route('panier_article.edit', $detail->id)}}" class="m-r-15 text-muted editModal" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-id="{{$detail->id}}"><i class="fa fa-edit"></i></a>
+                                      <a href="" class="m-r-15 text-muted editModal" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-id="{{$detail->id}}"><i class="fa fa-edit"></i></a>
                                       </button>
                                       <button
                                       type="button"
