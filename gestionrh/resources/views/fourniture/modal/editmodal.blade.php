@@ -5,9 +5,8 @@
             <h1 class="modal-title fs-5" id="exampleModalLabel">Modification Article de Fourniture - {{$fourni->projet->name_projet}} </h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form id="update_Article" action="" method="POST">
+        <form id="updated">
             @csrf
-            @method('POST')
             <div class="modal-body">
             <div class="mt-3">
                 <input type="hidden" name="id" value="" id="detail_id">

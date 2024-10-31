@@ -14,22 +14,34 @@ class PanierArticleController extends Controller
     {
 
         $panier = PanierArticle::where('id', $request->id)->get();
-        $article = Article::all();
 
-        return response()->json(['panier'=>$panier,'article'=>$article]);
+        $article = Article::all();
+        $articleid = Article::findorFail($request->id);
+        return response()->json(['panier'=>$panier,'article'=>$article,'articleid'=>$articleid]);
+
+    }
+    public function add(Request $request)
+    {
+        $panier = new PanierArticle;
+        $panier->id_article = $request->id_article;
+        $panier->id_fourniture = $fourniture;
+        $panier->Quantite_demandee = $request->quantite_demande;
+
+        $panier->save();
+        toastr()->success('L\'article est ajouté avec succes');
+        return redirect()->back();
 
     }
     public function update(Request $request)
     {
-        $panier = PanierArticle::findOrFail($request->id);
+        dd($request);
+        // $panier = PanierArticle::findOrFail($request->id);
+        // $panier->id_article = $request->id_article;
+        // $panier->Quantite_demandee = $request->qte_demande;
 
-        dd($panier);
-        $panier->id_article = $request->id_article;
-        $panier->Quantite_demandee = $request->qte_demande;
+        // $panier->save();
 
-        $panier->save();
-
-        return response()->json(['success'=>true,'msg'=>'l\'article a été modifié avec success']);
+        return response()->json(['success'=>true,'msg'=>$request]);
     }
 
     public function delete(int $panier_article)

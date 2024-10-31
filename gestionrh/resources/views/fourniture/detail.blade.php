@@ -145,7 +145,57 @@
         </div>
     </div>
 </div>
+<script>
+    $(".editModal").click(function(){
+                var detail_id =  $(this).attr('data-bs-id');
+            $.ajax({
+                url:"{{route('panier_article.edit')}}",
+                type:"GET",
+                data:{id:detail_id},
+                success:function(data){
+                    var panier = data.panier;
+                    var article = data.article;
+                    var htmlarticle = "<option value=''>Selectionner un article </option>";
 
+                    for(let i=0; i< article.length; i++)
+                    {
+                        if(panier[0]['id_article'] == article[i]['id']){
+                            htmlarticle += `<option value="`+article[i]['id']+`" selected>`+article[i]['name_article']+`</option>`;
+
+                        }else{
+                            htmlarticle += `<option value="`+article[i]['id']+`">`+article[i]['name_article']+`</option>`;
+                        }
+
+                    }
+
+                    var result = $("#edit_article").html(htmlarticle);
+                }
+            });
+            var _this = $(this).parents('tr');
+			$('#qte_demande').val(_this.find('.Qte_demande').text());
+
+        });
+
+            $("#updated").submit(function(){
+
+            var formData = $(this).serialize();
+
+            $.ajax({
+                url:"{{route('panier_article.update')}}",
+                type:"POST",
+                data:formData,
+                success:function(data){
+                    if(data.success == true){
+                        location.reload();
+                    }
+                    else{
+                        alert(data.msg);
+                        }
+                    }
+                });
+
+            });
+</script>
 @endsection
 
 {{-- @section('script')

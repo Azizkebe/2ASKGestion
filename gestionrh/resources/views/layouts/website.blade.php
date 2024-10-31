@@ -9,7 +9,6 @@
       name="viewport" />
     <link rel="icon" href="{{asset('admin/img/kaiadmin/favicon.ico')}}" type="image/x-icon"/>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
     <script src="https://jqueryui.com/resources/demos/datepicker/i18n/datepicker-fr.js"></script>
@@ -150,7 +149,7 @@ myModal.addEventListener('show.bs.modal', () => {
   myInput.focus();
 });
 </script> --}}
-    <script async>
+    {{-- <script async>
       $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
         type: "line",
         height: "70",
@@ -177,8 +176,8 @@ myModal.addEventListener('show.bs.modal', () => {
         lineColor: "#ffa534",
         fillColor: "rgba(255, 165, 52, .14)",
       });
-    </script>
-     <script async>
+    </script> --}}
+     <script>
         $(document).ready(function () {
           $("#basic-datatables").DataTable({});
 
@@ -232,18 +231,10 @@ myModal.addEventListener('show.bs.modal', () => {
                 action,
               ]);
             $("#addRowModal").modal("hide");
-          });
-        });
-      </script>
-    <script async>
-    window.addEventListener('show-form', event =>{
-        $('#exampleModal').modal('show')
-    });
-    </script>
-        <script async>
-         $(document).on('click', '.update', function(){
-
-            var _this = $(this).parents('tr');
+            });
+          $(".update").click(function()
+            {
+                var _this = $(this).parents('tr');
 			$('#e_id').val(_this.find('.id').text());
 			$('#e_projet').val(_this.find('.projet').text());
 			$('#e_projet2').val(_this.find('.projet2').text());
@@ -253,90 +244,16 @@ myModal.addEventListener('show.bs.modal', () => {
 			$('#e_validateur2').val(_this.find('.validateur2').text());
 			$('#e_etat').val(_this.find('.etat').text());
 			$('#e_etat2').val(_this.find('.etat2').text());
-
             $('#update').modal('show');
-
-            });
-        </script>
-    <script async>
-        $(document).ready(function(){
-            $(".editModal").click(function(){
-                var detail_id =  $(this).attr('data-bs-id');
-            $.ajax({
-                url:"{{route('panier_article.edit')}}",
-                type:"GET",
-                data:{id:detail_id},
-                success:function(data){
-                    var panier = data.panier;
-                    var article = data.article;
-                    var htmlarticle = "<option value=''>Selectionner un article </option>";
-
-                    for(let i=0; i< article.length; i++)
-                    {
-                        if(panier[0]['id_article'] == article[i]['id']){
-                            htmlarticle += `<option value="`+article[i]['id']+`" selected>`+article[i]['name_article']+`</option>`;
-
-                        }else{
-                            htmlarticle += `<option value="`+article[i]['id']+`">`+article[i]['name_article']+`</option>`;
-                        }
-
-                    }
-
-                    var result = $("#edit_article").html(htmlarticle);
-                }
-            });
-            var _this = $(this).parents('tr');
-			$('#qte_demande').val(_this.find('.Qte_demande').text());
-
-            });
-            // updateArticle
-            $("#update_Article").submit(function(){
-
-            var formData = $(this).serialize();
-
-            $.ajax({
-                url:"{{route('update_Article')}}",
-                method:"POST",
-                data:formData,
-                success:function(data){
-                    var article = data.id_article;
-                    console.log(article);
-                    if(data.success == true){
-                        location.reload();
-                    }
-                    else{
-                        alert(data.msg);
-                        }
-                    }
-                });
-
             });
         });
-    </script>
+      </script>
     {{-- <script async>
-        $(document).ready(function(){
-            $("#update_Article").submit(function(){
-                var formData = $(this).serialize();
-                console.log(formData);
-                $.ajax({
-                    url:"{{route('panier_article.update')}}",
-                    type:"POST",
-                    data:formData,
-                    success:function(data){
-                        // console.log(data);
-                        if(data.success == true)
-                    {
-                        location.reload();
-                    }else{
-
-                        alert(data.msg);
-                    }
-
-                    }
-                });
-            });
-        });
+    window.addEventListener('show-form', event =>{
+        $('#exampleModal').modal('show')
+    });
     </script> --}}
+
 {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> --}}
 {{-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> --}}
 @livewireScripts

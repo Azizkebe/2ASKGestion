@@ -91,8 +91,10 @@ class FournitureController extends Controller
 
         ]);
     }
-    public function store_detail(Request $request, PanierArticle $panier, int $fourniture )
+
+    public function store_detail(Request $request, int $fourniture)
     {
+        $panier = new PanierArticle;
         $panier->id_article = $request->id_article;
         $panier->id_fourniture = $fourniture;
         $panier->Quantite_demandee = $request->quantite_demande;
@@ -102,6 +104,7 @@ class FournitureController extends Controller
         return redirect()->back();
 
     }
+
     // public function editer_article(int $fourniture)
     // {
     //     $paniers = PanierArticle::where('id_fourniture',$fourniture)->first();
@@ -149,19 +152,15 @@ class FournitureController extends Controller
         toastr()->success('L\'article a été retiré avec succes');
         return redirect()->back();
     }
-    public function produit_article()
-    {
-        $article =  Article::all();
-        return view('fourniture.modal.addmodal', compact('article'));
-    }
+    // public function produit_article()
+    // {
+    //     $article =  Article::all();
+    //     return view('fourniture.modal.addmodal', compact('article'));
+    // }
     public function cash_fourniture(int $fourniture )
     {
 
         $user = Auth::user();
-
-        // dd($user->employe->service->employe);
-        // $userid = $user->id;
-        // $fourniture = Fourniture::where('user_id','=',$userid)->first();
 
         $data = PanierArticle::where('id_fourniture',$fourniture)->get();
 
@@ -199,7 +198,6 @@ class FournitureController extends Controller
     }
     public function validation()
     {
-        // dd(Auth::user()->id_employe);
 
         $fourniture = Fourniture::where('id_validateur', Auth::user()->id_employe)
                                 ->orWhere('id_user_comptable', Auth::user()->id_employe)->get();
@@ -295,7 +293,6 @@ class FournitureController extends Controller
     public function update_validation($fourniture, Request $request)
     {
         $com_fourniture = Fourniture::findOrFail($fourniture);
-        //  dd($request->id_etat);
         $com_fourniture->id_etat_valid_comptable = $request->id_etat;
         $com_fourniture->commentaire = $request->commentaire;
 

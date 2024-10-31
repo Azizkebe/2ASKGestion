@@ -191,10 +191,7 @@ class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bo
                 </div>
               </a>
               <a href="#">
-                <div class="notif-img">
-                  <img
-                    src="assets/img/profile2.jpg"alt="Img"/>
-                </div>
+
                 <div class="notif-content">
                   <span class="block">
                     Reza send messages to you

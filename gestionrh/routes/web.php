@@ -322,9 +322,9 @@ Route::middleware('userAdmin')->group(function(){
         Route::get('delete_fourniture/{fourniture}',[FournitureController::class,'delete_fourniture'])->name('delete_fourniture.delete');
         Route::get('detail/{fourniture}',[FournitureController::class,'detail'])->name('fourniture.detail');
         Route::get('add/{fourniture}',[FournitureController::class,'cash_fourniture'])->name('fourniture_cash');
-        Route::post('detail/{fourniture}',[FournitureController::class,'store_detail'])->name('fourniture.store_detail');
+        Route::post('detail',[FournitureController::class,'store_detail'])->name('fourniture.store_detail');
         // Route::post('detail_article',[FournitureController::class,'detail_save'])->name('fourniture.detail_save');
-        Route::get('/edit/{fourniture}',[FournitureController::class,'editer_article'])->name('fourniture.editer_article');
+        // Route::get('/edit/{fourniture}',[FournitureController::class,'editer_article'])->name('fourniture.editer_article');
         // Route::put('/update/{fourniture}',[FournitureController::class,'update_article'])->name('fourniture.update_article');
         Route::get('/validation',[FournitureController::class, 'validation'])->name('fourniture.validation');
         Route::get('/validation/edit/{fourniture}',[FournitureController::class,'edit'])->name('fourniture.edit');
@@ -334,9 +334,9 @@ Route::middleware('userAdmin')->group(function(){
         // Route::get('/delete/{fourniture}',[FournitureController::class,'delete'])->name('fourniture.delete');
     });
     Route::prefix('panier_article')->group(function(){
-        // Route::get('create',[])
+        Route::get('/',[PanierArticleController::class,'add'])->name('panier_article.add');
         Route::get('/edit', [PanierArticleController::class,'editer'])->name('panier_article.edit');
-        Route::post('/edit', [PanierArticleController::class,'update'])->name('update_Article');
+        Route::post('/edit', [PanierArticleController::class,'update'])->name('panier_article.update');
         Route::get('delete/{panier_article}', [PanierArticleController::class,'delete'])->name('panier_article.delete');
     });
     // Route::prefix('demande_fourniture')->group(function(){
