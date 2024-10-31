@@ -12,7 +12,8 @@
                     </button>
                     </div>
                     <div>
-                        @include('fourniture.modal.validatemodal')
+                        {{-- @include('fourniture.modal.validatemodal') --}}
+                        @include('fourniture.modal.editValidModal')
                     </div>
                 </div>
               <div class="card-body">
@@ -66,7 +67,6 @@
                                         title=""
                                         class="btn btn-link btn-primary btn-lg"
                                         data-original-title="Edit Task">
-                                        {{-- <a href="" data-bs-toggle="modal" data-bs-target="#validModal" class="validModal"><i class="fa fa-edit"></i></a> --}}
                                         <a href="{{route('fourniture.edit', $demande->id)}}"><i class="fa fa-edit"></i></a>
                                         </button>
                                         @else
@@ -76,8 +76,8 @@
                                         title=""
                                         class="btn btn-link btn-primary btn-lg"
                                         data-original-title="Edit Task">
-                                        {{-- <a href="" data-bs-toggle="modal" data-bs-target="#validModal" class="validModal"><i class="fa fa-edit"></i></a> --}}
-                                        <a href="{{route('fourniture.edit_valid', $demande->id)}}"><i class="fa fa-edit"></i></a>
+                                        <a data-bs-toggle="modal" data-bs-target="#editValidModal" data-bs-id="{{$demande->id}}" class="m-r-15 text-muted editValidModal"><i class="fa fa-edit"></i></a>
+                                        {{-- <a href="{{route('fourniture.edit_valid', $demande->id)}}"><i class="fa fa-edit"></i></a> --}}
                                         </button>
                                         @endif
                                         <button
@@ -103,5 +103,32 @@
         </div>
     </div>
 </div>
+<script>
+   $(document).ready(function(){
+    $(".editValidModal").click(function(){
+        var detail_id =  $(this).attr('data-bs-id');
+        // console.log(detail_id);
+        $.ajax({
+        id:{detail_id},
+        url:"{{route('fourniture.edit_valid')}}",
+        type:"GET",
+        data:{id:detail_id},
+        success:function(data){
 
+            var statut = data.etat;
+
+            // var article = data.article;
+            var htmlstatut = "<option value=''>Selectionner un statut </option>";
+
+            for(let i=0; i< statut.length; i++)
+            {
+                htmlstatut += `<option value="`+statut[i]['id']+`">`+statut[i]['statut_demande']+`</option>`;
+            }
+
+            var result = $("#edit_statut").html(htmlstatut);
+        }
+        });
+    });
+   });
+</script>
 @endsection

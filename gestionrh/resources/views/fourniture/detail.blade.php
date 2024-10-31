@@ -122,7 +122,7 @@
                                       class="btn btn-link btn-danger"
                                       data-original-title="Remove"
                                       ><a onclick="return confirm('Etes vous sure de vouloir supprimer l\'article')"
-                                      href="{{route('panier_article.delete', $detail->id)}}" class="btn btn-link btn-danger"><i class="fa fa-times"></i></a>
+                                      href="{{route('fourniture.delete', $detail->id)}}" class="btn btn-link btn-danger"><i class="fa fa-times"></i></a>
                                       </button>
                                   </div>
                               </td>
@@ -148,8 +148,10 @@
 <script>
     $(".editModal").click(function(){
                 var detail_id =  $(this).attr('data-bs-id');
-            $.ajax({
-                url:"{{route('panier_article.edit')}}",
+
+                $.ajax({
+                id:{detail_id},
+                url:"{{route('fourniture.editer_article')}}",
                 type:"GET",
                 data:{id:detail_id},
                 success:function(data){
@@ -179,13 +181,15 @@
             $("#updated").submit(function(){
 
             var formData = $(this).serialize();
-
+                console.log('ok');
             $.ajax({
-                url:"{{route('panier_article.update')}}",
+                url:"{{route('fourniture.update_article')}}",
                 type:"POST",
                 data:formData,
                 success:function(data){
+
                     if(data.success == true){
+                        alert('ok');
                         location.reload();
                     }
                     else{

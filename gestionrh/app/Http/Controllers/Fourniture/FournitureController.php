@@ -46,7 +46,7 @@ class FournitureController extends Controller
         $projet = Projet::all();
         return view('fourniture.add', compact('projet'));
     }
-    public function store(FournitureRequest $request,Fourniture $fourni )
+    public function store(FournitureRequest $request,Fourniture $fourni)
     {
 
        $user = Auth::user();
@@ -54,7 +54,6 @@ class FournitureController extends Controller
        $fourni->id_projet = $request->id_projet;
        $fourni->motif = $request->motif;
        $fourni->user_id = $user_id;
-    //    $fourni->id_superieur = $user->employe->service->id_chef_service;
        $fourni->bureau = $user->employe->service->service;
 
        $fourni->save();
@@ -62,6 +61,17 @@ class FournitureController extends Controller
        toastr()->success('La fourniture est ajoutée');
 
        return redirect()->route('fourniture.detail', $fourni->id);
+    }
+    public function update(Request $request, int $fourniture)
+    {
+        dd($request);
+        $panier = PanierArticle::findOrFail($request->id);
+        $panier->id_article = $request->id_article;
+        $panier->Quantite_demandee = $request->qte_demande;
+
+        $panier->save();
+
+        return response()->json(['success'=>true,'msg'=>$request]);
     }
     public function delete_fourniture($fourniture)
     {
@@ -94,6 +104,7 @@ class FournitureController extends Controller
 
     public function store_detail(Request $request, int $fourniture)
     {
+
         $panier = new PanierArticle;
         $panier->id_article = $request->id_article;
         $panier->id_fourniture = $fourniture;
@@ -105,53 +116,32 @@ class FournitureController extends Controller
 
     }
 
-    // public function editer_article(int $fourniture)
-    // {
-    //     $paniers = PanierArticle::where('id_fourniture',$fourniture)->first();
-        // $fourni = Fourniture::findOrFail($fourniture);
-        // $article = Article::all();
-        // return view('fourniture.modal.editmodal',[
-            // 'panier'=>$paniers,
-            // 'fourni'=>$fourni,
-            // 'article'=>$article,
-        // ]);
-
-    // }
-    // public function update_article(PanierArticle $panier, Request $requete, int $fourniture)
-    // {
-
-    //     $panier = PanierArticle::where('id_fourniture', $fourniture)->first();
-    //     $panier->id_article = $requete->id_article;
-    //     $panier->Quantite_demandee = $requete->quantite_demandee;
-    //     $panier->id_fourniture = $fourniture;
-
-    //     $panier->update();
-
-    //     toastr()->success('L\'article a été mise à jour');
-    //     return redirect()->back();
-
-    // }
-    // public function detail_save(Request $request, PanierArticle $panier_fourni)
-    // {
-    //     // $fourni = Fourniture::findOrFail($fourniture);
-
-    //     $panier_fourni->id_article = $request->id_article;
-    //     $panier_fourni->Quantite_demandee = $request->quantite_demande;
-
-    //     $panier_fourni->save();
-
-    //     toastr()->success('L\'article a été ajouté avec succes');
-    //     return redirect()->back();
-    // }
-    public function delete(int $fourniture, DetailFourniture $detail_fourni)
+    public function editer_article(Request $request)
     {
-        $fourni_delete = DetailFourniture::findOrFail($fourniture);
+        $panier = PanierArticle::where('id', $request->id)->get();
 
-        dd($fourni_delete);
+        $article = Article::all();
+        return response()->json(['panier'=>$panier,'article'=>$article]);
+    }
+    public function delete(int $fourniture)
+    {
+        $panier = PanierArticle::findOrFail($fourniture);
+
+        $panier->delete();
 
         toastr()->success('L\'article a été retiré avec succes');
+
         return redirect()->back();
     }
+    // public function delete(int $fourniture, DetailFourniture $detail_fourni)
+    // {
+    //     $fourni_delete = DetailFourniture::findOrFail($fourniture);
+
+    //     dd($fourni_delete);
+
+    //     toastr()->success('L\'article a été retiré avec succes');
+    //     return redirect()->back();
+    // }
     // public function produit_article()
     // {
     //     $article =  Article::all();
@@ -218,15 +208,19 @@ class FournitureController extends Controller
       ]);
 
     }
-    public function edit_validation($fourniture)
+    // public function edit_validation($fourniture)
+    public function edit_validation(Request $request)
     {
-        $com_fourniture = Fourniture::findOrFail($fourniture);
         $etat = EtatValidMagasin::all();
 
-        return view('fourniture.editcomptable',[
-            'com_fourniture'=>$com_fourniture,
-            'etat'=>$etat,
-        ]);
+        return response()->json(['etat'=>$etat]);
+        // $com_fourniture = Fourniture::findOrFail($fourniture);
+        // $etat = EtatValidMagasin::all();
+
+        // return view('fourniture.editcomptable',[
+        //     'com_fourniture'=>$com_fourniture,
+        //     'etat'=>$etat,
+        // ]);
 
     }
     public function update_fourniture($fourniture, Request $request)
@@ -236,7 +230,6 @@ class FournitureController extends Controller
 
             $role_resp = RoleModel::where('name','Comptable Matieres')->first();
             $users_resp = User::where('role_id', $role_resp->id)->first();
-            // dd($users_resp->employe->id);
             if($com_fourniture->id_etat_demande == '1')
             {
                 $com_fourniture->id_etat_demande = $request->id_etat;

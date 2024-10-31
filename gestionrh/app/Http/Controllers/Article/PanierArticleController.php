@@ -34,7 +34,7 @@ class PanierArticleController extends Controller
     }
     public function update(Request $request)
     {
-        dd($request);
+        // dd($request);
         // $panier = PanierArticle::findOrFail($request->id);
         // $panier->id_article = $request->id_article;
         // $panier->Quantite_demandee = $request->qte_demande;
