@@ -64,7 +64,7 @@ class FournitureController extends Controller
     }
     public function update(Request $request, int $fourniture)
     {
-        dd($request);
+
         $panier = PanierArticle::findOrFail($request->id);
         $panier->id_article = $request->id_article;
         $panier->Quantite_demandee = $request->qte_demande;
@@ -211,9 +211,10 @@ class FournitureController extends Controller
     // public function edit_validation($fourniture)
     public function edit_validation(Request $request)
     {
+        $fourniture = Fourniture::where('id', $request->id)->get();
         $etat = EtatValidMagasin::all();
 
-        return response()->json(['etat'=>$etat]);
+        return response()->json(['etat'=>$etat,'fourniture'=>$fourniture]);
         // $com_fourniture = Fourniture::findOrFail($fourniture);
         // $etat = EtatValidMagasin::all();
 
@@ -221,6 +222,36 @@ class FournitureController extends Controller
         //     'com_fourniture'=>$com_fourniture,
         //     'etat'=>$etat,
         // ]);
+
+    }
+    public function update_edit_validation(Request $request)
+    {
+
+        $com_fourniture = Fourniture::find($request->id);
+        $com_fourniture->id_etat_valid_comptable = $request->id_statut;
+        $com_fourniture->commentaire = $request->commentaire;
+
+        $response = $com_fourniture->save();
+        if($response)
+        {
+            $messages['prenom'] = $com_fourniture->user->employe->prenom;
+            $messages['nom'] = $com_fourniture->user->employe->nom;
+
+            $messages_resp['prenom'] = $com_fourniture->user_comptable->prenom;
+            $messages_resp['nom'] = $com_fourniture->user_comptable->nom;
+
+            Notification::route('mail', $com_fourniture->user->employe->email)->notify(
+                new SendEmailAfterResponseComptableNotification($messages)
+            );
+            Notification::route('mail', $com_fourniture->user_comptable->email)->notify(
+                new SendEmailAfterResponseComptableSupNotification($messages_resp)
+            );
+
+
+            toastr()->success('Bravo, vous avez repondu à la demande');
+            return response()->json(['success'=>true,'msg'=>'Bravo, Vous venez de traiter la demande']);
+
+        }
 
     }
     public function update_fourniture($fourniture, Request $request)

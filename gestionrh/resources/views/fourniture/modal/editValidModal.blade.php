@@ -5,20 +5,20 @@
             <h1 class="modal-title fs-5" id="editValidModal">Validation de la demande</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form id="">
+        <form id="updateValidModal">
             @csrf
             <div class="modal-body">
             <div class="mt-3">
-                <input type="hidden" name="id" value="" id="detail_id">
+                <input type="text" name="id" value="" id="detail_id">
             </div>
             <div class="mt-3 mb-3">
-                <label for="">Statut:</label>
+                <label for="edit_statut">Statut:</label>
                 <select name="id_statut" id="edit_statut" class="form-select">
                     <option value=''>Selectionner un statut </option>
                 </select>
             </div>
             <div class="mt-3">
-                <label for="">Commentaire</label>
+                <label for="commentaire">Commentaire</label>
                 <textarea name="commentaire" id="commentaire" cols="15" rows="5" class="form-control"></textarea>
                 {{-- <input type="number" name="qte_demande" id="qte_demande" min="0" id="qte_demande" class="form-control"> --}}
             </div>

@@ -107,7 +107,7 @@
    $(document).ready(function(){
     $(".editValidModal").click(function(){
         var detail_id =  $(this).attr('data-bs-id');
-        // console.log(detail_id);
+
         $.ajax({
         id:{detail_id},
         url:"{{route('fourniture.edit_valid')}}",
@@ -116,19 +116,46 @@
         success:function(data){
 
             var statut = data.etat;
+            var fourniture = data.fourniture;
 
-            // var article = data.article;
             var htmlstatut = "<option value=''>Selectionner un statut </option>";
+            $('#detail_id').val(fourniture[0]['id']);
 
             for(let i=0; i< statut.length; i++)
             {
-                htmlstatut += `<option value="`+statut[i]['id']+`">`+statut[i]['statut_demande']+`</option>`;
+                if(fourniture[0]['id_etat_valid_comptable'] == statut[i]['id']){
+                    htmlstatut += `<option value="`+statut[i]['id']+`" selected>`+statut[i]['statut_demande']+`</option>`;
+
+                }else{
+                    htmlstatut += `<option value="`+statut[i]['id']+`">`+statut[i]['statut_demande']+`</option>`;
+                }
             }
 
             var result = $("#edit_statut").html(htmlstatut);
         }
         });
     });
-   });
+    $("#updateValidModal").submit(function(){
+
+    var formData = $(this).serialize();
+    $.ajax({
+        url:"{{route('fourniture.edit_update')}}",
+        type:"POST",
+        data:formData,
+        success:function(data){
+            // console.log(data.success);
+            if(data.success == true){
+
+                location.reload();
+            }
+            else{
+                alert(data.msg);
+                }
+            }
+        });
+    });
+});
+
+
 </script>
 @endsection

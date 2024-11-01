@@ -330,6 +330,7 @@ Route::middleware('userAdmin')->group(function(){
         Route::get('/validation',[FournitureController::class, 'validation'])->name('fourniture.validation');
         Route::get('/validation/edit/{fourniture}',[FournitureController::class,'edit'])->name('fourniture.edit');
         Route::get('/validation/edit_valid',[FournitureController::class,'edit_validation'])->name('fourniture.edit_valid');
+        Route::post('/validation/edit_valid',[FournitureController::class,'update_edit_validation'])->name('fourniture.edit_update');
         // Route::get('/validation/edit_valid/{fourniture}',[FournitureController::class,'edit_validation'])->name('fourniture.edit_valid');
         Route::put('/validation/update_valid/{fourniture}',[FournitureController::class,'update_validation'])->name('fourniture.update_valid');
         Route::put('/validation/update/{fourniture}',[FournitureController::class,'update_fourniture'])->name('fourniture.update');
