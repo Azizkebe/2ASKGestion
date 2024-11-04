@@ -44,6 +44,7 @@
                                 <td class="validateur1" hidden>{{$demande->user->employe->service->employe->prenom}} {{$demande->user->employe->service->employe->nom}}</td>
                                 <td class="validateur2" hidden>{{$demande->user_comptable->prenom ?? ''}} {{$demande->user_comptable->nom ?? ''}}</td>
                                 <td class="etat2" hidden>{{$demande->etat_valid->statut_demande ?? ''}}</td>
+                                <td class="comment" hidden>{{$demande->commentaire ?? ''}}</td>
 
                                 <td>
                                     <div class="form-button-action">
@@ -101,7 +102,7 @@
                                 </td>
                                 </tr>
                              @empty
-                                 <td colspan="5">Aucune donnée trouvé</td>
+                                 <td colspan="9">Aucune donnée trouvé</td>
                              @endforelse
                             </tbody>
                     </table>
@@ -110,5 +111,23 @@
         </div>
     </div>
 </div>
-
+<script>
+    $(document).ready(function(){
+        $(".update").click(function()
+            {
+            var _this = $(this).parents('tr');
+			$('#e_id').val(_this.find('.id').text());
+			$('#e_projet').val(_this.find('.projet').text());
+			$('#e_projet2').val(_this.find('.projet2').text());
+			$('#e_motif').val(_this.find('.motif').text());
+			$('#e_service').val(_this.find('.bureau').text());
+			$('#e_validateur1').val(_this.find('.validateur1').text());
+			$('#e_validateur2').val(_this.find('.validateur2').text());
+			$('#e_etat').val(_this.find('.etat').text());
+			$('#e_etat2').val(_this.find('.etat2').text());
+			$('#comment').val(_this.find('.comment').text());
+            $('#update').modal('show');
+        });
+    });
+</script>
 @endsection

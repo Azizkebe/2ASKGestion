@@ -9,7 +9,7 @@
             @csrf
             <div class="modal-body">
             <div class="mt-3">
-                <input type="text" name="id" value="" id="detail_id">
+                <input type="hidden" name="id" value="" id="detail_id">
             </div>
             <div class="mt-3 mb-3">
                 <label for="edit_statut">Statut:</label>

@@ -151,7 +151,7 @@ myModal.addEventListener('show.bs.modal', () => {
   myInput.focus();
 });
 </script> --}}
-    {{-- <script async>
+    <script async>
       $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
         type: "line",
         height: "70",
@@ -178,7 +178,7 @@ myModal.addEventListener('show.bs.modal', () => {
         lineColor: "#ffa534",
         fillColor: "rgba(255, 165, 52, .14)",
       });
-    </script> --}}
+    </script>
      <script>
         $(document).ready(function () {
           $("#basic-datatables").DataTable({});
@@ -234,20 +234,7 @@ myModal.addEventListener('show.bs.modal', () => {
               ]);
             $("#addRowModal").modal("hide");
             });
-          $(".update").click(function()
-            {
-                var _this = $(this).parents('tr');
-			$('#e_id').val(_this.find('.id').text());
-			$('#e_projet').val(_this.find('.projet').text());
-			$('#e_projet2').val(_this.find('.projet2').text());
-			$('#e_motif').val(_this.find('.motif').text());
-			$('#e_service').val(_this.find('.bureau').text());
-			$('#e_validateur1').val(_this.find('.validateur1').text());
-			$('#e_validateur2').val(_this.find('.validateur2').text());
-			$('#e_etat').val(_this.find('.etat').text());
-			$('#e_etat2').val(_this.find('.etat2').text());
-            $('#update').modal('show');
-            });
+
         });
       </script>
     {{-- <script async>

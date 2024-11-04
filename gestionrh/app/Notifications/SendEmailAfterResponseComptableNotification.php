@@ -38,7 +38,7 @@ class SendEmailAfterResponseComptableNotification extends Notification
         return (new MailMessage)
         ->subject('Traitement final de la demande')
         ->line('Bonjour '.$this->messages['prenom'].' '. $this->messages['nom'])
-        ->line('Suite à la validation de votre superieur, vous avez nouvelle reponse du Comptable des Matieres')
+        ->line('Suite à la validation de votre superieur, vous avez une nouvelle reponse du Comptable des Matieres')
         ->line('Veuillez-vous connecter sur la plateforme');
     }
 

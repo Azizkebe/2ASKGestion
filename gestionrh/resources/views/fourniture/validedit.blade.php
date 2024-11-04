@@ -6,7 +6,7 @@
       <div class="col-12 h-50 ">
         <div class="card shadow">
           <div class="card-body mx-100">
-            <h4 class="card-title mt-3 text-center">Statut du dossier</h4>
+            <h4 class="card-title mt-3 text-center">Validateur N+1 - Statut du dossier</h4>
             <div>
                 {{-- <a href="{{route('genre.liste')}}" class="btn btn-sm btn-success float-end">Liste des Genres</a> --}}
             </div>

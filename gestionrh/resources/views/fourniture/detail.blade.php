@@ -136,11 +136,11 @@
                 </table>
                 @if ($error != '1')
                 <a href="{{route('fourniture_cash', $fourni)}}" class="btn btn-success btn-sm">Envoyer pour validation</a>
-                @endif
+
 
                &nbsp;&nbsp;
                 <a href="" type="reset" class="btn btn-danger btn-sm">Annuler</a>
-
+                @endif
             </div>
         </div>
     </div>
@@ -157,6 +157,7 @@
                 success:function(data){
                     var panier = data.panier;
                     var article = data.article;
+                    $('#detail_id').val(panier[0]['id']);
                     var htmlarticle = "<option value=''>Selectionner un article </option>";
 
                     for(let i=0; i< article.length; i++)
@@ -181,7 +182,7 @@
             $("#updated").submit(function(){
 
             var formData = $(this).serialize();
-                console.log('ok');
+
             $.ajax({
                 url:"{{route('fourniture.update_article')}}",
                 type:"POST",
@@ -189,7 +190,7 @@
                 success:function(data){
 
                     if(data.success == true){
-                        alert('ok');
+
                         location.reload();
                     }
                     else{

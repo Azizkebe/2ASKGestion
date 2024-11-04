@@ -28,6 +28,8 @@
                                 <td><input type="text" class="form-control" id="e_validateur2" name="e_validateur2" value="" readonly></td>
                                 <td><input type="text" class="form-control" id="e_projet2" name="e_projet2" value="" readonly/></td>
                                 <td><input type="text" class="form-control" id="e_etat2" name="e_etat2" value="" readonly/></td>
+                                {{-- <td><input type="text" class="form-control" id="comment" name="comment" value="" readonly/></td> --}}
+                                {{-- <td><textarea name="comment" id="comment" cols="4" rows="4" class="form-control" value="" readonly></textarea></td> --}}
                             </tr>
                         </tbody>
                     </table>

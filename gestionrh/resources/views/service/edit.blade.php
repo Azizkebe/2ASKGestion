@@ -53,7 +53,7 @@
                     </select>
                 </div>
               <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-block"> Ajouter le service  </button>
+                <button type="submit" class="btn btn-primary btn-block"> Mettre à jour le service  </button>
               </div>
             </form>
           </div>

@@ -62,16 +62,21 @@ class FournitureController extends Controller
 
        return redirect()->route('fourniture.detail', $fourni->id);
     }
-    public function update(Request $request, int $fourniture)
+    public function update(Request $request)
     {
 
         $panier = PanierArticle::findOrFail($request->id);
+        $panier->id = $request->id;
         $panier->id_article = $request->id_article;
         $panier->Quantite_demandee = $request->qte_demande;
 
+
         $panier->save();
 
+        return toastr()->success('La modification a été effectuée avec success');
+
         return response()->json(['success'=>true,'msg'=>$request]);
+
     }
     public function delete_fourniture($fourniture)
     {
@@ -228,29 +233,41 @@ class FournitureController extends Controller
     {
 
         $com_fourniture = Fourniture::find($request->id);
-        $com_fourniture->id_etat_valid_comptable = $request->id_statut;
-        $com_fourniture->commentaire = $request->commentaire;
 
-        $response = $com_fourniture->save();
-        if($response)
+
+        if(($com_fourniture->id_etat_valid_comptable == 1)||($com_fourniture->id_etat_valid_comptable == NULL))
         {
-            $messages['prenom'] = $com_fourniture->user->employe->prenom;
-            $messages['nom'] = $com_fourniture->user->employe->nom;
+            $com_fourniture->id_etat_valid_comptable = $request->id_statut;
+            $com_fourniture->commentaire = $request->commentaire;
 
-            $messages_resp['prenom'] = $com_fourniture->user_comptable->prenom;
-            $messages_resp['nom'] = $com_fourniture->user_comptable->nom;
+            $response = $com_fourniture->save();
 
-            Notification::route('mail', $com_fourniture->user->employe->email)->notify(
-                new SendEmailAfterResponseComptableNotification($messages)
-            );
-            Notification::route('mail', $com_fourniture->user_comptable->email)->notify(
-                new SendEmailAfterResponseComptableSupNotification($messages_resp)
-            );
+            if($response)
+            {
+                $messages['prenom'] = $com_fourniture->user->employe->prenom;
+                $messages['nom'] = $com_fourniture->user->employe->nom;
+
+                $messages_resp['prenom'] = $com_fourniture->user_comptable->prenom;
+                $messages_resp['nom'] = $com_fourniture->user_comptable->nom;
+
+                Notification::route('mail', $com_fourniture->user->employe->email)->notify(
+                    new SendEmailAfterResponseComptableNotification($messages)
+                );
+                Notification::route('mail', $com_fourniture->user_comptable->email)->notify(
+                    new SendEmailAfterResponseComptableSupNotification($messages_resp)
+                );
 
 
-            toastr()->success('Bravo, vous avez repondu à la demande');
-            return response()->json(['success'=>true,'msg'=>'Bravo, Vous venez de traiter la demande']);
+                toastr()->success('Bravo, vous avez repondu à la demande');
+                return response()->json(['success'=>true,'msg'=>'Bravo, Vous venez de traiter la demande']);
 
+            }
+        }
+        else
+        {
+
+            return toastr()->error('Impossible, La demande est déjà traitée');
+            return redirect()->back();
         }
 
     }
