@@ -21,12 +21,36 @@ use App\Models\User;
 use App\Models\EtatDemande;
 use App\Models\EtatValidMagasin;
 use App\Models\RoleModel;
+use App\Models\PermissionRoleModel;
 use Auth;
 
 class FournitureController extends Controller
 {
     public $error;
     public $rejet;
+
+    public function tableaudebord()
+    {
+        $totalDemande = Fourniture::where('user_id', Auth::user()->id)->count();
+        $totalValidTransmis = Fourniture::where('user_id', Auth::user()->id)
+                                           ->where('id_etat_demande','2')->count();
+        $totalRejetTransmis = Fourniture::where('user_id', Auth::user()->id)
+                                           ->where('id_etat_demande','3')->count();
+        $totalDemandeAccept = Fourniture::where('user_id', Auth::user()->id)
+                                           ->where('id_etat_demande','2')
+                                           ->where('id_etat_valid_comptable','2')->count();
+        $totalDemandeRejetComptable = Fourniture::where('user_id', Auth::user()->id)
+                                           ->where('id_etat_demande','2')
+                                           ->where('id_etat_valid_comptable','3')->count();
+        return view('fourniture.dashboard',[
+            'totaldemande'=>$totalDemande,
+            'totalvalidtransmis'=>$totalValidTransmis,
+            'totalrejet'=>$totalRejetTransmis,
+            'totaldemandeaccept'=>$totalDemandeAccept,
+            'totaldemanderejetcompt'=>$totalDemandeRejetComptable,
+
+        ]);
+    }
     public function liste()
     {
 
@@ -198,9 +222,11 @@ class FournitureController extends Controller
                                 ->orWhere('id_user_comptable', Auth::user()->id_employe)->get();
 
         $etat = EtatDemande::all();
+        $ComptableAdd = PermissionRoleModel::getPermission('Edit Validation', Auth::user()->role_id);
         return view('fourniture.validation',[
             'fourniture'=>$fourniture,
             'etat'=>$etat,
+            'comptableAdd'=>$ComptableAdd,
         ]);
     }
     public function edit($fourniture)
@@ -295,8 +321,8 @@ class FournitureController extends Controller
                     );
                         if($com_fourniture['id_etat_demande'] == '2')
                         {
-                            $com_fourniture->update(['id_user_comptable'=> $users_resp->employe->id,'id_etat_valid_comptable'=> '1']);
-
+                            $reponse = $com_fourniture->update(['id_user_comptable'=> $users_resp->employe->id,'id_etat_valid_comptable'=> '1']);
+                            // dd($reponse);
                             $messages_resp['prenom'] = $users_resp->employe->prenom;
                             $messages_resp['nom'] = $users_resp->employe->nom;
 

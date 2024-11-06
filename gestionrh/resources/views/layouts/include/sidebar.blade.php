@@ -172,6 +172,11 @@
                         <div class="collapse" id="mag1">
                           <ul class="nav nav-collapse subnav">
                             <li>
+                                <a href="{{route('fourniture.dashboard')}}">
+                                  <span class="sub-item">Tableau de bord</span>
+                                </a>
+                            </li>
+                            <li>
                               <a href="{{route('fourniture.liste')}}">
                                 <span class="sub-item">Faire une demande</span>
                               </a>

@@ -316,6 +316,7 @@ Route::middleware('userAdmin')->group(function(){
     });
     Route::prefix('fourniture')->group(function(){
         Route::get('add',[FournitureController::class, 'add'])->name('fourniture.add');
+        Route::get('dashboard',[FournitureController::class, 'tableaudebord'])->name('fourniture.dashboard');
         // Route::get('produit_article',[FournitureController::class, 'produit_article'])->name('produit.article');
         Route::post('add',[FournitureController::class, 'store'])->name('fourniture.store');
         Route::get('liste',[FournitureController::class, 'liste'])->name('fourniture.liste');

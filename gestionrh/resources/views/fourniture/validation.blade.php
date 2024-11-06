@@ -69,7 +69,8 @@
                                         data-original-title="Edit Task">
                                         <a href="{{route('fourniture.edit', $demande->id)}}"><i class="fa fa-edit"></i></a>
                                         </button>
-                                        @else
+                                        @endif
+                                        @if (!empty($comptableAdd))
                                         <button
                                         type="button"
                                         data-bs-toggle="tooltip"
