@@ -37,6 +37,7 @@ use App\Http\Controllers\Article\ArticleController;
 use App\Http\Controllers\Article\PanierArticleController;
 use App\Http\Controllers\Fourniture\FournitureController;
 use App\Http\Controllers\Fourniture\DemandeFournitureController;
+use App\Http\Controllers\Parking\ParkingController;
 use App\Livewire\EditPhotoEmploye;
 
 // Route::get('/dashboard',[UserAdminController::class,'dashboard'])->name('dashboard');
@@ -336,6 +337,10 @@ Route::middleware('userAdmin')->group(function(){
         Route::put('/validation/update_valid/{fourniture}',[FournitureController::class,'update_validation'])->name('fourniture.update_valid');
         Route::put('/validation/update/{fourniture}',[FournitureController::class,'update_fourniture'])->name('fourniture.update');
         Route::get('/delete/{fourniture}',[FournitureController::class,'delete'])->name('fourniture.delete');
+    });
+    Route::prefix('parking')->group(function(){
+        Route::get('add',[ParkingController::class, 'add'])->name('parking.add');
+        Route::post('add',[ParkingController::class, 'store'])->name('parking.store');
     });
     Route::prefix('panier_article')->group(function(){
         Route::get('/',[PanierArticleController::class,'add'])->name('panier_article.add');

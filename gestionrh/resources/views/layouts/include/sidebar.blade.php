@@ -159,7 +159,7 @@
           <li class="nav-item">
             <a data-bs-toggle="collapse" href="#magasin">
               <i class="fas fa-bars"></i>
-              <p>Magasin</p>
+              <p>Demande</p>
               <span class="caret"></span>
             </a>
             <div class="collapse" id="magasin">
@@ -186,6 +186,27 @@
                                 <span class="sub-item">Valider une demande</span>
                               </a>
                             </li>
+                          </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a data-bs-toggle="collapse" href="#veh1">
+                          <span class="sub-item">Vehicule</span>
+                          <span class="caret"></span>
+                        </a>
+                        <div class="collapse" id="veh1">
+                          <ul class="nav nav-collapse subnav">
+                            <li>
+                                <a href="{{route('parking.add')}}">
+                                  <span class="sub-item">Demande de vehicule</span>
+                                </a>
+                            </li>
+                            <li>
+                              <a href="">
+                                <span class="sub-item">Liste de validation des demandes</span>
+                              </a>
+                            </li>
+
                           </ul>
                         </div>
                     </li>
