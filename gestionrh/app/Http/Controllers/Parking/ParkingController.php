@@ -5,17 +5,36 @@ namespace App\Http\Controllers\Parking;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Parking;
+use App\Models\RoleModel;
+use App\Models\User;
+use App\Http\Requests\ParkRequest;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\SendEmailToAfterDemandeVehiculeNotification;
 use Auth;
 
 class ParkingController extends Controller
 {
+    public function index()
+    {
+        $role_resp = RoleModel::where('name','Chef Parking')->first();
+        $users_resp = User::where('role_id',$role_resp->id)->first();
+
+        $parking = Parking::where('id_user', Auth::user()->id)
+                            ->orWhere('id_validateur',$users_resp->employe->id)->get();
+        return view('parking.index',[
+            'parking'=>$parking,
+        ]);
+    }
     public function add()
     {
         return view('parking.add');
     }
-    public function store(Request $request, Parking $park)
+    public function store(ParkRequest $request, Parking $park)
     {
         try {
+
+            $role_resp = RoleModel::where('name','Chef Parking')->first();
+            $users_resp = User::where('role_id',$role_resp->id)->first();
 
             $request->validate([
                 'piece_vehicule' => 'required|mimes:jpeg,png,jpg,pdf|max:2048',
@@ -38,17 +57,76 @@ class ParkingController extends Controller
             $park->nombre_vehicule = $request->nombre_vehicule;
             $park->nombre_personne = $request->nombre_personne;
             $park->cadre = $request->cadre;
-            $park->id_statut_validateur = '1';
+
             $park->cloud_file_demande_vehicule = $filePath;
 
-            // dd($park);
-            $park->save();
+
+            $reussi = $park->save();
+
+            if($reussi)
+            {
+                $park->update(['id_validateur'=>$users_resp->employe->id,'id_statut_validateur'=> '1']);
+
+                $messages_resp['prenom'] = $users_resp->employe->prenom;
+                $messages_resp['nom'] = $users_resp->employe->nom;
+
+                Notification::route('mail',$users_resp->email)->notify(
+                    new SendEmailToAfterDemandeVehiculeNotification($messages_resp)
+                );
+
+                toastr()->success('la demande est envoyée pour validation avec succes');
+                return redirect()->back();
+
+            }
 
 
-        } catch (Exception $e) {
+        }
+        catch (Exception $e) {
             throw new Exception("Erreur survenue lors de l\'enregistrement", 1);
 
         }
     }
+    // public function save(ParkRequest $request, Parking $park)
+    // {
+    //     try {
+    //         $role_resp = RoleModel::where('name','Chef Parking')->first();
+    //         $users_resp = User::where('role_id',$role_resp->id)->first();
+
+    //         $request->validate([
+    //             'piece_vehicule' => 'required|mimes:jpeg,png,jpg,pdf|max:2048',
+    //         ]);
+
+    //         $fileName = $request->file('piece_vehicule')->getClientOriginalName();
+
+    //         $filePath = $request->file('piece_vehicule')->storeAs('CloudPieceDemande/Vehicule',$fileName,'public');
+
+    //         $user = Auth::user();
+    //         $user_id = $user->id;
+
+    //         $park->motif = $request->motif;
+    //         $park->id_user = $user_id;
+    //         $park->destination = $request->destination;
+    //         $park->date_depart = $request->date_depart;
+    //         $park->heure_depart = $request->time_depart;
+    //         $park->date_retour = $request->date_retour;
+    //         $park->heure_retour = $request->time_retour;
+    //         $park->nombre_vehicule = $request->nombre_vehicule;
+    //         $park->nombre_personne = $request->nombre_personne;
+    //         $park->cadre = $request->cadre;
+
+    //         $park->cloud_file_demande_vehicule = $filePath;
+
+
+    //         $park->save();
+    //         toastr()->success('la demande est enregistrée avec succes');
+    //         return redirect()->back();
+
+    //     }
+    //     catch (Exception $e) {
+    //         throw new Exception("Erreur survenue lors de l\'enregistrement", 1);
+
+    //     }
+    // }
+
 
 }

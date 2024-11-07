@@ -8,7 +8,7 @@
                     <div class="d-flex align-items-center">
                     <h4 class="card-title">Liste des Fournitures</h4>
                     <button class="btn btn-primary btn-round ms-auto">
-                        <a href="{{route('fourniture.add')}}" class="text-white"><i class="fa fa-plus"></i> Ajouter une Fourniture</a>
+                        <a href="{{route('fourniture.add')}}" class="text-white"><i class="fa fa-plus"></i> Nouvelle demande</a>
                     </button>
                     </div>
                 </div>

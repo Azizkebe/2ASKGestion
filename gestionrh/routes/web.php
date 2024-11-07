@@ -339,8 +339,10 @@ Route::middleware('userAdmin')->group(function(){
         Route::get('/delete/{fourniture}',[FournitureController::class,'delete'])->name('fourniture.delete');
     });
     Route::prefix('parking')->group(function(){
+        Route::get('index',[ParkingController::class, 'index'])->name('parking.liste');
         Route::get('add',[ParkingController::class, 'add'])->name('parking.add');
         Route::post('add',[ParkingController::class, 'store'])->name('parking.store');
+        // Route::post('add1',[ParkingController::class, 'save'])->name('parking.save');
     });
     Route::prefix('panier_article')->group(function(){
         Route::get('/',[PanierArticleController::class,'add'])->name('panier_article.add');

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ParkingRequest extends FormRequest
+class ParkRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,28 +22,29 @@ class ParkingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // 'type_de_conge'=>'required|unique:param_type_conges,type_de_conge',
             'motif'=>'required',
             'destination'=>'required',
             'date_depart'=>'required',
             'date_retour'=>'required',
-            'heure_depart'=>'required',
-            'heure_retour'=>'required',
+            'time_depart'=>'required',
+            'time_retour'=>'required',
             'nombre_vehicule'=>'required',
             'nombre_personne'=>'required',
+            'piece_vehicule'=>'required'
         ];
     }
-    public function messages(): array{
+    public function messages(): array
+    {
         return [
-            'motif.required'=>'Vous devez justifier la demande',
+            'motif.required'=>'Veuillez saisir le motif',
             'destination.required'=>'Veuillez preciser la destination',
             'date_depart.required'=>'Veuillez preciser la date de depart',
             'date_retour.required'=>'Veuillez preciser la date de retour',
-            'heure_depart.required'=>'Veuillez preciser l\'heure de depart',
-            'heure_retour.required'=>'Veuillez preciser l\'heure de retour',
+            'time_depart.required'=>'Veuillez preciser l\'heure de depart',
+            'time_retour.required'=>'Veuillez preciser l\'heure de retour',
             'nombre_vehicule.required'=>'Veuillez preciser le nombre de vehicule',
             'nombre_personne.required'=>'Veuillez preciser le nombre de personne',
-
+            'piece_vehicule.required'=>'Vous devez joindre un justificatif',
         ];
     }
 }
