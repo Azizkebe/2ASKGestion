@@ -16,11 +16,9 @@ class ParkingController extends Controller
 {
     public function index()
     {
-        $role_resp = RoleModel::where('name','Chef Parking')->first();
-        $users_resp = User::where('role_id',$role_resp->id)->first();
 
-        $parking = Parking::where('id_user', Auth::user()->id)
-                            ->orWhere('id_validateur',$users_resp->employe->id)->get();
+        $parking = Parking::where('id_user', Auth::user()->id)->get();
+
         return view('parking.index',[
             'parking'=>$parking,
         ]);
@@ -85,6 +83,15 @@ class ParkingController extends Controller
             throw new Exception("Erreur survenue lors de l\'enregistrement", 1);
 
         }
+    }
+    public function validation()
+    {
+        $role_resp = RoleModel::where('name','Chef Parking')->first();
+        $users_resp = User::where('role_id',$role_resp->id)->first();
+
+        $parking = Parking::where('id_validateur',$users_resp->employe->id)->get();
+
+        return view('parking.validation', compact('parking'));
     }
     // public function save(ParkRequest $request, Parking $park)
     // {

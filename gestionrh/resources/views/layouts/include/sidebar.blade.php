@@ -49,6 +49,7 @@
             $permission_magasin= App\Models\PermissionRoleModel::getPermission('Magasin', Auth::user()->role_id);
             $permission_projet= App\Models\PermissionRoleModel::getPermission('Projet', Auth::user()->role_id);
             $permission_article= App\Models\PermissionRoleModel::getPermission('Article', Auth::user()->role_id);
+            $permission_voiture= App\Models\PermissionRoleModel::getPermission('Voiture', Auth::user()->role_id);
 
             @endphp
             @if (!empty($permissionDashboard))
@@ -202,7 +203,7 @@
                                 </a>
                             </li>
                             <li>
-                              <a href="">
+                              <a href="{{route('parking.validation')}}">
                                 <span class="sub-item">Liste de validation des demandes</span>
                               </a>
                             </li>
@@ -280,17 +281,18 @@
             </div>
           </li>
           @endif
+          @if (!empty($permission_voiture))
           <li class="nav-item">
             <a data-bs-toggle="collapse" href="#voiture">
               <i class="fas fa-bars"></i>
-              <p>Voiture</p>
+              <p>Configuration du Park</p>
               <span class="caret"></span>
             </a>
             <div class="collapse" id="voiture">
                 <ul class="nav nav-collapse">
                     <li>
                         <a data-bs-toggle="collapse" href="#voiture1">
-                          <span class="sub-item">Voiture</span>
+                          <span class="sub-item">Voiture & Chauffeur</span>
                           <span class="caret"></span>
                         </a>
                         <div class="collapse" id="voiture1">
@@ -311,6 +313,7 @@
                 </ul>
             </div>
           </li>
+          @endif
           @if (!empty($permissionEmploye))
           <li class="nav-item">
             <a data-bs-toggle="collapse" href="#sidebarLayouts">

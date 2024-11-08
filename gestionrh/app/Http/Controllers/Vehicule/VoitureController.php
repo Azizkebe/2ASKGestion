@@ -72,4 +72,10 @@ class VoitureController extends Controller
         }
     }
 
+    // public function liste_chauffeur()
+    // {
+    //     $chauffeur = Employe::where('id_',$role_resp->id)->first();
+    //     return view('');
+    // }
+
 }

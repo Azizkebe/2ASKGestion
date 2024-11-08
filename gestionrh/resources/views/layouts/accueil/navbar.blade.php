@@ -4,8 +4,8 @@
             <img style="border-radius: 50%;" src="{{asset('hello/images/logo_anpej.png')}}" class="img-fluid logo-image">
 
             <div class="d-flex flex-column">
-                <strong class="logo-text">Gestion</strong>
-                <small class="logo-slogan">Ressources Humaines</small>
+                <strong class="logo-text">Plateforme</strong>
+                <small class="logo-slogan">DiiSso ANPEJ</small>
             </div>
         </a>
 

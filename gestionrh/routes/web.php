@@ -343,7 +343,7 @@ Route::middleware('userAdmin')->group(function(){
         Route::get('index',[ParkingController::class, 'index'])->name('parking.liste');
         Route::get('add',[ParkingController::class, 'add'])->name('parking.add');
         Route::post('add',[ParkingController::class, 'store'])->name('parking.store');
-        // Route::post('add1',[ParkingController::class, 'save'])->name('parking.save');
+        Route::get('validation',[ParkingController::class, 'validation'])->name('parking.validation');
     });
     Route::prefix('vehicule')->group(function(){
         Route::get('add',[VoitureController::class,'add'])->name('voiture.add');
@@ -351,6 +351,8 @@ Route::middleware('userAdmin')->group(function(){
         Route::get('index',[VoitureController::class,'liste'])->name('voiture.liste');
         Route::get('edit/{vehicule}', [VoitureController::class,'edit'])->name('voiture.edit');
         Route::put('update/{vehicule}', [VoitureController::class, 'update'])->name('voiture.update');
+        Route::get('delete/{vehicule}',[VoitureController::class, 'delete'])->name('voiture.delete');
+        // Route::get('liste_chauffeur',[VoitureController::class,'liste_chauffeur'])->name('chauffeur');
     });
     Route::prefix('panier_article')->group(function(){
         Route::get('/',[PanierArticleController::class,'add'])->name('panier_article.add');

@@ -10,4 +10,13 @@ class Parking extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user');
+    }
+    public function etat_valid_vehicule()
+    {
+        return $this->belongsTo(EtatValidVehicule::class, 'id_statut_validateur');
+    }
 }
