@@ -197,7 +197,7 @@
                         <div class="collapse" id="veh1">
                           <ul class="nav nav-collapse subnav">
                             <li>
-                                <a href="{{route('parking.add')}}">
+                                <a href="{{route('parking.liste')}}">
                                   <span class="sub-item">Demande de vehicule</span>
                                 </a>
                             </li>
@@ -280,7 +280,37 @@
             </div>
           </li>
           @endif
-
+          <li class="nav-item">
+            <a data-bs-toggle="collapse" href="#voiture">
+              <i class="fas fa-bars"></i>
+              <p>Voiture</p>
+              <span class="caret"></span>
+            </a>
+            <div class="collapse" id="voiture">
+                <ul class="nav nav-collapse">
+                    <li>
+                        <a data-bs-toggle="collapse" href="#voiture1">
+                          <span class="sub-item">Voiture</span>
+                          <span class="caret"></span>
+                        </a>
+                        <div class="collapse" id="voiture1">
+                          <ul class="nav nav-collapse subnav">
+                            <li>
+                              <a href="{{route('voiture.liste')}}">
+                                <span class="sub-item">Ajout d'une voiture </span>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="">
+                                <span class="sub-item">Liste des chauffeurs</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+          </li>
           @if (!empty($permissionEmploye))
           <li class="nav-item">
             <a data-bs-toggle="collapse" href="#sidebarLayouts">

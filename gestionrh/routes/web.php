@@ -38,6 +38,7 @@ use App\Http\Controllers\Article\PanierArticleController;
 use App\Http\Controllers\Fourniture\FournitureController;
 use App\Http\Controllers\Fourniture\DemandeFournitureController;
 use App\Http\Controllers\Parking\ParkingController;
+use App\Http\Controllers\Vehicule\VoitureController;
 use App\Livewire\EditPhotoEmploye;
 
 // Route::get('/dashboard',[UserAdminController::class,'dashboard'])->name('dashboard');
@@ -343,6 +344,13 @@ Route::middleware('userAdmin')->group(function(){
         Route::get('add',[ParkingController::class, 'add'])->name('parking.add');
         Route::post('add',[ParkingController::class, 'store'])->name('parking.store');
         // Route::post('add1',[ParkingController::class, 'save'])->name('parking.save');
+    });
+    Route::prefix('vehicule')->group(function(){
+        Route::get('add',[VoitureController::class,'add'])->name('voiture.add');
+        Route::post('add',[VoitureController::class,'store'])->name('voiture.store');
+        Route::get('index',[VoitureController::class,'liste'])->name('voiture.liste');
+        Route::get('edit/{vehicule}', [VoitureController::class,'edit'])->name('voiture.edit');
+        Route::put('update/{vehicule}', [VoitureController::class, 'update'])->name('voiture.update');
     });
     Route::prefix('panier_article')->group(function(){
         Route::get('/',[PanierArticleController::class,'add'])->name('panier_article.add');
