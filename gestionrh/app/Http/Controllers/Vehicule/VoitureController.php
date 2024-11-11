@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\VoitureRequest;
 use App\Models\Voiture;
+use App\Models\RoleModel;
+use App\Models\Employe;
+use App\Models\User;
 
 class VoitureController extends Controller
 {
@@ -72,10 +75,14 @@ class VoitureController extends Controller
         }
     }
 
-    // public function liste_chauffeur()
-    // {
-    //     $chauffeur = Employe::where('id_',$role_resp->id)->first();
-    //     return view('');
-    // }
+    public function liste_chauffeur()
+    {
+        $role_resp = RoleModel::where('name','Chauffeur')->get();
+
+        $role_resp = RoleModel::where('name','Chauffeur')->first();
+        $user = User::where('role_id', $role_resp->id)->get();
+
+        return view('voiture.chauffeur.liste', compact('user'));
+    }
 
 }

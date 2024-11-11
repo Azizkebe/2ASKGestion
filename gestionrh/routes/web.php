@@ -352,7 +352,7 @@ Route::middleware('userAdmin')->group(function(){
         Route::get('edit/{vehicule}', [VoitureController::class,'edit'])->name('voiture.edit');
         Route::put('update/{vehicule}', [VoitureController::class, 'update'])->name('voiture.update');
         Route::get('delete/{vehicule}',[VoitureController::class, 'delete'])->name('voiture.delete');
-        // Route::get('liste_chauffeur',[VoitureController::class,'liste_chauffeur'])->name('chauffeur');
+        Route::get('liste_chauffeur',[VoitureController::class,'liste_chauffeur'])->name('chauffeur.liste');
     });
     Route::prefix('panier_article')->group(function(){
         Route::get('/',[PanierArticleController::class,'add'])->name('panier_article.add');
