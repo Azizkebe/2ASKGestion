@@ -24,6 +24,7 @@
                         <th>Matricule</th>
 
                         <th style="width: 10%">Action</th>
+                        <th>Status</th>
                       </tr>
                         </thead>
                             <tbody>
@@ -52,6 +53,18 @@
                                         href="{{route('voiture.delete', $voiture->id)}}" class="btn btn-link btn-danger"><i class="fa fa-times"></i></a>
                                         </button>
                                     </div>
+                                </td>
+                                <td>
+                                    <a href="{{route('status.active', $voiture->id)}}" class="btn {{$voiture->active == true ? 'btn-success' : 'btn-danger'}}">
+                                        {{$voiture->active == true ? 'Disponible' : 'Non Disponible'}}
+                                    </a>
+                                    {{-- <div style="margin:5px;
+                                    border:1 solid white;
+                                    background-color:black;
+                                    color:{{$voiture->active ? 'white' :'yellow'}};
+                                    height:35px; font-size:14px;">
+                                    {{$voiture->active == true ? 'Disponible' : 'Non Disponible'}}
+                                    </div> --}}
                                 </td>
                                 </tr>
                              @empty

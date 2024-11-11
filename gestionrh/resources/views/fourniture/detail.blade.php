@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container-fluid">
+
     <div class="col-md-12">
         <div class="card">
                 <div class="card-header">
@@ -40,43 +41,7 @@
 
                     {{-- DEBUT EDIT ARTICLE --}}
                     @include('fourniture.modal.editmodal')
-                    {{-- <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h1 class="modal-title fs-5" id="exampleModalLabel">Ajout Article de Fourniture - {{$fourni->projet->name_projet}} </h1>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <form action="" method="POST">
-                                @csrf
-                                @method('PUT')
-                                <div class="modal-body">
-                                <div class="mt-3 mb-3">
 
-                                    <label for="">Article:</label>
-                                    <select name="id_article" id="id_article" class="form-select">
-                                        <option value="">-- choisir un article --</option>
-                                        @foreach ($article as $article)
-                                            <option value="{{$article->id}}">{{$article->name_article}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="mt-3">
-                                    <label for="">Quantite demandée</label>
-
-                                    <input type="number" name="quantite_demande" min="0" id="quantite_demande" class="form-control">
-                                </div>
-                                </div>
-                                <div class="modal-footer">
-                                <button type="reset" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
-                                <button type="submit" class="btn btn-primary">Mettre à jour</button>
-                                </div>
-                            </form>
-                            </div>
-                        </div>
-                    </div> --}}
-                    {{-- <p>{{$panier}}</p> --}}
-                    {{-- FIN EDIT ARTICLE --}}
             </div>
             <div class="table-responsive">
                 <table
@@ -98,9 +63,28 @@
                               <td>{{$detail->id}}</td>
                               <td class="article">{{$detail->article->name_article ?? ''}}</td>
                               <td class="Qte_demande">{{$detail->Quantite_demandee ?? ''}}</td>
-                              <td>{{$detail->Quantite_accordee}}</td>
+                              {{-- @if ($fourni->id_user_comptable == Auth::user()->id_employe) --}}
+                              <td>
+                                <div>
+                                    <form action="{{route('panier_article.article_accordee', $detail->id)}}">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <input style="width:95px;" type="number" name="qte_accordee" id="qte_accordee" value="{{$detail->Quantite_demandee}}" max="{{$detail->Quantite_demandee}}" min="0">
+                                                @if (!empty($ComptableValid))
+                                                <button onclick="return confirm('Etes-vous sure de valoir accorder cette quantite au demandeur')" type="submit" class="btn btn-primary btn-sm">Confirmer</button>
+                                                @endif
+                                            </div>
+                                            <div class="col-md-9">
+
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                              </td>
+
                               <td>{{$detail->fourniture->projet->name_projet}}</td>
-                              @if ($error != '1' || $fourni->id_user_comptable == Auth::user()->id_employe)
+                              {{-- @if ($error != '1' || $fourni->id_user_comptable == Auth::user()->id_employe) --}}
+                              @if (!empty($ComptableValid))
                               <td>
                                   <div class="form-button-action">
                                       <button
@@ -134,6 +118,13 @@
                           </tbody>
 
                 </table>
+                @if (!empty($ComptableValid))
+                <div style="align-content: center;">
+                    <button class="btn btn-success btn-round ms-auto" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Changer le statut
+                   </button>
+                </div>
+                @endif
                 @if ($error != '1')
                 <a href="{{route('fourniture_cash', $fourni)}}" class="btn btn-success btn-sm">Envoyer pour validation</a>
 

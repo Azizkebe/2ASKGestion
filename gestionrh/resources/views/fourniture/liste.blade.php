@@ -41,7 +41,7 @@
                                 <td class="motif">{{$demande->motif}}</td>
                                 <td class="bureau">{{$demande->bureau}}</td>
                                 <td class="etat">{{$demande->etat->statut_demande ?? 'Nouvelle demande'}}</td>
-                                <td class="validateur1" hidden>{{$demande->user->employe->service->employe->prenom}} {{$demande->user->employe->service->employe->nom}}</td>
+                                <td class="validateur1" hidden>{{$demande->user->employe->service->employe->prenom ?? ''}} {{$demande->user->employe->service->employe->nom ??''}}</td>
                                 <td class="validateur2" hidden>{{$demande->user_comptable->prenom ?? ''}} {{$demande->user_comptable->nom ?? ''}}</td>
                                 <td class="etat2" hidden>{{$demande->etat_valid->statut_demande ?? ''}}</td>
                                 <td class="comment" hidden>{{$demande->commentaire ?? ''}}</td>

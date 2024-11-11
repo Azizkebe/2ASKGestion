@@ -349,6 +349,7 @@ Route::middleware('userAdmin')->group(function(){
         Route::get('add',[VoitureController::class,'add'])->name('voiture.add');
         Route::post('add',[VoitureController::class,'store'])->name('voiture.store');
         Route::get('index',[VoitureController::class,'liste'])->name('voiture.liste');
+        Route::get('status_active/{vehicule}', [VoitureController::class,'status_active'])->name('status.active');
         Route::get('edit/{vehicule}', [VoitureController::class,'edit'])->name('voiture.edit');
         Route::put('update/{vehicule}', [VoitureController::class, 'update'])->name('voiture.update');
         Route::get('delete/{vehicule}',[VoitureController::class, 'delete'])->name('voiture.delete');
@@ -356,6 +357,7 @@ Route::middleware('userAdmin')->group(function(){
     });
     Route::prefix('panier_article')->group(function(){
         Route::get('/',[PanierArticleController::class,'add'])->name('panier_article.add');
+        Route::get('/article_accordee/{panier_article}', [PanierArticleController::class,'article_accordee'])->name('panier_article.article_accordee');
         Route::get('/edit', [PanierArticleController::class,'editer'])->name('panier_article.edit');
         Route::post('/edit', [PanierArticleController::class,'update'])->name('panier_article.update');
         Route::get('delete/{panier_article}', [PanierArticleController::class,'delete'])->name('panier_article.delete');

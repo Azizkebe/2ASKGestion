@@ -54,4 +54,10 @@ class PanierArticleController extends Controller
 
         return redirect()->back();
     }
+
+    public function article_accordee(Request $request, $panier_article)
+    {
+        $panier = PanierArticle::findOrFail($panier_article);
+        dd($panier);
+    }
 }

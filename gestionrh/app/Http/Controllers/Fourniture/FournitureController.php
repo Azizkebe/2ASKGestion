@@ -113,11 +113,15 @@ class FournitureController extends Controller
     }
     public function detail(int $fourniture)
     {
+        // $Permission_compt = PermissionRoleModel::getPermission('Validation demande1', Auth::user()->role_id);
+
         $fourni = Fourniture::findOrFail($fourniture);
         if($fourni['id_etat_demande'] == '1' || $fourni['id_etat_demande'] == '2' || $fourni['id_etat_demande'] == '3')
         {
             $this->error = '1';
         }
+
+        $ComptableValid = PermissionRoleModel::getPermission('Validation demande', Auth::user()->role_id);
         $article = Article::all();
         $panier = PanierArticle::where('id_fourniture',$fourniture )->get();
 
@@ -126,6 +130,7 @@ class FournitureController extends Controller
             'article'=> $article,
             'panier'=> $panier,
             'error'=> $this->error,
+            'ComptableValid'=>$ComptableValid,
 
 
         ]);
@@ -162,20 +167,6 @@ class FournitureController extends Controller
 
         return redirect()->back();
     }
-    // public function delete(int $fourniture, DetailFourniture $detail_fourni)
-    // {
-    //     $fourni_delete = DetailFourniture::findOrFail($fourniture);
-
-    //     dd($fourni_delete);
-
-    //     toastr()->success('L\'article a été retiré avec succes');
-    //     return redirect()->back();
-    // }
-    // public function produit_article()
-    // {
-    //     $article =  Article::all();
-    //     return view('fourniture.modal.addmodal', compact('article'));
-    // }
     public function cash_fourniture(int $fourniture )
     {
 

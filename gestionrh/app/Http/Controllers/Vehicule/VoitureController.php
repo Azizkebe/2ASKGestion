@@ -58,7 +58,29 @@ class VoitureController extends Controller
        }
 
     }
+    public function status_active(Request $request, $id)
+    {
+        $voiture = Voiture::findOrFail($id);
+        if($voiture->active == true)
+        {
+            $status = false;
+        }
+        else
+        {
+            $status = true;
+        }
+        $reussi = $voiture->update(['active'=> $status]);
 
+        if($reussi){
+
+            toastr()->success('Bravo, la disponible a été changée');
+            return redirect()->back();
+        }
+        else{
+            toastr()->error('Impossible, d\'effectuer le changement');
+            return redirect()->back();
+        }
+    }
     public function delete(int $vehicule)
     {
         try {
