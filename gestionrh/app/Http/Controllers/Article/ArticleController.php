@@ -22,6 +22,7 @@ class ArticleController extends Controller
     {
         $article->name_article = $request->name_article;
         $article->Quantite_stock = $request->quantite_stock;
+        $article->Quantite_restante = $request->quantite_stock;
 
         $article->save();
 

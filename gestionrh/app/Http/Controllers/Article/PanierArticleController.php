@@ -10,6 +10,7 @@ use App\Models\Article;
 
 class PanierArticleController extends Controller
 {
+    public $nbr_tentative = 0;
     public function editer(Request $request)
     {
 
@@ -58,6 +59,23 @@ class PanierArticleController extends Controller
     public function article_accordee(Request $request, $panier_article)
     {
         $panier = PanierArticle::findOrFail($panier_article);
-        dd($panier);
+
+        $article = Article::where('id', $panier->id_article)->first();
+
+        $result = $panier->update(['Quantite_accordee'=> $request->qte_accordee]);
+
+        if($result)
+        {
+            $article->update(['Quantite_restante'=> $article->Quantite_restante - $request->qte_accordee]);
+            $this->nbr_tentative = 1;
+            toastr()->success('la quantite a été bien accordée');
+
+            return redirect()->back();
+        }
+        else {
+            toastr()->error('Impossible de modifier la quantite');
+            return redirect()->back();
+        }
+
     }
 }

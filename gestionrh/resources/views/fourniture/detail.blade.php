@@ -30,9 +30,9 @@
                     </button>
                     @endif
                 {{-- @endif --}}
-                    {{-- <button class="btn btn-primary btn-round ms-auto" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        <i class="fa fa-plus"></i> Ajouter des articles
-                    </button> --}}
+                 {{-- Change Statut --}}
+                    @include('fourniture.modal.changestatut')
+
 
 
                     {{-- DEEBUT ADD ARTICLE  --}}
@@ -42,8 +42,10 @@
                     {{-- DEBUT EDIT ARTICLE --}}
                     @include('fourniture.modal.editmodal')
 
+
             </div>
             <div class="table-responsive">
+
                 <table
                   id="add-row"
                   class="display table table-striped table-hover">
@@ -51,6 +53,11 @@
                         <tr>
                             <th>ID</th>
                             <th>Article</th>
+
+                            @if (!empty($ComptableValid))
+                            <th>Quantite du Stock</th>
+                            @endif
+
                             <th>Quantite demandée</th>
                             <th>Quantite accordee</th>
                             <th>Projet</th>
@@ -62,21 +69,24 @@
                           <tr>
                               <td>{{$detail->id}}</td>
                               <td class="article">{{$detail->article->name_article ?? ''}}</td>
+                              @if (!empty($ComptableValid))
+                              <td style="color:red;">{{$detail->article->Quantite_restante}}</td>
+                              @endif
                               <td class="Qte_demande">{{$detail->Quantite_demandee ?? ''}}</td>
-                              {{-- @if ($fourni->id_user_comptable == Auth::user()->id_employe) --}}
                               <td>
                                 <div>
                                     <form action="{{route('panier_article.article_accordee', $detail->id)}}">
                                         <div class="row">
+                                            @if (!empty($ComptableValid))
                                             <div class="col-md-12">
-                                                <input style="width:95px;" type="number" name="qte_accordee" id="qte_accordee" value="{{$detail->Quantite_demandee}}" max="{{$detail->Quantite_demandee}}" min="0">
-                                                @if (!empty($ComptableValid))
-                                                <button onclick="return confirm('Etes-vous sure de valoir accorder cette quantite au demandeur')" type="submit" class="btn btn-primary btn-sm">Confirmer</button>
-                                                @endif
-                                            </div>
-                                            <div class="col-md-9">
+                                                <input style="width:95px;" type="number" name="qte_accordee" id="qte_accordee" value="{{$detail->Quantite_accordee}}" max="{{$detail->Quantite_demandee}}" min="0"><br>
 
+                                                <button style="width: 95px; margin-top:2px;" onclick="return confirm('Etes-vous sure de valoir accorder cette quantite au demandeur')" type="submit" class="btn btn-primary btn-sm">Valider</button>
                                             </div>
+                                            <div class="col-md-9"></div>
+                                            @else
+                                            <input style="width:95px; border:none;" type="number" name="qte_accordee" id="qte_accordee" value="{{$detail->Quantite_accordee}}" max="{{$detail->Quantite_demandee}}" min="0" readonly>
+                                            @endif
                                         </div>
                                     </form>
                                 </div>
@@ -120,9 +130,8 @@
                 </table>
                 @if (!empty($ComptableValid))
                 <div style="align-content: center;">
-                    <button class="btn btn-success btn-round ms-auto" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        Changer le statut
-                   </button>
+                    {{-- <a href="" class="btn btn-success m-r-15 text-muted ChangeStatutModal" data-bs-toggle="modal" data-bs-target="#ChangeStatutModal">Changer le statut</a> --}}
+                    <button class="btn btn-success m-r-15 text-muted ChangeStatutModal" data-bs-toggle="modal" data-bs-target="#ChangeStatutModal">Changer le statut</button>
                 </div>
                 @endif
                 @if ($error != '1')
@@ -145,22 +154,23 @@
                 url:"{{route('fourniture.editer_article')}}",
                 type:"GET",
                 data:{id:detail_id},
-                success:function(data){
+                success:function(data)
+                {
                     var panier = data.panier;
                     var article = data.article;
                     $('#detail_id').val(panier[0]['id']);
                     var htmlarticle = "<option value=''>Selectionner un article </option>";
 
-                    for(let i=0; i< article.length; i++)
-                    {
-                        if(panier[0]['id_article'] == article[i]['id']){
-                            htmlarticle += `<option value="`+article[i]['id']+`" selected>`+article[i]['name_article']+`</option>`;
+                        for(let i=0; i< article.length; i++)
+                        {
+                            if(panier[0]['id_article'] == article[i]['id']){
+                                htmlarticle += `<option value="`+article[i]['id']+`" selected>`+article[i]['name_article']+`</option>`;
 
-                        }else{
-                            htmlarticle += `<option value="`+article[i]['id']+`">`+article[i]['name_article']+`</option>`;
+                            }else{
+                                htmlarticle += `<option value="`+article[i]['id']+`">`+article[i]['name_article']+`</option>`;
+                            }
+
                         }
-
-                    }
 
                     var result = $("#edit_article").html(htmlarticle);
                 }
@@ -190,7 +200,8 @@
                     }
                 });
 
-            });
+        });
+
 </script>
 @endsection
 

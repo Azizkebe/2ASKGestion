@@ -235,6 +235,11 @@ myModal.addEventListener('show.bs.modal', () => {
             $("#addRowModal").modal("hide");
             });
 
+            $('#ChangeStatutModal').click(function(){
+
+                $('#editModal').modal('show');
+            });
+
         });
       </script>
     {{-- <script async>
