@@ -79,9 +79,10 @@
                                         <div class="row">
                                             @if (!empty($ComptableValid))
                                             <div class="col-md-12">
-                                                <input style="width:95px;" type="number" name="qte_accordee" id="qte_accordee" value="{{$detail->Quantite_accordee}}" max="{{$detail->Quantite_demandee}}" min="0"><br>
-
+                                                {{-- <input type="text" name="nbr_tentative" id="nbr_tentative" value="" hidden> --}}
+                                                <input style="width:95px;" type="number" name="qte_accordee" id="qte_accordee" value="{{$detail->Quantite_accordee}}" max="{{$detail->Quantite_demandee}}" min="0" required><br>
                                                 <button style="width: 95px; margin-top:2px;" onclick="return confirm('Etes-vous sure de valoir accorder cette quantite au demandeur')" type="submit" class="btn btn-primary btn-sm">Valider</button>
+
                                             </div>
                                             <div class="col-md-9"></div>
                                             @else
@@ -128,12 +129,11 @@
                           </tbody>
 
                 </table>
-                @if (!empty($ComptableValid))
+                {{-- @if (!empty($ComptableValid))
                 <div style="align-content: center;">
-                    {{-- <a href="" class="btn btn-success m-r-15 text-muted ChangeStatutModal" data-bs-toggle="modal" data-bs-target="#ChangeStatutModal">Changer le statut</a> --}}
                     <button class="btn btn-success m-r-15 text-muted ChangeStatutModal" data-bs-toggle="modal" data-bs-target="#ChangeStatutModal">Changer le statut</button>
                 </div>
-                @endif
+                @endif --}}
                 @if ($error != '1')
                 <a href="{{route('fourniture_cash', $fourni)}}" class="btn btn-success btn-sm">Envoyer pour validation</a>
 
@@ -148,7 +148,6 @@
 <script>
     $(".editModal").click(function(){
                 var detail_id =  $(this).attr('data-bs-id');
-
                 $.ajax({
                 id:{detail_id},
                 url:"{{route('fourniture.editer_article')}}",

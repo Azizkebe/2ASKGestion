@@ -58,6 +58,7 @@ class PanierArticleController extends Controller
 
     public function article_accordee(Request $request, $panier_article)
     {
+        $nbr_tentative = 1;
         $panier = PanierArticle::findOrFail($panier_article);
 
         $article = Article::where('id', $panier->id_article)->first();
@@ -67,7 +68,7 @@ class PanierArticleController extends Controller
         if($result)
         {
             $article->update(['Quantite_restante'=> $article->Quantite_restante - $request->qte_accordee]);
-            $this->nbr_tentative = 1;
+
             toastr()->success('la quantite a été bien accordée');
 
             return redirect()->back();

@@ -343,7 +343,10 @@ Route::middleware('userAdmin')->group(function(){
         Route::get('index',[ParkingController::class, 'index'])->name('parking.liste');
         Route::get('add',[ParkingController::class, 'add'])->name('parking.add');
         Route::post('add',[ParkingController::class, 'store'])->name('parking.store');
+        Route::get('edit/{parking}',[ParkingController::class, 'edit'])->name('parking.edit');
         Route::get('validation',[ParkingController::class, 'validation'])->name('parking.validation');
+        Route::get('/valid/edit_valid',[ParkingController::class,'edit_validation'])->name('parking.edit_valid');
+
     });
     Route::prefix('vehicule')->group(function(){
         Route::get('add',[VoitureController::class,'add'])->name('voiture.add');

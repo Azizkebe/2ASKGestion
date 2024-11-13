@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Parking;
 use App\Models\RoleModel;
 use App\Models\User;
+use App\Models\EtatValidVehicule;
 use App\Http\Requests\ParkRequest;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\SendEmailToAfterDemandeVehiculeNotification;
@@ -86,12 +87,24 @@ class ParkingController extends Controller
     }
     public function validation()
     {
-        $role_resp = RoleModel::where('name','Chef Parking')->first();
-        $users_resp = User::where('role_id',$role_resp->id)->first();
-
-        $parking = Parking::where('id_validateur',$users_resp->employe->id)->get();
+        // $role_resp = RoleModel::where('name','Chef Parking')->first();
+        // $users_resp = User::where('role_id',$role_resp->id)->first();
+        // dd(Auth::user()->employe->id);
+        $parking = Parking::where('id_validateur',Auth::user()->employe->id)->get();
 
         return view('parking.validation', compact('parking'));
+    }
+    public function edit(Request $request, int $parking)
+    {
+        $parking = Parking::findOrFail($parking);
+        return view('parking.edit', compact('parking'));
+    }
+    public function edit_validation(Request $request)
+    {
+        $parking = Parking::where('id', $request->id)->get();
+        $etat = EtatValidVehicule::all();
+
+        return response()->json(['etat'=>$etat,'parking'=>$parking]);
     }
     // public function save(ParkRequest $request, Parking $park)
     // {

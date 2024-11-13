@@ -122,6 +122,7 @@ class FournitureController extends Controller
         }
 
         $ComptableValid = PermissionRoleModel::getPermission('Validation demande', Auth::user()->role_id);
+        $ComptablEdit = PermissionRoleModel::getPermission('Edit Validation', Auth::user()->role_id);
         $article = Article::all();
         $panier = PanierArticle::where('id_fourniture',$fourniture )->get();
 
@@ -131,6 +132,7 @@ class FournitureController extends Controller
             'panier'=> $panier,
             'error'=> $this->error,
             'ComptableValid'=>$ComptableValid,
+            'ComptablEdit'=>$ComptablEdit,
 
 
         ]);
@@ -230,20 +232,12 @@ class FournitureController extends Controller
       ]);
 
     }
-    // public function edit_validation($fourniture)
     public function edit_validation(Request $request)
     {
         $fourniture = Fourniture::where('id', $request->id)->get();
         $etat = EtatValidMagasin::all();
 
         return response()->json(['etat'=>$etat,'fourniture'=>$fourniture]);
-        // $com_fourniture = Fourniture::findOrFail($fourniture);
-        // $etat = EtatValidMagasin::all();
-
-        // return view('fourniture.editcomptable',[
-        //     'com_fourniture'=>$com_fourniture,
-        //     'etat'=>$etat,
-        // ]);
 
     }
     public function update_edit_validation(Request $request)
@@ -375,8 +369,6 @@ class FournitureController extends Controller
             toastr()->success('Bravo, vous avez repondu à la demande');
             return redirect()->route('fourniture.validation');
         }
-
-
 
     }
 

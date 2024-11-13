@@ -78,7 +78,6 @@
                                         class="btn btn-link btn-primary btn-lg"
                                         data-original-title="Edit Task">
                                         <a data-bs-toggle="modal" data-bs-target="#editValidModal" data-bs-id="{{$demande->id}}" class="m-r-15 text-muted editValidModal"><i class="fa fa-edit"></i></a>
-                                        {{-- <a href="{{route('fourniture.edit_valid', $demande->id)}}"><i class="fa fa-edit"></i></a> --}}
                                         </button>
                                         @endif
                                         <button
@@ -88,8 +87,6 @@
                                         class="btn btn-link btn-danger"
                                         data-original-title="Remove"
                                         >
-                                        {{-- <a onclick="return confirm('Etes vous sure de vouloir supprimer la fourniture')"
-                                        href="{{route('delete_fourniture.delete', $demande->id)}}" class="btn btn-link btn-danger"><i class="fa fa-times"></i></a> --}}
                                         </button>
                                     </div>
                                 </td>
