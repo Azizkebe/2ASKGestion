@@ -8,6 +8,7 @@ use App\Models\Parking;
 use App\Models\RoleModel;
 use App\Models\User;
 use App\Models\EtatValidVehicule;
+use App\Models\Voiture;
 use App\Http\Requests\ParkRequest;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\SendEmailToAfterDemandeVehiculeNotification;
@@ -103,8 +104,13 @@ class ParkingController extends Controller
     {
         $parking = Parking::where('id', $request->id)->get();
         $etat = EtatValidVehicule::all();
+        $voiture = Voiture::where('active','1')->get();
 
-        return response()->json(['etat'=>$etat,'parking'=>$parking]);
+        $role_resp = RoleModel::where('name','Chauffeur')->get();
+        $role_resp = RoleModel::where('name','Chauffeur')->first();
+        $user = User::with('employe')->where('role_id', $role_resp->id)->get();
+
+        return response()->json(['etat'=>$etat,'parking'=>$parking,'user'=>$user,'voiture'=>$voiture]);
     }
     // public function save(ParkRequest $request, Parking $park)
     // {

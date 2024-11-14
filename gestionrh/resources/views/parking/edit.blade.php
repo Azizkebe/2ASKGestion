@@ -126,7 +126,12 @@
             success:function(data){
                 var statut = data.etat;
                 var parking = data.parking;
+                var user = data.user;
+                var voiture = data.voiture;
 
+
+                var html_voiture = "<option value=''>Choisir une voiture </option>";
+                var html_user = "<option value=''>Choisir un chauffeur</option>";
                 var htmlstatut = "<option value=''>Selectionner un statut </option>";
                 $('#detail_id').val(statut[0]['id']);
 
@@ -139,8 +144,20 @@
                         htmlstatut += `<option value="`+statut[i]['id']+`">`+statut[i]['statut_valid_vehicule']+`</option>`;
                     }
                 }
+                for(let i=0; i< user.length; i++)
+                {
+                    html_user += `<option value="`+user[i]['id']+`">`+user[i]['employe']['prenom']+' '+user[i]['employe']['nom']+`</option>`;
+
+                }
+                for(let i=0; i< voiture.length; i++)
+                {
+                    html_voiture += `<option value="`+voiture[i]['id']+`">`+voiture[i]['marque']+`</option>`;
+
+                }
 
                 var result = $("#edit_statut").html(htmlstatut);
+                var result1 = $("#edit_chauffeur").html(html_user);
+                var result2 = $("#edit_vehicule").html(html_voiture);
             }
             });
         });

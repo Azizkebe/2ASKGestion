@@ -18,14 +18,22 @@
                     <option value=''>Selectionner un statut </option>
                 </select>
             </div>
-            <div class="mt-3">
-                <label for="">Quantite demandée</label>
-                <input type="number" name="quantite_demande" min="1" value="1" id="quantite_demande" class="form-control">
+            <div class="mt-3 mb-3">
+                <label for="">Liste des voitures disponibles:</label>
+                <select name="vehicule_id" id="edit_vehicule" class="form-select">
+                    <option value=''>Choisir une voiture </option>
+                </select>
+            </div>
+            <div class="mt-3 mb-3">
+                <label for="">Liste des chauffeurs:</label>
+                <select name="chauffeur_id" id="edit_chauffeur" class="form-select">
+                    <option value=''>Choisir un chauffeur</option>
+                </select>
             </div>
             </div>
             <div class="modal-footer">
             <button type="reset" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
-            <button type="submit" class="btn btn-primary">Ajouter un article</button>
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
             </div>
         </form>
         </div>
