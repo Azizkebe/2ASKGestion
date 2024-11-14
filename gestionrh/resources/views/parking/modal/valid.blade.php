@@ -2,10 +2,10 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="ValidVehiculeModal">Ajout Article de Fourniture - </h1>
+          <h1 class="modal-title fs-5" id="ValidVehiculeModal">Reponse à la demande - </h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form action="" method="POST">
+        <form id="storevalid">
             @csrf
             @method('POST')
             <div class="modal-body">
@@ -32,8 +32,8 @@
             </div>
             </div>
             <div class="modal-footer">
-            <button type="reset" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
             <button type="submit" class="btn btn-primary">Enregistrer</button>
+            <button type="reset" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
             </div>
         </form>
         </div>

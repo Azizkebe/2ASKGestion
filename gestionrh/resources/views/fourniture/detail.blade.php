@@ -79,10 +79,8 @@
                                         <div class="row">
                                             @if (!empty($ComptableValid))
                                             <div class="col-md-12">
-                                                {{-- <input type="text" name="nbr_tentative" id="nbr_tentative" value="" hidden> --}}
                                                 <input style="width:95px;" type="number" name="qte_accordee" id="qte_accordee" value="{{$detail->Quantite_accordee}}" max="{{$detail->Quantite_demandee}}" min="0" required><br>
                                                 <button style="width: 95px; margin-top:2px;" onclick="return confirm('Etes-vous sure de valoir accorder cette quantite au demandeur')" type="submit" class="btn btn-primary btn-sm">Valider</button>
-
                                             </div>
                                             <div class="col-md-9"></div>
                                             @else
@@ -94,8 +92,7 @@
                               </td>
 
                               <td>{{$detail->fourniture->projet->name_projet}}</td>
-                              {{-- @if ($error != '1' || $fourni->id_user_comptable == Auth::user()->id_employe) --}}
-                              @if (!empty($ComptableValid))
+                              @if (!empty($ComptablEdit))
                               <td>
                                   <div class="form-button-action">
                                       <button
@@ -103,11 +100,7 @@
                                       data-bs-toggle="tooltip"
                                       title=""
                                       class="btn btn-link btn-primary btn-lg"
-                                      data-original-title="Edit Task"
-                                      >
-                                      {{-- <a href="" data-bs-toggle="modal" data-myquantity="{{$detail->Quantite_demandee}}"
-                                        data-myarticle="{{$detail->article->name_article ?? ''}}" data-bs-target="#editModal" class="editModal"
-                                      > --}}
+                                      data-original-title="Edit Task">
                                       <a href="" class="m-r-15 text-muted editModal" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-id="{{$detail->id}}"><i class="fa fa-edit"></i></a>
                                       </button>
                                       <button
@@ -127,13 +120,7 @@
                                <td colspan="7">Aucune Article trouvé</td>
                            @endforelse
                           </tbody>
-
                 </table>
-                {{-- @if (!empty($ComptableValid))
-                <div style="align-content: center;">
-                    <button class="btn btn-success m-r-15 text-muted ChangeStatutModal" data-bs-toggle="modal" data-bs-target="#ChangeStatutModal">Changer le statut</button>
-                </div>
-                @endif --}}
                 @if ($error != '1')
                 <a href="{{route('fourniture_cash', $fourni)}}" class="btn btn-success btn-sm">Envoyer pour validation</a>
 

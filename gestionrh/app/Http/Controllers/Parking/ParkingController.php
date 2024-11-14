@@ -112,6 +112,10 @@ class ParkingController extends Controller
 
         return response()->json(['etat'=>$etat,'parking'=>$parking,'user'=>$user,'voiture'=>$voiture]);
     }
+    public function store_vehicule(Request $request, Parking $park)
+    {
+        dd($request->id);
+    }
     // public function save(ParkRequest $request, Parking $park)
     // {
     //     try {

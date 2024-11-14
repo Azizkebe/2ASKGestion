@@ -90,7 +90,7 @@
                         <div class="mt-3">
                             <label for="">Justificatif demande de vehicule</label><br>
                             <div>
-                                <a href="{{asset('storage/'.$parking->cloud_file_demande_vehicule)}}">
+                                <a href="{{asset('storage/'.$parking->cloud_file_demande_vehicule)}}" target="_blank">
                                     <img style="height: 15%; width:15%;" src="{{asset('storage/'.$parking->cloud_file_demande_vehicule)}}"
                                     title="justificatif" alt="piece justificative" >
                                 </a>
@@ -161,6 +161,29 @@
             }
             });
         });
+        $("#storevalid").submit(function(){
+
+        var formData = $(this).serialize();
+        dd(formData);
+
+        $.ajax({
+            url:"{{route('parking.store_vehicule')}}",
+            type:"POST",
+            data:formData,
+            success:function(data){
+                    console.log(data);
+                if(data.success == true){
+
+                    location.reload();
+                }
+                else{
+                    alert(data.msg);
+                    }
+                }
+            });
+
+        });
+
     });
   </script>
 @endsection
