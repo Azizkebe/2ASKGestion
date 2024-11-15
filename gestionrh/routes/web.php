@@ -345,7 +345,8 @@ Route::middleware('userAdmin')->group(function(){
         Route::post('add',[ParkingController::class, 'store'])->name('parking.store');
         Route::get('edit/{parking}',[ParkingController::class, 'edit'])->name('parking.edit');
         Route::get('validation',[ParkingController::class, 'validation'])->name('parking.validation');
-        Route::get('/valid/edit_valid',[ParkingController::class,'edit_validation'])->name('parking.edit_valid');
+        // Route::get('/valid/edit',[ParkingController::class,'edit_demande'])->name('parking.edit_demande');
+        Route::get('edit_valid',[ParkingController::class,'edit_validation'])->name('parking.edit_valid');
         Route::post('store_vehicule',[ParkingController::class,'store_vehicule'])->name('parking.store_vehicule');
 
 

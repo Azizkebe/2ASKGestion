@@ -17,6 +17,9 @@
                 <div class="row">
                     <div class="col md-6">
                         <div class="mt-3">
+                            <input type="hidden" name="" id="detail_id" value="">
+                        </div>
+                        <div class="mt-3">
                             <label for="">Motif</label>
                             <input type="text" name="motif" id="motif" class="form-control" value="{{$parking->motif}}" readonly>
                             @error('motif')
@@ -128,12 +131,12 @@
                 var parking = data.parking;
                 var user = data.user;
                 var voiture = data.voiture;
-
+                // $('#detail_id').val(voiture[0]['id']);
 
                 var html_voiture = "<option value=''>Choisir une voiture </option>";
                 var html_user = "<option value=''>Choisir un chauffeur</option>";
                 var htmlstatut = "<option value=''>Selectionner un statut </option>";
-                $('#detail_id').val(statut[0]['id']);
+                $('#detail_id').val(parking[0]['id']);
 
                 for(let i=0; i< statut.length; i++)
                 {
@@ -164,14 +167,12 @@
         $("#storevalid").submit(function(){
 
         var formData = $(this).serialize();
-        dd(formData);
-
         $.ajax({
             url:"{{route('parking.store_vehicule')}}",
             type:"POST",
             data:formData,
             success:function(data){
-                    console.log(data);
+
                 if(data.success == true){
 
                     location.reload();

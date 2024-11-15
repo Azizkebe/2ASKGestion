@@ -112,51 +112,25 @@ class ParkingController extends Controller
 
         return response()->json(['etat'=>$etat,'parking'=>$parking,'user'=>$user,'voiture'=>$voiture]);
     }
-    public function store_vehicule(Request $request, Parking $park)
+    public function store_vehicule(Request $request)
     {
-        dd($request->id);
+        $park = Parking::findOrFail($request->id);
+        $park->id_statut_validateur = $request->statut_id;
+        $park->id_vehicule = $request->vehicule_id;
+        $park->id_chauffeur = $request->chauffeur_id;
+
+        if($park->id_statut_validateur == '1')
+        {
+            $park->save();
+            return toastr()->success('La modification a été effectuée avec success');
+            return response()->json(['success'=>true,'msg'=>$request]);
+            return redirect()->route('parking.liste');
+        }
+        else
+        {
+            toastr()->error('Erreur, Vous avez déjà repondu à la demande');
+            return redirect()->route('parking.liste');
+        }
     }
-    // public function save(ParkRequest $request, Parking $park)
-    // {
-    //     try {
-    //         $role_resp = RoleModel::where('name','Chef Parking')->first();
-    //         $users_resp = User::where('role_id',$role_resp->id)->first();
-
-    //         $request->validate([
-    //             'piece_vehicule' => 'required|mimes:jpeg,png,jpg,pdf|max:2048',
-    //         ]);
-
-    //         $fileName = $request->file('piece_vehicule')->getClientOriginalName();
-
-    //         $filePath = $request->file('piece_vehicule')->storeAs('CloudPieceDemande/Vehicule',$fileName,'public');
-
-    //         $user = Auth::user();
-    //         $user_id = $user->id;
-
-    //         $park->motif = $request->motif;
-    //         $park->id_user = $user_id;
-    //         $park->destination = $request->destination;
-    //         $park->date_depart = $request->date_depart;
-    //         $park->heure_depart = $request->time_depart;
-    //         $park->date_retour = $request->date_retour;
-    //         $park->heure_retour = $request->time_retour;
-    //         $park->nombre_vehicule = $request->nombre_vehicule;
-    //         $park->nombre_personne = $request->nombre_personne;
-    //         $park->cadre = $request->cadre;
-
-    //         $park->cloud_file_demande_vehicule = $filePath;
-
-
-    //         $park->save();
-    //         toastr()->success('la demande est enregistrée avec succes');
-    //         return redirect()->back();
-
-    //     }
-    //     catch (Exception $e) {
-    //         throw new Exception("Erreur survenue lors de l\'enregistrement", 1);
-
-    //     }
-    // }
-
 
 }

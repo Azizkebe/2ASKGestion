@@ -10,7 +10,7 @@
             @method('POST')
             <div class="modal-body">
             <div class="mt-3">
-                <input type="hidden" name="id" value="" id="detail_id">
+                <input type="text" name="id" value="" id="detail_id">
             </div>
             <div class="mt-3 mb-3">
                 <label for="">Statut du dossier:</label>

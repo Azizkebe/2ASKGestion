@@ -57,23 +57,15 @@
                                         </div>
                                     </td>
                                     <td>{{$park->etat_valid_vehicule->statut_valid_vehicule }}</td>
-                                    <td>
+                                    {{-- <td>
                                         <div class="form-button-action">
                                             <button
                                             type="button"
                                             data-bs-toggle="tooltip"
                                             title=""
                                             class="btn btn-link btn-primary btn-lg"
-                                            data-original-title="Edit Task"
-                                            >
-                                            {{-- <a href="{{}}"><i class="fa fa-info"></i></a> --}}
+                                            data-original-title="Edit Task">
                                             </button>
-
-                                            {{-- @if ($demande->id_etat_demande == '1' || $demande->id_etat_demande == '2' || $demande->id_etat_demande == '3') --}}
-                                            <div style="display: none;">
-
-                                            </div>
-                                            {{-- @else --}}
                                             <button
                                             type="button"
                                             data-bs-toggle="tooltip"
@@ -83,9 +75,9 @@
                                             >
 
                                             </button>
-                                            {{-- @endif --}}
+
                                         </div>
-                                    </td>
+                                    </td> --}}
                                     <td>
                                         <button
                                         type="button"
