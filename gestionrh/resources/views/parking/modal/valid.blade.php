@@ -2,7 +2,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="ValidVehiculeModal">Reponse à la demande - </h1>
+          <h1 class="modal-title fs-5" id="ValidVehiculeModal">Reponse à la demande - {{$parking->user->employe->prenom}} {{$parking->user->employe->nom}} </h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <form id="storevalid">
@@ -10,7 +10,7 @@
             @method('POST')
             <div class="modal-body">
             <div class="mt-3">
-                <input type="text" name="id" value="" id="detail_id">
+                <input type="hidden" name="id" value="" id="detail_id">
             </div>
             <div class="mt-3 mb-3">
                 <label for="">Statut du dossier:</label>

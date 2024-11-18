@@ -132,5 +132,36 @@ class ParkingController extends Controller
             return redirect()->route('parking.liste');
         }
     }
+    public function demande_carburant(int $park)
+    {
+        $parking = Parking::findOrFail($park);
+
+        return view('parking.demande_carburant', compact('parking'));
+    }
+    public function carburant_update(Request $request, int $park)
+    {
+        $parking = Parking::findOrFail($park);
+
+        $role_resp = RoleModel::where('name','Comptable Matieres')->first();
+        $users_comptable = User::where('role_id', $role_resp->id)->first();
+
+        $parking->id_user_comptable = $users_comptable->id_employe;
+        $parking->commentaire = $request->commentaire;
+
+        if(($parking->id_user_comptable == NULL)||($parking->id_user_comptable == ''))
+        {
+            $confirm = $parking->save();
+            if($confirm)
+            {
+                toastr()->success('Bravo, la demande est transmise avec succes');
+                return redirect()->route('parking.liste');
+            }
+        }
+        else
+        {
+            toastr()->error('Erreur, cette demande a été déjà envoyée');
+            return redirect()->back();
+        }
+    }
 
 }

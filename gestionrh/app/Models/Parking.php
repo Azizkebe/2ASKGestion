@@ -19,4 +19,8 @@ class Parking extends Model
     {
         return $this->belongsTo(EtatValidVehicule::class, 'id_statut_validateur');
     }
+    public function voiture()
+    {
+        return $this->belongsTo(Voiture::class, 'id_vehicule');
+    }
 }

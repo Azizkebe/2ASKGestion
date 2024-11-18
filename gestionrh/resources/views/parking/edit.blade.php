@@ -128,10 +128,10 @@
             data:{id:detail_id},
             success:function(data){
                 var statut = data.etat;
+                console.log(statut);
                 var parking = data.parking;
                 var user = data.user;
                 var voiture = data.voiture;
-                // $('#detail_id').val(voiture[0]['id']);
 
                 var html_voiture = "<option value=''>Choisir une voiture </option>";
                 var html_user = "<option value=''>Choisir un chauffeur</option>";
@@ -149,12 +149,24 @@
                 }
                 for(let i=0; i< user.length; i++)
                 {
-                    html_user += `<option value="`+user[i]['id']+`">`+user[i]['employe']['prenom']+' '+user[i]['employe']['nom']+`</option>`;
+                    if(parking[0]['id_chauffeur'] == user[i]['id'])
+                    {
+                        html_user += `<option value="`+user[i]['id']+`" selected>`+user[i]['employe']['prenom']+' '+user[i]['employe']['nom']+`</option>`;
+                    }else
+                    {
+                        html_user += `<option value="`+user[i]['id']+`">`+user[i]['employe']['prenom']+' '+user[i]['employe']['nom']+`</option>`;
+
+                    }
 
                 }
                 for(let i=0; i< voiture.length; i++)
                 {
-                    html_voiture += `<option value="`+voiture[i]['id']+`">`+voiture[i]['marque']+`</option>`;
+                    if(parking[0]['id_vehicule'] == voiture[i]['id'])
+                    {
+                        html_voiture += `<option value="`+voiture[i]['id']+`" selected>`+voiture[i]['marque']+`</option>`;
+                    }else{
+                        html_voiture += `<option value="`+voiture[i]['id']+`">`+voiture[i]['marque']+`</option>`;
+                    }
 
                 }
 

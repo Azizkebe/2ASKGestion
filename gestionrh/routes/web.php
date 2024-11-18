@@ -38,6 +38,7 @@ use App\Http\Controllers\Article\PanierArticleController;
 use App\Http\Controllers\Fourniture\FournitureController;
 use App\Http\Controllers\Fourniture\DemandeFournitureController;
 use App\Http\Controllers\Parking\ParkingController;
+use App\Http\Controllers\Parking\DemandeVehiculeController;
 use App\Http\Controllers\Vehicule\VoitureController;
 use App\Livewire\EditPhotoEmploye;
 
@@ -344,10 +345,14 @@ Route::middleware('userAdmin')->group(function(){
         Route::get('add',[ParkingController::class, 'add'])->name('parking.add');
         Route::post('add',[ParkingController::class, 'store'])->name('parking.store');
         Route::get('edit/{parking}',[ParkingController::class, 'edit'])->name('parking.edit');
+        Route::get('demande_carburant/{parking}',[ParkingController::class, 'demande_carburant'])->name('parking.demande_carburant');
+        Route::post('demande_carburant/{parking}',[ParkingController::class, 'carburant_update'])->name('parking.carburant_update');
         Route::get('validation',[ParkingController::class, 'validation'])->name('parking.validation');
         // Route::get('/valid/edit',[ParkingController::class,'edit_demande'])->name('parking.edit_demande');
         Route::get('edit_valid',[ParkingController::class,'edit_validation'])->name('parking.edit_valid');
         Route::post('store_vehicule',[ParkingController::class,'store_vehicule'])->name('parking.store_vehicule');
+        // Route::get('edit_demande_carburant',[DemandeVehiculeController::class,'edit_demande_carburant'])->name('parking.edit_demande_carburant');
+
 
 
     });

@@ -31,7 +31,7 @@
                             <th>Justificatif</th>
                             <th>Statut</th>
                             <th style="width: 10%">Action</th>
-                            {{-- <th>Suivi demande</th> --}}
+                            <th>Faire une demande de carburant</th>
                         </tr>
                             </thead>
                                 <tbody>
@@ -50,34 +50,15 @@
                                     <td>{{$park->cadre}}</td>
                                     <td>
                                         <div>
-                                            <a href="{{asset('storage/'.$park->cloud_file_demande_vehicule)}}">
+                                            <a href="{{asset('storage/'.$park->cloud_file_demande_vehicule)}}" target="_blank">
                                                 <img style="height: 40px; width:50px;" src="{{asset('storage/'.$park->cloud_file_demande_vehicule)}}"
                                                 title="justificatif" alt="piece justificative" >
                                             </a>
                                         </div>
                                     </td>
-                                    <td>{{$park->etat_valid_vehicule->statut_valid_vehicule }}</td>
-                                    {{-- <td>
-                                        <div class="form-button-action">
-                                            <button
-                                            type="button"
-                                            data-bs-toggle="tooltip"
-                                            title=""
-                                            class="btn btn-link btn-primary btn-lg"
-                                            data-original-title="Edit Task">
-                                            </button>
-                                            <button
-                                            type="button"
-                                            data-bs-toggle="tooltip"
-                                            title=""
-                                            class="btn btn-link btn-danger"
-                                            data-original-title="Remove"
-                                            >
-
-                                            </button>
-
-                                        </div>
-                                    </td> --}}
+                                    <td>
+                                        {{$park->etat_valid_vehicule->statut_valid_vehicule }}
+                                    </td>
                                     <td>
                                         <button
                                         type="button"
@@ -85,9 +66,25 @@
                                         title=""
                                         class="btn btn-link btn-primary btn-lg"
                                         data-original-title="Edit"
-                                        ><a href="{{route('parking.edit',$park->id)}}" class="btn btn-link btn-primary btn-lg"><i class="fa fa-edit"></i></a>
+                                        >
+                                        <a href="{{route('parking.edit',$park->id)}}" class="btn btn-link btn-primary btn-lg"><i class="fa fa-edit"></i></a>
                                         </button>
                                     </td>
+                                    <td>
+                                        <div class="form-button-action">
+                                            @if ($park->id_statut_validateur == '2')
+                                            <button
+                                            type="button"
+                                            data-bs-toggle="tooltip"
+                                            title="Nouvelle demande de carburant"
+                                            class="btn btn-link btn-black btn-lg"
+                                            data-original-title="Edit Task">
+                                            <a href="{{route('parking.demande_carburant', $park->id)}}" class="btn btn-link btn-primary btn-lg"><i class="fa fa-plus-circle"></i></a>
+                                            </button>
+                                            @endif
+                                        </div>
+                                    </td>
+
                                     </tr>
                                 @empty
                                     <td colspan="9">Aucune donnée trouvé</td>
