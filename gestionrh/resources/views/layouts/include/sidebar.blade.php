@@ -211,6 +211,31 @@
                           </ul>
                         </div>
                     </li>
+                    <li>
+                        <a data-bs-toggle="collapse" href="#mission1">
+                          <span class="sub-item">Ordre de Mission</span>
+                          <span class="caret"></span>
+                        </a>
+                        <div class="collapse" id="mission1">
+                          <ul class="nav nav-collapse subnav">
+                            {{-- <li>
+                                <a href="">
+                                  <span class="sub-item">Tableau de bord</span>
+                                </a>
+                            </li> --}}
+                            <li>
+                              <a href="{{route('ordre_mission.liste')}}">
+                                <span class="sub-item">Faire une demande</span>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="">
+                                <span class="sub-item">Valider une demande</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                    </li>
                 </ul>
             </div>
           </li>

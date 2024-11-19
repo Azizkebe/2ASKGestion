@@ -148,13 +148,14 @@ class ParkingController extends Controller
         $parking->id_user_comptable = $users_comptable->id_employe;
         $parking->commentaire = $request->commentaire;
 
-        if(($parking->id_user_comptable == NULL)||($parking->id_user_comptable == ''))
+        if($parking->active == false)
         {
+            $parking->active = true;
             $confirm = $parking->save();
             if($confirm)
             {
                 toastr()->success('Bravo, la demande est transmise avec succes');
-                return redirect()->route('parking.liste');
+                return redirect()->route('parking.validation');
             }
         }
         else

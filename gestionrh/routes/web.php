@@ -40,6 +40,7 @@ use App\Http\Controllers\Fourniture\DemandeFournitureController;
 use App\Http\Controllers\Parking\ParkingController;
 use App\Http\Controllers\Parking\DemandeVehiculeController;
 use App\Http\Controllers\Vehicule\VoitureController;
+use App\Http\Controllers\Mission\OrdreMissionController;
 use App\Livewire\EditPhotoEmploye;
 
 // Route::get('/dashboard',[UserAdminController::class,'dashboard'])->name('dashboard');
@@ -372,6 +373,11 @@ Route::middleware('userAdmin')->group(function(){
         Route::get('/edit', [PanierArticleController::class,'editer'])->name('panier_article.edit');
         Route::post('/edit', [PanierArticleController::class,'update'])->name('panier_article.update');
         Route::get('delete/{panier_article}', [PanierArticleController::class,'delete'])->name('panier_article.delete');
+    });
+    Route::prefix('ordre_mission')->group(function(){
+        Route::get('index',[OrdreMissionController::class,'liste'])->name('ordre_mission.liste');
+        Route::get('add',[OrdreMissionController::class,'add'])->name('ordre_mission.add');
+        Route::post('add',[OrdreMissionController::class,'store'])->name('ordre_mission.store');
     });
     // Route::prefix('demande_fourniture')->group(function(){
     //     Route::get('create',[])

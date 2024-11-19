@@ -60,23 +60,31 @@ class PanierArticleController extends Controller
     {
         $nbr_tentative = 1;
         $panier = PanierArticle::findOrFail($panier_article);
-
-        $article = Article::where('id', $panier->id_article)->first();
-
-        $result = $panier->update(['Quantite_accordee'=> $request->qte_accordee]);
-
-        if($result)
+        if($panier->active == false)
         {
-            $article->update(['Quantite_restante'=> $article->Quantite_restante - $request->qte_accordee]);
+            $article = Article::where('id', $panier->id_article)->first();
 
-            toastr()->success('la quantite a été bien accordée');
+            $result = $panier->update(['Quantite_accordee'=> $request->qte_accordee,'active'=> true]);
 
+            if($result)
+            {
+                $article->update(['Quantite_restante'=> $article->Quantite_restante - $request->qte_accordee]);
+
+                toastr()->success('la quantite a été bien accordée');
+
+                return redirect()->back();
+            }
+            else {
+                toastr()->error('Impossible de modifier la quantite');
+                return redirect()->back();
+            }
+        }
+        else{
+
+            toastr()->error('Desolé, vous avez déjà confirmé la quantite accordee');
             return redirect()->back();
         }
-        else {
-            toastr()->error('Impossible de modifier la quantite');
-            return redirect()->back();
-        }
+
 
     }
 }

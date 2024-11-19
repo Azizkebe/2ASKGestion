@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ParkRequest extends FormRequest
+class MissionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,29 +22,26 @@ class ParkRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'motif'=>'required',
+            'activite'=>'required',
             'destination'=>'required',
             'date_depart'=>'required',
             'date_retour'=>'required',
-            'time_depart'=>'required',
-            'time_retour'=>'required',
-            'nombre_vehicule'=>'required',
-            'nombre_personne'=>'required',
-            'piece_vehicule'=>'required',
+            'cadre'=>'required',
+            'id_type_mission'=>'required|integer',
+            'id_moyen_transport'=>'required|integer',
+            'piece_mission'=>'required',
         ];
     }
     public function messages(): array
     {
         return [
-            'motif.required'=>'Veuillez saisir le motif',
+            'activite.required'=>'Veuillez preciser l\'activite',
             'destination.required'=>'Veuillez preciser la destination',
             'date_depart.required'=>'Veuillez preciser la date de depart',
             'date_retour.required'=>'Veuillez preciser la date de retour',
-            'time_depart.required'=>'Veuillez preciser l\'heure de depart',
-            'time_retour.required'=>'Veuillez preciser l\'heure de retour',
-            'nombre_vehicule.required'=>'Veuillez preciser le nombre de vehicule',
-            'nombre_personne.required'=>'Veuillez preciser le nombre de personne',
-            'piece_vehicule.required'=>'Vous devez joindre un justificatif',
+            'id_type_mission.required'=>'Veuillez choisir le type de mission',
+            'id_moyen_transport.required'=>'Veuillez choisir un moyen de transport',
+            'piece_mission.required'=>'Vous devez joindre un justificatif',
         ];
     }
 }
