@@ -229,7 +229,7 @@
                               </a>
                             </li>
                             <li>
-                              <a href="">
+                              <a href="{{route('ordre_mission.validation')}}">
                                 <span class="sub-item">Valider une demande</span>
                               </a>
                             </li>

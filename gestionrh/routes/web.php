@@ -378,6 +378,10 @@ Route::middleware('userAdmin')->group(function(){
         Route::get('index',[OrdreMissionController::class,'liste'])->name('ordre_mission.liste');
         Route::get('add',[OrdreMissionController::class,'add'])->name('ordre_mission.add');
         Route::post('add',[OrdreMissionController::class,'store'])->name('ordre_mission.store');
+        Route::get('validation',[OrdreMissionController::class,'validation'])->name('ordre_mission.validation');
+        Route::get('edit/{ordre_mission}',[OrdreMissionController::class,'edit_validation'])->name('ordre_mission.edit');
+        Route::get('edit_mission',[OrdreMissionController::class,'edit_mission'])->name('ordre_mission.edit_mission');
+        Route::post('store_mission',[OrdreMissionController::class,'store_mission'])->name('ordre_mission.store_mission');
     });
     // Route::prefix('demande_fourniture')->group(function(){
     //     Route::get('create',[])

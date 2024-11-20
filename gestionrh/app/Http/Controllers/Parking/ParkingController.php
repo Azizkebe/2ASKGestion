@@ -88,9 +88,7 @@ class ParkingController extends Controller
     }
     public function validation()
     {
-        // $role_resp = RoleModel::where('name','Chef Parking')->first();
-        // $users_resp = User::where('role_id',$role_resp->id)->first();
-        // dd(Auth::user()->employe->id);
+
         $parking = Parking::where('id_validateur',Auth::user()->employe->id)->get();
 
         return view('parking.validation', compact('parking'));
