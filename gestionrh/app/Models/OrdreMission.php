@@ -26,4 +26,8 @@ class OrdreMission extends Model
     {
         return $this->belongsTo(MoyenTransport::class, 'moyen_transport');
     }
+    public function user_validateur()
+    {
+        return $this->belongsTo(Employe::class, 'id_validateur');
+    }
 }

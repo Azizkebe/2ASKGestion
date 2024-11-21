@@ -75,6 +75,7 @@
                         </div>
                     </div>
                 </div>
+                @if (!empty($Validation_OM))
                 <div class="mt-3 form-group">
                     <button type="button" class="btn btn-success btn-block">
                         <a href="" class="m-r-15 text-white ValidOrdreMisionModal" data-bs-toggle="modal" data-bs-target="#ValidOrdreMisionModal" data-bs-id="{{$mission->id}}">
@@ -82,6 +83,7 @@
                         </a>
                     </button>
                 </div>
+                @endif
             </form>
           </div>
         </div>
@@ -90,8 +92,8 @@
   </div>
   <script>
     $(document).ready(function(){
-        $(".ValidOrdreMisionModal").click(function(){
-            var detail_id =  $(this).attr('data-bs-id');
+             $(".ValidOrdreMisionModal").click(function(){
+                var detail_id =  $(this).attr('data-bs-id');
             $.ajax({
                 id:{detail_id},
                 url:"{{route('ordre_mission.edit_mission')}}",
@@ -101,43 +103,47 @@
 
                     var statut = data.etat;
                     var mission = data.mission;
+                    // console.log(mission[0]['id_statut_demande_mission']);
 
                     var htmlstatut = "<option value=''>Selectionner un statut </option>";
-                    var test = $('#detail_id').val(mission[0]['id']);
+                    $('#detail_id').val(mission[0]['id']);
+                    var comment = $('#comment').val(mission[0]['commentaire']);
 
                     for(let i=0; i< statut.length; i++)
                     {
-                        if(mission[0]['type_mission'] == statut[i]['id']){
-                            htmlstatut += `<option value="`+mission[i]['id']+`" selected>`+statut[i]['statut_demande_mission']+`</option>`;
+                        if(mission[0]['id_statut_demande_mission'] == statut[i]['id']){
+                            htmlstatut += `<option value="`+statut[i]['id']+`" selected>`+statut[i]['statut_demande_mission']+`</option>`;
 
                         }else{
                             htmlstatut += `<option value="`+statut[i]['id']+`">`+statut[i]['statut_demande_mission']+`</option>`;
                         }
                     }
                     var result = $("#edit_statut").html(htmlstatut);
+                    // var result2 = $(comment).html()
 
                 }
             });
         });
-        $("#storevalidMission").submit(function(){
+        $("#StoreValidOrdreMission").submit(function(){
 
-    var formData = $(this).serialize();
+            var formData = $(this).serialize();
 
-    $.ajax({
-        url:"{{route('ordre_mission.store_mission')}}",
-        type:"POST",
-        data:formData,
-        success:function(data){
-            alert(data)
-            if(data.success == true){
+            $.ajax({
+                url:"{{route('ordre_mission.store_mission')}}",
+                type:"POST",
+                data:formData,
+                success:function(data){
 
-                location.reload();
-            }
-            else{
-                alert(data.msg);
+                    if(data.success == true){
+
+                        location.reload();
+                    }
+                    else
+                    {
+                        alert(data.msg);
+                    }
                 }
-            }
-         });
+            });
 
         });
     });

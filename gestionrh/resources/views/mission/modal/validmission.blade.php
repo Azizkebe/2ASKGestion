@@ -5,7 +5,7 @@
           <h1 class="modal-title fs-5" id="ValidOrdreMisionModal">Reponse à la demande - {{$mission->user->employe->prenom}} {{$mission->user->employe->nom}} </h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form id="storevalidMission">
+        <form id="StoreValidOrdreMission">
             @csrf
             @method('POST')
             <div class="modal-body">
@@ -20,7 +20,7 @@
             </div>
             <div class="mt-3 mb-3">
                 <label for="">Commentaire:</label>
-                    <textarea name="commentaire" id="commentaire" cols="15" rows="5" class="form-control"></textarea>
+                    <textarea name="commentaire" id="comment" cols="15" rows="5" class="form-control" value=""></textarea>
             </div>
             </div>
             <div class="modal-footer">

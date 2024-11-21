@@ -382,6 +382,7 @@ Route::middleware('userAdmin')->group(function(){
         Route::get('edit/{ordre_mission}',[OrdreMissionController::class,'edit_validation'])->name('ordre_mission.edit');
         Route::get('edit_mission',[OrdreMissionController::class,'edit_mission'])->name('ordre_mission.edit_mission');
         Route::post('store_mission',[OrdreMissionController::class,'store_mission'])->name('ordre_mission.store_mission');
+        Route::get('suivi_validation',[OrdreMissionController::class,'suivi_validation'])->name('ordre_mission.suivi_validation');
     });
     // Route::prefix('demande_fourniture')->group(function(){
     //     Route::get('create',[])

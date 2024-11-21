@@ -5,7 +5,7 @@
 
             <div class="d-flex flex-column">
                 <strong class="logo-text">Plateforme</strong>
-                <small class="logo-slogan">DiiSso ANPEJ</small>
+                <small class="logo-slogan">DiiSo ANPEJ</small>
             </div>
         </a>
 

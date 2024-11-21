@@ -8,6 +8,7 @@
                     <div class="d-flex align-items-center">
                     <h4 class="card-title">Liste des demandes d'ordre de mission</h4>
                 </div>
+                @include('mission.modal.suividemande')
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -28,8 +29,9 @@
                             <th>Frais à la charge</th>
                             <th>Statut</th>
                             <th>Justificatif</th>
+                            <th>Commentaire</th>
                             <th style="width: 10%">Action</th>
-                            {{-- <th>Faire une demande de carburant</th> --}}
+                            <th>Suivi Demande</th>
                         </tr>
                             </thead>
                                 <tbody>
@@ -44,6 +46,7 @@
                                     <td>{{$mission->typemission->type_mission}}</td>
                                     <td>{{$mission->moyentransport->moyen_transport}}</td>
                                     <td>{{$mission->frais}}</td>
+
                                     <td>
                                         {{$mission->etat_statut_demande_mission->statut_demande_mission}}
                                     </td>
@@ -55,6 +58,7 @@
                                             </a>
                                         </div>
                                     </td>
+                                    <td>{{$mission->commentaire}}</td>
                                     <td>
                                         <button
                                         type="button"
@@ -65,6 +69,11 @@
                                         >
                                         <a href="{{route('ordre_mission.edit', $mission->id)}}" class="btn btn-link btn-primary btn-lg"><i class="fa fa-edit"></i></a>
                                         </button>
+                                    </td>
+                                    <td>
+
+                                        <a href="" class="m-r-15 text-black OMValidModal" data-bs-toggle="modal" data-bs-target="#OMValidModal" data-bs-id="{{$mission->id}}"><i class="fa fa-eye"></i></a>
+
                                     </td>
                                     </tr>
                                 @empty
@@ -77,5 +86,25 @@
         </div>
     </div>
 </div>
-
+<script>
+    $(document).ready(function(){
+        $(".OMValidModal").click(function(){
+                var detail_id =  $(this).attr('data-bs-id');
+            $.ajax({
+                id:{detail_id},
+                url:"{{route('ordre_mission.suivi_validation')}}",
+                type:"GET",
+                data:{id:detail_id},
+                success:function(data){
+                    var mission = data.mission;
+                    $('#detail_id').val(mission[0]['id']);
+                    var comment = $('#comment').val(mission[0]['commentaire']);
+                    var p_validateur = $('#p_validateur').val(mission[0]['user_validateur']['prenom']);
+                    var n_validateur = $('#n_validateur').val(mission[0]['user_validateur']['nom']);
+                    var statut = $('#statut').val(mission[0]['etat_statut_demande_mission']['statut_demande_mission']);
+                }
+            });
+        });
+    });
+</script>
 @endsection
