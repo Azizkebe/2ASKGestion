@@ -18,6 +18,10 @@ class OrdreMission extends Model
     {
         return $this->belongsTo(User::class, 'id_user');
     }
+    public function user_sup()
+    {
+        return $this->belongsTo(User::class, 'id_sup_validateur');
+    }
     public function typemission()
     {
         return $this->belongsTo(TypeMission::class, 'type_mission');

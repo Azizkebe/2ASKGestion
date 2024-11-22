@@ -93,6 +93,10 @@
   <script>
     $(document).ready(function(){
              $(".ValidOrdreMisionModal").click(function(){
+
+                // var cat_id = $(this).val();
+                // console.log(cat_id);
+
                 var detail_id =  $(this).attr('data-bs-id');
             $.ajax({
                 id:{detail_id},
@@ -120,6 +124,9 @@
                     }
                     var result = $("#edit_statut").html(htmlstatut);
                     // var result2 = $(comment).html()
+                    $(document).on('change','.statut_id',function() {
+            console.log('ok');
+        });
 
                 }
             });
@@ -146,6 +153,7 @@
             });
 
         });
+
     });
   </script>
 @endsection

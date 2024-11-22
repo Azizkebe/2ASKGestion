@@ -9,6 +9,7 @@
                     <h4 class="card-title">Liste des demandes d'ordre de mission</h4>
                 </div>
                 @include('mission.modal.suividemande')
+                @include('mission.modal.transfert')
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -32,6 +33,7 @@
                             <th>Commentaire</th>
                             <th style="width: 10%">Action</th>
                             <th>Suivi Demande</th>
+                            <th>Transmis à la DAFC</th>
                         </tr>
                             </thead>
                                 <tbody>
@@ -48,7 +50,7 @@
                                     <td>{{$mission->frais}}</td>
 
                                     <td>
-                                        {{$mission->etat_statut_demande_mission->statut_demande_mission}}
+                                        {{$mission->etat_statut_demande_mission->statut_demande_mission ?? 'En cours'}}
                                     </td>
                                     <td>
                                         <div>
@@ -71,11 +73,28 @@
                                         </button>
                                     </td>
                                     <td>
-
-                                        <a href="" class="m-r-15 text-black OMValidModal" data-bs-toggle="modal" data-bs-target="#OMValidModal" data-bs-id="{{$mission->id}}"><i class="fa fa-eye"></i></a>
-
+                                        <button
+                                        type="button"
+                                        data-bs-toggle="tooltip"
+                                        title="Nouvelle demande de carburant"
+                                        class="btn btn-link btn-black btn-lg"
+                                        data-original-title="Edit Task">
+                                        <a href="" class="btn btn-link btn-primary btn-lg OMValidModal" data-bs-toggle="modal" data-bs-target="#OMValidModal" data-bs-id="{{$mission->id}}"><i class="fa fa-eye"></i></a>
+                                        </button>
                                     </td>
-                                    </tr>
+                                    @if ($mission->id_statut_demande_mission == '2')
+                                    <td>
+                                        <button
+                                            type="button"
+                                            data-bs-toggle="tooltip"
+                                            title="Transmis à la DAFC"
+                                            class="btn btn-link btn-black btn-lg"
+                                            data-original-title="Edit Task">
+                                            <a href="" class="btn btn-link btn-secondary btn-lg TransfertOMValidModal" data-bs-toggle="modal" data-bs-target="#TransfertOMValidModal" data-id="{{$mission->id}}"><i class="fa fa-paper-plane "></i></a>
+                                        </button>
+                                    </td>
+                                    @endif
+                                </tr>
                                 @empty
                                     <td colspan="9">Aucune donnée trouvé</td>
                                 @endforelse
