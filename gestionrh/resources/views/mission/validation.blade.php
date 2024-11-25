@@ -124,6 +124,10 @@
                 }
             });
         });
+        $(".TransfertOMValidModal").click(function(){
+            var detail =  $(this).attr('data-bs-id');
+            console.log(detail);
+        });
     });
 </script>
 @endsection

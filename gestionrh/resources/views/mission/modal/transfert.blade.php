@@ -5,7 +5,7 @@
           <h1 class="modal-title fs-5" id="TransfertOMValidModal">Transfert des Ordres de Mission</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form id="TransfertOrdreMission">
+        <form id="TransfertOrdreMission" enctype="multipart/form-data">
             @csrf
             @method('POST')
             <div class="modal-body">

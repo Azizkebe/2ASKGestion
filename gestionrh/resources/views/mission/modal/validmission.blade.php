@@ -12,12 +12,6 @@
             <div class="mt-3">
                 <input type="hidden" name="id" value="" id="detail_id">
             </div>
-            {{-- <div class="mt-3 mb-3">
-                <label for="">Statut du dossier:</label>
-                <select name="statut_id" id="edit_statut" class="form-select">
-                    <option value=''>Selectionner un statut </option>
-                </select>
-            </div> --}}
             <div class="mt-3 mb-3">
                 <label for="">Veuillez joindre l'ordre de mission</label>
                 <input type="file" name="file_ordre_mission" id="file_ordre_mission" class="form-control">

@@ -1,5 +1,4 @@
 @extends('layouts.website')
-
 @section('content')
 <div class="container-fluid">
     <div class="row  justify-content-center h-100">
@@ -75,15 +74,15 @@
                         </div>
                     </div>
                 </div>
-                @if (!empty($Validation_OM))
+                {{-- @if (!empty($Validation_OM))
                 <div class="mt-3 form-group">
                     <button type="button" class="btn btn-success btn-block">
-                        <a href="" class="m-r-15 text-white ValidOrdreMisionModal" data-bs-toggle="modal" data-bs-target="#ValidOrdreMisionModal" data-bs-id="{{$mission->id}}">
+                        <a href="{{route('ordre_mission.response', $mission->id)}}" class="m-r-15 text-white ValidOrdreMisionModal">
                             Repondre à la demande
                         </a>
                     </button>
                 </div>
-                @endif
+                @endif --}}
             </form>
           </div>
         </div>
@@ -94,49 +93,27 @@
     $(document).ready(function(){
              $(".ValidOrdreMisionModal").click(function(){
 
-                // var cat_id = $(this).val();
-                // console.log(cat_id);
-
                 var detail_id =  $(this).attr('data-bs-id');
+
             $.ajax({
-                id:{detail_id},
-                url:"{{route('ordre_mission.edit_mission')}}",
-                type:"GET",
-                data:{id:detail_id},
-                success:function(data){
+                    'id': {detail_id},
+                    'url':"{{route('ordre_mission.edit_mission')}}",
+                    'type':"GET",
+                    'data':{id:detail_id},
+                    success:function(data){
+                        var mission = data.mission;
+                        $('#comment').val(mission[0]['commentaire']);
+                        $('#detail_id').val(mission[0]['id']);
 
-                    var statut = data.etat;
-                    var mission = data.mission;
-                    // console.log(mission[0]['id_statut_demande_mission']);
-
-                    var htmlstatut = "<option value=''>Selectionner un statut </option>";
-                    $('#detail_id').val(mission[0]['id']);
-                    var comment = $('#comment').val(mission[0]['commentaire']);
-
-                    for(let i=0; i< statut.length; i++)
-                    {
-                        if(mission[0]['id_statut_demande_mission'] == statut[i]['id']){
-                            htmlstatut += `<option value="`+statut[i]['id']+`" selected>`+statut[i]['statut_demande_mission']+`</option>`;
-
-                        }else{
-                            htmlstatut += `<option value="`+statut[i]['id']+`">`+statut[i]['statut_demande_mission']+`</option>`;
-                        }
                     }
-                    var result = $("#edit_statut").html(htmlstatut);
-                    // var result2 = $(comment).html()
-                    $(document).on('change','.statut_id',function() {
-            console.log('ok');
-        });
-
-                }
-            });
+                });
         });
         $("#StoreValidOrdreMission").submit(function(){
 
             var formData = $(this).serialize();
-
+            // dd(formData);
             $.ajax({
-                url:"{{route('ordre_mission.store_mission')}}",
+                url:"{{route('ordre_mission.mission_store')}}",
                 type:"POST",
                 data:formData,
                 success:function(data){

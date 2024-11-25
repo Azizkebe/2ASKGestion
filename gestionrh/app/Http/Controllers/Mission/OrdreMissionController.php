@@ -115,84 +115,100 @@ class OrdreMissionController extends Controller
     public function edit_mission(Request $request)
     {
         $mission = OrdreMission::where('id', $request->id)->get();
-        $etat = StatutDemandeMission::all();
+        // $etat = StatutDemandeMission::all();
 
-        return response()->json(['etat'=>$etat,'mission'=>$mission]);
+        return response()->json(['mission'=>$mission]);
+        // return response()->json(['etat'=>$etat,'mission'=>$mission]);
     }
-    public function store_mission(Request $request)
+    public function store_mission1(Request $request)
     {
         // try {
-
-            $mission = OrdreMission::findOrFail($request->id);
-
             $role_resp = RoleModel::where('name','DAFC')->first();
             $users_resp = User::where('role_id',$role_resp->id)->first();
+
+            $mission = OrdreMission::find($request->id);
 
             // $request->validate([
             //     'file_ordre_mission' => 'required|mimes:jpeg,png,jpg,pdf|max:2048',
             // ]);
 
-            $fileName = $request->file('file_ordre_mission')->getClientOriginalName();
+            // $fileName = $request->file('file_ordre_mission')->getClientOriginalName();
 
-            $filePath = $request->file('file_ordre_mission')->storeAs('CloudPieceDemande/Mission',$fileName,'public');
+            // $filePath = $request->file('file_ordre_mission')->storeAs('CloudPieceDemandeOrdreMission/Mission',$fileName,'public');
 
             $mission->id_statut_demande_mission = '2';
             $mission->commentaire = $request->commentaire;
+            // $mission->piece_ordre_mission = $filePath;
+            return response()->json($mission->commentaire);
 
-            if($mission->action == false)
+            $reponse = $mission->save();
+            if($reponse)
             {
-                $reponse = $mission->save();
-
-                    if($reponse)
-                    {
-                        $mission->update(['id_sup_validateur'=>$users_resp->id_employe,'active'=> true]);
-
-                        $messages_resp['prenom'] = $mission->user->employe->prenom;
-                        $messages_resp['nom'] = $mission->user->employe->nom;
-                        Notification::route('mail',$mission->user->employe->email)->notify(
-                            new SendEmailToAfterResponseDemandeOrdreMissionNotification($messages_resp)
-                        );
-
-                        $messages['prenom'] = $mission->user_validateur->prenom;
-                        $messages['nom'] = $mission->user_validateur->nom;
-                        Notification::route('mail',$mission->user_validateur->email)->notify(
-                            new SendEmailAfterDemandeTraitementOrdreMissionNotification($messages)
-                        );
-
-                        $messages_sup_resp['prenom'] = $mission->user_sup->employe->prenom;
-                        $messages_sup_resp['nom'] = $mission->user_sup->employe->nom;
-                        Notification::route('mail',$mission->user_sup->employe->email)->notify(
-                            new SendEmailToAfterTransfertDemandeOrdreMissionNotification($messages_sup_resp)
-                        );
-
-                        return response()->json(['success'=>true,'msg'=>$request]);
-                        return toastr()->success('La reponse à la demande a été enregistrer avec success');
-
-                        return redirect()->route('ordre_mission.validation');
-
-                    }
-                    else
-                    {
-                        toastr()->error('Impossible d\'effectuer la validation');
-                        return redirect()->back();
-                    }
+                toastr()->success('le transfert effectué avec succes');
+                return response()->json(['success'=>true,'msg'=>$request]);
             }
             else
             {
-                toastr()->error('Desolé, Vous avez déjà repondu à la demande');
-                return redirect()->route('ordre_mission.validation');
+                toastr()->error('Erreur de transfert');
+                return redirect()->back();
             }
+
+
+            // if($mission->action == false)
+            // {
+            //     $reponse = $mission->save();
+
+            //         if($reponse)
+            //         {
+            //             $mission->update(['id_sup_validateur'=>$users_resp->id_employe,'active'=> true]);
+
+            //             $messages_resp['prenom'] = $mission->user->employe->prenom;
+            //             $messages_resp['nom'] = $mission->user->employe->nom;
+            //             Notification::route('mail',$mission->user->employe->email)->notify(
+            //                 new SendEmailToAfterResponseDemandeOrdreMissionNotification($messages_resp)
+            //             );
+
+            //             $messages['prenom'] = $mission->user_validateur->prenom;
+            //             $messages['nom'] = $mission->user_validateur->nom;
+            //             Notification::route('mail',$mission->user_validateur->email)->notify(
+            //                 new SendEmailAfterDemandeTraitementOrdreMissionNotification($messages)
+            //             );
+
+            //             $messages_sup_resp['prenom'] = $mission->user_sup->employe->prenom;
+            //             $messages_sup_resp['nom'] = $mission->user_sup->employe->nom;
+            //             Notification::route('mail',$mission->user_sup->employe->email)->notify(
+            //                 new SendEmailToAfterTransfertDemandeOrdreMissionNotification($messages_sup_resp)
+            //             );
+
+            //             return response()->json(['success'=>true,'msg'=>$request]);
+            //             return redirect()->back();
+
+            //         }
+            //         else
+            //         {
+            //             toastr()->error('Impossible d\'effectuer la validation');
+            //             return redirect()->back();
+            //         }
+            // }
+            // else
+            // {
+            //     toastr()->error('Desolé, Vous avez déjà repondu à la demande');
+            //     return redirect()->route('ordre_mission.validation');
+            // }
         // } catch (Exception $th) {
         //     throw new Exception("Erreur survenue lors de la validation", 1);
 
         // }
 
     }
-    public function suivi_validation(Request $request)
+    // public function suivi_validation(Request $request)
+    // {
+    //     $mission = OrdreMission::with(['user_validateur','etat_statut_demande_mission'])->where('id', $request->id)->get();
+
+    //     return response()->json(['mission'=>$mission]);
+    // }
+    public function response_mission()
     {
-        $mission = OrdreMission::with(['user_validateur','etat_statut_demande_mission'])->where('id', $request->id)->get();
-
-        return response()->json(['mission'=>$mission]);
+        return view('mission.response');
     }
-
 }

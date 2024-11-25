@@ -32,25 +32,10 @@
                         <th>Utilisation</th>
                         <th>Statut</th>
                         <th style="width: 10%">Action</th>
-                        {{-- <th>Suivi demande</th> --}}
                       </tr>
                         </thead>
                             <tbody>
-                             {{-- @forelse ($parking as $park) --}}
                             <tr>
-                                {{-- <td>{{$park->id}}</td>
-                                <td>{{$park->motif}}</td>
-                                <td>{{$park->destination}}</td>
-                                <td class="w-100">{{$park->date_depart}}</td>
-                                <td>{{$park->heure_depart}}</td>
-                                <td>{{$park->date_retour}}</td>
-                                <td> {{$park->heure_retour}}</td>
-                                <td>{{$park->nombre_vehicule}}</td>
-                                <td>{{$park->nombre_personne}}</td>
-                                <td>{{$park->cadre}}</td>
-                                <td>{{$park->id_statut_validateur}}</td> --}}
-                                {{-- <td>{{$demande->commentaire ?? ''}}</td> --}}
-
                                 <td>
                                     <div class="form-button-action">
                                         <button
@@ -60,14 +45,9 @@
                                         class="btn btn-link btn-primary btn-lg"
                                         data-original-title="Edit Task"
                                         >
-                                        {{-- <a href="{{}}"><i class="fa fa-info"></i></a> --}}
                                         </button>
-
-                                        {{-- @if ($demande->id_etat_demande == '1' || $demande->id_etat_demande == '2' || $demande->id_etat_demande == '3') --}}
                                         <div style="display: none;">
-
                                         </div>
-                                        {{-- @else --}}
                                         <button
                                         type="button"
                                         data-bs-toggle="tooltip"
@@ -75,17 +55,11 @@
                                         class="btn btn-link btn-danger"
                                         data-original-title="Remove"
                                         >
-                                        {{-- <a onclick="return confirm('Etes vous sure de vouloir supprimer la demande')"
-                                        href="{{}}" class="btn btn-link btn-danger"><i class="fa fa-trash"></i>
-                                       </a> --}}
                                         </button>
-                                        {{-- @endif --}}
                                     </div>
                                 </td>
                                 </tr>
-                             {{-- @empty --}}
                                  <td colspan="9">Aucune donnée trouvé</td>
-                             {{-- @endforelse --}}
                             </tbody>
                     </table>
                 </div>
