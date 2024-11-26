@@ -82,7 +82,7 @@
                                         <a href="" class="btn btn-link btn-primary btn-lg OMValidModal" data-bs-toggle="modal" data-bs-target="#OMValidModal" data-bs-id="{{$mission->id}}"><i class="fa fa-eye"></i></a>
                                         </button>
                                     </td>
-                                    @if ($mission->id_statut_demande_mission == '2')
+                                    {{-- @if ($mission->id_statut_demande_mission == '2') --}}
                                     <td>
                                         <button
                                             type="button"
@@ -90,10 +90,10 @@
                                             title="Transmis à la DAFC"
                                             class="btn btn-link btn-black btn-lg"
                                             data-original-title="Edit Task">
-                                            <a href="" class="btn btn-link btn-secondary btn-lg TransfertOMValidModal" data-bs-toggle="modal" data-bs-target="#TransfertOMValidModal" data-id="{{$mission->id}}"><i class="fa fa-paper-plane "></i></a>
+                                            <a href="" class="btn btn-link btn-secondary btn-lg TransfertOM" data-bs-toggle="modal" data-bs-target="#TransfertOM" data-bs-id="{{$mission->id}}"><i class="fa fa-paper-plane "></i></a>
                                         </button>
                                     </td>
-                                    @endif
+                                    {{-- @endif --}}
                                 </tr>
                                 @empty
                                     <td colspan="9">Aucune donnée trouvé</td>
@@ -108,7 +108,7 @@
 <script>
     $(document).ready(function(){
         $(".OMValidModal").click(function(){
-                var detail_id =  $(this).attr('data-bs-id');
+            var detail_id =  $(this).attr('data-bs-id');
             $.ajax({
                 id:{detail_id},
                 url:"{{route('ordre_mission.suivi_validation')}}",
@@ -124,9 +124,40 @@
                 }
             });
         });
-        $(".TransfertOMValidModal").click(function(){
+        $(".TransfertOM").click(function(){
             var detail =  $(this).attr('data-bs-id');
-            console.log(detail);
+            $("#detail_id").val(detail);
+
+        $.ajax({
+            id:{detail},
+            url:"{{route('ordre_mission.transfert')}}",
+            type:"GET",
+            data:{id:detail},
+            success:function(data){
+                var mission = data.mission;
+                var com = $('#comment').val(mission['commentaire']);
+                // console.log(mission);
+            }
+        });
+        });
+        $('#TransfertOrdreMission').submit(function(){
+            var formData = $(this).serialize();
+
+        $.ajax({
+        url:"{{route('ordre_mission.mission_store')}}",
+        type:"POST",
+        data:formData,
+        success:function(data){
+            alert(data);
+            if(data.success == true){
+
+                location.reload();
+            }
+            else{
+                alert(data.msg);
+                }
+            }
+        });
         });
     });
 </script>

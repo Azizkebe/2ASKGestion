@@ -48,7 +48,7 @@
                             @enderror
                         </div>
                             <div class="mt-3">
-                            <label for="">Cadre</label><br>
+                            <label for="">Raison</label><br>
                             <input type="radio" name="cadre" id="service" value="service" checked> Service
                             <input type="radio" name="cadre" id="personnel" value="personnel"> Personnel
                         </div>

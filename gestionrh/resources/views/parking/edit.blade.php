@@ -6,7 +6,7 @@
       <div class="col-12 h-50 ">
         <div class="card shadow">
           <div class="card-body mx-100">
-            <h4 class="card-title mt-3 ">Detail de la demande de vehicule</h4>
+            <h4 class="card-title mt-3 ">Detail de la demande de vehicule - {{$parking->user->employe->prenom}} {{$parking->user->employe->nom}}</h4>
             <div style="display: flex; justify-content:end;">
                 <a href="{{route('parking.liste')}}" class="btn btn-success btn-sm">Liste des vehicules</a>
             </div>
@@ -52,7 +52,7 @@
                             @enderror
                         </div>
                             <div class="mt-3">
-                            <label for="">Cadre</label><br>
+                            <label for="">Raison</label><br>
                             <input type="radio" name="cadre" id="service" value="service" {{ $parking->cadre == 'service' ? 'checked' : ''}} readonly> Service
                             <input type="radio" name="cadre" id="personnel" value="personnel" {{ $parking->cadre == 'personnel' ? 'checked' : ''}} readonly> Personnel
                         </div>
