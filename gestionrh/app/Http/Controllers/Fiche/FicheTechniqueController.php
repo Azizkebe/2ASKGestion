@@ -1,0 +1,90 @@
+<?php
+
+namespace App\Http\Controllers\Fiche;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\SendEmailToAfterDemandeOrdreMissionNotification;
+use App\Models\FicheTechnique;
+use App\Models\MoyenTransport;
+use App\Models\TypeMission;
+use App\Models\RoleModel;
+use App\Http\Requests\FicheRequest;
+use App\Models\User;
+use Auth;
+class FicheTechniqueController extends Controller
+{
+    public function liste()
+    {
+        $fiche = FicheTechnique::all();
+
+        return view('fiche.liste', compact('fiche'));
+    }
+    public function add()
+    {
+        $mission = TypeMission::all();
+        $moyen = MoyenTransport::all();
+        return view('fiche.add',[
+            'mission'=>$mission,
+            'moyen'=>$moyen,
+        ]);
+    }
+    public function store(FicheRequest $request, FicheTechnique $fiche)
+    {
+        try {
+            $role_resp = RoleModel::where('name','Ressource Humaine')->first();
+            $users_resp = User::where('role_id',$role_resp->id)->first();
+
+            $user = Auth::user();
+            $user_id = $user->id;
+
+            $fiche->objet = $request->objet;
+            $fiche->id_user = $user_id;
+            $fiche->destination = $request->destination;
+            $fiche->date_depart = $request->date_depart;
+            $fiche->date_retour = $request->date_retour;
+            $fiche->moyen_transport = $request->id_moyen_transport;
+            $fiche->type_mission = $request->id_type_mission;
+            $fiche->frais = $request->cadre;
+            $fiche->objectif = $request->objectif;
+            $reussi = $fiche->save();
+
+            if($reussi)
+            {
+                $fiche->update(['id_validateur'=>$users_resp->id_employe,'id_statut_demande_mission'=> '1']);
+
+                $messages_resp['prenom'] = $users_resp->employe->prenom;
+                $messages_resp['nom'] = $users_resp->employe->nom;
+
+                Notification::route('mail',$users_resp->email)->notify(
+                    new SendEmailToAfterDemandeOrdreMissionNotification($messages_resp)
+                );
+
+                toastr()->success('la demande d\'ordre de mission est envoyée pour traitement avec succes');
+                return redirect()->back();
+
+            }
+        } catch (Exception $e) {
+            throw new Exception("Erreur survenue lors de l'enregistrement", 1);
+
+        }
+    }
+    public function validation()
+    {
+        $fiche = FicheTechnique::where('id_validateur',Auth::user()->employe->id)->get();
+
+        return view('fiche.validation', compact('fiche'));
+    }
+    public function detail_valid(int $fiche_technique)
+    {
+        $fiche = FicheTechnique::findOrFail($fiche_technique);
+        $type = TypeMission::all();
+        $moyen = MoyenTransport::all();
+        return view('fiche.detail', [
+            'fiche'=>$fiche,
+            'type'=>$type,
+            'moyen'=>$moyen,
+        ]);
+    }
+}

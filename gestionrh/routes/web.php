@@ -41,6 +41,7 @@ use App\Http\Controllers\Parking\ParkingController;
 use App\Http\Controllers\Parking\DemandeVehiculeController;
 use App\Http\Controllers\Vehicule\VoitureController;
 use App\Http\Controllers\Mission\OrdreMissionController;
+use App\Http\Controllers\Fiche\FicheTechniqueController;
 use App\Livewire\EditPhotoEmploye;
 
 // Route::get('/dashboard',[UserAdminController::class,'dashboard'])->name('dashboard');
@@ -385,6 +386,13 @@ Route::middleware('userAdmin')->group(function(){
         Route::post('store_mission_valid',[OrdreMissionController::class,'store_mission_valid'])->name('ordre_mission.mission_store');
         Route::get('suivi_validation',[OrdreMissionController::class,'suivi_validation'])->name('ordre_mission.suivi_validation');
         Route::get('find_transfert',[OrdreMissionController::class,'transfert'])->name('ordre_mission.transfert');
+    });
+    Route::prefix('fiche_technique')->group(function(){
+        Route::get('index',[FicheTechniqueController::class, 'liste'])->name('fiche.liste');
+        Route::get('add', [FicheTechniqueController::class, 'add'])->name('fiche.add');
+        Route::post('add', [FicheTechniqueController::class, 'store'])->name('fiche.store');
+        Route::get('validation',[FicheTechniqueController::class, 'validation'])->name('fiche.validation');
+        Route::get('detail_valid/{fiche_technique}',[FicheTechniqueController::class, 'detail_valid'])->name('fiche.detail');
     });
     // Route::prefix('demande_fourniture')->group(function(){
     //     Route::get('create',[])
