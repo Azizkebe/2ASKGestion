@@ -87,4 +87,33 @@ class FicheTechniqueController extends Controller
             'moyen'=>$moyen,
         ]);
     }
+    public function fichefind(Request $request)
+    {
+        $fiche = FicheTechnique::where('id', $request->id)->get();
+
+        return response()->json(['fiche'=>$fiche]);
+    }
+    public function update_fiche(Request $request, int $fiche_technique)
+    {
+        dd($fiche_technique);
+        // $fiche = FicheTechnique::find($request->id);
+
+        // if($fiche->active == false)
+        // {
+        //     $fiche->commentaire = $request->commentaire;
+        //     $fiche->active == true;
+
+        //     toastr()->success('Bravo, la demande a été clocturée');
+
+        //     return response()->json(['success'=>true,'msg'=>'Bravo, Vous venez de traiter la demande']);
+
+        //     return redirect()->back();
+        // }
+        // else
+        // {
+        //     toastr()->error('Impossible de clocturer la demande');
+        //     return redirect()->back();
+        // }
+
+    }
 }

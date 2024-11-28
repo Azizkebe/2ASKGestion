@@ -9,7 +9,7 @@
             <div style="display: flex; justify-content:end;">
                 <a href="{{route('fiche.add')}}" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> Nouvelle demande</a>
             </div>
-            @include('fiche.modal.valid')
+            {{-- @include('fiche.modal.valid') --}}
             <form method="POST" action="" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
@@ -72,64 +72,41 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                    </div>
+                </form>
+                {{$fiche->active}}
                 @if ($fiche->active == false)
-                <div class="mt-3 form-group">
-                    {{-- <button> --}}
-                        <a href="" class=" text-white btn btn-primary btn-sm FicheTechniqueModal" data-bs-toggle="modal" data-bs-target="#FicheTechniqueModal" data-bs-id="{{$fiche->id}}">
-                            Fermer la demande
-                        </a>
-                    {{-- </button> --}}
+                <form action="{{route('fiche.update_fiche',$fiche->id)}}" enctype="multipart/form-data">
+                    @csrf
+                    @method('POST')
+                    <ul class="nav nav-pills nav-fill">
+                        <div>
+                            <li class="nav-item">
+                                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Cloture la demande</button>
+                            </li>
+                        </div>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="mt-3 mb-3">
+                                        <label for="">Veuillez joindre l'ordre de mission</label>
+                                        <input type="file" name="file_ordre_mission" id="file_ordre_mission" class="form-control">
+                                </div>
+                                <div class="mt-3 mb-3">
+                                        <label for="">Commentaire</label>
+                                    <textarea name="commentaire" id="comment" cols="15" rows="5" class="form-control"></textarea>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="mt-3 mb-3">
+                        <button type="submit" class="btn btn-success">Repondre à la demande</button>
+                    </div>
+                </form>
+                 @endif
                 </div>
-                @endif
-            </form>
-          </div>
+            </div>
         </div>
-      </div>
     </div>
   </div>
-  <script>
-    $(document).ready(function(){
-             $(".ValidOrdreMisionModal").click(function(){
 
-                var detail_id =  $(this).attr('data-bs-id');
-
-            $.ajax({
-                    'id': {detail_id},
-                    'url':"{{route('ordre_mission.edit_mission')}}",
-                    'type':"GET",
-                    'data':{id:detail_id},
-                    success:function(data){
-                        var mission = data.mission;
-                        $('#comment').val(mission[0]['commentaire']);
-                        $('#detail_id').val(mission[0]['id']);
-
-                    }
-                });
-        });
-        $("#StoreValidOrdreMission").submit(function(){
-
-            var formData = $(this).serialize();
-            // dd(formData);
-            $.ajax({
-                url:"{{route('ordre_mission.mission_store')}}",
-                type:"POST",
-                data:formData,
-                success:function(data){
-
-                    if(data.success == true){
-
-                        location.reload();
-                    }
-                    else
-                    {
-                        alert(data.msg);
-                    }
-                }
-            });
-
-        });
-
-    });
-  </script>
 @endsection

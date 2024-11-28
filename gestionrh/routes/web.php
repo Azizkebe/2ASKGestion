@@ -393,6 +393,9 @@ Route::middleware('userAdmin')->group(function(){
         Route::post('add', [FicheTechniqueController::class, 'store'])->name('fiche.store');
         Route::get('validation',[FicheTechniqueController::class, 'validation'])->name('fiche.validation');
         Route::get('detail_valid/{fiche_technique}',[FicheTechniqueController::class, 'detail_valid'])->name('fiche.detail');
+        Route::post('detail_valid/{fiche_technique}',[FicheTechniqueController::class, 'update_fiche'])->name('fiche.update_fiche');
+        // Route::get('findFicheTechnique',[FicheTechniqueController::class,'findfiche'])->name('fiche.find');
+        // Route::post('updatefiche',[FicheTechniqueController::class, 'update_fiche'])->name('fiche.update_fiche');
     });
     // Route::prefix('demande_fourniture')->group(function(){
     //     Route::get('create',[])

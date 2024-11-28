@@ -5,12 +5,12 @@
           <h1 class="modal-title fs-5" id="FicheTechniqueModal">Reponse à la demande - {{$fiche->user->employe->prenom}} {{$fiche->user->employe->nom}} </h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form>
+        <form id="FicheValid" enctype="multipart/form-data" >
             @csrf
             @method('POST')
             <div class="modal-body">
             <div class="mt-3">
-                <input type="hidden" name="id" value="" id="detail_id">
+                <input type="" name="id" value="" id="detail_id">
             </div>
             <div class="mt-3 mb-3">
                 <label for="">Veuillez joindre l'ordre de mission</label>
