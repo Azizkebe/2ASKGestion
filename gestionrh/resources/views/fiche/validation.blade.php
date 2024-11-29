@@ -74,47 +74,4 @@
         </div>
     </div>
 </div>
-{{-- <script>
-    $(document).ready(function(){
-             $(".FicheTechniqueModal").click(function(){
-
-        var detail_id =  $(this).attr('data-bs-id');
-        $.ajax({
-        id:{detail_id},
-        url:"{{route('fiche.find')}}",
-        type:"GET",
-        data:{id:detail_id},
-        success:function(data){
-            var fiche = data.donnees;
-            console.log(data);
-            $('#detail_id').val(fiche[0]['id']);
-        }
-        });
-
-        });
-        $("#FicheValid").submit(function(){
-
-            var formData = $(this).serialize();
-            alert(formData);
-            $.ajax({
-                url:"{{route('fiche.update_fiche')}}",
-                type:"POST",
-                data:formData,
-                success:function(data){
-
-                    if(data.success == true){
-
-                        location.reload();
-                    }
-                    else
-                    {
-                        alert(data.msg);
-                    }
-                }
-            });
-
-        });
-
-    });
-</script> --}}
 @endsection

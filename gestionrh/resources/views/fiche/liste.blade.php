@@ -82,7 +82,7 @@
                                         title="Nouvelle demande de carburant"
                                         class="btn btn-link btn-black btn-lg"
                                         data-original-title="Edit Task">
-                                        <a href="" class="btn btn-link btn-primary btn-lg OMValidModal" data-bs-toggle="modal" data-bs-target="#OMValidModal" data-bs-id="{{$mission->id}}"><i class="fa fa-eye"></i></a>
+                                        {{-- <a href="" class="btn btn-link btn-primary btn-lg OMValidModal" data-bs-toggle="modal" data-bs-target="#OMValidModal" data-bs-id="{{$mission->id}}"><i class="fa fa-eye"></i></a> --}}
                                         </button>
                                     </td>
                                 </tr>

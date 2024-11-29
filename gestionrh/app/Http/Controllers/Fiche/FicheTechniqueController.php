@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Fiche;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
+use App\Http\Requests\FicheModifRequest;
 use App\Notifications\SendEmailToAfterDemandeOrdreMissionNotification;
+use App\Notifications\SendEmailToCloseDemandeOrdreMissionNotification;
 use App\Models\FicheTechnique;
 use App\Models\MoyenTransport;
 use App\Models\TypeMission;
@@ -87,33 +89,39 @@ class FicheTechniqueController extends Controller
             'moyen'=>$moyen,
         ]);
     }
-    public function fichefind(Request $request)
+    public function update(FicheModifRequest $request,int $fiche_technique)
     {
-        $fiche = FicheTechnique::where('id', $request->id)->get();
+       try {
+        $fiche = FicheTechnique::findOrFail($fiche_technique);
 
-        return response()->json(['fiche'=>$fiche]);
-    }
-    public function update_fiche(Request $request, int $fiche_technique)
-    {
-        dd($fiche_technique);
-        // $fiche = FicheTechnique::find($request->id);
+        $request->validate([
+            'piece_mission' => 'required|mimes:jpeg,png,jpg,pdf|max:2048',
+        ]);
 
-        // if($fiche->active == false)
-        // {
-        //     $fiche->commentaire = $request->commentaire;
-        //     $fiche->active == true;
+        $fileName = $request->file('piece_mission')->getClientOriginalName();
 
-        //     toastr()->success('Bravo, la demande a été clocturée');
+        $filePath = $request->file('piece_mission')->storeAs('CloudOrdreMission/Mission',$fileName,'public');
+        $fiche->piece_mission = $filePath;
+        $fiche->commentaire = $request->comment;
 
-        //     return response()->json(['success'=>true,'msg'=>'Bravo, Vous venez de traiter la demande']);
+        $reussi = $fiche->save();
 
-        //     return redirect()->back();
-        // }
-        // else
-        // {
-        //     toastr()->error('Impossible de clocturer la demande');
-        //     return redirect()->back();
-        // }
+        if($reussi)
+        {
+            $fiche->update(['active'=>true, 'id_statut_demande_mission'=>'2']);
+            $messages['prenom'] = $fiche->user->employe->prenom;
+            $messages['nom'] = $fiche->user->employe->nom;
+
+            Notification::route('mail',$fiche->user->employe->email)->notify(
+                new SendEmailToCloseDemandeOrdreMissionNotification($messages)
+            );
+            toastr()->success('Bravo, vous avez clocturer la demande');
+            return redirec()->route('fiche.validation');
+        }
+       } catch (Exception $e) {
+        throw new Exception("Error Processing Request", 1);
+
+       }
 
     }
 }

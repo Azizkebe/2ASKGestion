@@ -9,9 +9,9 @@
             <div style="display: flex; justify-content:end;">
                 <a href="{{route('fiche.add')}}" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> Nouvelle demande</a>
             </div>
-            {{-- @include('fiche.modal.valid') --}}
-            <form method="POST" action="" enctype="multipart/form-data">
+            <form action="{{route('fiche.update', $fiche->id)}}" method="POST" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
                 <div class="row">
                     <div class="col md-6">
                         <div class="mt-3">
@@ -72,41 +72,64 @@
                             </div>
                         </div>
                     </div>
-                    </div>
-                </form>
-                {{$fiche->active}}
-                @if ($fiche->active == false)
-                <form action="{{route('fiche.update_fiche',$fiche->id)}}" enctype="multipart/form-data">
-                    @csrf
-                    @method('POST')
-                    <ul class="nav nav-pills nav-fill">
-                        <div>
-                            <li class="nav-item">
-                                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Cloture la demande</button>
-                            </li>
+                </div>
+                @if ($fiche->active == true)
+                <div class="row">
+                    <div class="col col-md-6">
+                        <div class="mt-3 mb-3">
+                            <label for="">Ordre de Mission</label>
+                            <a href="{{asset('storage/'.$fiche->piece_mission)}}" class="form-control" target="_blank">
+                                <img style="height: 40px; width:50px;" src="{{asset('storage/'.$fiche->piece_mission)}}"
+                                title="Ordre de mission" alt="Ordre de Mission" >
+                            </a>
                         </div>
-                    </ul>
+                    </div>
+                    <div class="col col-md-6">
+                        <div class="mt-3 mb-3">
+                            <label for="">Commentaire Final</label>
+                            <textarea name="" id="" cols="15" rows="5" class="form-control" readonly>{{$fiche->commentaire}}</textarea>
+                        </div>
+                    </div>
+                </div>
+                @endif
+                @if ($fiche->active == false)
+            <div style="margin-right: 3px;" class="row mt-2">
+                <hr>
+                <h4 class="card-title mt-3 ">Fermeture de la demande</h4>
+                <div class="col col-md-6">
                     <div class="tab-content" id="myTabContent">
-                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 <div class="mt-3 mb-3">
                                         <label for="">Veuillez joindre l'ordre de mission</label>
-                                        <input type="file" name="file_ordre_mission" id="file_ordre_mission" class="form-control">
+                                            <input type="file" name="piece_mission" id="piece_mission" class="form-control">
+                                            @error('piece_mission')
+                                                <div class="error">{{$message}}</div>
+                                            @enderror
                                 </div>
                                 <div class="mt-3 mb-3">
-                                        <label for="">Commentaire</label>
-                                    <textarea name="commentaire" id="comment" cols="15" rows="5" class="form-control"></textarea>
-                                </div>
-                        </div>
+                                            <label for="">Commentaire</label>
+                                            <textarea name="comment" id="comment" cols="15" rows="5" class="form-control"></textarea>
+                                            @error('comment')
+                                                <div class="error">{{$message}}</div>
+                                            @enderror
+                                        </div>
+                                 </div>
+                            </div>
                     </div>
                     <div class="mt-3 mb-3">
                         <button type="submit" class="btn btn-success">Repondre à la demande</button>
                     </div>
-                </form>
-                 @endif
                 </div>
+                </div>
+                @else
+                <div class="mt-3">
+                    <a href="{{route('fiche.validation')}}" class="btn btn-primary btn-sm"><i class="fa fa-arrow-left"></i> Retour</a>
+                </div>
+                @endif
+            </form>
             </div>
         </div>
     </div>
-  </div>
-
+</div>
+</div>
 @endsection
