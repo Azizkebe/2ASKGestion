@@ -32,6 +32,10 @@
                             <th>Statut</th>
                             <th>Objectif</th>
                             <th style="width: 10%">Action</th>
+                            {{-- @if ($fiche->etat_statut_demande_mission->statut_demande_mission == '2') --}}
+                            <th>Telecharger Ordre de Mission</th>
+
+                            {{-- @endif --}}
                         </tr>
                             </thead>
                                 <tbody>
@@ -62,6 +66,12 @@
                                         >
                                         <a href="{{route('fiche.detail', $fiche->id)}}" class="btn btn-link btn-primary btn-lg"><i class="fa fa-edit"></i></a>
                                         </button>
+                                    </td>
+                                    <td>
+
+                                        @if ($fiche->id_statut_demande_mission == '2')
+                                        <a href="{{route('fiche.download', $fiche->id)}}" class="btn btn-link btn-secondary btn-lg"><i class="fa fa-download"></i></a>
+                                        @endif
                                     </td>
                                 </tr>
                                 @empty

@@ -15,6 +15,7 @@ use App\Models\RoleModel;
 use App\Http\Requests\FicheRequest;
 use App\Models\User;
 use Auth;
+use PDF;
 class FicheTechniqueController extends Controller
 {
     public function liste()
@@ -123,5 +124,27 @@ class FicheTechniqueController extends Controller
 
        }
 
+    }
+    public function downloadpdf($fiche_technique)
+    {
+        try {
+
+            $main_image = base64_encode(file_get_contents(public_path('icon/ANPEJ_MINISTERE.png')));
+
+            $OM_info = FicheTechnique::find($fiche_technique);
+
+            $pdf = PDF::loadView('mission.ordre_mission',[
+                'OM_info'=>$OM_info,
+                // 'main_image'=>$main_image,
+            ]);
+            return $pdf->download('fiche_ordre_de_mission'.$OM_info->user->employe->prenom.' '.$OM_info->user->employe->nom.'.pdf');
+
+            // return view('mission.ordre_mission',compact('OM_info'));
+
+
+           } catch (Exception $e) {
+
+               throw new Exception('Une erreur est survenue lors du telechargement de l\'intervention');
+           }
     }
 }

@@ -394,6 +394,7 @@ Route::middleware('userAdmin')->group(function(){
         Route::get('validation',[FicheTechniqueController::class, 'validation'])->name('fiche.validation');
         Route::get('detail_valid/{fiche_technique}',[FicheTechniqueController::class, 'detail_valid'])->name('fiche.detail');
         Route::put('update_valid/{fiche_technique}',[FicheTechniqueController::class, 'update'])->name('fiche.update');
+        Route::get('dowload_OM/{fiche_technique}',[FicheTechniqueController::class, 'downloadpdf'])->name('fiche.download');
     });
     // Route::prefix('demande_fourniture')->group(function(){
     //     Route::get('create',[])
