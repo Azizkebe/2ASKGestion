@@ -4,91 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ordre de mission</title>
+    <title>Ordre de Mission</title>
     <style>
-        body {
-            font-family: sans-serif;
+        body{
+            text-align: justify;
         }
-        #customers {
-        font-family: Arial, Helvetica, sans-serif;
-        border-collapse: collapse;
-        width: 100%;
-        }
-
-        #customers td, #customers th {
-        border: 1px solid #ddd;
-        padding: 8px;
-        }
-
-        #customers tr:nth-child(even){background-color: #f2f2f2;}
-
-        #customers tr:hover {background-color: #ddd;}
-
-        #customers th {
-        padding-top: 12px;
-        padding-bottom: 12px;
-        text-align: left;
-        background-color: #04AA6D;
-        color: white;
+        .text{
+            font-style: italic;
+            text-decoration: 1px solid underline;
         }
     </style>
 </head>
 <body>
-    <div style="margin:" class="row">
+    <div style="margin-bottom: 40px;" class="row">
         <div style="float: left;" class="col col-md-6">
-            {{-- <img src="data:image/png;base64,{{ $main_image }}"> --}}
-            <a href="{{asset('icon/ANPEJ_MINISTERE.png')}}" target="_blank">
-                <img style="width:120px;" src="{{asset('icon/ANPEJ_MINISTERE.png')}}"
-                title="Logo" alt="piece Logo" >
-            </a>
+            <img src="{{ public_path('storage\anpej_ministre.jpg') }}" class="image img-thumbnail" height="100px" width="250px" />
         </div>
-        <div style="float: right;" class="col col-md-6">
+        <div style="float: right; font-style: italic;" class="col md-6">
             <p>No......................./ANPEJ/DG/SG/RRH/ARH</p>
             <p>Dakar, le ..........</p>
         </div>
-    </div><br>
-    <div style="margin-top: 100px;" class="row">
-        <div class="col col-md-6">
-            <h2 class="title" style="border: solid 5px black;
-                text-align:center;
-                width:500px;
-                margin:auto;
-                cellspacing:0;">
-                ORDRE DE MISSION
-            </h2>
+    </div><br><br><br><br><br><br>
+    <div style="margin: 20px;">
+        <h1 style="text-align:center; margin:auto;padding:20px;
+         border:10px solid gray; cellspacing:0; width:500px;">ORDRE DE MISSION</h1>
+    </div><br><br>
+    <div style="font-size: 20px;margin-left:20px; text-align:justify;" class="row">
+        <div style="margin-top:40px;" class="col col-md-12">
+            <div>
+                <label class="text" for="">Prenom et Nom:</label>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                    {{$OM_info->user->employe->prenom}} {{$OM_info->user->employe->nom}}</span>
+            </div>
+            <div style="margin-top:40px;">
+                <label class="text" for="">Fonction:</label>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                     {{$OM_info->user->employe->poste->poste}}</span>
+            </div>
+            <div style="margin-top:40px;">
+                <label class="text" for="">Destination:</label>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    {{$OM_info->destination}}</span>
+            </div>
+            <div style="margin-top:40px;">
+                <label class="text" for="">Objet de la Mission:</label>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    {{$OM_info->objet}}</span>
+            </div>
+            <div style="margin-top:40px;">
+                <label class="text" for="">Date de depart:</label>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    {{date('d-m-Y',strtotime($OM_info->date_depart))}}</span>
+            </div>
+            <div style="margin-top:40px;">
+                <label class="text" for="">Date de Retour:</label>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;
+                    {{date('d-m-Y',strtotime($OM_info->date_retour))}}</span>
+            </div>
+            <div style="margin-top:40px;">
+                <label class="text" for="">Moyen de transport:</label>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    {{$OM_info->voiture->matricule}}</span>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col col-md-6">
-            <div style="margin-top: 40px; margin-bottom:25px; height:50px;">
-                <label class="customers" style="text-decoration: underline;" for="">Prenom et Nom:</label>
-                <span style="font-weight: bolder;">{{$OM_info->user->employe->prenom}} {{$OM_info->user->employe->nom}}</span>
-            </div>
-            <div style="margin-top: 5px; margin-bottom:25px; height:50px;">
-                <label style="text-decoration: underline;" for="">Fonction:</label>
-                <span style="font-weight: bolder;">{{$OM_info->user->employe->poste->poste}}</span>
-            </div>
-            <div style="margin-top: 5px; margin-bottom:25px;height:50px;">
-                <label style="text-decoration: underline;" for="">Destination:</label>
-                <span style="font-weight: bolder;">{{$OM_info->destination}}</span>
-            </div>
-            <div style="margin-top: 5px; margin-bottom:25px;height:50px;">
-                <label style="text-decoration: underline;" for="">Objet de la Mission:</label>
-                <span style="font-weight: bolder;">{{$OM_info->objet}}</span>
-            </div>
-            <div style="margin-top: 5px; margin-bottom:25px;height:50px;">
-                <label style="text-decoration: underline;" for="">Date de depart:</label>
-                <span style="font-weight: bolder;">{{date('d-m-y',strtotime($OM_info->date_depart))}}</span>
-            </div>
-            <div style="margin-top: 5px; margin-bottom:25px;height:50px;">
-                <label style="text-decoration: underline;" for="">Date de Retour:</label>
-                <span style="font-weight: bolder;">{{date('d-m-y',strtotime($OM_info->date_retour))}}</span>
-            </div>
-            <div style="margin-top: 5px; margin-bottom:25px;height:50px;">
-                <label style="text-decoration: underline;" for="">Moyen de transport:</label>
-                <span style="font-weight: bolder;">hhhhhhh</span>
-            </div>
-        </div>
+        {{-- <div class="col col-md-6">
+            <span></span>
+        </div> --}}
     </div>
 </body>
 </html>

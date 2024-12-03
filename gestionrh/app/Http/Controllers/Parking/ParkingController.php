@@ -96,7 +96,15 @@ class ParkingController extends Controller
     public function edit(Request $request, int $parking)
     {
         $parking = Parking::findOrFail($parking);
-        return view('parking.edit', compact('parking'));
+        // $parking = Parking::where('id', $request->id)->get();
+        $etat = EtatValidVehicule::all();
+        $voiture = Voiture::where('active','1')->get();
+
+        $role_resp = RoleModel::where('name','Chauffeur')->get();
+        $role_resp = RoleModel::where('name','Chauffeur')->first();
+        $user = User::with('employe')->where('role_id', $role_resp->id)->get();
+
+        return view('parking.edit', compact('parking','etat','voiture','user'));
     }
     public function edit_validation(Request $request)
     {

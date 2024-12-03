@@ -77,11 +77,13 @@
                 <div class="row">
                     <div class="col col-md-6">
                         <div class="mt-3 mb-3">
-                            <label for="">Ordre de Mission</label>
-                            <a href="{{asset('storage/'.$fiche->piece_mission)}}" class="form-control" target="_blank">
-                                <img style="height: 40px; width:50px;" src="{{asset('storage/'.$fiche->piece_mission)}}"
-                                title="Ordre de mission" alt="Ordre de Mission" >
-                            </a>
+                            <label for="">Voiture Attribuée</label>
+                            <select name="id_vehicule" id="id_vehicule" class="form-select" readonly>
+                                <option value="">--Choisir un vehicule --</option>
+                                @foreach ($voiture as $voiture)
+                                    <option value="{{$voiture->id}}"{{ $voiture->id == $fiche->id_vehicule ? 'selected' : ''}} @readonly(true)>{{$voiture->marque}}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="col col-md-6">
@@ -100,9 +102,14 @@
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 <div class="mt-3 mb-3">
-                                        <label for="">Veuillez joindre l'ordre de mission</label>
-                                            <input type="file" name="piece_mission" id="piece_mission" class="form-control">
-                                            @error('piece_mission')
+                                        <label for="">Vehicule:</label>
+                                        <select name="id_vehicule" id="id_vehicule" class="form-select">
+                                                <option value="">--Choisir un vehicule--</option>
+                                            @foreach ($voiture as $voiture)
+                                                <option value="{{$voiture->id}}">{{$voiture->marque}} - {{$voiture->matricule}} </option>
+                                            @endforeach
+                                        </select>
+                                            @error('id_vehicule')
                                                 <div class="error">{{$message}}</div>
                                             @enderror
                                 </div>

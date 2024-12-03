@@ -33,4 +33,8 @@ class FicheTechnique extends Model
     {
         return $this->belongsTo(Employe::class, 'id_validateur');
     }
+    public function voiture()
+    {
+        return $this->belongsTo(Voiture::class, 'id_vehicule');
+    }
 }

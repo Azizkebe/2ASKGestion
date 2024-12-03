@@ -11,6 +11,7 @@ use App\Notifications\SendEmailToCloseDemandeOrdreMissionNotification;
 use App\Models\FicheTechnique;
 use App\Models\MoyenTransport;
 use App\Models\TypeMission;
+use App\Models\Voiture;
 use App\Models\RoleModel;
 use App\Http\Requests\FicheRequest;
 use App\Models\User;
@@ -84,10 +85,12 @@ class FicheTechniqueController extends Controller
         $fiche = FicheTechnique::findOrFail($fiche_technique);
         $type = TypeMission::all();
         $moyen = MoyenTransport::all();
+        $voiture = Voiture::where('active','1')->get();
         return view('fiche.detail', [
             'fiche'=>$fiche,
             'type'=>$type,
             'moyen'=>$moyen,
+            'voiture'=>$voiture,
         ]);
     }
     public function update(FicheModifRequest $request,int $fiche_technique)
@@ -95,14 +98,15 @@ class FicheTechniqueController extends Controller
        try {
         $fiche = FicheTechnique::findOrFail($fiche_technique);
 
-        $request->validate([
-            'piece_mission' => 'required|mimes:jpeg,png,jpg,pdf|max:2048',
-        ]);
+        // $request->validate([
+        //     'piece_mission' => 'required|mimes:jpeg,png,jpg,pdf|max:2048',
+        // ]);
 
-        $fileName = $request->file('piece_mission')->getClientOriginalName();
+        // $fileName = $request->file('piece_mission')->getClientOriginalName();
 
-        $filePath = $request->file('piece_mission')->storeAs('CloudOrdreMission/Mission',$fileName,'public');
-        $fiche->piece_mission = $filePath;
+        // $filePath = $request->file('piece_mission')->storeAs('CloudOrdreMission/Mission',$fileName,'public');
+
+        $fiche->id_vehicule = $request->id_vehicule;
         $fiche->commentaire = $request->comment;
 
         $reussi = $fiche->save();
@@ -117,7 +121,7 @@ class FicheTechniqueController extends Controller
                 new SendEmailToCloseDemandeOrdreMissionNotification($messages)
             );
             toastr()->success('Bravo, vous avez clocturer la demande');
-            return redirec()->route('fiche.validation');
+            return redirect()->route('fiche.validation');
         }
        } catch (Exception $e) {
         throw new Exception("Error Processing Request", 1);
@@ -129,13 +133,15 @@ class FicheTechniqueController extends Controller
     {
         try {
 
-            $main_image = base64_encode(file_get_contents(public_path('icon/ANPEJ_MINISTERE.png')));
+            // $main_image = base64_encode(file_get_contents(public_path('icon/ANPEJ_MINISTERE.png')));
 
             $OM_info = FicheTechnique::find($fiche_technique);
+            $ImagePath = public_path('ANPEJ_MINISTERE.png');
 
             $pdf = PDF::loadView('mission.ordre_mission',[
                 'OM_info'=>$OM_info,
-                // 'main_image'=>$main_image,
+                'ImagePath'=>$ImagePath,
+
             ]);
             return $pdf->download('fiche_ordre_de_mission'.$OM_info->user->employe->prenom.' '.$OM_info->user->employe->nom.'.pdf');
 

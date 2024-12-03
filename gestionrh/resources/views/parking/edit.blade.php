@@ -101,7 +101,48 @@
                         </div>
                     </div>
                 </div>
+                @if ($parking->active == '0')
+                <div style="margin-right: 3px;" class="row mt-2">
+                    <hr>
+                    <h4 class="card-title mt-3 ">Reponse à la demande</h4>
 
+                    <div class="col col-md-6">
+                        <div class="mt-3 mb-3">
+                            <label for="">Liste des vehicules disponible</label>
+                            <select name="id_vehicule" id="id_vehicule" class="form-select">
+                                <option value="">--Choisir un vehicule ---</option>
+                                @foreach ($voiture as $voiture)
+                                    <option value="{{$voiture->id}}">{{$voiture->marque}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mt-3 mb-3">
+                            <label for="">Liste des chauffeurs</label>
+                            <select name="id_chauffeur" id="id_chauffeur" class="form-select">
+                                <option value="">-- Choisir un chauffeur ---</option>
+                                @foreach ($user as $user)
+                                    <option value="{{$user->id}}">{{$user->employe->prenom}} {{$user->employe->nom}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mt-3 mb-3">
+                            <label for="">Statut du dossier</label>
+                            <select name="id_statut" id="" class="form-select">
+                                <option value="">-- Choisir un statut --</option>
+                                @foreach ($etat as $etat)
+                                    <option value="{{$etat->id}}">{{$etat->statut_valid_vehicule}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col col-md-6">
+                        <div class="mt-3 mb-3">
+                            <label for="">Commentaire</label>
+                            <textarea name="commentaire" id="commentaire" cols="15" rows="4" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+                @endif
               <div class="mt-3 form-group">
                 {{-- <button type="submit" id="save" name="save" class="btn btn-primary btn-block">Envoyer pour validation</button> --}}
                 {{-- <a href="{{route('parking.store')}}" type="submit" id="save" class="btn btn-primary btn-block">Enregistrer</a> --}}

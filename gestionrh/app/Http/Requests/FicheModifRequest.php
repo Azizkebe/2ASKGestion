@@ -22,13 +22,13 @@ class FicheModifRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'piece_mission'=>'required',
+            'id_vehicule'=>'required',
             'comment'=>'required',
         ];
     }
     public function messages(): array{
         return [
-            'piece_mission.required'=>'Veuillez joindre la fiche d\'ordre de mission',
+            'id_vehicule.required'=>'Veuillez choisir un vehicule pour la demande',
             'comment.required'=>'Veuillez donner un commentaire',
         ];
     }
