@@ -207,7 +207,11 @@
                                 <span class="sub-item">Liste de validation des demandes</span>
                               </a>
                             </li>
-
+                            <li>
+                                <a href="{{route('parking.validation_accepted')}}">
+                                  <span class="sub-item">Liste des demandes de vehicule acceptée</span>
+                                </a>
+                              </li>
                           </ul>
                         </div>
                     </li>

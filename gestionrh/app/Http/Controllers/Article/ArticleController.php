@@ -6,12 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
+use App\Models\Group;
 
 class ArticleController extends Controller
 {
     public function create()
     {
-        return view('article.create');
+        $group = Group::all();
+        return view('article.create', compact('group'));
     }
     public function liste()
     {
@@ -23,6 +25,7 @@ class ArticleController extends Controller
         $article->name_article = $request->name_article;
         $article->Quantite_stock = $request->quantite_stock;
         $article->Quantite_restante = $request->quantite_stock;
+        $article->id_group = $request->id_group;
 
         $article->save();
 

@@ -30,6 +30,15 @@
                         <span>{{$message}}</span>
                     @enderror
                 </div>
+                <div class="mt-3 mb-3">
+                    <label for="">Groupe d'article</label>
+                    <select name="id_group" id="id_group" class="form-select">
+                    <option value="" disabled='true'>-- Veuillez le group d'appartenance ---</option>
+                    @foreach ($group as $group)
+                        <option value="{{$group->id}}">{{$group->groupe}}</option>
+                    @endforeach
+                    </select>
+                </div>
               <div style="display: flex; justify-content:center;" class="form-group">
                 <button type="submit" class="btn btn-primary btn-block"> Ajouter l'article </button>
               </div>

@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class SendEmailToCloseDemandeOrdreMissionNotification extends Notification
+class SendEmailToCloseDemandeVehiculeNotification extends Notification
 {
     use Queueable;
     public $messages;
@@ -36,11 +36,10 @@ class SendEmailToCloseDemandeOrdreMissionNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-
-        ->subject('Avis de fermeture de la demande')
+        ->subject('Avis de fermeture de la demande de vehicule')
             ->line('Bonjour '.$this->messages['prenom'].' '. $this->messages['nom'])
-            ->line('Nous vous informons que votre demande d\'ordre de mission a été clocturée ')
-            ->line('Merci de consulter le statut de la demande');
+            ->line('Nous vous informons que votre demande de vehicule a été clocturée ')
+            ->line('Merci de bien consulter le statut de la demande');
     }
 
     /**

@@ -67,7 +67,7 @@
                                         class="btn btn-link btn-primary btn-lg"
                                         data-original-title="Edit"
                                         >
-                                        <a href="{{route('parking.edit',$park->id)}}" class="btn btn-link btn-primary btn-lg"><i class="fa fa-edit"></i></a>
+                                        <a href="" class="btn btn-link btn-primary btn-lg"><i class="fa fa-edit"></i></a>
                                         </button>
                                     </td>
                                     {{-- <td>

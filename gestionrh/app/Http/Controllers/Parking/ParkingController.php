@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Parking;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\ParkingEditRequest;
 use App\Models\Parking;
 use App\Models\RoleModel;
 use App\Models\User;
@@ -12,6 +13,7 @@ use App\Models\Voiture;
 use App\Http\Requests\ParkRequest;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\SendEmailToAfterDemandeVehiculeNotification;
+use App\Notifications\SendEmailToCloseDemandeVehiculeNotification;
 use Auth;
 
 class ParkingController extends Controller
@@ -96,15 +98,50 @@ class ParkingController extends Controller
     public function edit(Request $request, int $parking)
     {
         $parking = Parking::findOrFail($parking);
-        // $parking = Parking::where('id', $request->id)->get();
+
         $etat = EtatValidVehicule::all();
+
         $voiture = Voiture::where('active','1')->get();
 
         $role_resp = RoleModel::where('name','Chauffeur')->get();
         $role_resp = RoleModel::where('name','Chauffeur')->first();
         $user = User::with('employe')->where('role_id', $role_resp->id)->get();
 
+
         return view('parking.edit', compact('parking','etat','voiture','user'));
+    }
+    public function update(ParkingEditRequest $request, int $parking)
+    {
+        try {
+            $park = Parking::find($parking);
+
+            $role_resp = RoleModel::where('name','Comptable Matieres')->first();
+            $users_resp = User::where('role_id',$role_resp->id)->first();
+
+            $park->id_statut_validateur = $request->id_statut;
+            $park->id_vehicule = $request->id_vehicule;
+            $park->id_chauffeur = $request->id_chauffeur;
+            $park->commentaire = $request->commentaire;
+
+            $reussi = $park->save();
+            if($reussi){
+
+                $park->update(['active'=>'1','id_user_comptable'=>$users_resp->id_employe,'metrage_depart'=>$request->metrage_depart]);
+                $messages['prenom'] = $park->user->employe->prenom;
+                $messages['nom'] = $park->user->employe->nom;
+
+                Notification::route('mail',$park->user->employe->email)->notify(
+                    new SendEmailToCloseDemandeVehiculeNotification($messages)
+                );
+                toastr()->success('Bravo, Vous avez bien repondu à la demande de vehicule');
+                return redirect()->route('parking.validation');
+            }
+
+        } catch (Exception $e) {
+                throw new Exception("Erreur survenue lors de la modification", 1);
+
+        }
+
     }
     public function edit_validation(Request $request)
     {
@@ -169,6 +206,14 @@ class ParkingController extends Controller
             toastr()->error('Erreur, cette demande a été déjà envoyée');
             return redirect()->back();
         }
+    }
+    public function validation_accepted()
+    {
+        // dd(Auth::user()->employe->id);
+        $parking = Parking::where('active','1')
+                            ->Where('id_user_comptable', Auth::user()->employe->id)
+                            ->get();
+        return view('parking.demande_accepted', compact('parking'));
     }
 
 }

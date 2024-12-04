@@ -5,13 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Article extends Model
+class Group extends Model
 {
     use HasFactory;
     protected $guarded = [];
-
-    public function group()
-    {
-        return $this->belongsTo(Group::class,'id_group');
-    }
 }
