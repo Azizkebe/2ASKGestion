@@ -18,6 +18,7 @@ use App\Models\DetailFourniture;
 use App\Models\PanierArticle;
 use App\Models\DemandeFourniture;
 use App\Models\User;
+use App\Models\Group;
 use App\Models\EtatDemande;
 use App\Models\EtatValidMagasin;
 use App\Models\RoleModel;
@@ -68,7 +69,8 @@ class FournitureController extends Controller
     public function add()
     {
         $projet = Projet::all();
-        return view('fourniture.add', compact('projet'));
+        $group = Group::all();
+        return view('fourniture.add', compact('projet','group'));
     }
     public function store(FournitureRequest $request,Fourniture $fourni)
     {
@@ -76,6 +78,7 @@ class FournitureController extends Controller
        $user = Auth::user();
        $user_id = $user->id;
        $fourni->id_projet = $request->id_projet;
+       $fourni->id_group = $request->id_group;
        $fourni->motif = $request->motif;
        $fourni->user_id = $user_id;
        $fourni->bureau = $user->employe->service->service;
@@ -116,6 +119,7 @@ class FournitureController extends Controller
         // $Permission_compt = PermissionRoleModel::getPermission('Validation demande1', Auth::user()->role_id);
 
         $fourni = Fourniture::findOrFail($fourniture);
+
         if($fourni['id_etat_demande'] == '1' || $fourni['id_etat_demande'] == '2' || $fourni['id_etat_demande'] == '3')
         {
             $this->error = '1';
@@ -123,9 +127,11 @@ class FournitureController extends Controller
 
         $ComptableValid = PermissionRoleModel::getPermission('Validation demande', Auth::user()->role_id);
         $ComptablEdit = PermissionRoleModel::getPermission('Edit Validation', Auth::user()->role_id);
-        $article = Article::all();
+
+        $article = Article::where('id_group',$fourni->id_group)->get();
         $panier = PanierArticle::where('id_fourniture',$fourniture )->get();
 
+        // $article = Article::all();
         return view('fourniture.detail', [
             'fourni'=> $fourni,
             'article'=> $article,
@@ -156,7 +162,10 @@ class FournitureController extends Controller
     {
         $panier = PanierArticle::where('id', $request->id)->get();
 
-        $article = Article::all();
+        $first_article = PanierArticle::find($request->id);
+
+        // $article = Article::all();
+        $article = Article::where('id_group',$first_article->article->id_group)->get();
         return response()->json(['panier'=>$panier,'article'=>$article]);
     }
     public function delete(int $fourniture)

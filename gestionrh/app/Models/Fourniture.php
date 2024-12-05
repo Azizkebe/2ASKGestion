@@ -14,6 +14,10 @@ class Fourniture extends Model
     {
         return $this->belongsTo(Projet::class, 'id_projet');
     }
+    public function group()
+    {
+        return $this->belongsTo(Group::class,'id_group');
+    }
     public function etat()
     {
         return $this->belongsTo(EtatDemande::class, 'id_etat_demande');

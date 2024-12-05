@@ -69,6 +69,7 @@ class PanierArticleController extends Controller
             if($result)
             {
                 $article->update(['Quantite_restante'=> $article->Quantite_restante - $request->qte_accordee]);
+                $panier->update(['statut_article'=>'2']);
 
                 toastr()->success('la quantite a été bien accordée');
 

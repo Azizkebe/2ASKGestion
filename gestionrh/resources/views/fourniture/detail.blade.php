@@ -12,13 +12,17 @@
                 </div>
               <div class="card-body">
                 <div class="row mb-3">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label for="">Projet Initial</label>
                         <input type="text" class="form-control" name="" id="" value="{{$fourni->projet->name_projet}}" readonly>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label for="">Motif de la demande</label>
                         <input type="text" class="form-control" name="" id="" value="{{$fourni->motif}}" readonly>
+                    </div>
+                    <div class="col md-4">
+                        <label for="">Groupe</label>
+                        <input type="text" class="form-control" name="" id="" value="{{$fourni->group->groupe ?? ''}}" readonly>
                     </div>
                 </div>
             <div class="d-flex justify-content:end mb-3">
@@ -45,7 +49,6 @@
 
             </div>
             <div class="table-responsive">
-
                 <table
                   id="add-row"
                   class="display table table-striped table-hover">
@@ -61,6 +64,7 @@
                             <th>Quantite demandée</th>
                             <th>Quantite accordee</th>
                             <th>Projet</th>
+                            <th>Statut</th>
                             <th style="width: 10%">Action</th>
                         </tr>
                     </thead>
@@ -92,7 +96,9 @@
                               </td>
 
                               <td>{{$detail->fourniture->projet->name_projet}}</td>
-                              @if (!empty($ComptablEdit))
+                              <td>{{$detail->StatutArticle->statut_article_fourniture}}</td>
+                              {{-- @if (!empty($ComptablEdit)) --}}
+                              @if (($detail->active == false))
                               <td>
                                   <div class="form-button-action">
                                       <button
@@ -126,7 +132,7 @@
 
 
                &nbsp;&nbsp;
-                <a href="" type="reset" class="btn btn-danger btn-sm">Annuler</a>
+                <a href="{{route('fourniture.liste')}}" type="reset" class="btn btn-danger btn-sm">Annuler</a>
                 @endif
             </div>
         </div>
@@ -135,6 +141,7 @@
 <script>
     $(".editModal").click(function(){
                 var detail_id =  $(this).attr('data-bs-id');
+
                 $.ajax({
                 id:{detail_id},
                 url:"{{route('fourniture.editer_article')}}",
@@ -144,7 +151,11 @@
                 {
                     var panier = data.panier;
                     var article = data.article;
-                    $('#detail_id').val(panier[0]['id']);
+                    // var fourni = data.first_article;
+                    // console.log(fourni);
+
+                    $reussi = $('#detail_id').val(panier[0]['id']);
+                    console.log($reussi);
                     var htmlarticle = "<option value=''>Selectionner un article </option>";
 
                         for(let i=0; i< article.length; i++)

@@ -7,13 +7,15 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
 use App\Models\Group;
+use App\Models\Projet;
 
 class ArticleController extends Controller
 {
     public function create()
     {
+        $projet = Projet::all();
         $group = Group::all();
-        return view('article.create', compact('group'));
+        return view('article.create', compact('group','projet'));
     }
     public function liste()
     {
@@ -26,6 +28,7 @@ class ArticleController extends Controller
         $article->Quantite_stock = $request->quantite_stock;
         $article->Quantite_restante = $request->quantite_stock;
         $article->id_group = $request->id_group;
+        $article->id_projet = $request->id_projet;
 
         $article->save();
 
@@ -36,8 +39,9 @@ class ArticleController extends Controller
     public function editer(int $article)
     {
         $article = Article::findOrFail($article);
-
-        return view('article.edit', compact('article'));
+        $projet = Projet::all();
+        $group = Group::all();
+        return view('article.edit', compact('article','projet','group'));
     }
     public function update(Request $request, int $article)
     {
@@ -46,6 +50,10 @@ class ArticleController extends Controller
         $article->name_article = $request->name_article;
 
         $article->Quantite_stock = $request->quantite_stock;
+
+        $article->id_group = $request->id_group;
+
+        $article->id_projet = $request->id_projet;
 
         $article->update();
 

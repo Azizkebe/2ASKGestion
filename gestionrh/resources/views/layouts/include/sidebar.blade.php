@@ -275,11 +275,11 @@
                         </a>
                         <div class="collapse" id="projet1">
                           <ul class="nav nav-collapse subnav">
-                            <li>
+                            {{-- <li>
                               <a href="{{route('projet.create')}}">
                                 <span class="sub-item">Ajout un projet</span>
                               </a>
-                            </li>
+                            </li> --}}
                             <li>
                               <a href="{{route('projet.liste')}}">
                                 <span class="sub-item">Liste des projets</span>
@@ -308,11 +308,11 @@
                         </a>
                         <div class="collapse" id="article1">
                           <ul class="nav nav-collapse subnav">
-                            <li>
+                            {{-- <li>
                               <a href="{{route('article.create')}}">
                                 <span class="sub-item">Ajout un article</span>
                               </a>
-                            </li>
+                            </li> --}}
                             <li>
                               <a href="{{route('article.liste')}}">
                                 <span class="sub-item">Liste des articles</span>

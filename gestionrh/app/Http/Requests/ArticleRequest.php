@@ -23,6 +23,8 @@ class ArticleRequest extends FormRequest
     {
         return [
             'name_article'=>'required|unique:articles,name_article',
+            'id_group'=>'required',
+            'id_projet'=>'required',
         ];
     }
     public function messages(): array
@@ -30,6 +32,8 @@ class ArticleRequest extends FormRequest
         return [
             'name_article.required'=>'l\'article est requis',
             'name_article.unique'=>'l\'article existe déjà',
+            'id_group.required'=>'Vous devez choisir un groupe',
+            'id_projet.required'=>'Vous devez choisir un projet',
         ];
     }
 }

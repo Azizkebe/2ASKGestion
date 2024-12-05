@@ -24,6 +24,7 @@ class FournitureRequest extends FormRequest
         return [
             'id_projet'=>'required',
             'motif'=>'required',
+            'id_group'=>'required',
         ];
     }
     public function messages(): array
@@ -31,6 +32,7 @@ class FournitureRequest extends FormRequest
         return [
             'id_projet.required'=>'Le choix du projet est obligatoire',
             'motif.required'=>'Le motif de la demande est obligatoire',
+            'id_group.required'=>'Le choix du groupe est obligatoire',
         ];
     }
 }

@@ -21,8 +21,8 @@ class FicheTechniqueController extends Controller
 {
     public function liste()
     {
-        $fiche = FicheTechnique::all();
-
+        $fiche = FicheTechnique::where('id_user',Auth::user()->id)->get();
+        // dd(Auth::user()->id);
         return view('fiche.liste', compact('fiche'));
     }
     public function add()
@@ -52,6 +52,7 @@ class FicheTechniqueController extends Controller
             $fiche->type_mission = $request->id_type_mission;
             $fiche->frais = $request->cadre;
             $fiche->objectif = $request->objectif;
+
             $reussi = $fiche->save();
 
             if($reussi)
@@ -66,12 +67,29 @@ class FicheTechniqueController extends Controller
                 );
 
                 toastr()->success('la demande d\'ordre de mission est envoyée pour traitement avec succes');
-                return redirect()->back();
+                return redirect()->route('fiche.liste');
 
             }
         } catch (Exception $e) {
             throw new Exception("Erreur survenue lors de l'enregistrement", 1);
 
+        }
+    }
+    public function consulte_fiche(int $fiche_technique)
+    {
+        try {
+            $fiche = FicheTechnique::findOrFail($fiche_technique);
+        $type = TypeMission::all();
+        $moyen = MoyenTransport::all();
+        $voiture = Voiture::where('active','1')->get();
+        return view('fiche.consult', [
+            'fiche'=>$fiche,
+            'type'=>$type,
+            'moyen'=>$moyen,
+            'voiture'=>$voiture,
+        ]);
+        } catch (\Throwable $th) {
+            throw new Exception("Error Processing Request", 1);
         }
     }
     public function validation()

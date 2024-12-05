@@ -12,6 +12,8 @@
         .text{
             font-style: italic;
             text-decoration: 1px solid underline;
+            margin-left: 60px;
+            margin-right: 10px;
         }
     </style>
 </head>

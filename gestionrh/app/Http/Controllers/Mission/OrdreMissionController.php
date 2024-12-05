@@ -23,7 +23,7 @@ class OrdreMissionController extends Controller
     public function liste()
     {
         $ordre = OrdreMission::all();
-
+        // dd($ordre);
         return view('mission.liste', compact('ordre'));
     }
     public function add()

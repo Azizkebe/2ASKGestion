@@ -19,7 +19,25 @@
                 </div>
                 <div class="mt-3">
                     <label for="">Quantite de Stock</label>
-                    <input type="number" name="quantite_stock" min="0" class="form-control" id="quantite_stock" value="{{$article->quantite_stock}}">
+                    <input type="number" name="quantite_stock" min="0" class="form-control" id="quantite_stock" value="{{$article->Quantite_stock}}" readonly>
+                </div>
+                <div class="mt-3 mb-3">
+                    <label for="">Projet</label>
+                    <select name="id_projet" id="id_projet" class="form-select">
+                        <option value="">--Precisez le projet ---</option>
+                            @foreach ($projet as $projet)
+                                <option value="{{$projet->id}}"{{$projet->id == $article->id_projet ? 'selected' : ''}}>{{$projet->name_projet}}</option>
+                            @endforeach
+                    </select>
+                </div>
+                <div class="mt-3 mb-3">
+                    <label for="">Groupe d'article</label>
+                    <select name="id_group" id="id_group" class="form-select">
+                    <option value="">-- Veuillez le group d'appartenance ---</option>
+                    @foreach ($group as $group)
+                        <option value="{{$group->id}}"{{$group->id == $article->id_group ? 'selected' : ''}}>{{$group->groupe}}</option>
+                    @endforeach
+                    </select>
                 </div>
               <div style="display: flex; justify-content:center;" class="form-group">
                 <button type="submit" class="btn btn-primary btn-block"> Mettre à jour l'article </button>

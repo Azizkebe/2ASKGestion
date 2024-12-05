@@ -18,4 +18,8 @@ class PanierArticle extends Model
     {
         return $this->belongsTo(Article::class, 'id_article');
     }
+    public function StatutArticle()
+    {
+        return $this->belongsTo(StatutFourniture::class,'statut_article');
+    }
 }

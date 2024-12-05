@@ -25,7 +25,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Demandeur</th>
-                            <th>Activite</th>
+                            <th>Objet</th>
                             <th>Destination</th>
                             <th class="w-100">  Date de depart  </th>
                             <th>Date de retour</th>
@@ -33,37 +33,28 @@
                             <th>Moyen de transport</th>
                             <th>Frais à la charge</th>
                             <th>Statut</th>
-                            <th>Justificatif</th>
-                            <th>Commentaire</th>
-                            <th style="width: 10%">Action</th>
-                            <th>Suivi Demande</th>
-                            <th>Transmis à la DAFC</th>
+                            <th>Objectif</th>
                         </tr>
                             </thead>
                                 <tbody>
                                 @forelse ($fiche as $fiche)
                                 <tr>
-                                    <td></td>
-                                    <th></th>
-                                    <td></td>
-                                    <td></td>
-                                    <td class="w-100"></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{$fiche->id}}</td>
+                                    <th>{{$fiche->user->employe->prenom}} {{$fiche->user->employe->nom}}</th>
+                                    <td>{{$fiche->objet}}</td>
+                                    <td>{{$fiche->destination}}</td>
+                                    <td class="w-100">{{$fiche->date_depart}}</td>
+                                    <td>{{$fiche->date_retour}}</td>
+                                    <td>{{$fiche->typemission->type_mission}}</td>
+                                    <td>{{$fiche->moyentransport->moyen_transport}}</td>
+                                    <td>{{$fiche->frais}}</td>
+                                    <td>
+                                        {{$fiche->etat_statut_demande_mission->statut_demande_mission ?? 'En cours'}}
+                                    </td>
+                                    <td>
+                                        <div>{{$fiche->objectif}}</div>
+                                    </td>
 
-                                    <td>
-                                    </td>
-                                    <td>
-                                        <div>
-                                            <a href="" target="_blank">
-                                                <img style="height: 40px; width:50px;" src=""
-                                                title="justificatif" alt="piece justificative" >
-                                            </a>
-                                        </div>
-                                    </td>
-                                    <td></td>
                                     <td>
                                         <button
                                         type="button"
@@ -72,7 +63,7 @@
                                         class="btn btn-link btn-primary btn-lg"
                                         data-original-title="Edit"
                                         >
-                                        <a href="" class="btn btn-link btn-primary btn-lg"><i class="fa fa-edit"></i></a>
+                                        <a href="{{route('fiche.consulte',$fiche->id)}}" class="btn btn-link btn-primary btn-lg" title="les details des informations"><i class="fa fa-eye"></i></a>
                                         </button>
                                     </td>
                                     <td>

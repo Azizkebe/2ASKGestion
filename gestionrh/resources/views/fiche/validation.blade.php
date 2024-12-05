@@ -33,7 +33,7 @@
                             <th>Objectif</th>
                             <th style="width: 10%">Action</th>
                             {{-- @if ($fiche->etat_statut_demande_mission->statut_demande_mission == '2') --}}
-                            <th>Telecharger Ordre de Mission</th>
+                            {{-- <th>Telecharger Ordre de Mission</th> --}}
 
                             {{-- @endif --}}
                         </tr>

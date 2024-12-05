@@ -14,4 +14,8 @@ class Article extends Model
     {
         return $this->belongsTo(Group::class,'id_group');
     }
+    public function projet()
+    {
+        return $this->belongsTo(Projet::class,'id_projet');
+    }
 }

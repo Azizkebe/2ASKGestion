@@ -23,6 +23,7 @@
                         <th></th>
                         <th>Nom de l'article</th>
                         <th>Quantite Stock Disponible</th>
+                        <th>Projet</th>
                         <th>Groupe</th>
 
                         <th style="width: 10%">Action</th>
@@ -34,6 +35,7 @@
                                 <td></td>
                                 <td>{{$article->name_article}}</td>
                                 <td>{{$article->Quantite_stock}}</td>
+                                <td>{{$article->projet->name_projet ?? ''}}</td>
                                 <td>{{$article->group->groupe ?? ''}}</td>
                                 <td>
                                     <div class="form-button-action">

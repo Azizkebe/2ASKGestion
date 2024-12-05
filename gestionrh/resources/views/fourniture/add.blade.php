@@ -27,6 +27,21 @@
                         <span class="error">{{$message}}</span>
                     @enderror
                 </div>
+                <div class="mt-3 mb-3">
+                    <label for="">Groupe Article</label>
+                    <select name="id_group" id="id_group" class="form-select">
+                        <option value="">-- Choisir le groupe d'article</option>
+                            @foreach ($group as $group)
+                                <option value="{{$group->id}}">{{$group->groupe}}</option>
+                            @endforeach
+                    </select>
+                    @error('id_group')
+                        <div class="error">{{$message}}</div>
+                    @enderror
+                </div>
+                    <span style="color: rgba(80, 95, 232, 0.714)">Group_1: .................</span><br>
+                    <Span style="color:rgba(34, 2, 1, 0.917)">Group_2:  ..................</Span>
+
                 <div class="mt-3">
                     <label for=""><sup class="error">*</sup> Motif de la demande</label>
                     <input type="text" name="motif" class="form-control" id="motif">
@@ -38,7 +53,8 @@
                 </div>
               <div class="mt-3 form-group">
                 <button type="submit" class="btn btn-primary btn-block"> Ajouter l'article</button>&nbsp;&nbsp;
-                <button type="reset" class="btn btn-danger btn-block"> Annuler</button>
+                <a href="{{route('fourniture.liste')}}" class="btn btn-danger btn-block">Annuler</a>
+                {{-- <button type="reset" class="btn btn-danger btn-block"> Annuler</button> --}}
               </div>
             </form>
           </div>
