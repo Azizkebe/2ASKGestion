@@ -395,6 +395,8 @@ Route::middleware('userAdmin')->group(function(){
         Route::post('add', [FicheTechniqueController::class, 'store'])->name('fiche.store');
         Route::get('validation',[FicheTechniqueController::class, 'validation'])->name('fiche.validation');
         Route::get('consult_fiche/{fiche_technique}',[FicheTechniqueController::class, 'consulte_fiche'])->name('fiche.consulte');
+        Route::get('detail_valid_sup/{fiche_technique}',[FicheTechniqueController::class, 'edit_valid_sup'])->name('fiche_valid_sup.detail');
+        Route::put('update_valid_sup/{fiche_technique}',[FicheTechniqueController::class, 'update_valid_sup'])->name('fiche.update_valid_sup');
         Route::get('detail_valid/{fiche_technique}',[FicheTechniqueController::class, 'detail_valid'])->name('fiche.detail');
         Route::put('update_valid/{fiche_technique}',[FicheTechniqueController::class, 'update'])->name('fiche.update');
         Route::get('dowload_OM/{fiche_technique}',[FicheTechniqueController::class, 'downloadpdf'])->name('fiche.download');

@@ -7,12 +7,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
 use App\Http\Requests\FicheModifRequest;
 use App\Notifications\SendEmailToAfterDemandeOrdreMissionNotification;
+use App\Notifications\SendEmailToCloseSupDemandeOrdreMissionNotification;
 use App\Notifications\SendEmailToCloseDemandeOrdreMissionNotification;
 use App\Models\FicheTechnique;
 use App\Models\MoyenTransport;
 use App\Models\TypeMission;
 use App\Models\Voiture;
 use App\Models\RoleModel;
+use App\Models\PermissionRoleModel;
+use App\Models\StatutDemandeOMSup;
 use App\Http\Requests\FicheRequest;
 use App\Models\User;
 use Auth;
@@ -42,6 +45,7 @@ class FicheTechniqueController extends Controller
 
             $user = Auth::user();
             $user_id = $user->id;
+            $id_superieur = $user->employe->service->id_chef_service;
 
             $fiche->objet = $request->objet;
             $fiche->id_user = $user_id;
@@ -57,12 +61,13 @@ class FicheTechniqueController extends Controller
 
             if($reussi)
             {
-                $fiche->update(['id_validateur'=>$users_resp->id_employe,'id_statut_demande_mission'=> '1']);
+                // $fiche->update(['id_validateur'=>$users_resp->id_employe,'id_statut_demande_mission'=> '1']);
+                $fiche->update(['id_superieur'=>$user->employe->service->id_chef_service,'id_statut_demande_OM_Sup'=> '1']);
 
-                $messages_resp['prenom'] = $users_resp->employe->prenom;
-                $messages_resp['nom'] = $users_resp->employe->nom;
+                $messages_resp['prenom'] = $user->employe->service->employe->prenom;
+                $messages_resp['nom'] = $user->employe->service->employe->nom;
 
-                Notification::route('mail',$users_resp->email)->notify(
+                Notification::route('mail',$user->employe->service->employe->email)->notify(
                     new SendEmailToAfterDemandeOrdreMissionNotification($messages_resp)
                 );
 
@@ -92,11 +97,63 @@ class FicheTechniqueController extends Controller
             throw new Exception("Error Processing Request", 1);
         }
     }
+    public function edit_valid_sup(int $fiche_technique)
+    {
+        $fiche = FicheTechnique::findOrFail($fiche_technique);
+        $type = TypeMission::all();
+        $moyen = MoyenTransport::all();
+        $statutOM = StatutDemandeOMSup::all();
+
+        return view('fiche.detail_valide_sup', [
+            'fiche'=>$fiche,
+            'type'=>$type,
+            'moyen'=>$moyen,
+            'statutOM'=>$statutOM,
+
+        ]);
+
+    }
+    public function update_valid_sup(Request $request, int $fiche_technique)
+    {
+        try {
+            $role_resp = RoleModel::where('name','Ressource Humaine')->first();
+            $users_resp = User::where('role_id',$role_resp->id)->first();
+
+            $fiche = FicheTechnique::findOrFail($fiche_technique);
+
+            $fiche->id_statut_demande_OM_Sup = $request->id_statut_OM;
+            // $fiche->commentaire = $request->comment;
+
+            $reussi = $fiche->save();
+
+            if($reussi)
+            {
+                $fiche->update(['id_statut_demande_OM_Sup'=>'2','id_validateur'=>$users_resp->id_employe,'id_statut_demande_mission'=> '1']);
+
+                $messages['prenom'] = $fiche->user->employe->prenom;
+                $messages['nom'] = $fiche->user->employe->nom;
+
+                Notification::route('mail',$fiche->user->employe->email)->notify(
+                    new SendEmailToCloseSupDemandeOrdreMissionNotification($messages)
+                );
+                toastr()->success('Bravo, vous avez repondu à la demande');
+                return redirect()->route('fiche.validation');
+            }
+           } catch (Exception $e) {
+            throw new Exception("Error Processing Request", 1);
+
+           }
+    }
     public function validation()
     {
-        $fiche = FicheTechnique::where('id_validateur',Auth::user()->employe->id)->get();
+        // $fiche = FicheTechnique::where('id_validateur',Auth::user()->employe->id)->get();
+        $Validation_OM = PermissionRoleModel::getPermission('Validation Ordre de Mission', Auth::user()->role_id);
 
-        return view('fiche.validation', compact('fiche'));
+        $fiche = FicheTechnique::where('id_superieur',Auth::user()->employe->id)
+                                ->orWhere('id_validateur',Auth::user()->employe->id)->get();
+
+        return view('fiche.validation', compact('fiche','Validation_OM'));
+        // return view('fiche.validation', compact('fiche'));
     }
     public function detail_valid(int $fiche_technique)
     {
@@ -104,11 +161,16 @@ class FicheTechniqueController extends Controller
         $type = TypeMission::all();
         $moyen = MoyenTransport::all();
         $voiture = Voiture::where('active','1')->get();
+
+        $Validation_OM = PermissionRoleModel::getPermission('Validation Ordre de Mission', Auth::user()->role_id);
+
         return view('fiche.detail', [
             'fiche'=>$fiche,
             'type'=>$type,
             'moyen'=>$moyen,
             'voiture'=>$voiture,
+            'Validation_OM'=>$Validation_OM,
+
         ]);
     }
     public function update(FicheModifRequest $request,int $fiche_technique)

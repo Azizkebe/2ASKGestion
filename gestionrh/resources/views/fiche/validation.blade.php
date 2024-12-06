@@ -56,7 +56,26 @@
                                     <td>
                                         <div>{{$fiche->objectif}}</div>
                                     </td>
+                                    @if ($fiche->id_statut_demande_OM_Sup == '1')
                                     <td>
+                                        <button
+                                        type="button"
+                                        data-bs-toggle="tooltip"
+                                        title=""
+                                        class="btn btn-link btn-primary btn-lg"
+                                        data-original-title="Edit"
+                                        >
+                                        <a href="{{route('fiche_valid_sup.detail', $fiche->id)}}" class="btn btn-link btn-primary btn-lg"><i class="fa fa-edit"></i></a>
+
+                                        </button>
+                                    </td>
+                                    @endif
+                                    <td>
+                                        @if (!empty($Validation_OM))
+                                        <a href="{{route('fiche.detail', $fiche->id)}}" class="btn btn-link btn-primary btn-lg"><i class="fa fa-edit"></i></a>
+                                        @endif
+                                    </td>
+                                    {{-- <td>
                                         <button
                                         type="button"
                                         data-bs-toggle="tooltip"
@@ -66,9 +85,8 @@
                                         >
                                         <a href="{{route('fiche.detail', $fiche->id)}}" class="btn btn-link btn-primary btn-lg"><i class="fa fa-edit"></i></a>
                                         </button>
-                                    </td>
+                                    </td> --}}
                                     <td>
-
                                         @if ($fiche->id_statut_demande_mission == '2')
                                         <a href="{{route('fiche.download', $fiche->id)}}" class="btn btn-link btn-secondary btn-lg"><i class="fa fa-download"></i></a>
                                         @endif

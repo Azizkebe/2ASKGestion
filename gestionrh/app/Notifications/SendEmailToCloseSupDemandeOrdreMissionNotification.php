@@ -7,17 +7,16 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class SendEmailToAfterDemandeOrdreMissionNotification extends Notification
+class SendEmailToCloseSupDemandeOrdreMissionNotification extends Notification
 {
     use Queueable;
-    public $messages_resp;
-
+    public $messages;
     /**
      * Create a new notification instance.
      */
     public function __construct($message)
     {
-        $this->messages_resp = $message;
+        $this->messages = $message;
     }
 
     /**
@@ -36,10 +35,10 @@ class SendEmailToAfterDemandeOrdreMissionNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-        ->subject('Nouvelle demande d\'ordre de mission')
-        ->line('Bonjour '.$this->messages_resp['prenom'].' '. $this->messages_resp['nom'])
-        ->line('Vous avez une nouvelle notification de demande d\'ordre de mission pour validation')
-        ->line('Veuillez-vous connecter sur la plateforme');
+        ->subject('Information sur la demande de vehicule')
+            ->line('Bonjour '.$this->messages['prenom'].' '. $this->messages['nom'])
+            ->line('Nous vous informons que votre superieur vient de repondre à la demande d\'ordre de mission ')
+            ->line('Merci de consulter le statut de la demande');
     }
 
     /**
