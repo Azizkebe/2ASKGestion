@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('statut_demande_missions', function (Blueprint $table) {
             $table->id();
-            $table->enum('statut_demande_mission',['En cours','Valider','Rejeter'])->default('En cours');
+            $table->enum('statut_demande_mission',['En cours','Validé','Rejeté'])->default('En cours');
             $table->timestamps();
         });
     }

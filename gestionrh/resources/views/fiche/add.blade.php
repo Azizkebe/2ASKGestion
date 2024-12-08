@@ -92,7 +92,7 @@
                     </div>
                 </div>
                 <div class="mt-3 form-group">
-                    <button type="submit" class="btn btn-success btn-block">Envoyer la fiche technique</button>
+                    <button type="submit" class="btn btn-success btn-block">Envoyer la fiche technique pour validation</button>
                     <button type="reset" class="btn btn-danger btn-block">Annuler</button>
                 </div>
             </form>

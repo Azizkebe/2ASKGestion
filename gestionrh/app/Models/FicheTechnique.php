@@ -37,4 +37,8 @@ class FicheTechnique extends Model
     {
         return $this->belongsTo(Voiture::class, 'id_vehicule');
     }
+    public function statut_demande_OM()
+    {
+        return $this->belongsTo(StatutDemandeOMSup::class, 'id_statut_demande_OM_Sup');
+    }
 }

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('fiche_techniques', function (Blueprint $table) {
             $table->string('id_statut_demande_OM_Sup')->after('id_superieur')->nullable();
+
         });
     }
 

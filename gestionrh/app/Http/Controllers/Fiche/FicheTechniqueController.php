@@ -128,7 +128,7 @@ class FicheTechniqueController extends Controller
 
             if($reussi)
             {
-                $fiche->update(['id_statut_demande_OM_Sup'=>'2','id_validateur'=>$users_resp->id_employe,'id_statut_demande_mission'=> '1']);
+                $fiche->update(['id_statut_demande_OM_Sup'=>$request->id_statut_OM,'id_validateur'=>$users_resp->id_employe,'id_statut_demande_mission'=> '1']);
 
                 $messages['prenom'] = $fiche->user->employe->prenom;
                 $messages['nom'] = $fiche->user->employe->nom;

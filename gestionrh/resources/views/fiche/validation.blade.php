@@ -29,7 +29,10 @@
                             <th>Type de mission</th>
                             <th>Moyen de transport</th>
                             <th>Frais à la charge</th>
-                            <th>Statut</th>
+                            <th>Statut de validation du N+1</th>
+                            @if (!empty($Validation_OM))
+                            <th>Statut de validation RH</th>
+                            @endif
                             <th>Objectif</th>
                             <th style="width: 10%">Action</th>
                             {{-- @if ($fiche->etat_statut_demande_mission->statut_demande_mission == '2') --}}
@@ -51,13 +54,18 @@
                                     <td>{{$fiche->moyentransport->moyen_transport}}</td>
                                     <td>{{$fiche->frais}}</td>
                                     <td>
-                                        {{$fiche->etat_statut_demande_mission->statut_demande_mission ?? 'En cours'}}
+                                        {{$fiche->statut_demande_OM->statut_demande_OM_Sup}}
                                     </td>
+                                    @if (!empty($Validation_OM))
+                                    <td>
+                                    {{$fiche->etat_statut_demande_mission->statut_demande_mission}}
+                                    </td>
+                                    @endif
                                     <td>
                                         <div>{{$fiche->objectif}}</div>
                                     </td>
                                     @if ($fiche->id_statut_demande_OM_Sup == '1')
-                                    <td>
+                                        <td>
                                         <button
                                         type="button"
                                         data-bs-toggle="tooltip"
@@ -70,6 +78,22 @@
                                         </button>
                                     </td>
                                     @endif
+                                    @if($fiche->id_statut_demande_OM_Sup != '2')
+                                    {{-- <td>
+                                        <button
+                                        type="button"
+                                        data-bs-toggle="tooltip"
+                                        title=""
+                                        class="btn btn-link btn-primary btn-lg"
+                                        data-original-title="Edit"
+                                        >
+                                        <a href="{{route('fiche.consulte', $fiche->id)}}" class="btn btn-link btn-primary btn-lg"><i class="fa fa-eye"></i></a>
+
+                                        </button>
+                                    </td> --}}
+
+                                    @endif
+
                                     <td>
                                         @if (!empty($Validation_OM))
                                         <a href="{{route('fiche.detail', $fiche->id)}}" class="btn btn-link btn-primary btn-lg"><i class="fa fa-edit"></i></a>

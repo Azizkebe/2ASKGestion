@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('statut_demande_o_m_sups', function (Blueprint $table) {
             $table->id();
-            $table->enum('statut_demande_OM_Sup',['En cours','Validée','Rejetée'])->default('En cours');
+            $table->enum('statut_demande_OM_Sup',['En cours','Validé','Rejeté'])->default('En cours');
             $table->timestamps();
         });
     }

@@ -32,7 +32,8 @@
                             <th>Type de mission</th>
                             <th>Moyen de transport</th>
                             <th>Frais à la charge</th>
-                            <th>Statut</th>
+                            <th>Statut de validation du N+1</th>
+                            <th>Statut de validation du RH</th>
                             <th>Objectif</th>
                         </tr>
                             </thead>
@@ -49,7 +50,12 @@
                                     <td>{{$fiche->moyentransport->moyen_transport}}</td>
                                     <td>{{$fiche->frais}}</td>
                                     <td>
-                                        {{$fiche->etat_statut_demande_mission->statut_demande_mission ?? 'En cours'}}
+                                        {{$fiche->statut_demande_OM->statut_demande_OM_Sup}}
+                                    </td>
+                                    <td>
+                                        @if ($fiche->active == true)
+                                        {{$fiche->etat_statut_demande_mission->statut_demande_mission}}
+                                        @endif
                                     </td>
                                     <td>
                                         <div>{{$fiche->objectif}}</div>
