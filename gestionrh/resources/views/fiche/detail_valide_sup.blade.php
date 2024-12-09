@@ -40,15 +40,16 @@
                             <input type="radio" name="cadre" id="anpej" value="ANPEJ" {{ $fiche->frais == 'ANPEJ' ? 'checked' : ''}}> ANPEJ
                             <input type="radio" name="cadre" id="organisation" value="ORGANISATION" {{ $fiche->frais == 'ORGANISATION' ? 'checked' : ''}}> ORGANISATION
                         </div>
-                        <div>
-                            
-                        
-                            @if($fiche->piece_justificative)
-                            <a href="{{asset('storage/'.$fiche->piece_justificative) ?? ''}}" target="_blank">
-                                <img style="height: 40px; width:50px;" src="{{asset('storage/'.$fiche->piece_justificative) ?? ''}}"
-                                title="justificatif" alt="piece justificative" >
-                            </a>
-                            @endif
+                        <div class="mt-3 mb-3">
+                            <label for="">Piece Justicative:</label>
+                            <div>
+                                @if($fiche->piece_justificative)
+                                <a href="{{asset('storage/'.$fiche->piece_justificative) ?? ''}}" target="_blank">
+                                    <img style="height: 40px; width:50px;" src="{{asset('storage/'.$fiche->piece_justificative) ?? ''}}"
+                                    title="justificatif" alt="piece justificative" >
+                                </a>
+                                @endif
+                            </div>
                         </div>
                     </div>
                     <div class="col md-6">
