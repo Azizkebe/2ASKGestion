@@ -10,6 +10,7 @@ use App\Models\RoleModel;
 use App\Models\User;
 use App\Models\EtatValidVehicule;
 use App\Models\Voiture;
+use App\Models\PermissionRoleModel;
 use App\Http\Requests\ParkRequest;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\SendEmailToAfterDemandeVehiculeNotification;
@@ -92,9 +93,45 @@ class ParkingController extends Controller
     {
 
         $parking = Parking::where('id_validateur',Auth::user()->employe->id)->get();
+        $valid_park = PermissionRoleModel::getPermission('Chef Parking', Auth::user()->role_id);
 
-        return view('parking.validation', compact('parking'));
+        return view('parking.validation', compact('parking','valid_park'));
     }
+    public function edit_valid(Request $request)
+    {
+        $parking = Parking::where('id', $request->id)->get();
+        return response()->json(['parking'=>$parking]);
+    }
+    public function update_valid_metrage(Request $request)
+    {
+        $park = Parking::find($request->id);
+
+
+        if($park->metrage_retour != NULL )
+        {
+            return toastr()->error('Desolé, Vous avez déjà ajouter le metrage');
+            return response()->json(['success'=>true,'msg'=>'Desolé, Vous avez déjà ajouter le metrage']);
+            return redirect()->back();
+        }
+        else {
+            $park->metrage_retour = $request->metrage_retour;
+            $reponse = $park->save();
+
+            if($response)
+            {
+                    return toastr()->success('Bravo, Vous avez ajouté le metrage de retour');
+                    return response()->json(['success'=>true,'msg'=>'Bravo, Vous avez ajouté le metrage de retour']);
+                    return redirect()->route('parking.validation');
+            }
+            else
+            {
+                    return toastr()->error('Desolé, Impossible de faire le metrage');
+                    return redirect()->back();
+            }
+
+        }
+    }
+
     public function edit(Request $request, int $parking)
     {
         $parking = Parking::findOrFail($parking);

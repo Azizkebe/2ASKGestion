@@ -346,6 +346,8 @@ Route::middleware('userAdmin')->group(function(){
         Route::get('index',[ParkingController::class, 'index'])->name('parking.liste');
         Route::get('add',[ParkingController::class, 'add'])->name('parking.add');
         Route::post('add',[ParkingController::class, 'store'])->name('parking.store');
+        Route::get('edit_valid_metrage',[ParkingController::class,'edit_valid'])->name('parking.edit_valid_metrage');
+        Route::post('update_valid_metrage',[ParkingController::class,'update_valid_metrage'])->name('parking.update_valid_metrage');
         Route::get('edit/{parking}',[ParkingController::class, 'edit'])->name('parking.edit');
         Route::put('update/{parking}',[ParkingController::class,'update'])->name('parking.update');
         Route::get('demande_carburant/{parking}',[ParkingController::class, 'demande_carburant'])->name('parking.demande_carburant');

@@ -10,6 +10,9 @@
                 </div>
                 </div>
                 <div class="card-body">
+
+                    @include('parking.modal.metrage')
+
                     <div class="table-responsive">
                     <table
                         id="add-row"
@@ -31,6 +34,9 @@
                             <th>Justificatif</th>
                             <th>Statut</th>
                             <th style="width: 10%">Action</th>
+                            @if (!empty($valid_park))
+                            <th>Metrage Retour</th>
+                            @endif
                             {{-- <th>Faire une demande de carburant</th> --}}
                         </tr>
                             </thead>
@@ -70,6 +76,21 @@
                                         <a href="{{route('parking.edit',$park->id)}}" class="btn btn-link btn-primary btn-lg"><i class="fa fa-edit"></i></a>
                                         </button>
                                     </td>
+                                    <td>
+                                        @if ((!empty($valid_park))&&($park->id_statut_validateur == '2'))
+                                        <button
+                                        type="button"
+                                        data-bs-toggle="tooltip"
+                                        title=""
+                                        class="btn btn-link btn-primary btn-lg"
+                                        data-original-title="Edit"
+                                        >
+                                        {{-- <a href="" class="btn btn-link btn-primary btn-lg"><i class="fa fa-plus"></i></a> --}}
+                                        <a href="" class="btn btn-link btn-primary btn-lg MetrageRetour" data-bs-toggle="modal" data-bs-target="#MetrageRetour" data-bs-id="{{$park->id}}"><i class="fa fa-plus"></i></a>
+
+                                        </button>
+                                        @endif
+                                    </td>
                                     {{-- <td>
                                         <div class="form-button-action">
                                             @if ($park->id_statut_validateur == '2')
@@ -96,5 +117,43 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function(){
+        $(".MetrageRetour").click(function(){
+            var detail_id =  $(this).attr('data-bs-id');
+            console.log(detail_id);
+            $.ajax({
+                id:{detail_id},
+                url:"{{route('parking.edit_valid_metrage')}}",
+                type:"GET",
+                data:{id:detail_id},
+                success:function(data){
+                    var park = data.parking;
+                    $('#detail_id').val(detail_id);
+                    var metrage1 = $('#metrage_retour').val(park[0]['metrage_retour']);
+                    var metrage1 = $('#metrage_depart').val(park[0]['metrage_depart']);
 
+                }
+            });
+        });
+        $('#storevalidMetrage').submit(function(){
+        var formData = $(this).serialize();
+        $.ajax({
+        url:"{{route('parking.update_valid_metrage')}}",
+        type:"POST",
+        data:formData,
+        success:function(data){
+            console.log(data);
+            if(data.success == true){
+
+                location.reload();
+            }
+            else{
+                alert(data.msg);
+                }
+            }
+        });
+        });
+    });
+</script>
 @endsection
