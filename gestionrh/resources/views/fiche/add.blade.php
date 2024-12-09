@@ -10,7 +10,7 @@
             <div style="display: flex; justify-content:end;">
                 <a href="{{route('fiche.liste')}}" class="btn btn-success btn-sm">Liste des fiches techniques</a>
             </div>
-            <form method="POST" action="{{route('fiche.store')}}">
+            <form method="POST" action="{{route('fiche.store')}}" enctype="multipart/form-data">
                 @csrf
                 @method('POST')
                 <div class="row">
@@ -49,6 +49,13 @@
                             <label for="">Frais à la charge</label><br>
                             <input type="radio" name="cadre" id="anpej" value="ANPEJ" checked> ANPEJ
                             <input type="radio" name="cadre" id="organisation" value="ORGANISATION"> ORGANISATION
+                        </div><br>
+                        <div class="mt-3 mb-9">
+                            <label for="">Piece Justicative: TDR ou Autres docs utils</label>
+                            <input type="file" name="piece_justificative" id="piece_justificative" class="form-control">
+                            @error('piece_justificative')
+                                <div class="error">{{$message}}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="col md-6">

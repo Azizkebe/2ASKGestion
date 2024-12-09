@@ -30,6 +30,7 @@ class FicheRequest extends FormRequest
             'id_type_mission'=>'required|integer',
             'id_moyen_transport'=>'required|integer',
             'objectif'=>'required',
+            'piece_justificative'=>'required|mimes:jpeg,png,jpg,pdf|max:2048',
         ];
     }
     public function messages():array
@@ -42,6 +43,7 @@ class FicheRequest extends FormRequest
             'id_type_mission.required'=>'Veuillez choisir le type de mission',
             'id_moyen_transport.required'=>'Veuillez choisir un moyen de transport',
             'objectif.required'=>'Faites une description de l\'objectif de la mission',
+            'piece_justification.required'=>'Veuillez joindre une piece justificative',
         ];
     }
 }

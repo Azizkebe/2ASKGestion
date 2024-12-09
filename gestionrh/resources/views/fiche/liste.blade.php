@@ -35,6 +35,7 @@
                             <th>Statut de validation du N+1</th>
                             <th>Statut de validation du RH</th>
                             <th>Objectif</th>
+                            <th>Piece justificative</th>
                         </tr>
                             </thead>
                                 <tbody>
@@ -60,7 +61,16 @@
                                     <td>
                                         <div>{{$fiche->objectif}}</div>
                                     </td>
-
+                                    <td>
+                                        <div>
+                                            @if($fiche->piece_justificative)
+                                            <a href="{{asset('storage/'.$fiche->piece_justificative) ?? ''}}" target="_blank">
+                                                <img style="height: 40px; width:50px;" src="{{asset('storage/'.$fiche->piece_justificative) ?? ''}}"
+                                                title="justificatif" alt="piece justificative" >
+                                            </a>
+                                            @endif
+                                        </div>
+                                    </td>
                                     <td>
                                         <button
                                         type="button"

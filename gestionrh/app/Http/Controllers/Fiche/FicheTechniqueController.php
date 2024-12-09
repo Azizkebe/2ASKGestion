@@ -57,6 +57,16 @@ class FicheTechniqueController extends Controller
             $fiche->frais = $request->cadre;
             $fiche->objectif = $request->objectif;
 
+            // $request->validate([
+            //     'piece_justificative' => 'required|mimes:jpeg,png,jpg,pdf|max:2048',
+            // ]);
+
+            $fileName = $request->file('piece_justificative')->getClientOriginalName();
+
+            $filePath = $request->file('piece_justificative')->storeAs('CloudFicheTechnique/Fiche',$fileName,'public');
+
+            $fiche->piece_justificative = $filePath;
+
             $reussi = $fiche->save();
 
             if($reussi)
@@ -75,7 +85,8 @@ class FicheTechniqueController extends Controller
                 return redirect()->route('fiche.liste');
 
             }
-        } catch (Exception $e) {
+        }
+        catch (Exception $e) {
             throw new Exception("Erreur survenue lors de l'enregistrement", 1);
 
         }
