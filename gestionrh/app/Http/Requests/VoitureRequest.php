@@ -24,6 +24,7 @@ class VoitureRequest extends FormRequest
         return [
             'marque'=>'required',
             'matricule'=>'required',
+            'id_type_vehicule'=>'required',
         ];
     }
     public function messages(): array{
@@ -31,6 +32,7 @@ class VoitureRequest extends FormRequest
         return [
             'marque.required'=>'la marque est requise',
             'matricule.required'=>'le matricule est requis',
+            'id_type_vehicule.required'=>'le choix du type de vehicule est obligatoire',
         ];
     }
 }

@@ -25,6 +25,8 @@ class ArticleRequest extends FormRequest
             'name_article'=>'required|unique:articles,name_article',
             'id_group'=>'required',
             'id_projet'=>'required',
+            'quantite_stock'=>'required',
+            'prix_unitaire'=>'required',
         ];
     }
     public function messages(): array
@@ -34,6 +36,8 @@ class ArticleRequest extends FormRequest
             'name_article.unique'=>'l\'article existe déjà',
             'id_group.required'=>'Vous devez choisir un groupe',
             'id_projet.required'=>'Vous devez choisir un projet',
+            'quantite_stock.required'=>'La quantite de stock est requise',
+            'prix_unitaire.required'=>'Vous devez preciser le prix unitaire de l\'article',
         ];
     }
 }

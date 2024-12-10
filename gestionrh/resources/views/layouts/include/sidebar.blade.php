@@ -343,7 +343,7 @@
                           <ul class="nav nav-collapse subnav">
                             <li>
                               <a href="{{route('voiture.liste')}}">
-                                <span class="sub-item">Ajout d'une voiture </span>
+                                <span class="sub-item">Liste des voitures </span>
                               </a>
                             </li>
                             <li>

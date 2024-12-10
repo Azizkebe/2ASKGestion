@@ -21,6 +21,18 @@
                     <label for="">Matricule</label>
                     <input type="text" name="matricule" id="matricule" class="form-control">
                 </div>
+                <div class="mt-3">
+                    <label for="">Type de Vehicule:</label>
+                    <select name="id_type_vehicule" id="id_type_vehicule" class="form-select">
+                        <option value="">-- Choississez le type de vehicule --</option>
+                        @foreach ($type_vehicule as $type)
+                            <option value="{{$type->id}}">{{$type->type_vehicule}}</option>
+                        @endforeach
+                    </select>
+                    @error('id_type_vehicule')
+                        <div class="error">{{$message}}</div>
+                    @enderror
+                </div>
               <div style="display: flex; justify-content:center;" class="mt-3 form-group">
                 <button type="submit" class="btn btn-primary btn-block w-50">Enregistrer</button>
               </div>

@@ -21,6 +21,12 @@
                     <label for="">Quantite de Stock</label>
                     <input type="number" name="quantite_stock" min="0" class="form-control" id="quantite_stock" value="{{$article->Quantite_stock}}" readonly>
                 </div>
+                <div class="mt-3">
+                    <label for="">Prix Unitaire</label>
+                    <div>
+                        <input type="number" name="prix_unitaire" id="prix_unitaire" min="0" value="{{$article->prix_unitaire}}" class="form-control">
+                    </div>
+                </div>
                 <div class="mt-3 mb-3">
                     <label for="">Projet</label>
                     <select name="id_projet" id="id_projet" class="form-select">

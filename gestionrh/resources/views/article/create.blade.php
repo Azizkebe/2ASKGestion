@@ -27,7 +27,16 @@
                 </div>
                 <div>
                     @error('quantite_stock')
-                        <span>{{$message}}</span>
+                        <span class="error">{{$message}}</span>
+                    @enderror
+                </div>
+                <div class="mt-3">
+                    <label for="">Prix Unitaire</label>
+                    <div>
+                        <input type="number" name="prix_unitaire" id="prix_unitaire" min="0" class="form-control">
+                    </div>
+                    @error('prix_unitaire')
+                        <div class="error">{{$message}}</div>
                     @enderror
                 </div>
                 <div class="mt-3 mb-3">

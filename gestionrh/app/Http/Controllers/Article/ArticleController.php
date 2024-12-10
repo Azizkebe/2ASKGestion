@@ -8,6 +8,7 @@ use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
 use App\Models\Group;
 use App\Models\Projet;
+use Carbon\Carbon;
 
 class ArticleController extends Controller
 {
@@ -24,11 +25,33 @@ class ArticleController extends Controller
     }
     public function store(ArticleRequest $request, Article $article)
     {
+        $mounthMapping = [
+            'JAN'=>'JANVIER',
+            'FEB'=>'FEVRIER',
+            'MAR'=>'MARS',
+            'APR'=>'AVRIL',
+            'MAY'=>'MAI',
+            'JUN'=>'JUIN',
+            'JUL'=>'JUILLET',
+            'AUG'=>'AOUT',
+            'SEP'=>'SEPTEMBRE',
+            'OCT'=>'OCTOBRE',
+            'NOV'=>'NOVEMBRE',
+            'DEC'=>'DECEMBRE',
+        ];
+
+        $currentMounth = strtoupper(Carbon::now()->format('M'));
+
+        $currentMonthFrench = $mounthMapping[$currentMounth] ?? '';
+
         $article->name_article = $request->name_article;
         $article->Quantite_stock = $request->quantite_stock;
         $article->Quantite_restante = $request->quantite_stock;
+        $article->prix_unitaire = $request->prix_unitaire;
         $article->id_group = $request->id_group;
         $article->id_projet = $request->id_projet;
+        $article->mois = $currentMonthFrench;
+        $article->annee = Carbon::now()->format('Y');
 
         $article->save();
 
@@ -50,6 +73,8 @@ class ArticleController extends Controller
         $article->name_article = $request->name_article;
 
         $article->Quantite_stock = $request->quantite_stock;
+
+        $article->prix_unitaire = $request->prix_unitaire;
 
         $article->id_group = $request->id_group;
 

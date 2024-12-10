@@ -171,7 +171,9 @@ class FicheTechniqueController extends Controller
         $fiche = FicheTechnique::findOrFail($fiche_technique);
         $type = TypeMission::all();
         $moyen = MoyenTransport::all();
-        $voiture = Voiture::where('active','1')->get();
+        $voiture = Voiture::where('active','1')
+                            ->where('id_type_vehicule','1')
+                            ->get();
 
         $Validation_OM = PermissionRoleModel::getPermission('Validation Ordre de Mission', Auth::user()->role_id);
 

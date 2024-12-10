@@ -22,6 +22,7 @@
                       <tr>
                         <th>Marque</th>
                         <th>Matricule</th>
+                        <th>Type de Vehicule</th>
 
                         <th style="width: 10%">Action</th>
                         <th>Status</th>
@@ -32,6 +33,7 @@
                             <tr>
                                 <td>{{$voiture->marque}}</td>
                                 <td>{{$voiture->matricule}}</td>
+                                <td>{{$voiture->type_vehicule->type_vehicule ?? ''}}</td>
                                 <td>
                                     <div class="form-button-action">
                                         <button

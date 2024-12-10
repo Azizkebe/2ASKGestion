@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\VoitureRequest;
 use App\Models\Voiture;
+use App\Models\TypeVehicule;
 use App\Models\RoleModel;
 use App\Models\Employe;
 use App\Models\User;
@@ -19,12 +20,14 @@ class VoitureController extends Controller
     }
     public function add()
     {
-        return view('voiture.add');
+        $type_vehicule = TypeVehicule::all();
+        return view('voiture.add', compact('type_vehicule'));
     }
     public function store(VoitureRequest $request, Voiture $voiture)
     {
         $voiture->marque = $request->marque;
         $voiture->matricule = $request->matricule;
+        $voiture->id_type_vehicule = $request->id_type_vehicule;
 
         $voiture->save();
 
@@ -34,8 +37,9 @@ class VoitureController extends Controller
     }
     public function edit(int $vehicule)
     {
+        $type_vehicule = TypeVehicule::all();
         $voiture = Voiture::findOrFail($vehicule);
-        return view('voiture.edit',compact('voiture'));
+        return view('voiture.edit',compact('voiture','type_vehicule'));
     }
     public function update(int $vehicule, Request $request)
     {
@@ -44,6 +48,7 @@ class VoitureController extends Controller
 
         $voiture->marque = $request->marque;
         $voiture->matricule = $request->matricule;
+        $voiture->id_type_vehicule = $request->id_type_vehicule;
 
         $voiture->save();
 

@@ -21,6 +21,14 @@
                     <label for="">Matricule</label>
                     <input type="text" name="matricule" id="matricule" class="form-control" value="{{$voiture->matricule}}">
                 </div>
+                <div class="mt-3">
+                    <select name="id_type_vehicule" id="id_type_vehicule" class="form-select">
+                        <option value="">-- Choississez le type de vehicule</option>
+                        @foreach ($type_vehicule as $type)
+                            <option value="{{$type->id}}" {{$type->id == $voiture->id_type_vehicule ? 'selected':''}}>{{$type->type_vehicule}}</option>
+                        @endforeach
+                    </select>
+                </div>
               <div style="display: flex; justify-content:center;" class="mt-3 form-group">
                 <button type="submit" class="btn btn-primary btn-block w-50">Mettre à jour les informations</button>
               </div>
