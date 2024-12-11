@@ -9,6 +9,7 @@ use App\Models\Article;
 use App\Models\Group;
 use App\Models\Projet;
 use Carbon\Carbon;
+use PDF;
 
 class ArticleController extends Controller
 {
@@ -95,5 +96,15 @@ class ArticleController extends Controller
 
         return redirect()->back();
 
+    }
+    public function bon_entree(Request $request)
+    {
+            $article = Article::where('mois',$request->mois)
+                            ->Where('annee',$request->annee)
+                            ->get();
+            // dd($article);
+            $pdf = PDF::loadView('article.bon_entree',compact('article'))->setPaper('a4','landscape');
+            return $pdf->download('bon_entree'.$request->mois.' '.$request->annee.'.pdf');
+            // return view('article.bon_entree', compact('article'));
     }
 }

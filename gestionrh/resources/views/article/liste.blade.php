@@ -16,8 +16,7 @@
                 <div class="table-responsive">
                   <table
                     id="add-row"
-                    class="display table table-striped table-hover"
-                  >
+                    class="display table table-striped table-hover">
                     <thead>
                       <tr>
                         <th></th>
@@ -78,10 +77,27 @@
             <div class="card-header">
                 <h4 class="card-title">BON D'ENTREE</h4>
             </div>
-            <form action="">
+            <form action="{{route('article.bon_entree')}}" method="POST">
+                @csrf
+
                 <div class="mt-1">
-                    <input type="text" name="" id="" placeholder="JANVIER">
-                    <input type="text" name="" id="" placeholder="2024">
+                    {{-- <input type="text" name="mois" id="mois" placeholder="JANVIER"> --}}
+                    <select name="mois" id="mois">
+                        <option value="">--choisir le mois --</option>
+                        <option value="JANVIER">JANVIER</option>
+                        <option value="FEVRIER">FEVRIER</option>
+                        <option value="MARS">MARS</option>
+                        <option value="AVRIL">AVRIL</option>
+                        <option value="MAI">MAI</option>
+                        <option value="JUIN">JUIN</option>
+                        <option value="JUILLET">JUILLET</option>
+                        <option value="AOUT">AOUT</option>
+                        <option value="SEPTEMBRE">SEPTEMBRE</option>
+                        <option value="OCTOBRE">OCTOBRE</option>
+                        <option value="NOVEMBRE">NOVEMBRE</option>
+                        <option value="DECEMBRE">DECEMBRE</option>
+                    </select>
+                    <input type="text" name="annee" id="annee" placeholder="2024">
                     <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-download"></i> Bon Entree</button>
                 </div>
 
