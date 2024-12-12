@@ -17,12 +17,18 @@ class ArticleController extends Controller
     {
         $projet = Projet::all();
         $group = Group::all();
+
         return view('article.create', compact('group','projet'));
     }
     public function liste()
     {
+        $group = Group::all();
         $article = Article::all();
-        return view('article.liste', compact('article'));
+        $projet = Projet::all();
+        $projets = Projet::all();
+        // dd($projets);
+
+        return view('article.liste', compact('article','group','projet','projets'));
     }
     public function store(ArticleRequest $request, Article $article)
     {
@@ -99,12 +105,38 @@ class ArticleController extends Controller
     }
     public function bon_entree(Request $request)
     {
-            $article = Article::where('mois',$request->mois)
-                            ->Where('annee',$request->annee)
+        $group = Group::all();
+        $currentYear = $request->annee;
+        $mouth = $request->mois;
+        $today = Carbon::now()->format('d');
+        $info_grp = Article::where('id_group',$request->id_group)->first();
+            $article = Article::where('annee',$currentYear)
+                                ->Where('annee',$currentYear)
+                                ->Where('id_group',$request->id_group)
+                                ->Where('id_projet',$request->id_projet)
+                                ->orWhere('mois',$mouth)
+                                ->get();
+            $pdf = PDF::loadView('article.bon_entree',compact('article','currentYear','mouth','today','group','info_grp'))->setPaper('a4','landscape');
+            return $pdf->download('bon_entree_'.$mouth.' '.$currentYear.'.pdf');
+            // return view('article.bon_entree', compact('article','currentYear','mouth','today','group','info_grp'));
+    }
+    public function bon_sortie(Request $request)
+    {
+
+        $group = Group::all();
+        $currentYear = $request->annee;
+        $mouth = $request->mois;
+        $today = Carbon::now()->format('d');
+        $info_grp = Article::where('id_group',$request->id_group)->first();
+            $article = Article::where('annee',$currentYear)
+                            ->Where('annee',$currentYear)
+                            ->Where('id_group',$request->id_group)
+                            ->Where('id_projet',$request->id_projet)
+                            ->orWhere('mois',$mouth)
                             ->get();
             // dd($article);
-            $pdf = PDF::loadView('article.bon_entree',compact('article'))->setPaper('a4','landscape');
-            return $pdf->download('bon_entree'.$request->mois.' '.$request->annee.'.pdf');
-            // return view('article.bon_entree', compact('article'));
+            $pdf = PDF::loadView('article.bon_sortie',compact('article','currentYear','mouth','today','group','info_grp'))->setPaper('a4','landscape');
+            return $pdf->download('bon_sortie_'.$mouth.' '.$currentYear.'.pdf');
+            // return view('article.bon_sortie', compact('article','currentYear','mouth','today','group','info_grp'));
     }
 }

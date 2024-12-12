@@ -269,6 +269,7 @@ Route::middleware('userAdmin')->group(function(){
         Route::put('/update/{article}',[ArticleController::class,'update'])->name('article.update');
         Route::get('/delete/{article}',[ArticleController::class,'delete'])->name('article.delete');
         Route::post('bon_entree',[ArticleController::class,'bon_entree'])->name('article.bon_entree');
+        Route::post('bon_sortie',[ArticleController::class,'bon_sortie'])->name('article.bon_sortie');
     });
     Route::prefix('setting')->group(function(){
         Route::get('create',[YearController::class,'create'])->name('setting.create');

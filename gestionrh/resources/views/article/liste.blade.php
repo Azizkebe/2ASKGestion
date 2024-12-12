@@ -23,6 +23,7 @@
                         <th>Nom de l'article</th>
                         <th>Quantite Stock Disponible</th>
                         <th>Prix Unitaire</th>
+                        <th>Quantite de Stock restante</th>
                         <th>Projet</th>
                         <th>Groupe</th>
                         <th>Mois et Annee Enregistrement</th>
@@ -37,6 +38,7 @@
                                 <td>{{$article->name_article}}</td>
                                 <td>{{$article->Quantite_stock}}</td>
                                 <td>{{$article->prix_unitaire}} FCFA</td>
+                                <td style="color:red;">{{$article->Quantite_restante ?? ''}}</td>
                                 <td>{{$article->projet->name_projet ?? ''}}</td>
                                 <td>{{$article->group->groupe ?? ''}}</td>
                                 <td>{{$article->mois}} {{$article->annee}}</td>
@@ -79,9 +81,7 @@
             </div>
             <form action="{{route('article.bon_entree')}}" method="POST">
                 @csrf
-
                 <div class="mt-1">
-                    {{-- <input type="text" name="mois" id="mois" placeholder="JANVIER"> --}}
                     <select name="mois" id="mois">
                         <option value="">--choisir le mois --</option>
                         <option value="JANVIER">JANVIER</option>
@@ -98,7 +98,21 @@
                         <option value="DECEMBRE">DECEMBRE</option>
                     </select>
                     <input type="text" name="annee" id="annee" placeholder="2024">
-                    <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-download"></i> Bon Entree</button>
+                    <div class="mt-3 mb-3">
+                        <select name="id_group" id="id_group">
+                            <option value="">-Choisir un groupe-</option>
+                            @foreach ($group as $groupe)
+                                <option value="{{$groupe->id}}">{{$groupe->groupe}}</option>
+                            @endforeach
+                        </select>
+                        <select name="id_projet" id="projet">
+                            <option value="">- Choisir un projet -</option>
+                            @foreach ($projet as $projet)
+                                <option value="{{$projet->id}}">{{$projet->name_projet}}</option>
+                            @endforeach
+                        </select>
+                        <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-download"></i> Bon Entree</button>
+                    </div>
                 </div>
 
             </form>
@@ -107,11 +121,41 @@
             <div class="card-header">
                 <h4 class="card-title">BON DE SORTIE</h4>
             </div>
-            <form action="">
+            <form action="{{route('article.bon_sortie')}}" method="POST">
+                @csrf
                 <div class="mt-1">
-                    <input type="text" name="" id="" placeholder="JANVIER">
-                    <input type="text" name="" id="" placeholder="2024">
-                    <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-download"></i> Bon Sortie</button>
+                    <select name="mois" id="mois">
+                        <option value="">--choisir le mois --</option>
+                        <option value="JANVIER">JANVIER</option>
+                        <option value="FEVRIER">FEVRIER</option>
+                        <option value="MARS">MARS</option>
+                        <option value="AVRIL">AVRIL</option>
+                        <option value="MAI">MAI</option>
+                        <option value="JUIN">JUIN</option>
+                        <option value="JUILLET">JUILLET</option>
+                        <option value="AOUT">AOUT</option>
+                        <option value="SEPTEMBRE">SEPTEMBRE</option>
+                        <option value="OCTOBRE">OCTOBRE</option>
+                        <option value="NOVEMBRE">NOVEMBRE</option>
+                        <option value="DECEMBRE">DECEMBRE</option>
+                    </select>
+                    <input type="text" name="annee" id="annee" placeholder="2024">
+                    <div class="mt-3 mb-3">
+                        <select name="id_group" id="id_group">
+                            <option value="">-Choisir un groupe-</option>
+                            @foreach ($group as $groupe)
+                                <option value="{{$groupe->id}}">{{$groupe->groupe}}</option>
+                            @endforeach
+                        </select>
+                        <select name="id_projet" id="id_projet">
+                            <option value="">- Choisir un projet -</option>
+                            @foreach ($projets as $projet)
+                                <option value="{{$projet->id}}">{{$projet->name_projet}}</option>
+                            @endforeach
+                        </select>
+                        <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-download"></i> Bon Sortie</button>
+
+                    </div>
                 </div>
 
             </form>

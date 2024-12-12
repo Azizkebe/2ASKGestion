@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>BON ENTREE</title>
+    <title>BON SORTIE</title>
     <style>
         body{
             text-align: justify;
@@ -45,7 +45,7 @@
     </div>
     <div style="margin: 3px;">
         <h1 style="text-align:center; margin:auto;padding:20px;
-          width:500px;">BON D'ENTREE</h1>
+          width:500px;">BON DE SORTIE</h1>
           <p style="text-align:center; margin:auto;
           width:500px;">Des Matieres du {{$info_grp->group->groupe ?? ''}} dans le projet de {{$info_grp->projet->name_projet ?? ''}}</p>
     </div>
@@ -81,16 +81,16 @@
                                @forelse ($article as $article)
                                 <tr>
                                   <td>{{$article->name_article}}</td>
-                                  <td style="text-align:right;">{{$article->Quantite_stock}}</td>
+                                  <td style="text-align:right;">{{$article->Quantite_stock - $article->Quantite_restante}}</td>
                                   <td></td>
                                   <td style="text-align:right;">{{$article->prix_unitaire}} FCFA</td>
-                                  <td style="text-align:right;">{{$article->prix_unitaire  * $article->Quantite_stock}} FCFA</td>
+                                  <td style="text-align:right;">{{$article->prix_unitaire  * ($article->Quantite_stock - $article->Quantite_restante)}} FCFA</td>
 
                                 </tr>
 
                                 <?php
-                                    $total_unite = $total_unite + $article->Quantite_stock ;
-                                    $total_price = $total_price + $article->prix_unitaire  * $article->Quantite_stock;
+                                    $total_unite = $total_unite + ($article->Quantite_stock - $article->Quantite_restante) ;
+                                    $total_price = $total_price + $article->prix_unitaire  * ($article->Quantite_stock - $article->Quantite_restante);
                                 ?>
 
                                 @empty
@@ -133,21 +133,5 @@
         </div>
     </div>
 </div><br>
-{{-- <div style="margin:5px; clear:both;">
-    <div class="row">
-        <div class="col col-md-4">
-            <span style="text-decoration:underline 1px solid;"> La comptable des Matieres</span>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        </div>
-        <div class="col col-md-4">
-            <span style="text-decoration:underline 1px solid; text-align:right;">Le DAFC</span>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        </div>
-        <div class="col col-md-4">
-
-            <span style="text-decoration:underline 1px solid; text-align:right;">L'Administrateur des Matieres</span>
-        </div>
-    </div>
-</div> --}}
 </body>
 </html>
