@@ -134,6 +134,42 @@
                &nbsp;&nbsp;
                 <a href="{{route('fourniture.liste')}}" type="reset" class="btn btn-danger btn-sm">Annuler</a>
                 @endif
+               @if ((!empty($valid_sup))&&($fourni->active_validateur == '0'))
+               <hr>
+               <div class="card">
+                <div class="card-header">
+                    <h4>Reponse à la demande</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row mt-3 mb-3">
+                        <div class="col col-md-12">
+                            <form action="{{route('fourniture.valid_sup',$fourni->id)}}" method="POST">
+                                @csrf
+                                @method('PUT')
+                                <div class="mt-3">
+                                    <label for="">Statut</label>
+                                     <select name="id_statut_demande" id="id_statut_demande" class="form-select" required>
+                                         <option value="">-- choississez un statut --</option>
+                                         @foreach ($etatdemande as $statut)
+                                             <option value="{{$statut->id}}">{{$statut->statut_demande}}</option>
+                                         @endforeach
+                                     </select>
+                                </div>
+                                <div class="mt-3">
+                                    <label for="">Commentaire</label>
+                                    <textarea name="commentaire" id="commentaire" cols="15" rows="5" class="form-control"></textarea>
+                                </div><br>
+                                <button type="submit" class="btn-primary btn-sm text-white">Envoyer la reponse</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+               </div>
+               @else
+                @if ($error == '1')
+                <a href="{{route('fourniture.validation')}}" class="btn btn-primary btn-sm"><i class="fa fa-arrow-left "></i> Retour</a>
+                @endif
+               @endif
             </div>
         </div>
     </div>

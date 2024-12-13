@@ -342,6 +342,7 @@ Route::middleware('userAdmin')->group(function(){
         // Route::get('/validation/edit_valid/{fourniture}',[FournitureController::class,'edit_validation'])->name('fourniture.edit_valid');
         Route::put('/validation/update_valid/{fourniture}',[FournitureController::class,'update_validation'])->name('fourniture.update_valid');
         Route::put('/validation/update/{fourniture}',[FournitureController::class,'update_fourniture'])->name('fourniture.update');
+        Route::put('/valid_sup/{fourniture}',[FournitureController::class,'valid_sup'])->name('fourniture.valid_sup');
         Route::get('/delete/{fourniture}',[FournitureController::class,'delete'])->name('fourniture.delete');
     });
     Route::prefix('parking')->group(function(){

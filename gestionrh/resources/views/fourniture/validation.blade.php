@@ -60,7 +60,7 @@
                                         >
                                         <a href="{{route('fourniture.detail', $demande->id)}}"><i class="fa fa-info"></i></a>
 
-                                        @if ($demande->id_user_comptable == NULL || $demande->id_user_comptable == '')
+                                        {{-- @if ($demande->id_user_comptable == NULL || $demande->id_user_comptable == '')
                                         <button
                                         type="button"
                                         data-bs-toggle="tooltip"
@@ -69,7 +69,7 @@
                                         data-original-title="Edit Task">
                                         <a href="{{route('fourniture.edit', $demande->id)}}"><i class="fa fa-edit"></i></a>
                                         </button>
-                                        @endif
+                                        @endif --}}
                                         @if (!empty($comptableAdd))
                                         <button
                                         type="button"

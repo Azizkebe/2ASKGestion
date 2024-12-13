@@ -116,10 +116,10 @@ class FournitureController extends Controller
     }
     public function detail(int $fourniture)
     {
-        // $Permission_compt = PermissionRoleModel::getPermission('Validation demande1', Auth::user()->role_id);
+        $valid_sup = PermissionRoleModel::getPermission('validateur_sup', Auth::user()->role_id);
 
         $fourni = Fourniture::findOrFail($fourniture);
-
+        $etatdemande = EtatDemande::all();
         if($fourni['id_etat_demande'] == '1' || $fourni['id_etat_demande'] == '2' || $fourni['id_etat_demande'] == '3')
         {
             $this->error = '1';
@@ -139,9 +139,49 @@ class FournitureController extends Controller
             'error'=> $this->error,
             'ComptableValid'=>$ComptableValid,
             'ComptablEdit'=>$ComptablEdit,
+            'valid_sup'=>$valid_sup,
+            'etatdemande'=>$etatdemande,
 
 
         ]);
+    }
+    public function valid_sup(int $fourniture, Request $request)
+    {
+        $role_resp = RoleModel::where('name','Comptable Matieres')->first();
+        $users_resp = User::where('role_id',$role_resp->id)->first();
+
+        $fourni = Fourniture::findOrFail($fourniture);
+        $fourni->id_etat_demande = $request->id_statut_demande;
+
+        $reussi = $fourni->save();
+
+        if($reussi)
+        {
+            $fourni->update(['active_validateur'=>true]);
+
+            if($fourni->id_etat_demande == '2')
+            {
+
+            $fourni->update(['id_user_comptable'=>$users_resp->id_employe]);
+
+            $messages['prenom'] = $fourni->user->employe->prenom;
+            $messages['nom'] = $fourni->user->employe->nom;
+
+            $messages_resp['prenom'] = $users_resp->employe->prenom;
+            $messages_resp['nom'] = $users_resp->employe->nom;
+
+            Notification::route('mail', $fourni->user->employe->email)->notify(
+                new SendEmailToResponseSupDemandeNotification($messages)
+            );
+            Notification::route('mail', $users_resp->employe->email)->notify(
+                new SendEmailToAfterValidSupNotification($messages_resp)
+            );
+
+            return toastr()->success('Bravo, vous venez de repondre à la demande');
+            return redirect()->route('fourniture.validation');
+            }
+
+        }
     }
 
     public function store_detail(Request $request, int $fourniture)

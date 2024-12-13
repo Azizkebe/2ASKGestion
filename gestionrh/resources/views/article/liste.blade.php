@@ -26,7 +26,8 @@
                         <th>Quantite de Stock restante</th>
                         <th>Projet</th>
                         <th>Groupe</th>
-                        <th>Mois et Annee Enregistrement</th>
+                        <th>Mois Enregistrement</th>
+                        <th>Annee Enregistrement</th>
 
                         <th style="width: 10%">Action</th>
                       </tr>
@@ -41,7 +42,8 @@
                                 <td style="color:red;">{{$article->Quantite_restante ?? ''}}</td>
                                 <td>{{$article->projet->name_projet ?? ''}}</td>
                                 <td>{{$article->group->groupe ?? ''}}</td>
-                                <td>{{$article->mois}} {{$article->annee}}</td>
+                                <td>{{$article->mois}}</td>
+                                <td>{{$article->annee}}</td>
                                 <td>
                                     <div class="form-button-action">
                                         <button
@@ -66,7 +68,7 @@
                                 </td>
                                 </tr>
                              @empty
-                                 <td colspan="5">Aucune donnée trouvé</td>
+                                 <td colspan="8">Aucune donnée trouvée</td>
                              @endforelse
                             </tbody>
                     </table>
