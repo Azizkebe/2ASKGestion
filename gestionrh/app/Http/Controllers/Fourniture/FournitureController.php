@@ -149,7 +149,7 @@ class FournitureController extends Controller
     {
         $role_resp = RoleModel::where('name','Comptable Matieres')->first();
         $users_resp = User::where('role_id',$role_resp->id)->first();
-
+        dd($users_resp);
         $fourni = Fourniture::findOrFail($fourniture);
         $fourni->id_etat_demande = $request->id_statut_demande;
 
@@ -229,9 +229,22 @@ class FournitureController extends Controller
         {
 
         $four = Fourniture::where('id','=',$fourniture)->first();
-
-        $four->update(['id_validateur'=> $user->employe->service->id_chef_service,
-         'id_etat_demande'=>'1']);
+        if($user->role->name != 'Ressource Humaine' || $user->role->name != 'DAFC'
+        || $user->role->name != 'Chef de Service' || $user->role->name != 'DOFI')
+            {
+                $role_resp = RoleModel::where('name','Secrétaire General')->first();
+                $users_resp = User::where('role_id', $role_resp->id)->first();
+                dd($users_resp->employe);
+                // $four->update(['id_validateur'=> $user->employe->service->id_chef_service,
+                // 'id_etat_demande'=>'1']);
+            }
+            else{
+                $role_resp = RoleModel::where('name','Secrétaire General')->first();
+                $users_resp = User::where('role_id', $role_resp->id)->first();
+                dd('vrai');
+                // $four->update(['id_validateur'=> $user->employe->service->id_chef_service,
+                // 'id_etat_demande'=>'1']);
+            }
 
         if($four)
         {

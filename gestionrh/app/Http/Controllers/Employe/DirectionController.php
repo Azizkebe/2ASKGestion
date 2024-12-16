@@ -6,17 +6,21 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\DirectionRequest;
 use App\Models\Direction;
+use App\Models\Employe;
 
 class DirectionController extends Controller
 {
     public function create()
     {
-        return view('direction.create');
+
+        $employe = Employe::all();
+        return view('direction.create', compact('employe'));
     }
     public function store(DirectionRequest $request, Direction $direction)
     {
         try {
             $direction->direction = $request->direction;
+            $direction->id_chef_direction = $request->id_chef_direction;
 
             $direction->save();
 
@@ -37,8 +41,9 @@ class DirectionController extends Controller
     public function editer($direction)
     {
         $direction = Direction::findOrFail($direction);
+        $employe = Employe::all();
 
-        return view('direction.edit', compact('direction'));
+        return view('direction.edit', compact('direction','employe'));
     }
     public function update(DirectionRequest $request, $direction)
     {
@@ -46,6 +51,7 @@ class DirectionController extends Controller
             $direction = Direction::findOrFail($direction);
 
             $direction->direction = $request->direction;
+            $direction->id_chef_direction = $request->id_chef_direction;
 
             $direction->update();
 

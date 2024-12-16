@@ -27,6 +27,14 @@
                     @enderror
                 </div>
                 </div>
+                <div class="form-group input-group">
+                    <select name="id_chef_direction" id="id_chef_direction" class="form-select">
+                       <option value="">--Choisir le chef de direction --</option>
+                        @foreach ($employe as $chef)
+                       <option value="{{$chef->id}}">{{$chef->prenom}} {{$chef->nom}}</option>
+                       @endforeach
+                    </select>
+                </div>
               <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-block"> Enregister les modifications la direction  </button>
               </div>
