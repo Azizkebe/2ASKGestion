@@ -129,8 +129,6 @@
                 </table>
                 @if ($error != '1')
                 <a href="{{route('fourniture_cash', $fourni)}}" class="btn btn-success btn-sm">Envoyer pour validation</a>
-
-
                &nbsp;&nbsp;
                 <a href="{{route('fourniture.liste')}}" type="reset" class="btn btn-danger btn-sm">Annuler</a>
                 @endif
