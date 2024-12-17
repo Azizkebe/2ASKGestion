@@ -229,22 +229,36 @@ class FournitureController extends Controller
         {
 
         $four = Fourniture::where('id','=',$fourniture)->first();
-        if($user->role->name != 'Ressource Humaine' || $user->role->name != 'DAFC'
-        || $user->role->name != 'Chef de Service' || $user->role->name != 'DOFI')
-            {
+
+        if(($user->employe->poste->poste == 'Responsable Informatique')||($user->employe->poste->poste == 'Chef Antenne')||($user->employe->poste->poste =='Chauffeur')||($user->employe->poste->poste =='Secrétaire General'))
+        {
+                dd('respo');
                 $role_resp = RoleModel::where('name','Secrétaire General')->first();
                 $users_resp = User::where('role_id', $role_resp->id)->first();
-                dd($users_resp->employe);
+
+                $four->update(['id_validateur'=> $users_resp->employe->id,
+                'id_etat_demande'=>'1']);
+
                 // $four->update(['id_validateur'=> $user->employe->service->id_chef_service,
                 // 'id_etat_demande'=>'1']);
-            }
-            else{
-                $role_resp = RoleModel::where('name','Secrétaire General')->first();
-                $users_resp = User::where('role_id', $role_resp->id)->first();
+        }
+        elseif(($user->employe->poste->poste == 'Chef Service')||( $user->employe->poste->poste =='Comptable des Matieres')||($user->employe->poste->poste =='Chef de Park'))
+        {
+                // dd('vraiiiiiiiii');
+                dd($user->employe->direction->employe->id );
+                $four->update(['id_validateur'=> $user->employe->direction->employe->id,
+                'id_etat_demande'=>'1']);
+        }
+        else
+        {
+                // $role_resp = RoleModel::where('name','Secrétaire General')->first();
+                // $users_resp = User::where('role_id', $role_resp->id)->first();
+                // dd($user->employe->poste);
+
                 dd('vrai');
-                // $four->update(['id_validateur'=> $user->employe->service->id_chef_service,
-                // 'id_etat_demande'=>'1']);
-            }
+                $four->update(['id_validateur'=> $user->employe->service->id_chef_service,
+                'id_etat_demande'=>'1']);
+        }
 
         if($four)
         {
