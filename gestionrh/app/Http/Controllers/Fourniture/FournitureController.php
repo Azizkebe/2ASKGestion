@@ -116,9 +116,21 @@ class FournitureController extends Controller
     }
     public function detail(int $fourniture)
     {
-        $valid_sup = PermissionRoleModel::getPermission('validateur_sup', Auth::user()->role_id);
+        $user_id = Auth::user()->id;
+
 
         $fourni = Fourniture::findOrFail($fourniture);
+        // $donnees = $fourni::where('user_id',$user_id)->get();
+        if($fourni->user_id == $user_id)
+        {
+            $valid_sup = '';
+        }
+        else
+        {
+
+            $valid_sup = PermissionRoleModel::getPermission('validateur_sup', Auth::user()->role_id);
+
+        }
         $etatdemande = EtatDemande::all();
         if($fourni['id_etat_demande'] == '1' || $fourni['id_etat_demande'] == '2' || $fourni['id_etat_demande'] == '3')
         {
