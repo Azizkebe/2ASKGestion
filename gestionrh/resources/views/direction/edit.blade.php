@@ -31,7 +31,7 @@
                     <select name="id_chef_direction" id="id_chef_direction" class="form-select">
                        <option value="">--Choisir le chef de direction --</option>
                         @foreach ($employe as $chef)
-                       <option value="{{$chef->id}}">{{$chef->prenom}} {{$chef->nom}}</option>
+                       <option value="{{$chef->id}}"{{$direction->id_chef_direction == $chef->id ? 'selected' : ''}}>{{$chef->prenom}} {{$chef->nom}}</option>
                        @endforeach
                     </select>
                 </div>

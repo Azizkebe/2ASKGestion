@@ -68,23 +68,72 @@ class FicheTechniqueController extends Controller
             $fiche->piece_justificative = $filePath;
 
             $reussi = $fiche->save();
-
-            if($reussi)
+            if(($user->employe->poste->poste == 'Responsable Informatique')||($user->employe->poste->poste == 'Chef Antenne')||($user->employe->poste->poste =='Chauffeur')||($user->employe->poste->poste =='Secrétaire General'))
             {
-                // $fiche->update(['id_validateur'=>$users_resp->id_employe,'id_statut_demande_mission'=> '1']);
+                $role_resp = RoleModel::where('name','Secrétaire General')->first();
+                $users_resp = User::where('role_id', $role_resp->id)->first();
+                if($reussi)
+                {
+                    $fiche->update(['id_superieur'=>$users_resp->employe->id,'id_statut_demande_OM_Sup'=> '1']);
+
+                    $messages_resp['prenom'] = $users_resp->employe->prenom;
+                    $messages_resp['nom'] = $users_resp->employe->nom;
+
+                    Notification::route('mail',$users_resp->employe->email)->notify(
+                        new SendEmailToAfterDemandeOrdreMissionNotification($messages_resp)
+                    );
+
+                    toastr()->success('la demande d\'ordre de mission est envoyée pour traitement avec succes');
+                    return redirect()->route('fiche.liste');
+
+                }
+                else {
+                    toastr()->error('error','Impossible d\'envoyer la demande');
+                    return redirect()->back();
+                    }
+            }
+            elseif(($user->employe->poste->poste == 'Chef Service')||( $user->employe->poste->poste =='Comptable des Matieres')||($user->employe->poste->poste =='Chef de Park'))
+            {
+                $fiche->update(['id_superieur'=>$user->employe->direction->employe->id,'id_statut_demande_OM_Sup'=> '1']);
+                if($reussi)
+                {
+
+                    $messages_resp['prenom'] = $user->employe->direction->employe->prenom;
+                    $messages_resp['nom'] = $user->employe->direction->employe->nom;
+
+                    Notification::route('mail',$user->employe->direction->employe->email)->notify(
+                        new SendEmailToAfterDemandeOrdreMissionNotification($messages_resp)
+                    );
+
+                    toastr()->success('la demande d\'ordre de mission est envoyée pour traitement avec succes');
+                    return redirect()->route('fiche.liste');
+
+                }
+                else {
+                    toastr()->error('error','Impossible d\'envoyer la demande');
+                    return redirect()->back();
+                    }
+            }
+            else
+            {
                 $fiche->update(['id_superieur'=>$user->employe->service->id_chef_service,'id_statut_demande_OM_Sup'=> '1']);
+                if($reussi)
+                {
 
-                $messages_resp['prenom'] = $user->employe->service->employe->prenom;
-                $messages_resp['nom'] = $user->employe->service->employe->nom;
+                    $messages_resp['prenom'] = $user->employe->service->employe->prenom;
+                    $messages_resp['nom'] = $user->employe->service->employe->nom;
 
-                Notification::route('mail',$user->employe->service->employe->email)->notify(
-                    new SendEmailToAfterDemandeOrdreMissionNotification($messages_resp)
-                );
+                    Notification::route('mail',$user->employe->service->employe->email)->notify(
+                        new SendEmailToAfterDemandeOrdreMissionNotification($messages_resp)
+                    );
 
-                toastr()->success('la demande d\'ordre de mission est envoyée pour traitement avec succes');
-                return redirect()->route('fiche.liste');
+                    toastr()->success('la demande d\'ordre de mission est envoyée pour traitement avec succes');
+                    return redirect()->route('fiche.liste');
+
+                }
 
             }
+
         }
         catch (Exception $e) {
             throw new Exception("Erreur survenue lors de l'enregistrement", 1);

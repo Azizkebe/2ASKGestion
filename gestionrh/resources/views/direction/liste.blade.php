@@ -21,6 +21,7 @@
                     <thead>
                       <tr>
                         <th>Direction</th>
+                        <th>Chef de direction</th>
 
                         <th style="width: 10%">Action</th>
                       </tr>
@@ -29,6 +30,7 @@
                              @forelse ($direction as $direction)
                             <tr>
                                 <td>{{$direction->direction}}</td>
+                                <td>{{$direction->employe->prenom ?? ''}} {{$direction->employe->nom ?? ''}}</td>
                                 <td>
                                     <div class="form-button-action">
                                         <button

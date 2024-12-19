@@ -64,12 +64,15 @@ class PanierArticleController extends Controller
         {
             $article = Article::where('id', $panier->id_article)->first();
 
+            $fourniture = Fourniture::where('id', $panier->id_fourniture)->first();
+            dd($fourniture);
             $result = $panier->update(['Quantite_accordee'=> $request->qte_accordee,'active'=> true]);
 
             if($result)
             {
                 $article->update(['Quantite_restante'=> $article->Quantite_restante - $request->qte_accordee]);
                 $panier->update(['statut_article'=>'2']);
+                $fourniture->update(['id_etat_valid_comptable'=>'2']);
 
                 toastr()->success('la quantite a été bien accordée');
 

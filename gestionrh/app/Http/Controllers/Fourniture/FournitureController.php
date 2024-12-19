@@ -149,7 +149,7 @@ class FournitureController extends Controller
     {
         $role_resp = RoleModel::where('name','Comptable Matieres')->first();
         $users_resp = User::where('role_id',$role_resp->id)->first();
-        dd($users_resp);
+        // dd($users_resp);
         $fourni = Fourniture::findOrFail($fourniture);
         $fourni->id_etat_demande = $request->id_statut_demande;
 
@@ -232,50 +232,75 @@ class FournitureController extends Controller
 
         if(($user->employe->poste->poste == 'Responsable Informatique')||($user->employe->poste->poste == 'Chef Antenne')||($user->employe->poste->poste =='Chauffeur')||($user->employe->poste->poste =='Secrétaire General'))
         {
-                dd('respo');
+
                 $role_resp = RoleModel::where('name','Secrétaire General')->first();
                 $users_resp = User::where('role_id', $role_resp->id)->first();
 
                 $four->update(['id_validateur'=> $users_resp->employe->id,
                 'id_etat_demande'=>'1']);
 
-                // $four->update(['id_validateur'=> $user->employe->service->id_chef_service,
-                // 'id_etat_demande'=>'1']);
+                if($four)
+                {
+                    $messages['prenom'] = $users_resp->employe->prenom;
+                    $messages['nom'] = $users_resp->employe->nom;
+
+                    Notification::route('mail', $users_resp->employe->email)->notify(
+                        new SendEmailToAfterDemandeNotification($messages)
+                    );
+
+                    toastr()->success('la demande est envoyée pour validation avec succes');
+                    return redirect()->back();
+                }
+                else{
+                    toastr()->error('Impossible d\'envoyer la demande');
+                    return redirect()->back();
+                }
+
         }
         elseif(($user->employe->poste->poste == 'Chef Service')||( $user->employe->poste->poste =='Comptable des Matieres')||($user->employe->poste->poste =='Chef de Park'))
         {
-                // dd('vraiiiiiiiii');
-                dd($user->employe->direction->employe->id );
+
                 $four->update(['id_validateur'=> $user->employe->direction->employe->id,
                 'id_etat_demande'=>'1']);
+                if($four)
+                {
+                    $messages['prenom'] = $user->employe->direction->employe->prenom;
+                    $messages['nom'] = $user->employe->direction->employe->nom;
+
+                    Notification::route('mail', $user->employe->direction->employe->email)->notify(
+                        new SendEmailToAfterDemandeNotification($messages)
+                    );
+
+                    toastr()->success('la demande est envoyée pour validation avec succes');
+                    return redirect()->back();
+                }
+                else{
+                    toastr()->error('Impossible d\'envoyer la demande');
+                    return redirect()->back();
+                }
         }
         else
         {
-                // $role_resp = RoleModel::where('name','Secrétaire General')->first();
-                // $users_resp = User::where('role_id', $role_resp->id)->first();
-                // dd($user->employe->poste);
-
-                dd('vrai');
                 $four->update(['id_validateur'=> $user->employe->service->id_chef_service,
                 'id_etat_demande'=>'1']);
+                if($four)
+                {
+                    $messages['prenom'] = $user->employe->service->employe->prenom;
+                    $messages['nom'] = $user->employe->service->employe->nom;
+
+                    Notification::route('mail', $user->employe->service->employe->email)->notify(
+                        new SendEmailToAfterDemandeNotification($messages)
+                    );
+
+                    toastr()->success('la demande est envoyée pour validation avec succes');
+                    return redirect()->back();
+                }
+                else{
+                    toastr()->error('Impossible d\'envoyer la demande');
+                    return redirect()->back();
+                }
         }
 
-        if($four)
-        {
-            $messages['prenom'] = $user->employe->service->employe->prenom;
-            $messages['nom'] = $user->employe->service->employe->nom;
-
-            Notification::route('mail', $user->employe->service->employe->email)->notify(
-                new SendEmailToAfterDemandeNotification($messages)
-            );
-
-            toastr()->success('la demande est envoyée pour validation avec succes');
-            return redirect()->back();
-        }
-        else{
-            toastr()->error('Impossible d\'envoyer la demande');
-            return redirect()->back();
-        }
 
         }
         else{
@@ -387,7 +412,7 @@ class FournitureController extends Controller
                             $messages_resp['prenom'] = $users_resp->employe->prenom;
                             $messages_resp['nom'] = $users_resp->employe->nom;
 
-                            Notification::route('mail', $users_resp->email)->notify(
+                            Notification::route('mail', $users_resp->employe->email)->notify(
                                 new SendEmailToAfterValidSupNotification($messages_resp)
                             );
                         }

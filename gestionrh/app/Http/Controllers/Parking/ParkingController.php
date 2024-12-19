@@ -34,7 +34,8 @@ class ParkingController extends Controller
     }
     public function store(ParkRequest $request, Parking $park)
     {
-        try {
+        try
+        {
 
             $role_resp = RoleModel::where('name','Chef Parking')->first();
             $users_resp = User::where('role_id',$role_resp->id)->first();
@@ -65,24 +66,69 @@ class ParkingController extends Controller
 
 
             $reussi = $park->save();
-
-            if($reussi)
+            if(($user->employe->poste->poste == 'Responsable Informatique')||($user->employe->poste->poste == 'Chef Antenne')||($user->employe->poste->poste =='Chauffeur')||($user->employe->poste->poste =='Secrétaire General'))
             {
-                $park->update(['id_validateur'=>$users_resp->employe->id,'id_statut_validateur'=> '1']);
+                $role_resp = RoleModel::where('name','Secrétaire General')->first();
+                $users_resp = User::where('role_id', $role_resp->id)->first();
 
-                $messages_resp['prenom'] = $users_resp->employe->prenom;
-                $messages_resp['nom'] = $users_resp->employe->nom;
+                if($reussi)
+                {
+                    $park->update(['id_validateur'=>$users_resp->employe->id,'id_statut_validateur'=> '1']);
 
-                Notification::route('mail',$users_resp->email)->notify(
-                    new SendEmailToAfterDemandeVehiculeNotification($messages_resp)
-                );
+                    $messages_resp['prenom'] = $users_resp->employe->prenom;
+                    $messages_resp['nom'] = $users_resp->employe->nom;
 
-                toastr()->success('la demande est envoyée pour validation avec succes');
-                return redirect()->back();
+                    Notification::route('mail',$users_resp->employe->email)->notify(
+                        new SendEmailToAfterDemandeVehiculeNotification($messages_resp)
+                    );
 
+                    toastr()->success('la demande est envoyée pour validation avec succes');
+                    return redirect()->back();
+
+                }
+                else {
+                    toastr()->error('error','Impossible de transferer la demande');
+                    return redirect()->back();
+                }
             }
+            elseif(($user->employe->poste->poste == 'Chef Service')||( $user->employe->poste->poste =='Comptable des Matieres')||($user->employe->poste->poste =='Chef de Park'))
+            {
+                $park->update(['id_validateur'=>$user->employe->direction->employe->id,'id_statut_validateur'=> '1']);
+                if($reussi)
+                {
 
+                    $messages_resp['prenom'] = $user->employe->direction->employe->prenom;
+                    $messages_resp['nom'] = $user->employe->direction->employe->nom;
 
+                    Notification::route('mail',$user->employe->direction->employe->email)->notify(
+                        new SendEmailToAfterDemandeVehiculeNotification($messages_resp)
+                    );
+
+                    toastr()->success('la demande est envoyée pour validation avec succes');
+                    return redirect()->back();
+
+                }
+            }
+            else
+            {
+                    $four->update(['id_validateur'=> $user->employe->service->id_chef_service,
+                    'id_etat_demande'=>'1']);
+                    if($reussi)
+                    {
+                        $park->update(['id_validateur'=>$user->employe->service->id_chef_service,'id_statut_validateur'=> '1']);
+
+                        $messages_resp['prenom'] = $user->employe->service->employe->prenom;
+                        $messages_resp['nom'] = $user->employe->service->employe->nom;
+
+                        Notification::route('mail',$user->employe->service->employe->email)->notify(
+                            new SendEmailToAfterDemandeVehiculeNotification($messages_resp)
+                        );
+
+                        toastr()->success('la demande est envoyée pour validation avec succes');
+                        return redirect()->back();
+
+                    }
+            }
         }
         catch (Exception $e) {
             throw new Exception("Erreur survenue lors de l\'enregistrement", 1);

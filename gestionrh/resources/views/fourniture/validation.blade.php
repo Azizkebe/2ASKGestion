@@ -70,7 +70,7 @@
                                         <a href="{{route('fourniture.edit', $demande->id)}}"><i class="fa fa-edit"></i></a>
                                         </button>
                                         @endif --}}
-                                        @if (!empty($comptableAdd))
+                                        {{-- @if (!empty($comptableAdd))
                                         <button
                                         type="button"
                                         data-bs-toggle="tooltip"
@@ -87,7 +87,7 @@
                                         class="btn btn-link btn-danger"
                                         data-original-title="Remove"
                                         >
-                                        </button>
+                                        </button> --}}
                                     </div>
                                 </td>
                                 </tr>
