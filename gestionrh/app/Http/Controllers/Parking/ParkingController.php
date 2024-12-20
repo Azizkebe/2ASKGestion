@@ -142,7 +142,8 @@ class ParkingController extends Controller
     {
 
         $parking = Parking::where('id_validateur',Auth::user()->employe->id)
-                            ->orWhere('id_user_chef_park',Auth::user()->employe->id )->get();
+                            ->orWhere('id_user_chef_park',Auth::user()->employe->id)
+                            ->orWhere('id_user_comptable',Auth::user()->employe->id)->get();
 
         $valid_park = PermissionRoleModel::getPermission('Chef Parking', Auth::user()->role_id);
 
@@ -214,8 +215,6 @@ class ParkingController extends Controller
             $role_resp = RoleModel::where('name','Chef Parking')->first();
             $users_resp = User::where('role_id',$role_resp->id)->first();
 
-            // dd($users_resp->employe);
-
             $park->id_statut_validateur = $request->id_statut_reponse;
             $park->commentaire = $request->commentaire;
 
@@ -254,10 +253,10 @@ class ParkingController extends Controller
             $role_resp = RoleModel::where('name','Comptable Matieres')->first();
             $users_resp = User::where('role_id',$role_resp->id)->first();
 
-            $park->id_statut_validateur = $request->id_statut;
+            $park->id_statut_validateur_sup = $request->id_statut;
             $park->id_vehicule = $request->id_vehicule;
             $park->id_chauffeur = $request->id_chauffeur;
-            $park->commentaire = $request->commentaire;
+            // $park->commentaire = $request->commentaire;
 
             $reussi = $park->save();
             if($reussi){

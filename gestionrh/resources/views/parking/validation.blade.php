@@ -91,8 +91,8 @@
                                         @endif
 
                                     </td>
-                                    {{-- <td>
-                                        @if ((!empty($valid_park))&&($park->id_statut_validateur == '2'))
+                                    <td>
+                                        @if ((!empty($valid_park))&&($park->id_statut_validateur_sup == '2')&&($park->active == '1'))
                                         <button
                                         type="button"
                                         data-bs-toggle="tooltip"
@@ -104,7 +104,7 @@
 
                                         </button>
                                         @endif
-                                    </td> --}}
+                                    </td>
 
                                     {{-- <td>
                                         <div class="form-button-action">

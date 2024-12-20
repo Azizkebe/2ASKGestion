@@ -180,7 +180,7 @@
                             @enderror
                         </div>
                         <div class="mt-3 mb-3">
-                            <label for="">Liste des vehicules disponible</label>
+                            <label for="">Liste des vehicules disponibles</label>
                             <select name="id_vehicule" id="id_vehicule" class="form-select">
                                 <option value="">--Choisir un vehicule ---</option>
                                 @foreach ($voiture as $voiture)
@@ -195,7 +195,7 @@
                     <div class="col col-md-6">
                         <div class="mt-3 mb-3">
                             <label for="">Statut du dossier:</label>
-                            <select name="id_statut" id="" class="form-select">
+                            <select name="id_statut" id="" class="form-select" required>
                                 <option value="">-- Choisir un statut --</option>
                                 @foreach ($statuts as $etats)
                                     <option value="{{$etats->id}}">{{$etats->id_statut_validateur_sup}}</option>
