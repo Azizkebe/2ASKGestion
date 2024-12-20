@@ -10,11 +10,14 @@ use App\Models\RoleModel;
 use App\Models\User;
 use App\Models\EtatValidVehicule;
 use App\Models\Voiture;
+use App\Models\StatutDemandeSup;
 use App\Models\PermissionRoleModel;
 use App\Http\Requests\ParkRequest;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\SendEmailToAfterDemandeVehiculeNotification;
 use App\Notifications\SendEmailToCloseDemandeVehiculeNotification;
+use App\Notifications\SendEmailToResponseSupDemandeVehiculeNotification;
+use App\Notifications\SendEmailToSendResponseSupNotification;
 use Auth;
 
 class ParkingController extends Controller
@@ -37,8 +40,8 @@ class ParkingController extends Controller
         try
         {
 
-            $role_resp = RoleModel::where('name','Chef Parking')->first();
-            $users_resp = User::where('role_id',$role_resp->id)->first();
+            // $role_resp = RoleModel::where('name','Chef Parking')->first();
+            // $users_resp = User::where('role_id',$role_resp->id)->first();
 
             $request->validate([
                 'piece_vehicule' => 'required|mimes:jpeg,png,jpg,pdf|max:2048',
@@ -83,12 +86,12 @@ class ParkingController extends Controller
                     );
 
                     toastr()->success('la demande est envoyée pour validation avec succes');
-                    return redirect()->back();
+                    return redirect()->route('parking.liste');
 
                 }
                 else {
                     toastr()->error('error','Impossible de transferer la demande');
-                    return redirect()->back();
+                    return redirect()->route('parking.liste');
                 }
             }
             elseif(($user->employe->poste->poste == 'Chef Service')||( $user->employe->poste->poste =='Comptable des Matieres')||($user->employe->poste->poste =='Chef de Park'))
@@ -105,14 +108,14 @@ class ParkingController extends Controller
                     );
 
                     toastr()->success('la demande est envoyée pour validation avec succes');
-                    return redirect()->back();
+                    return redirect()->route('parking.liste');
 
                 }
             }
             else
             {
-                    $four->update(['id_validateur'=> $user->employe->service->id_chef_service,
-                    'id_etat_demande'=>'1']);
+                    $park->update(['id_validateur'=> $user->employe->service->id_chef_service,
+                    'id_statut_validateur'=>'1']);
                     if($reussi)
                     {
                         $park->update(['id_validateur'=>$user->employe->service->id_chef_service,'id_statut_validateur'=> '1']);
@@ -125,7 +128,7 @@ class ParkingController extends Controller
                         );
 
                         toastr()->success('la demande est envoyée pour validation avec succes');
-                        return redirect()->back();
+                        return redirect()->route('parking.liste');
 
                     }
             }
@@ -138,7 +141,9 @@ class ParkingController extends Controller
     public function validation()
     {
 
-        $parking = Parking::where('id_validateur',Auth::user()->employe->id)->get();
+        $parking = Parking::where('id_validateur',Auth::user()->employe->id)
+                            ->orWhere('id_user_chef_park',Auth::user()->employe->id )->get();
+
         $valid_park = PermissionRoleModel::getPermission('Chef Parking', Auth::user()->role_id);
 
         return view('parking.validation', compact('parking','valid_park'));
@@ -177,12 +182,12 @@ class ParkingController extends Controller
 
         }
     }
-
     public function edit(Request $request, int $parking)
     {
         $parking = Parking::findOrFail($parking);
 
         $etat = EtatValidVehicule::all();
+        $statuts = StatutDemandeSup::all();
 
         $voiture = Voiture::where('active','1')->get();
 
@@ -191,7 +196,55 @@ class ParkingController extends Controller
         $user = User::with('employe')->where('role_id', $role_resp->id)->get();
 
 
-        return view('parking.edit', compact('parking','etat','voiture','user'));
+        return view('parking.edit', compact('parking','etat','voiture','user','statuts'));
+    }
+    public function reponse(Request $request, int $parking)
+    {
+
+        $parking = Parking::findOrFail($parking);
+        $statut = EtatValidVehicule::all();
+
+        return view('parking.reponse', compact('parking','statut'));
+    }
+    public function update_reponse(Request $request, int $parking)
+    {
+        try {
+            $park = Parking::find($parking);
+
+            $role_resp = RoleModel::where('name','Chef Parking')->first();
+            $users_resp = User::where('role_id',$role_resp->id)->first();
+
+            // dd($users_resp->employe);
+
+            $park->id_statut_validateur = $request->id_statut_reponse;
+            $park->commentaire = $request->commentaire;
+
+            $reussi = $park->save();
+            if($reussi){
+
+                $park->update(['active_sup'=>'1','id_statut_validateur_sup'=>'1','id_user_chef_park'=>$users_resp->id_employe]);
+                $messages['prenom'] = $park->user->employe->prenom;
+                $messages['nom'] = $park->user->employe->nom;
+
+                Notification::route('mail',$park->user->employe->email)->notify(
+                    new SendEmailToResponseSupDemandeVehiculeNotification($messages)
+                );
+
+                $messages_resp['prenom'] = $users_resp->employe->prenom;
+                $messages_resp['nom'] = $users_resp->employe->nom;
+
+                Notification::route('mail',$users_resp->employe->email)->notify(
+                    new SendEmailToSendResponseSupNotification($messages)
+                );
+
+                toastr()->success('Bravo, Vous avez bien repondu à la demande de vehicule');
+                return redirect()->route('parking.validation');
+            }
+
+        } catch (Exception $e) {
+                throw new Exception("Erreur survenue lors de la modification", 1);
+
+        }
     }
     public function update(ParkingEditRequest $request, int $parking)
     {

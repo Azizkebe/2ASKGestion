@@ -19,6 +19,11 @@ class Parking extends Model
     {
         return $this->belongsTo(EtatValidVehicule::class, 'id_statut_validateur');
     }
+    public function etat_valid_sup()
+    {
+        return $this->belongsTo(StatutDemandeSup::class, 'id_statut_validateur_sup');
+
+    }
     public function voiture()
     {
         return $this->belongsTo(Voiture::class, 'id_vehicule');

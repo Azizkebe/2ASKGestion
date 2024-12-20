@@ -6,12 +6,12 @@
       <div class="col-12 h-50 ">
         <div class="card shadow">
           <div class="card-body mx-100">
-            <h4 class="card-title mt-3 ">Detail de la demande de vehicule - {{$parking->user->employe->prenom}} {{$parking->user->employe->nom}}</h4>
+            <h4 class="card-title mt-3 ">Reponse du Superieur à la demande de vehicule - {{$parking->user->employe->prenom}} {{$parking->user->employe->nom}}</h4>
             <div style="display: flex; justify-content:end;">
                 <a href="{{route('parking.liste')}}" class="btn btn-success btn-sm">Liste des vehicules</a>
             </div>
             @include('parking.modal.valid')
-            <form action="{{route('parking.update', $parking->id)}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('parking.update_reponse', $parking->id)}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="row">
@@ -91,16 +91,15 @@
                             @enderror
                         </div>
 
-                    </div><br>
-                    <hr>
-                    <h5>Observation du Superieur</h5>
+                    </div>
+                    @if ($parking->active_sup == '1')
                     <div class="row">
                         <div class="col col-md-6">
                             <div class="mt-3">
                                 <label for="">Statut de la reponse</label><br>
                                 <select name="id_statut_reponse" id="id_statut_reponse" class="form-select">
                                     <option value="">-- Choisir un statut --</option>
-                                    @foreach ($etat as $statut)
+                                    @foreach ($statut as $statut)
                                     <option value="{{$statut->id}}"{{ $statut->id == $parking->id_statut_validateur ? 'selected' : ''}}>{{$statut->statut_valid_vehicule}}</option>
                                     @endforeach
                                 </select>
@@ -113,117 +112,47 @@
                             </div>
                         </div>
                     </div>
-                    @if ($parking->active == '1')
-                    <div class="row">
-                        <div class="col col-md-6">
-                            <div class="mt-3">
-                                <label for="">Statut de la demande</label><br>
-                                <select name="id_statut" id="" class="form-select">
-                                    <option value="">-- Choisir un statut --</option>
-                                    @foreach ($etat as $etat)
-                                    <option value="{{$etat->id}}"{{ $etat->id == $parking->id_statut_validateur ? 'selected' : ''}}>{{$etat->statut_valid_vehicule}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="mt-3">
-                                <label for="">Chauffeur choisi</label><br>
-                                <select name="id_chauffeur" id="" class="form-select">
-                                    <option value="">-- Choisir un statut --</option>
-                                    @foreach ($user as $user)
-                                    <option value="{{$user->id}}"{{$user->id == $parking->id_chauffeur ? 'selected' : ''}}>{{$user->employe->prenom}} {{$user->employe->nom}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="mt-3 mb-3">
-                                <label for="">Vehicule choisi</label>
-                                <select name="id_vehicule" id="id_vehicule" class="form-select">
-                                    <option value="">--Choisir un vehicule ---</option>
-                                    @foreach ($voiture as $voiture)
-                                        <option value="{{$voiture->id}}"{{$voiture->id == $parking->id_vehicule ? 'selected' : ''}}>{{$voiture->marque}} - {{$voiture->matricule}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col col-md-6">
-                            <div class="mt-3 mb-3">
-                                <label for="">Commentaire</label>
-                                <textarea name="commentaire" id="commentaire" cols="15" rows="4" class="form-control" readonly>{{$parking->commentaire}}</textarea>
-                            </div>
-                            <div class="mt-3 mb-3">
-                                <label for="">Metrage de depart</label>
-                                    <input type="number" id="metrage_depart" name="metrage_depart" min="0" value="{{$parking->metrage_depart}}" class="form-control" readonly> Kilometre
-                            </div>
-                            <div class="mt-3 mb-3">
-                                <label for="">Metrage de retour</label>
-                                    <input type="number" id="metrage_depart" name="metrage_depart" min="0" value="{{$parking->metrage_retour ?? ''}}" class="form-control" readonly> Kilometre
-                            </div>
-                        </div>
-                    </div>
                     @endif
                 </div>
-                @if ($parking->active == '0')
+                @if ($parking->active_sup == '0')
                 <div style="margin-right: 3px;" class="row mt-2">
                     <hr>
-                    <h4 class="card-title mt-3 ">Reponse à la demande</h4>
-
+                    <h4 class="card-title mt-3 ">Observation du Superieur</h4>
                     <div class="col col-md-6">
                         <div class="mt-3 mb-3">
-                            <label for="">Liste des chauffeurs</label>
-                            <select name="id_chauffeur" id="id_chauffeur" class="form-select">
-                                <option value="">-- Choisir un chauffeur ---</option>
-                                @foreach ($user as $user)
-                                    <option value="{{$user->id}}">{{$user->employe->prenom}} {{$user->employe->nom}}</option>
+                            <label for="">Statut de la demande:</label>
+                            <select name="id_statut_reponse" id="id_statut_reponse" class="form-select" required>
+                                <option value="">-- Choisir un statut --</option>
+                                @foreach ($statut as $statut)
+                                    <option value="{{$statut->id}}">{{$statut->statut_valid_vehicule}}</option>
                                 @endforeach
                             </select>
-                            @error('id_chauffeur')
+                            @error('id_statut_reponse')
                             <div class="error">{{$message}}</div>
                             @enderror
                         </div>
                         <div class="mt-3 mb-3">
-                            <label for="">Liste des vehicules disponible</label>
-                            <select name="id_vehicule" id="id_vehicule" class="form-select">
-                                <option value="">--Choisir un vehicule ---</option>
-                                @foreach ($voiture as $voiture)
-                                    <option value="{{$voiture->id}}">{{$voiture->marque}}</option>
-                                @endforeach
-                            </select>
-                                @error('id_vehicule')
-                                    <div class="error">{{$message}}</div>
-                                @enderror
+                            <label for="">Commentaire</label>
+                            <textarea name="commentaire" id="commentaire" cols="15" rows="4" class="form-control"></textarea>
+                            @error('commentaire')
+                            <div class="error">{{$message}}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="col col-md-6">
-                        <div class="mt-3 mb-3">
-                            <label for="">Statut du dossier:</label>
-                            <select name="id_statut" id="" class="form-select">
-                                <option value="">-- Choisir un statut --</option>
-                                @foreach ($statuts as $etats)
-                                    <option value="{{$etats->id}}">{{$etats->id_statut_validateur_sup}}</option>
-                                @endforeach
-                            </select>
-                            @error('id_statut')
-                            <div class="error">{{$message}}</div>
-                            @enderror
-                        </div>
-                        <div class="mt-3 mb-3">
-                            <label for="">Metrage de depart</label>
-                                <input type="number" id="metrage_depart" name="metrage_depart" min="0" value="0" class="form-control"> Kilometre(km)
-                                @error('metrage_depart')
-                                <div class="error">{{$message}}</div>
-                                @enderror
-                            </div>
-                        </div>
+
+                    </div>
                     <div class="mt-3 mb-3">
                         <button type="submit" class="btn btn-success">Repondre à la demande</button>
                     </div>
                 </div>
                 @else
-                    <div class="mt-3 form-group">
-                        <a href="{{route('parking.validation')}}" class="m-r-15 btn btn-primary">
+                <div class="mt-3 form-group">
+                        <a href="{{route('parking.liste')}}" class="m-r-15 btn btn-primary">
                             <i class="fa fa-arrow-left "></i>
                             Retour
                         </a>
-                    </div>
+                  </div>
                 @endif
 
               {{-- <div class="mt-3 form-group">
@@ -233,6 +162,7 @@
                     </a>
                 </button>
               </div> --}}
+
             </form>
           </div>
         </div>

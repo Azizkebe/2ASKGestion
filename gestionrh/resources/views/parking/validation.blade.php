@@ -32,7 +32,8 @@
                             <th>Nombre de personne</th>
                             <th>Utilisation</th>
                             <th>Justificatif</th>
-                            <th>Statut</th>
+                            <th>Statut de validation du N+1</th>
+                            <th>Statut de Validation du Chef de Park</th>
                             <th style="width: 10%">Action</th>
                             @if (!empty($valid_park))
                             <th>Metrage Retour</th>
@@ -65,7 +66,9 @@
                                     <td>
                                         {{$park->etat_valid_vehicule->statut_valid_vehicule }}
                                     </td>
+                                    <td>{{$park->etat_valid_sup->id_statut_validateur_sup ?? 'En cours'}}</td>
                                     <td>
+                                        @if (!empty($valid_park))
                                         <button
                                         type="button"
                                         data-bs-toggle="tooltip"
@@ -75,8 +78,20 @@
                                         >
                                         <a href="{{route('parking.edit',$park->id)}}" class="btn btn-link btn-primary btn-lg"><i class="fa fa-edit"></i></a>
                                         </button>
+                                        @else
+                                        <button
+                                        type="button"
+                                        data-bs-toggle="tooltip"
+                                        title=""
+                                        class="btn btn-link btn-primary btn-lg"
+                                        data-original-title="Edit"
+                                        >
+                                        <a href="{{route('parking.reponse',$park->id)}}" class="btn btn-link btn-primary btn-lg"><i class="fa fa-edit"></i></a>
+                                        </button>
+                                        @endif
+
                                     </td>
-                                    <td>
+                                    {{-- <td>
                                         @if ((!empty($valid_park))&&($park->id_statut_validateur == '2'))
                                         <button
                                         type="button"
@@ -85,12 +100,12 @@
                                         class="btn btn-link btn-primary btn-lg"
                                         data-original-title="Edit"
                                         >
-                                        {{-- <a href="" class="btn btn-link btn-primary btn-lg"><i class="fa fa-plus"></i></a> --}}
                                         <a href="" class="btn btn-link btn-primary btn-lg MetrageRetour" data-bs-toggle="modal" data-bs-target="#MetrageRetour" data-bs-id="{{$park->id}}"><i class="fa fa-plus"></i></a>
 
                                         </button>
                                         @endif
-                                    </td>
+                                    </td> --}}
+
                                     {{-- <td>
                                         <div class="form-button-action">
                                             @if ($park->id_statut_validateur == '2')
