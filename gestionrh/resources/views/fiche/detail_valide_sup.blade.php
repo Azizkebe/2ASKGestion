@@ -108,7 +108,7 @@
                 @if ($fiche->id_statut_demande_OM_Sup=='1')
                 <div style="margin-right: 3px;" class="row mt-2">
                     <hr>
-                    <h4 class="card-title mt-3 ">Envoi pour Traitement</h4>
+                    <h4 class="card-title mt-3 ">Observation du Superieur</h4>
                     <div class="col col-md-6">
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -124,13 +124,13 @@
                                                     <div class="error">{{$message}}</div>
                                                 @enderror
                                     </div>
-                                    {{-- <div class="mt-3 mb-3">
+                                    <div class="mt-3 mb-3">
                                                 <label for="">Commentaire</label>
                                                 <textarea name="comment" id="comment" cols="15" rows="5" class="form-control"></textarea>
                                                 @error('comment')
                                                     <div class="error">{{$message}}</div>
                                                 @enderror
-                                    </div> --}}
+                                    </div>
                             </div>
                         </div>
                     </div>

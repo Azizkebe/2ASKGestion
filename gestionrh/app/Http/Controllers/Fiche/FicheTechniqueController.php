@@ -40,8 +40,8 @@ class FicheTechniqueController extends Controller
     public function store(FicheRequest $request, FicheTechnique $fiche)
     {
         try {
-            $role_resp = RoleModel::where('name','Ressource Humaine')->first();
-            $users_resp = User::where('role_id',$role_resp->id)->first();
+            // $role_resp = RoleModel::where('name','Ressource Humaine')->first();
+            // $users_resp = User::where('role_id',$role_resp->id)->first();
 
             $user = Auth::user();
             $user_id = $user->id;
@@ -176,30 +176,100 @@ class FicheTechniqueController extends Controller
     public function update_valid_sup(Request $request, int $fiche_technique)
     {
         try {
-            $role_resp = RoleModel::where('name','Ressource Humaine')->first();
-            $users_resp = User::where('role_id',$role_resp->id)->first();
+            // $role_resp = RoleModel::where('name','Ressource Humaine')->first();
+            // $users_resp = User::where('role_id',$role_resp->id)->first();
+
+            $user = Auth::user();
+            $user_id = Auth::user()->id;
 
             $fiche = FicheTechnique::findOrFail($fiche_technique);
 
             $fiche->id_statut_demande_OM_Sup = $request->id_statut_OM;
-            // $fiche->commentaire = $request->comment;
+            $fiche->commentaire = $request->comment;
 
             $reussi = $fiche->save();
-
-            if($reussi)
+            if(($user->employe->poste->poste == 'Responsable Informatique')||($user->employe->poste->poste == 'Chef Antenne')||($user->employe->poste->poste =='Chauffeur')||($user->employe->poste->poste =='Secrétaire General'))
             {
-                $fiche->update(['id_statut_demande_OM_Sup'=>$request->id_statut_OM,'id_validateur'=>$users_resp->id_employe,'id_statut_demande_mission'=> '1']);
+                $role_resp = RoleModel::where('name','Secrétaire General')->first();
+                $users_resp = User::where('role_id',$role_resp->id)->first();
+                if($reussi)
+                {
+                    $fiche->update(['id_statut_demande_OM_Sup'=>$request->id_statut_OM,'id_validateur'=>$users_resp->employe->id,'id_statut_demande_mission'=> '1']);
 
-                $messages['prenom'] = $fiche->user->employe->prenom;
-                $messages['nom'] = $fiche->user->employe->nom;
+                    $messages['prenom'] = $users_resp->employe->prenom;
+                    $messages['nom'] = $users_resp->employe->nom;
 
-                Notification::route('mail',$fiche->user->employe->email)->notify(
-                    new SendEmailToCloseSupDemandeOrdreMissionNotification($messages)
-                );
-                toastr()->success('Bravo, vous avez repondu à la demande');
-                return redirect()->route('fiche.validation');
+                    Notification::route('mail',$users_resp->employe->email)->notify(
+                        new SendEmailToCloseSupDemandeOrdreMissionNotification($messages)
+                    );
+
+                    toastr()->success('Bravo, vous avez repondu à la demande');
+                    return redirect()->route('fiche.validation');
+
+                }
+                else {
+                    toastr()->error('error','Impossible d\'envoyer la demande');
+                    return redirect()->back();
+                    }
             }
-           } catch (Exception $e) {
+            elseif(($user->employe->poste->poste == 'Chef Service')||( $user->employe->poste->poste =='Comptable des Matieres')||($user->employe->poste->poste =='Chef de Park'))
+            {
+                $fiche->update(['id_statut_demande_OM_Sup'=>$request->id_statut_OM,'id_validateur'=>$user->employe->direction->employe->id,'id_statut_demande_mission'=> '1']);
+
+                if($reussi)
+                {
+
+                    $messages['prenom'] = $user->employe->direction->employe->prenom;
+                    $messages['nom'] = $user->employe->direction->employe->nom;
+
+                    Notification::route('mail',$user->employe->direction->employe->email)->notify(
+                        new SendEmailToCloseSupDemandeOrdreMissionNotification($messages)
+                    );
+
+                    toastr()->success('Bravo, vous avez repondu à la demande');
+                    return redirect()->route('fiche.validation');
+
+                }
+                else {
+                    toastr()->error('error','Impossible d\'envoyer la demande');
+                    return redirect()->back();
+                    }
+            }
+            else
+            {
+                $fiche->update(['id_superieur'=>$user->employe->service->id_chef_service,'id_statut_demande_OM_Sup'=> '1']);
+                if($reussi)
+                {
+
+                    $messages['prenom'] = $user->employe->service->employe->prenom;
+                    $messages['nom'] = $user->employe->service->employe->nom;
+
+                    Notification::route('mail',$user->employe->service->employe->email)->notify(
+                        new SendEmailToCloseSupDemandeOrdreMissionNotification($messages)
+                    );
+
+                    toastr()->success('Bravo, vous avez repondu à la demande');
+                    return redirect()->route('fiche.validation');
+
+                }
+
+            }
+
+            // if($reussi)
+            // {
+            //     $fiche->update(['id_statut_demande_OM_Sup'=>$request->id_statut_OM,'id_validateur'=>$users_resp->id_employe,'id_statut_demande_mission'=> '1']);
+
+            //     $messages['prenom'] = $fiche->user->employe->prenom;
+            //     $messages['nom'] = $fiche->user->employe->nom;
+
+            //     Notification::route('mail',$fiche->user->employe->email)->notify(
+            //         new SendEmailToCloseSupDemandeOrdreMissionNotification($messages)
+            //     );
+            //     toastr()->success('Bravo, vous avez repondu à la demande');
+            //     return redirect()->route('fiche.validation');
+            // }
+            }
+            catch (Exception $e) {
             throw new Exception("Error Processing Request", 1);
 
            }
