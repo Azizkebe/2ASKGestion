@@ -78,7 +78,6 @@
                                         </button>
                                     </td>
                                     @endif
-                                    @if($fiche->id_statut_demande_OM_Sup != '2')
                                     {{-- <td>
                                         <button
                                         type="button"
@@ -92,8 +91,11 @@
                                         </button>
                                     </td> --}}
 
-                                    @endif
-
+                                    <td>
+                                        @if ($fiche->id_statut_demande_OM_Sup == '2')
+                                        <a href="{{route('fiche.consulte', $fiche->id)}}" class="btn btn-link btn-primary btn-lg"><i class="fa fa-eye"></i></a>
+                                        @endif
+                                    </td>
                                     <td>
                                         @if (!empty($Validation_OM))
                                         <a href="{{route('fiche.detail', $fiche->id)}}" class="btn btn-link btn-primary btn-lg"><i class="fa fa-edit"></i></a>

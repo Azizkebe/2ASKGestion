@@ -68,6 +68,7 @@ class FicheTechniqueController extends Controller
             $fiche->piece_justificative = $filePath;
 
             $reussi = $fiche->save();
+
             if(($user->employe->poste->poste == 'Responsable Informatique')||($user->employe->poste->poste == 'Chef Antenne')||($user->employe->poste->poste =='Chauffeur')||($user->employe->poste->poste =='Secrétaire General'))
             {
                 $role_resp = RoleModel::where('name','Secrétaire General')->first();
@@ -144,14 +145,16 @@ class FicheTechniqueController extends Controller
     {
         try {
             $fiche = FicheTechnique::findOrFail($fiche_technique);
-        $type = TypeMission::all();
-        $moyen = MoyenTransport::all();
-        $voiture = Voiture::where('active','1')->get();
+            $type = TypeMission::all();
+            $moyen = MoyenTransport::all();
+            $voiture = Voiture::where('active','1')->get();
+            $statutOM = StatutDemandeOMSup::all();
         return view('fiche.consult', [
             'fiche'=>$fiche,
             'type'=>$type,
             'moyen'=>$moyen,
             'voiture'=>$voiture,
+            'statutOM'=> $statutOM,
         ]);
         } catch (\Throwable $th) {
             throw new Exception("Error Processing Request", 1);
@@ -176,8 +179,9 @@ class FicheTechniqueController extends Controller
     public function update_valid_sup(Request $request, int $fiche_technique)
     {
         try {
-            // $role_resp = RoleModel::where('name','Ressource Humaine')->first();
-            // $users_resp = User::where('role_id',$role_resp->id)->first();
+
+            $role_rh = RoleModel::where('name','Ressource Humaine')->first();
+            $users_rh = User::where('role_id',$role_rh->id)->first();
 
             $user = Auth::user();
             $user_id = Auth::user()->id;
@@ -194,7 +198,8 @@ class FicheTechniqueController extends Controller
                 $users_resp = User::where('role_id',$role_resp->id)->first();
                 if($reussi)
                 {
-                    $fiche->update(['id_statut_demande_OM_Sup'=>$request->id_statut_OM,'id_validateur'=>$users_resp->employe->id,'id_statut_demande_mission'=> '1']);
+                    $fiche->update(['id_statut_demande_OM_Sup'=>$request->id_statut_OM,'id_validateur'=>$users_resp->employe->id,
+                    'id_statut_demande_mission'=> '1','id_validateur_rh'=> $users_rh->employe->id]);
 
                     $messages['prenom'] = $users_resp->employe->prenom;
                     $messages['nom'] = $users_resp->employe->nom;
@@ -214,7 +219,8 @@ class FicheTechniqueController extends Controller
             }
             elseif(($user->employe->poste->poste == 'Chef Service')||( $user->employe->poste->poste =='Comptable des Matieres')||($user->employe->poste->poste =='Chef de Park'))
             {
-                $fiche->update(['id_statut_demande_OM_Sup'=>$request->id_statut_OM,'id_validateur'=>$user->employe->direction->employe->id,'id_statut_demande_mission'=> '1']);
+                $fiche->update(['id_statut_demande_OM_Sup'=>$request->id_statut_OM,
+                'id_validateur'=>$user->employe->direction->employe->id,'id_statut_demande_mission'=> '1','id_validateur_rh'=> $users_rh->employe->id]);
 
                 if($reussi)
                 {
@@ -237,7 +243,7 @@ class FicheTechniqueController extends Controller
             }
             else
             {
-                $fiche->update(['id_superieur'=>$user->employe->service->id_chef_service,'id_statut_demande_OM_Sup'=> '1']);
+                $fiche->update(['id_superieur'=>$user->employe->service->id_chef_service,'id_statut_demande_OM_Sup'=> '1','id_validateur_rh'=> $users_rh->employe->id]);
                 if($reussi)
                 {
 
@@ -280,6 +286,7 @@ class FicheTechniqueController extends Controller
         $Validation_OM = PermissionRoleModel::getPermission('Validation Ordre de Mission', Auth::user()->role_id);
 
         $fiche = FicheTechnique::where('id_superieur',Auth::user()->employe->id)
+                                ->orWhere('id_validateur_rh',Auth::user()->employe->id)
                                 ->orWhere('id_validateur',Auth::user()->employe->id)->get();
 
         return view('fiche.validation', compact('fiche','Validation_OM'));
@@ -292,6 +299,7 @@ class FicheTechniqueController extends Controller
         $moyen = MoyenTransport::all();
         $voiture = Voiture::where('active','1')
                             ->where('id_type_vehicule','1')
+                            ->orWhere('id_type_vehicule','3')
                             ->get();
 
         $Validation_OM = PermissionRoleModel::getPermission('Validation Ordre de Mission', Auth::user()->role_id);
@@ -319,7 +327,7 @@ class FicheTechniqueController extends Controller
         // $filePath = $request->file('piece_mission')->storeAs('CloudOrdreMission/Mission',$fileName,'public');
 
         $fiche->id_vehicule = $request->id_vehicule;
-        $fiche->commentaire = $request->comment;
+        $fiche->commentaire_final = $request->comment;
 
         $reussi = $fiche->save();
 

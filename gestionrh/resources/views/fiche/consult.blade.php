@@ -83,7 +83,26 @@
                         </div>
                     </div>
                 </div>
-                @if ($fiche->active == true)
+                @if ($fiche->id_statut_demande_OM_Sup != '1')
+                <div class="row mt-3 mb-3">
+                    <h4>Observation du superieur</h4>
+                    <div class="mt-3">
+                        <label for="">Statut Autorisation</label>
+                        <select name="id_statut_OM" id="id_statut_OM" class="form-select">
+                            <option value="">--Choisir un statut--</option>
+                        @foreach ($statutOM as $statut)
+                            <option value="{{$statut->id}}" {{ $statut->id == $fiche->id_statut_demande_OM_Sup ? 'selected' : ''}}>{{$statut->statut_demande_OM_Sup ?? ''}} </option>
+                        @endforeach
+                    </select>
+                    </div>
+                    <div class="mt-3">
+                        <label for="">Commentaire</label>
+                        <textarea name="comment" id="comment" cols="15" rows="5" class="form-control" readonly>{{$fiche->commentaire}}</textarea>
+
+                    </div>
+                </div>
+                @endif
+                {{-- @if ($fiche->active == true)
                 <div class="row">
                     <div class="col col-md-6">
                         <div class="mt-3 mb-3">
@@ -103,7 +122,7 @@
                         </div>
                     </div>
                 </div>
-                @endif
+                @endif --}}
                 <div class="mt-3 mb-3">
                     <a href="{{route('fiche.liste')}}" class="btn btn-primary btn-sm"><i class="fa fa-arrow-left"></i> Retour</a>
                 </div>

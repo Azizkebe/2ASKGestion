@@ -83,6 +83,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
                 @if ($fiche->active == true)
                 <div class="row">
@@ -105,7 +106,7 @@
                     </div>
                 </div>
                 @endif
-                @if ($fiche->id_statut_demande_OM_Sup=='1')
+                @if ($fiche->id_statut_demande_OM_Sup == '1')
                 <div style="margin-right: 3px;" class="row mt-2">
                     <hr>
                     <h4 class="card-title mt-3 ">Observation du Superieur</h4>

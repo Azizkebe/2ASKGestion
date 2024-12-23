@@ -64,12 +64,12 @@
             <div style="margin-top:40px;">
                 <label class="text" for="">Date de Retour:</label>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;
                     {{date('d-m-Y',strtotime($OM_info->date_retour))}}</span>
             </div>
             <div style="margin-top:40px;">
                 <label class="text" for="">Moyen de transport:</label>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     {{$OM_info->voiture->matricule}}</span>
             </div>
         </div>

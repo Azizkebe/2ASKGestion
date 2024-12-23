@@ -89,7 +89,7 @@
                     <div class="col col-md-6">
                         <div class="mt-3 mb-3">
                             <label for="">Commentaire Final</label>
-                            <textarea name="" id="" cols="15" rows="5" class="form-control" readonly>{{$fiche->commentaire}}</textarea>
+                            <textarea name="" id="" cols="15" rows="5" class="form-control" readonly>{{$fiche->commentaire_final}}</textarea>
                         </div>
                     </div>
                 </div>
