@@ -15,8 +15,8 @@ jobs:
           tools: 'composer' 
 
     - name: Install PHP dependencies
-      run: composer install
-      
+      run: composer install --no-dev --optimize-autoloader
+
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.0.0
       with:
