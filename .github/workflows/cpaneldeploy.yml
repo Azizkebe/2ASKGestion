@@ -7,28 +7,7 @@ jobs:
     steps:
     - name: 🚚 Get latest code
       uses: actions/checkout@v2.3.2
-
-    - name: Copy .env
-      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
-
-    - name: Generate key
-      run: php artisan key:generate
-
-    - name: Generate storage link
-      run: php artisan storage:link
-
-    - name: Directory Permissions
-      run: chmod -R 777 storage bootstrap/cache
-    
-    - name: Setup PHP
-      uses: shivammathur/setup-php@v2
-      with:
-          php-version: '8.2'
-          tools: 'composer' 
-
-    - name: Install PHP dependencies
-      run: composer install --no-dev --optimize-autoloader
-
+      
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.0.0
       with:
