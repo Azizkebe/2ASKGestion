@@ -242,7 +242,7 @@ class FournitureController extends Controller
 
         $four = Fourniture::where('id','=',$fourniture)->first();
 
-        if(($user->employe->poste->poste == 'Responsable Informatique')||($user->employe->poste->poste == 'Chef Antenne')||($user->employe->poste->poste =='Chauffeur')||($user->employe->poste->poste =='Secrétaire General'))
+        if(($user->employe->poste->poste == 'Responsable Informatique')||($user->employe->poste->poste == 'Chef Antenne')||($user->employe->poste->poste =='Chauffeur')||($user->employe->poste->poste =='Secretaire General'))
         {
 
                 $role_resp = RoleModel::where('name','Secrétaire General')->first();
