@@ -127,7 +127,7 @@
                                 </li>
                                 <li class="time-line-item">
                                     <span class=" time-line-item-title">Service</span><br>
-                                    <h6 style="margin-top: 5px; font-size:16px;" class="section-title">{{$employes->service->service}}</h6>
+                                    <h6 style="margin-top: 5px; font-size:16px;" class="section-title">{{$employes->service->service ?? ''}}</h6>
 
                                 </li>
                                 <li class="time-line-item">
