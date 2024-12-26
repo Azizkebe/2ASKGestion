@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Employe;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Employe;
-
+use App\Models\CloudFileContrat;
+use App\Models\CloudFilePhoto;
+use App\Models\CloudFileDiplome;
+use App\Models\CloudFileCV;
 
 class EmployeController extends Controller
 {
@@ -109,6 +112,20 @@ class EmployeController extends Controller
     }
     public function delete(int $employe)
     {
-        dd($employe);
+        $employedata = Employe::findOrFail($employe);
+
+        if($employedata)
+        {
+            $employedata->delete();
+
+            toastr()->success('L\'utilisateur a été retiré avec success');
+            return redirect()->back();
+        }
+        else{
+            toastr()->error('Erreur survenue lors de la suppression');
+            return redirect()->back();
+        }
+
+
     }
 }
