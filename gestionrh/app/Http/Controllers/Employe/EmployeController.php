@@ -107,4 +107,8 @@ class EmployeController extends Controller
 
         }
     }
+    public function delete(int $employe)
+    {
+        dd($employe);
+    }
 }
