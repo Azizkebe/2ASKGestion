@@ -37,7 +37,7 @@ class SendEmailToAdminAfterRegistration extends Notification
     {
         return (new MailMessage)
                 ->line('Bonjour,')
-                ->line('Bienvenue sur la plateforme de Gestion RH de l\'ANPEJ,')
+                ->line('Bienvenue sur la plateforme DIiso-ANPEJ,')
                 ->line('Votre compte a été crée avec success')
                 ->line('cliquez sur le bouton ci dessous pour valider le compte')
                 ->action('Cliquez ici', url('/validate-account' . '/'. $this->email))
