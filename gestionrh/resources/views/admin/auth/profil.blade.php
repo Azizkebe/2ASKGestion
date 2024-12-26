@@ -28,13 +28,13 @@
                 @method('PUT')
 
               <div class="form-group input-group">
-                <input name="username" class="form-control" placeholder="Prenom" type="text" value="{{$user->username}}">
+                <input name="username" class="form-control" placeholder="Prenom" type="text" value="{{$user->employe->prenom}}">
              </div>
              <div class="form-group input-group">
-                <input name="name" class="form-control" placeholder="Nom" type="text" value="{{$user->name}}">
+                <input name="name" class="form-control" placeholder="Nom" type="text" value="{{$user->employe->nom}}">
              </div>
               <div class="form-group input-group">
-                <input name="email" class="form-control" placeholder="Email address" type="email" value="{{$user->email}}">
+                <input name="email" class="form-control" placeholder="Email address" type="email" value="{{$user->employe->email}}">
             </div>
             <div class="input-group">
                 @error('email')
@@ -42,7 +42,7 @@
                 @enderror
             </div>
               <div class="form-group input-group">
-                <input name="phone" class="form-control" placeholder="Telephone" type="number" value="{{$user->phone}}">
+                <input name="phone" class="form-control" placeholder="Telephone" type="number" value="{{$user->employe->telephone}}">
             </div>
             <div class="input-group">
                 @error('phone')
