@@ -235,6 +235,7 @@ class UserAdminController extends Controller
     public function profil_user($user, Request $request)
     {
         $user = User::findOrFail($user);
+        $employe = Employe::where('id', $user->id_employe)->first();
 
         try {
 
@@ -242,14 +243,18 @@ class UserAdminController extends Controller
 
             if($userconnecter == $user->id)
             {
-                $user->name = $request->name;
-                $user->username = $request->username;
                 $user->email = $request->email;
-                $user->phone = $request->phone;
 
-                $user->update();
-
-                return redirect()->back()->with('success','Les donnees ont été modifiées');
+                $reussi = $user->update();
+                if($reussi)
+                {
+                    $employe->update(['prenom'=>$request->username,'nom'=>$request->name,'email'=>$request->email,'telephone'=>$request->phone]);
+                    return redirect()->back()->with('success','Les donnees ont été modifiées');
+                }
+                else{
+                    toastr()->error('Erreur survenue lors de la mise à jour des infos de l\'employé');
+                    return redirect()->back();
+                }
 
             }
             else
