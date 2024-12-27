@@ -8,7 +8,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Portail: DiiSso-ANPEJ</title>
+        <title>Portail: Diiso-ANPEJ</title>
 
         <!-- CSS FILES -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
