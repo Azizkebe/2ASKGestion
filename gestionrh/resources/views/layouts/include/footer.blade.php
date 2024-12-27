@@ -4,7 +4,7 @@
         <ul class="nav">
           <li class="nav-item">
             <a class="nav-link" href="">
-              DiiSO-ANPEJ
+              Diiso-ANPEJ
             </a>
           </li>
           <li class="nav-item">
