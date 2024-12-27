@@ -26,7 +26,7 @@
         @csrf
         @method('POST')
 
-        <label for="chk" aria-hidden="true">DIiSo - ANPEJ</label>
+        <label for="chk" aria-hidden="true">DiiSo - ANPEJ</label>
         <input type="email" name="email" placeholder="Email" required="">
         <div>
             @error('email')

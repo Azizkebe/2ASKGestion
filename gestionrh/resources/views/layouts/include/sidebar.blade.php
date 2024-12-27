@@ -81,7 +81,7 @@
             <span class="sidebar-mini-icon">
               <i class="fa fa-ellipsis-h"></i>
             </span>
-            <h4 class="text-section">Components</h4>
+            <h4 class="text-section">Menu Principal</h4>
           </li>
 
           @if (!empty($permissionUser))
