@@ -90,6 +90,8 @@
             <form action="{{route('article.bon_entree')}}" method="POST">
                 @csrf
                 <div class="mt-1">
+
+                    <input type="text" id="numero_article" name="numero_article" placeholder="Numero Article">
                     <select name="mois" id="mois">
                         <option value="">--choisir le mois --</option>
                         <option value="JANVIER">JANVIER</option>
@@ -119,6 +121,14 @@
                                 <option value="{{$projet->id}}">{{$projet->name_projet}}</option>
                             @endforeach
                         </select>
+                        <div class="mt-2 mb-2">
+                            <select name="id_fournisseur" id="id_fournisseur">
+                                <option value="">-- Choisir un fournisseur --</option>
+                                @foreach ($fournisseur as $fournisseur)
+                                    <option value="{{$fournisseur->id}}">{{$fournisseur->name_fournisseur}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-download"></i> Bon Entree</button>
                     </div>
                 </div>

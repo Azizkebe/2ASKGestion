@@ -60,17 +60,19 @@
                       <thead>
                         <tr>
                           {{-- <th></th> --}}
-                          <th>DESIGNATIONS DES MATIERES</th>
-                          <th colspan="4">CHIFFRES A COMPTABILISER</th>
-                          {{-- <th rowspan="2">OBSERVATIONS</th> --}}
+                          <th colspan="3">DESIGNATIONS DES MATIERES</th>
+                          <th colspan="3">CHIFFRES A COMPTABILISER</th>
+                          <th style="padding-top: 0; margin-top:0;" rowspan="2">OBSERVATIONS</th>
                         </tr>
                         <tr>
-                            {{-- <th></th> --}}
+                            <th>No</th>
+                            <th>Nature des matieres</th>
                             <th>Specification</th>
                             <th>Nbre Unités</th>
-                            <th>Nature</th>
+                            {{-- <th>Nature</th> --}}
                             <th>Prix Unitaire CFA</th>
                             <th>Montant total TTC FCFA</th>
+                            {{-- <th rowspan="2" colspan="2">Fournisseur</th> --}}
 
 
                         </tr>
@@ -80,11 +82,14 @@
                             <?php $total_price = 0; $total_unite = 0; ?>
                                @forelse ($article as $article)
                                 <tr>
+                                  <td>{{$article->numero_article ?? ''}}</td>
+                                  <td>{{$article->matiere->nature ?? ''}}</td>
                                   <td>{{$article->name_article}}</td>
                                   <td style="text-align:right;">{{$article->Quantite_stock}}</td>
-                                  <td></td>
-                                  <td style="text-align:right;">{{$article->prix_unitaire}} FCFA</td>
-                                  <td style="text-align:right;">{{$article->prix_unitaire  * $article->Quantite_stock}} FCFA</td>
+                                  {{-- <td></td> --}}
+                                  <td style="text-align:right;">{{$article->prix_unitaire}}F </td>
+                                  <td style="text-align:right;">{{$article->prix_unitaire  * $article->Quantite_stock}}F </td>
+                                  <td style="text-align:center;">{{$article->fournisseur->name_fournisseur ?? ''}}</td>
 
                                 </tr>
 
@@ -98,6 +103,8 @@
                                 @endforelse
                                 <tr>
                                     <td></td>
+                                    <td></td>
+                                    <td></td>
                                     <td style="text-align: right;font-weight:bolder;">{{$total_unite}}</td>
                                     <td></td>
                                     <td></td>
@@ -105,7 +112,7 @@
                                 </tr>
                                 <tr>
                                     <td>TOTAL</td>
-                                    <td style="text-align:right;font-weight:bolder;" colspan="4">{{$total_price}} FCFA</td>
+                                    <td style="text-align:right;font-weight:bolder;" colspan="5">{{$total_price}} FCFA</td>
 
                                 </tr>
 

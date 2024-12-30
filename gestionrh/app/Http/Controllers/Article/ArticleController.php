@@ -30,9 +30,10 @@ class ArticleController extends Controller
         $article = Article::all();
         $projet = Projet::all();
         $projets = Projet::all();
+        $fournisseur = Fournisseur::all();
         // dd($projets);
 
-        return view('article.liste', compact('article','group','projet','projets'));
+        return view('article.liste', compact('article','group','projet','projets','fournisseur'));
     }
     public function store(ArticleRequest $request, Article $article)
     {
@@ -130,11 +131,13 @@ class ArticleController extends Controller
                                 ->Where('annee',$currentYear)
                                 ->Where('id_group',$request->id_group)
                                 ->Where('id_projet',$request->id_projet)
+                                ->Where('id_fournisseur', $request->id_fournisseur)
+                                ->Where('numero_article', $request->numero_article)
                                 ->orWhere('mois',$mouth)
                                 ->get();
             $pdf = PDF::loadView('article.bon_entree',compact('article','currentYear','mouth','today','group','info_grp'))->setPaper('a4','landscape');
-            return $pdf->download('bon_entree_'.$mouth.' '.$currentYear.'.pdf');
-            // return view('article.bon_entree', compact('article','currentYear','mouth','today','group','info_grp'));
+            // return $pdf->download('bon_entree_'.$mouth.' '.$currentYear.'.pdf');
+            return view('article.bon_entree', compact('article','currentYear','mouth','today','group','info_grp'));
     }
     public function bon_sortie(Request $request)
     {
