@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
 use App\Models\Group;
+use App\Models\Fournisseur;
+use App\Models\Matiere;
 use App\Models\Projet;
 use Carbon\Carbon;
 use PDF;
@@ -17,8 +19,10 @@ class ArticleController extends Controller
     {
         $projet = Projet::all();
         $group = Group::all();
+        $fournisseur = Fournisseur::all();
+        $matiere = Matiere::all();
 
-        return view('article.create', compact('group','projet'));
+        return view('article.create', compact('group','projet','fournisseur','matiere'));
     }
     public function liste()
     {
@@ -51,15 +55,19 @@ class ArticleController extends Controller
 
         $currentMonthFrench = $mounthMapping[$currentMounth] ?? '';
 
+        $article->numero_article = $request->numero_article;
         $article->name_article = $request->name_article;
+        $article->id_matiere = $request->id_matiere;
         $article->Quantite_stock = $request->quantite_stock;
         $article->Quantite_restante = $request->quantite_stock;
         $article->prix_unitaire = $request->prix_unitaire;
         $article->id_group = $request->id_group;
         $article->id_projet = $request->id_projet;
+        $article->id_fournisseur = $request->id_fournisseur;
         $article->mois = $currentMonthFrench;
         $article->annee = Carbon::now()->format('Y');
 
+        // dd($article);
         $article->save();
 
         toastr()->success('Bravo, l\'article a été ajouté avec succes');
@@ -71,7 +79,9 @@ class ArticleController extends Controller
         $article = Article::findOrFail($article);
         $projet = Projet::all();
         $group = Group::all();
-        return view('article.edit', compact('article','projet','group'));
+        $fournisseur = Fournisseur::all();
+        $matiere = Matiere::all();
+        return view('article.edit', compact('article','projet','group','fournisseur','matiere'));
     }
     public function update(Request $request, int $article)
     {

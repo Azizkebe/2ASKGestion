@@ -13,6 +13,15 @@
                 @csrf
                 @method('POST')
                 <div class="mt-3">
+                    <label for="">Numero de l'article</label>
+                    <input type="text" class="form-control" name="numero_article" id="numero_article">
+                  </div>
+                  <div>
+                      @error('numero_article')
+                          <span class="error">{{$message}}</span>
+                      @enderror
+                  </div>
+                <div class="mt-3">
                   <label for="">Nom de l'article</label>
                   <input type="text" class="form-control" name="name_article">
                 </div>
@@ -21,6 +30,20 @@
                         <span class="error">{{$message}}</span>
                     @enderror
                 </div>
+                <div class="mt-3">
+                    <label for="">Nature des matiere</label>
+                    <select name="id_matiere" id="id_matiere" class="form-select">
+                        <option value="">---Choisissez la nature --</option>
+                        @foreach ($matiere as $matiere)
+                            <option value="{{$matiere->id}}">{{$matiere->nature}}</option>
+                        @endforeach
+                    </select>
+                  </div>
+                  <div>
+                      @error('matiere')
+                          <span class="error">{{$message}}</span>
+                      @enderror
+                  </div>
                 <div class="mt-3">
                     <label for="">Quantite de Stock</label>
                     <input type="number" name="quantite_stock" min="0" class="form-control" id="quantite_stock">
@@ -60,6 +83,18 @@
                     @endforeach
                     </select>
                     @error('id_group')
+                        <div class="error">{{$message}}</div>
+                    @enderror
+                </div>
+                <div class="mt-3 mb-3">
+                    <label for="">Fournisseur</label>
+                    <select name="id_fournisseur" id="id_fournisseur" class="form-select">
+                    <option value="">-- Veuillez choisir le fournisseur ---</option>
+                    @foreach ($fournisseur as $fourni)
+                        <option value="{{$fourni->id}}">{{$fourni->name_fournisseur}}</option>
+                    @endforeach
+                    </select>
+                    @error('id_fournisseur')
                         <div class="error">{{$message}}</div>
                     @enderror
                 </div>
