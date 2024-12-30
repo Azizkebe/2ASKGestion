@@ -43,6 +43,7 @@ use App\Http\Controllers\Parking\DemandeVehiculeController;
 use App\Http\Controllers\Vehicule\VoitureController;
 use App\Http\Controllers\Mission\OrdreMissionController;
 use App\Http\Controllers\Fiche\FicheTechniqueController;
+use App\Http\Controllers\Nature\MatiereController;
 use App\Livewire\EditPhotoEmploye;
 
 // Route::get('/dashboard',[UserAdminController::class,'dashboard'])->name('dashboard');
@@ -413,6 +414,11 @@ Route::middleware('userAdmin')->group(function(){
         Route::get('/',[FournisseurController::class,'liste'])->name('fournisseur.liste');
         Route::get('/create',[FournisseurController::class,'create'])->name('fournisseur.create');
         Route::post('/create',[FournisseurController::class,'store'])->name('fournisseur.store');
+    });
+    Route::prefix('matiere')->group(function(){
+        Route::get('/',[MatiereController::class,'liste'])->name('matiere.liste');
+        Route::get('/create',[MatiereController::class,'create'])->name('matiere.create');
+        Route::post('/create',[MatiereController::class,'store'])->name('matiere.store');
     });
     // Route::prefix('demande_fourniture')->group(function(){
     //     Route::get('create',[])

@@ -50,6 +50,7 @@
             $permission_projet= App\Models\PermissionRoleModel::getPermission('Projet', Auth::user()->role_id);
             $permission_article= App\Models\PermissionRoleModel::getPermission('Article', Auth::user()->role_id);
             $permission_fournisseur= App\Models\PermissionRoleModel::getPermission('Fournisseur', Auth::user()->role_id);
+            $permission_matiere= App\Models\PermissionRoleModel::getPermission('Nature_Matiere', Auth::user()->role_id);
             $permission_voiture= App\Models\PermissionRoleModel::getPermission('Voiture', Auth::user()->role_id);
 
             @endphp
@@ -314,7 +315,26 @@
             </div>
           </li>
           @endif
+          @if (!empty($permission_matiere))
+          <li class="nav-item">
+            <a data-bs-toggle="collapse" href="#matiere">
+              <i class="fas fa-bars"></i>
+              <p>Nature des Matieres</p>
+              <span class="caret"></span>
+            </a>
+            <div class="collapse" id="matiere">
+                <ul>
+                    <li>
+                        <a href="{{route('matiere.liste')}}">
+                          <span class="sub-item">Voir les matieres</span>
+                          {{-- <span class="caret"></span> --}}
+                        </a>
 
+                    </li>
+                </ul>
+            </div>
+          </li>
+          @endif
           @if (!empty($permission_article))
           <li class="nav-item">
             <a data-bs-toggle="collapse" href="#article">
