@@ -18,4 +18,12 @@ class Article extends Model
     {
         return $this->belongsTo(Projet::class,'id_projet');
     }
+    public function fournisseur()
+    {
+        return $this->belongsTo(Fournisseur::class,'id_fournisseur');
+    }
+    public function matiere()
+    {
+        return $this->belongsTo(Matiere::class,'id_matiere');
+    }
 }

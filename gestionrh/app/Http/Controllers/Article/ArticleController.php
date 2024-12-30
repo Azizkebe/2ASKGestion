@@ -87,7 +87,11 @@ class ArticleController extends Controller
     {
         $article = Article::findOrFail($article);
 
+        $article->numero_article = $request->numero_article;
+
         $article->name_article = $request->name_article;
+
+        $article->id_matiere = $request->id_matiere;
 
         $article->Quantite_stock = $request->quantite_stock;
 
@@ -96,6 +100,8 @@ class ArticleController extends Controller
         $article->id_group = $request->id_group;
 
         $article->id_projet = $request->id_projet;
+
+        $article->id_fournisseur = $request->id_fournisseur;
 
         $article->update();
 

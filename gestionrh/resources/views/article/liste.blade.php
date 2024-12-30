@@ -20,12 +20,15 @@
                     <thead>
                       <tr>
                         <th></th>
+                        <th>Numero de l'article</th>
                         <th>Nom de l'article</th>
+                        <th>Nature des matieres</th>
                         <th>Quantite Stock Disponible</th>
                         <th>Prix Unitaire</th>
                         <th>Quantite de Stock restante</th>
                         <th>Projet</th>
                         <th>Groupe</th>
+                        <th>Fournisseur</th>
                         <th>Mois Enregistrement</th>
                         <th>Annee Enregistrement</th>
 
@@ -36,12 +39,15 @@
                              @forelse ($article as $article)
                             <tr>
                                 <td></td>
+                                <td>{{$article->numero_article ?? ''}}</td>
                                 <td>{{$article->name_article}}</td>
+                                <td>{{$article->matiere->nature ?? ''}}</td>
                                 <td>{{$article->Quantite_stock}}</td>
                                 <td>{{$article->prix_unitaire}} FCFA</td>
                                 <td style="color:red;">{{$article->Quantite_restante ?? ''}}</td>
                                 <td>{{$article->projet->name_projet ?? ''}}</td>
                                 <td>{{$article->group->groupe ?? ''}}</td>
+                                <td>{{$article->fournisseur->name_fournisseur ?? ''}}</td>
                                 <td>{{$article->mois}}</td>
                                 <td>{{$article->annee}}</td>
                                 <td>
