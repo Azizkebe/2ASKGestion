@@ -35,6 +35,7 @@ use App\Http\Controllers\Demande\DemandePermissionCongeController;
 use App\Http\Controllers\Projet\ProjetController;
 use App\Http\Controllers\Article\ArticleController;
 use App\Http\Controllers\Article\PanierArticleController;
+use App\Http\Controllers\Fournisseur\FournisseurController;
 use App\Http\Controllers\Fourniture\FournitureController;
 use App\Http\Controllers\Fourniture\DemandeFournitureController;
 use App\Http\Controllers\Parking\ParkingController;
@@ -407,6 +408,11 @@ Route::middleware('userAdmin')->group(function(){
         Route::get('detail_valid/{fiche_technique}',[FicheTechniqueController::class, 'detail_valid'])->name('fiche.detail');
         Route::put('update_valid/{fiche_technique}',[FicheTechniqueController::class, 'update'])->name('fiche.update');
         Route::get('dowload_OM/{fiche_technique}',[FicheTechniqueController::class, 'downloadpdf'])->name('fiche.download');
+    });
+    Route::prefix('fournisseur')->group(function(){
+        Route::get('/',[FournisseurController::class,'liste'])->name('fournisseur.liste');
+        Route::get('/create',[FournisseurController::class,'create'])->name('fournisseur.create');
+        Route::post('/create',[FournisseurController::class,'store'])->name('fournisseur.store');
     });
     // Route::prefix('demande_fourniture')->group(function(){
     //     Route::get('create',[])
