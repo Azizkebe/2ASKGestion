@@ -136,6 +136,18 @@
             <span>A............................., le...........................</span><br>
         </div>
     </div>
-</div><br>
+</div>
+<br>
+<div style="background-color:back; height:40px; clear:both; width:80%; display:flex;" class="row">
+    <div style="" class="col col-md-4">
+        <p style="text-align:left; text-decoration:underline 1px solid;">La Comptable des Matieres</p>
+    </div>
+    <div style="" class="col col-md-4">
+        <p style=" text-decoration:underline 1px solid;">Le DAFC</p>
+    </div>
+    <div style="" class="col col-md-4">
+        <p style="text-decoration:underline 1px solid;">L'Administrateur des matieres</p>
+    </div>
+</div>
 </body>
 </html>

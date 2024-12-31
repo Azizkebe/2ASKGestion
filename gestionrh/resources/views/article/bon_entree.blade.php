@@ -49,7 +49,6 @@
           <p style="text-align:center; margin:auto;
           width:500px;">Des Matieres du {{$info_grp->group->groupe ?? ''}} dans le projet de {{$info_grp->projet->name_projet ?? ''}}</p>
     </div>
-
     <div style="font-size: 20px;margin-left:20px; margin-top:60px; text-align:justify;" class="row">
         <div class="card">
             <div class="card-body">
@@ -137,7 +136,19 @@
             <span>A............................., le...........................</span><br>
         </div>
     </div>
-</div><br>
+</div>
+<br>
+<div style="height:40px; clear:both; width:80%; display:flex;" class="row">
+    <div style="" class="col col-md-4">
+        <p style="text-align:left; text-decoration:underline 1px solid;">La Comptable des Matieres</p>
+    </div>
+    <div style="" class="col col-md-4">
+        <p style=" text-decoration:underline 1px solid;">Le DAFC</p>
+    </div>
+    <div style="" class="col col-md-4">
+        <p style="text-decoration:underline 1px solid;">L'Administrateur des matieres</p>
+    </div>
+</div>
 {{-- <div style="margin:5px; clear:both;">
     <div class="row">
         <div class="col col-md-4">

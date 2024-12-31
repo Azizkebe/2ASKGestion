@@ -132,17 +132,17 @@ class ArticleController extends Controller
         $mouth = $request->mois;
         $today = Carbon::now()->format('d');
         $info_grp = Article::where('id_group',$request->id_group)->first();
-            $article = Article::where('annee',$currentYear)
-                                ->orWhere('jour',$day)
-                                ->orWhere('mois',$mouth)
-                                ->Where('id_group',$request->id_group)
-                                ->Where('id_projet',$request->id_projet)
-                                ->Where('id_fournisseur', $request->id_fournisseur)
-                                ->orWhere('numero_article', $request->numero_article)
-                                ->get();
+        $article = Article::where('annee',$currentYear)
+                            ->orwhere('jour',$day)
+                            ->orwhere('mois',$mouth)
+                            ->Where('id_group',$request->id_group)
+                            ->Where('id_projet',$request->id_projet)
+                            ->Where('id_fournisseur', $request->id_fournisseur)
+                            ->orWhere('numero_article', $request->numero_article)
+                            ->get();
             $pdf = PDF::loadView('article.bon_entree',compact('article','currentYear','day','mouth','today','group','info_grp'))->setPaper('a4','landscape');
-            // return $pdf->download('bon_entree_'.$day.' '.$mouth.' '.$currentYear.'.pdf');
-            return view('article.bon_entree', compact('article','currentYear','day','mouth','today','group','info_grp'));
+            return $pdf->download('bon_entree_'.$day.' '.$mouth.' '.$currentYear.'.pdf');
+            // return view('article.bon_entree', compact('article','currentYear','day','mouth','today','group','info_grp'));
     }
     public function bon_sortie(Request $request)
     {
@@ -163,7 +163,7 @@ class ArticleController extends Controller
                             ->get();
             // dd($article);
             $pdf = PDF::loadView('article.bon_sortie',compact('article','currentYear','day','mouth','today','group','info_grp'))->setPaper('a4','landscape');
-            // return $pdf->download('bon_sortie_'.$day.' '.$mouth.' '.$currentYear.'.pdf');
-            return view('article.bon_sortie', compact('article','currentYear','day','mouth','today','group','info_grp'));
+            return $pdf->download('bon_sortie_'.$day.' '.$mouth.' '.$currentYear.'.pdf');
+            // return view('article.bon_sortie', compact('article','currentYear','day','mouth','today','group','info_grp'));
     }
 }
