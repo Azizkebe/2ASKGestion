@@ -42,7 +42,11 @@
                                         title=""
                                         class="btn btn-link btn-primary btn-lg"
                                         data-original-title="Edit Task"
-                                        ><a href=""><i class="fa fa-edit"></i></a>
+                                        >
+                                        @if (!empty($autorise_edit ))
+
+                                        <a href="{{route('fournisseur.edit', $fourni->id)}}"><i class="fa fa-edit"></i></a>
+                                        @endif
 
                                         </button>
                                         <button
@@ -51,8 +55,11 @@
                                         title=""
                                         class="btn btn-link btn-danger"
                                         data-original-title="Remove"
-                                        ><a onclick="return confirm('Etes vous sure de vouloir retirer le fournisseur')"
-                                        href="" class="btn btn-link btn-danger"><i class="fa fa-times"></i></a>
+                                        >
+                                        @if (!empty($autorise_delete))
+                                        <a onclick="return confirm('Etes vous sure de vouloir retirer le fournisseur')"
+                                        href="{{route('fournisseur.delete', $fourni->id)}}" class="btn btn-link btn-danger"><i class="fa fa-times"></i></a>
+                                        @endif
                                         </button>
                                     </div>
                                 </td>
