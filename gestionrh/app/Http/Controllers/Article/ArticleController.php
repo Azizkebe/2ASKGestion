@@ -31,9 +31,10 @@ class ArticleController extends Controller
         $projet = Projet::all();
         $projets = Projet::all();
         $fournisseur = Fournisseur::all();
+        $fournis = Fournisseur::all();
         // dd($projets);
 
-        return view('article.liste', compact('article','group','projet','projets','fournisseur'));
+        return view('article.liste', compact('article','group','projet','projets','fournisseur','fournis'));
     }
     public function store(ArticleRequest $request, Article $article)
     {
@@ -52,6 +53,7 @@ class ArticleController extends Controller
             'DEC'=>'DECEMBRE',
         ];
 
+
         $currentMounth = strtoupper(Carbon::now()->format('M'));
 
         $currentMonthFrench = $mounthMapping[$currentMounth] ?? '';
@@ -65,6 +67,7 @@ class ArticleController extends Controller
         $article->id_group = $request->id_group;
         $article->id_projet = $request->id_projet;
         $article->id_fournisseur = $request->id_fournisseur;
+        $article->jour = Carbon::now()->day;
         $article->mois = $currentMonthFrench;
         $article->annee = Carbon::now()->format('Y');
 
@@ -124,38 +127,43 @@ class ArticleController extends Controller
     {
         $group = Group::all();
         $currentYear = $request->annee;
+        $day = $request->jour;
+
         $mouth = $request->mois;
         $today = Carbon::now()->format('d');
         $info_grp = Article::where('id_group',$request->id_group)->first();
             $article = Article::where('annee',$currentYear)
-                                ->Where('annee',$currentYear)
+                                ->orWhere('jour',$day)
+                                ->orWhere('mois',$mouth)
                                 ->Where('id_group',$request->id_group)
                                 ->Where('id_projet',$request->id_projet)
                                 ->Where('id_fournisseur', $request->id_fournisseur)
-                                ->Where('numero_article', $request->numero_article)
-                                ->orWhere('mois',$mouth)
+                                ->orWhere('numero_article', $request->numero_article)
                                 ->get();
-            $pdf = PDF::loadView('article.bon_entree',compact('article','currentYear','mouth','today','group','info_grp'))->setPaper('a4','landscape');
-            // return $pdf->download('bon_entree_'.$mouth.' '.$currentYear.'.pdf');
-            return view('article.bon_entree', compact('article','currentYear','mouth','today','group','info_grp'));
+            $pdf = PDF::loadView('article.bon_entree',compact('article','currentYear','day','mouth','today','group','info_grp'))->setPaper('a4','landscape');
+            // return $pdf->download('bon_entree_'.$day.' '.$mouth.' '.$currentYear.'.pdf');
+            return view('article.bon_entree', compact('article','currentYear','day','mouth','today','group','info_grp'));
     }
     public function bon_sortie(Request $request)
     {
 
         $group = Group::all();
         $currentYear = $request->annee;
+        $day = $request->jour;
         $mouth = $request->mois;
         $today = Carbon::now()->format('d');
         $info_grp = Article::where('id_group',$request->id_group)->first();
             $article = Article::where('annee',$currentYear)
-                            ->Where('annee',$currentYear)
+                            ->orwhere('jour',$day)
+                            ->orwhere('mois',$mouth)
                             ->Where('id_group',$request->id_group)
                             ->Where('id_projet',$request->id_projet)
-                            ->orWhere('mois',$mouth)
+                            ->Where('id_fournisseur', $request->id_fournisseur)
+                            ->orWhere('numero_article', $request->numero_article)
                             ->get();
             // dd($article);
-            $pdf = PDF::loadView('article.bon_sortie',compact('article','currentYear','mouth','today','group','info_grp'))->setPaper('a4','landscape');
-            return $pdf->download('bon_sortie_'.$mouth.' '.$currentYear.'.pdf');
-            // return view('article.bon_sortie', compact('article','currentYear','mouth','today','group','info_grp'));
+            $pdf = PDF::loadView('article.bon_sortie',compact('article','currentYear','day','mouth','today','group','info_grp'))->setPaper('a4','landscape');
+            // return $pdf->download('bon_sortie_'.$day.' '.$mouth.' '.$currentYear.'.pdf');
+            return view('article.bon_sortie', compact('article','currentYear','day','mouth','today','group','info_grp'));
     }
 }

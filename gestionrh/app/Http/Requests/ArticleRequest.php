@@ -28,8 +28,8 @@ class ArticleRequest extends FormRequest
             'quantite_stock'=>'required',
             'prix_unitaire'=>'required',
             'numero_article'=>'required',
-            'id_matiere'=>'required',
-            'id_fournisseur'=>'required',
+            // 'id_matiere'=>'required',
+            // 'id_fournisseur'=>'required',
         ];
     }
     public function messages(): array
@@ -42,8 +42,8 @@ class ArticleRequest extends FormRequest
             'quantite_stock.required'=>'La quantite de stock est requise',
             'prix_unitaire.required'=>'Vous devez preciser le prix unitaire de l\'article',
             'numero_article.required'=>'le numero de l\'article est requis',
-            'id_fournisseur.required'=>'le choix du fournisseur est requis',
-            'id_matiere.required'=>'la matiere est requise',
+            // 'id_fournisseur.required'=>'le choix du fournisseur est requis',
+            // 'id_matiere.required'=>'la matiere est requise',
         ];
     }
 }

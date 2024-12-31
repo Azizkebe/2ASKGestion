@@ -56,7 +56,7 @@
 
                 <div class="table-responsive">
                     <table style="border:1px black solid;" cellspacing="0"
-                      class=" table table-striped table-hover">
+                      class=" display table table-striped table-hover">
                       <thead>
                         <tr>
                           {{-- <th></th> --}}
@@ -73,8 +73,6 @@
                             <th>Prix Unitaire CFA</th>
                             <th>Montant total TTC FCFA</th>
                             {{-- <th rowspan="2" colspan="2">Fournisseur</th> --}}
-
-
                         </tr>
 
                     </thead>
@@ -113,7 +111,7 @@
                                 <tr>
                                     <td>TOTAL</td>
                                     <td style="text-align:right;font-weight:bolder;" colspan="5">{{$total_price}} FCFA</td>
-
+                                    <td></td>
                                 </tr>
 
                         </tbody>

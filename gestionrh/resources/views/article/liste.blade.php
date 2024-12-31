@@ -29,8 +29,7 @@
                         <th>Projet</th>
                         <th>Groupe</th>
                         <th>Fournisseur</th>
-                        <th>Mois Enregistrement</th>
-                        <th>Annee Enregistrement</th>
+                        <th>Date Enregistrement</th>
 
                         <th style="width: 10%">Action</th>
                       </tr>
@@ -48,8 +47,7 @@
                                 <td>{{$article->projet->name_projet ?? ''}}</td>
                                 <td>{{$article->group->groupe ?? ''}}</td>
                                 <td>{{$article->fournisseur->name_fournisseur ?? ''}}</td>
-                                <td>{{$article->mois}}</td>
-                                <td>{{$article->annee}}</td>
+                                <td>{{$article->jour ?? '..'}} {{$article->mois ?? '..'}} {{$article->annee ?? '..'}}</td>
                                 <td>
                                     <div class="form-button-action">
                                         <button
@@ -89,9 +87,42 @@
             </div>
             <form action="{{route('article.bon_entree')}}" method="POST">
                 @csrf
-                <div class="mt-1">
-
+            <div class="mt-1">
                     <input type="text" id="numero_article" name="numero_article" placeholder="Numero Article">
+                    <select name="jour" id="jour">
+                        <option value="">--choisir le jour --</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                        <option value="24">24</option>
+                        <option value="25">25</option>
+                        <option value="26">26</option>
+                        <option value="27">27</option>
+                        <option value="28">28</option>
+                        <option value="29">29</option>
+                        <option value="30">30</option>
+                        <option value="31">31</option>
+                    </select>
                     <select name="mois" id="mois">
                         <option value="">--choisir le mois --</option>
                         <option value="JANVIER">JANVIER</option>
@@ -107,7 +138,10 @@
                         <option value="NOVEMBRE">NOVEMBRE</option>
                         <option value="DECEMBRE">DECEMBRE</option>
                     </select>
-                    <input type="text" name="annee" id="annee" placeholder="2024">
+                    <div class="mt-1">
+
+                        <input type="text" name="annee" id="annee" placeholder="2024">
+                    </div>
                     <div class="mt-3 mb-3">
                         <select name="id_group" id="id_group">
                             <option value="">-Choisir un groupe-</option>
@@ -142,6 +176,41 @@
             <form action="{{route('article.bon_sortie')}}" method="POST">
                 @csrf
                 <div class="mt-1">
+                    <input type="text" id="numero_article" name="numero_article" placeholder="Numero Article">
+                    <select name="jour" id="jour">
+                        <option value="">--choisir le jour --</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                        <option value="24">24</option>
+                        <option value="25">25</option>
+                        <option value="26">26</option>
+                        <option value="27">27</option>
+                        <option value="28">28</option>
+                        <option value="29">29</option>
+                        <option value="30">30</option>
+                        <option value="31">31</option>
+                    </select>
                     <select name="mois" id="mois">
                         <option value="">--choisir le mois --</option>
                         <option value="JANVIER">JANVIER</option>
@@ -157,7 +226,9 @@
                         <option value="NOVEMBRE">NOVEMBRE</option>
                         <option value="DECEMBRE">DECEMBRE</option>
                     </select>
-                    <input type="text" name="annee" id="annee" placeholder="2024">
+                    <div class="mt-1">
+                        <input type="text" name="annee" id="annee" placeholder="2024">
+                    </div>
                     <div class="mt-3 mb-3">
                         <select name="id_group" id="id_group">
                             <option value="">-Choisir un groupe-</option>
@@ -171,8 +242,15 @@
                                 <option value="{{$projet->id}}">{{$projet->name_projet}}</option>
                             @endforeach
                         </select>
+                        <div class="mt-2 mb-2">
+                            <select name="id_fournisseur" id="id_fournisseur">
+                                <option value="">-- Choisir un fournisseur --</option>
+                                @foreach ($fournis as $fourni)
+                                    <option value="{{$fourni->id}}">{{$fourni->name_fournisseur}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-download"></i> Bon Sortie</button>
-
                     </div>
                 </div>
 
